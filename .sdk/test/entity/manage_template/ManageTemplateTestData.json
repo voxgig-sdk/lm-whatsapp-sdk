@@ -1,0 +1,20 @@
+{
+  "existing": {
+    "manage_template": {
+      "MANAGE_TEMPLATE00": {
+        "id": "MANAGE_TEMPLATE00"
+      },
+      "MANAGE_TEMPLATE01": {
+        "id": "MANAGE_TEMPLATE01"
+      },
+      "MANAGE_TEMPLATE02": {
+        "id": "MANAGE_TEMPLATE02"
+      }
+    }
+  },
+  "new": {
+    "manage_template": {
+      "manage_template_ref01": {}
+    }
+  }
+}

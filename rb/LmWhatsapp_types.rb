@@ -1,0 +1,246 @@
+# frozen_string_literal: true
+
+# Typed models for the LmWhatsapp SDK.
+#
+# GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
+# params (op.<name>.points[].args.params[]). Member types come from the
+# canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
+# @voxgig/apidef VALID_CANON). Ruby types are unenforced; these YARD
+# annotations document the shapes. Do not edit by hand.
+
+# ManageTemplate entity data model.
+class ManageTemplate
+end
+
+# Request payload for ManageTemplate#remove.
+#
+# @!attribute [rw] id
+#   @return [String]
+ManageTemplateRemoveMatch = Struct.new(
+  :id,
+  keyword_init: true
+)
+
+# Media entity data model.
+class Media
+end
+
+# Request payload for Media#create.
+#
+# @!attribute [rw] phone_number
+#   @return [String]
+MediaCreateData = Struct.new(
+  :phone_number,
+  keyword_init: true
+)
+
+# SendMessage entity data model.
+class SendMessage
+end
+
+# Request payload for SendMessage#create.
+class SendMessageCreateData
+end
+
+# Template entity data model.
+#
+# @!attribute [rw] allow_category_change
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] category
+#   @return [String, nil]
+#
+# @!attribute [rw] component
+#   @return [Array]
+#
+# @!attribute [rw] created_date
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Object, nil]
+#
+# @!attribute [rw] language
+#   @return [String, nil]
+#
+# @!attribute [rw] library_template_body_input
+#   @return [Hash, nil]
+#
+# @!attribute [rw] library_template_button_input
+#   @return [Object, nil]
+#
+# @!attribute [rw] library_template_name
+#   @return [Object, nil]
+#
+# @!attribute [rw] message_send_ttl_second
+#   @return [Integer, nil]
+#
+# @!attribute [rw] modified_date
+#   @return [Object, nil]
+#
+# @!attribute [rw] name
+#   @return [Object, nil]
+#
+# @!attribute [rw] parameter_format
+#   @return [String, nil]
+#
+# @!attribute [rw] status
+#   @return [String, nil]
+#
+# @!attribute [rw] sub_category
+#   @return [String, nil]
+Template = Struct.new(
+  :allow_category_change,
+  :category,
+  :component,
+  :created_date,
+  :id,
+  :language,
+  :library_template_body_input,
+  :library_template_button_input,
+  :library_template_name,
+  :message_send_ttl_second,
+  :modified_date,
+  :name,
+  :parameter_format,
+  :status,
+  :sub_category,
+  keyword_init: true
+)
+
+# Request payload for Template#create.
+#
+# @!attribute [rw] allow_category_change
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] category
+#   @return [String, nil]
+#
+# @!attribute [rw] component
+#   @return [Array]
+#
+# @!attribute [rw] created_date
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Object, nil]
+#
+# @!attribute [rw] language
+#   @return [String, nil]
+#
+# @!attribute [rw] library_template_body_input
+#   @return [Hash, nil]
+#
+# @!attribute [rw] library_template_button_input
+#   @return [Object, nil]
+#
+# @!attribute [rw] library_template_name
+#   @return [Object, nil]
+#
+# @!attribute [rw] message_send_ttl_second
+#   @return [Integer, nil]
+#
+# @!attribute [rw] modified_date
+#   @return [Object, nil]
+#
+# @!attribute [rw] name
+#   @return [Object, nil]
+#
+# @!attribute [rw] parameter_format
+#   @return [String, nil]
+#
+# @!attribute [rw] status
+#   @return [String, nil]
+#
+# @!attribute [rw] sub_category
+#   @return [String, nil]
+TemplateCreateData = Struct.new(
+  :allow_category_change,
+  :category,
+  :component,
+  :created_date,
+  :id,
+  :language,
+  :library_template_body_input,
+  :library_template_button_input,
+  :library_template_name,
+  :message_send_ttl_second,
+  :modified_date,
+  :name,
+  :parameter_format,
+  :status,
+  :sub_category,
+  keyword_init: true
+)
+
+# Request payload for Template#update.
+#
+# @!attribute [rw] id
+#   @return [String]
+TemplateUpdateData = Struct.new(
+  :id,
+  keyword_init: true
+)
+
+# WhatsAppTemplateGetV2 entity data model.
+class WhatsAppTemplateGetV2
+end
+
+# Request payload for WhatsAppTemplateGetV2#load.
+#
+# @!attribute [rw] id
+#   @return [String]
+WhatsAppTemplateGetV2LoadMatch = Struct.new(
+  :id,
+  keyword_init: true
+)
+
+# WhatsAppTemplateGetV2Pagination entity data model.
+#
+# @!attribute [rw] current_page
+#   @return [Integer, nil]
+#
+# @!attribute [rw] item
+#   @return [Object, nil]
+#
+# @!attribute [rw] page
+#   @return [Integer, nil]
+#
+# @!attribute [rw] result
+#   @return [Integer, nil]
+#
+# @!attribute [rw] results_per_page
+#   @return [Integer, nil]
+WhatsAppTemplateGetV2Pagination = Struct.new(
+  :current_page,
+  :item,
+  :page,
+  :result,
+  :results_per_page,
+  keyword_init: true
+)
+
+# Request payload for WhatsAppTemplateGetV2Pagination#load.
+#
+# @!attribute [rw] current_page
+#   @return [Integer, nil]
+#
+# @!attribute [rw] item
+#   @return [Object, nil]
+#
+# @!attribute [rw] page
+#   @return [Integer, nil]
+#
+# @!attribute [rw] result
+#   @return [Integer, nil]
+#
+# @!attribute [rw] results_per_page
+#   @return [Integer, nil]
+WhatsAppTemplateGetV2PaginationLoadMatch = Struct.new(
+  :current_page,
+  :item,
+  :page,
+  :result,
+  :results_per_page,
+  keyword_init: true
+)
+

@@ -1,0 +1,28 @@
+# BasicWhatsAppTemplateGetV2PaginationFlow
+
+main: kit: flow: BasicWhatsAppTemplateGetV2PaginationFlow:
+{
+  entity: "whats_app_template_get_v2_pagination",
+  kind: "basic",
+  name: "BasicWhatsAppTemplateGetV2PaginationFlow",
+  step: [
+    {
+      input: {
+        ref: "whats_app_template_get_v2_pagination_ref01",
+        srcdatavar: "whats_app_template_get_v2_pagination_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-whats_app_template_get_v2_pagination_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicWhatsAppTemplateGetV2PaginationFlow"
+}

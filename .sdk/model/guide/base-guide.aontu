@@ -1,0 +1,48 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 6
+  metrics: count: path: 4
+  metrics: count: method: 7
+
+  entity: manage_template: {
+    path: "/whatsapp/v2/templates/{id}": {
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: media: {
+    path: "/whatsapp/v2/{phoneNumber}/media": {
+      rename: param: "phoneNumber": *"phone_number"
+      op: create: method: *POST
+    }
+  }
+
+  entity: send_message: {
+    path: "/whatsapp/v2/messages": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: template: {
+    path: "/whatsapp/v2/templates": {
+      op: create: method: *POST
+    }
+    path: "/whatsapp/v2/templates/{id}": {
+      op: update: method: *PUT
+    }
+  }
+
+  entity: whats_app_template_get_v2: {
+    path: "/whatsapp/v2/templates/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: whats_app_template_get_v2_pagination: {
+    path: "/whatsapp/v2/templates": {
+      op: load: method: *GET
+    }
+  }
+
+}

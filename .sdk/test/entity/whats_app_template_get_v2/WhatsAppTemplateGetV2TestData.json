@@ -1,0 +1,20 @@
+{
+  "existing": {
+    "whats_app_template_get_v2": {
+      "WHATS_APP_TEMPLATE_GET_V200": {
+        "id": "WHATS_APP_TEMPLATE_GET_V200"
+      },
+      "WHATS_APP_TEMPLATE_GET_V201": {
+        "id": "WHATS_APP_TEMPLATE_GET_V201"
+      },
+      "WHATS_APP_TEMPLATE_GET_V202": {
+        "id": "WHATS_APP_TEMPLATE_GET_V202"
+      }
+    }
+  },
+  "new": {
+    "whats_app_template_get_v2": {
+      "whats_app_template_get_v2_ref01": {}
+    }
+  }
+}

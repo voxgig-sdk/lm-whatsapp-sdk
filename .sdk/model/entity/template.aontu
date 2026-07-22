@@ -1,0 +1,209 @@
+# Entity: template
+
+main: kit: entity: template: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "allow_category_change"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "category"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "component"
+      op: {
+        update: {
+          req: false
+          type: [
+            "`$ONE`"
+            [
+              "`$ARRAY`"
+              "`$NULL`"
+            ]
+          ]
+        }
+      }
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "created_date"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      type: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    {
+      name: "language"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "library_template_body_input"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "library_template_button_input"
+      req: false
+      type: [
+        "`$ONE`"
+        [
+          "`$ARRAY`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    {
+      name: "library_template_name"
+      req: false
+      type: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    {
+      name: "message_send_ttl_second"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "modified_date"
+      req: false
+      type: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    {
+      name: "name"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    {
+      name: "parameter_format"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "sub_category"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "template"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/whatsapp/v2/templates"
+          parts: [
+            "whatsapp"
+            "v2"
+            "templates"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/whatsapp/v2/templates/{id}"
+          parts: [
+            "whatsapp"
+            "v2"
+            "templates"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

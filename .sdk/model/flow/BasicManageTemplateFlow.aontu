@@ -1,0 +1,9 @@
+# BasicManageTemplateFlow
+
+main: kit: flow: BasicManageTemplateFlow:
+{
+  entity: "manage_template",
+  kind: "basic",
+  name: "BasicManageTemplateFlow",
+  "key$": "BasicManageTemplateFlow"
+}

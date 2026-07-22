@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "<div>\t<h2>Purpose and functionality</h2>\t<p>MyLINK WhatsApp API is a REST-based API that supports sending WhatsApp messages to the recipients you want to reach.</p>\t<h2>Current supported functionality</h2>\t<ul style=\"list-style:disc inside;\">\t\t<li>Send WhatsApp messages<ul style=\"list-style:circle;\"><li>Send a text WhatsApp message</li><li>Send a WhatsApp message with media (image, video, document, sticker, location)</li><li>Send an interactive WhatsApp message (containing list, catalogue, flow, carousel and more)</li><li>Send a WhatsApp template message (authentication, marketing or utility)</li></ul></li><li>Receive WhatsApp messages </li><li>Receive Delivery reports for sent messages</li><li>Create/Update/Delete and Retrieve templates via API</li></ul><p>In order to start sending on WhatsApp you must first create a template message. This process is mandated by Meta to improve the relevancy and trust consumers have in their inbox messages; ultimately filtering out potential spam content that reduces that channel's popularity amongst consumers. LINK can help you create templates. You can also follow this documentation on how to do it. </p><h2>Getting started</h2><p>To maximise the deliverability of your WhatsApp messages first you need to make sure that your configuration is correctly set up. The following steps are crucial for the success of your integration:</p><ul style=\"list-style:disc inside;\"><li>Get in touch with us to get a demo or sign up for the product: <a href=\"https://www.linkmobility.com/contact-us\">Click here</a></li><li>Accept your invitation to the MyLINK portal to generate your API secrets - simply go to the Messaging APIs page in the navigation menu, select the myLINK WhatsApp API product and generate your credentials(clientId and secret)</li><li>Revisit the developer portal for how to send a WhatsApp message</li></ul><p>All needed values for the configuration can be found on the Messaging APIs page in MyLINK. Once ready, revisit the developer portal for how to send WhatsApp messages.</p></div>"
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "Bearer"
+        type: "oauth2"
+      }
+      servers: [
+        {
+          description: "LINK Mobility MyLINK (base shared with the sibling SMS/Email APIs)"
+          url: "https://api.linkmobility.com"
+        }
+      ]
+      summary: "<div> <h2>Purpose and functionality</h2> <p>MyLINK WhatsApp API is a REST-based API that supports sending WhatsApp messages to the recipients you want to reach.</p> <h2>Current supported functionality</h2> <ul style=\"list-style:disc inside…"
+      title: "MyLINK WhatsApp API"
+      version: "v2"
+      website: "https://linkmobility.com"
+    }
+  }
+}
+

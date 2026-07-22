@@ -1,0 +1,31 @@
+# Entity: send_message
+
+main: kit: entity: send_message: {
+
+  alias: field: {}
+
+  name: "send_message"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/whatsapp/v2/messages"
+          parts: [
+            "whatsapp"
+            "v2"
+            "messages"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

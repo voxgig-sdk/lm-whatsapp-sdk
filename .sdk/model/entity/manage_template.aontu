@@ -1,0 +1,48 @@
+# Entity: manage_template
+
+main: kit: entity: manage_template: {
+
+  alias: field: {}
+
+  name: "manage_template"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/whatsapp/v2/templates/{id}"
+          parts: [
+            "whatsapp"
+            "v2"
+            "templates"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

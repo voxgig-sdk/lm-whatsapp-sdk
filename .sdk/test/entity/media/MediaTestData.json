@@ -1,0 +1,23 @@
+{
+  "existing": {
+    "media": {
+      "MEDIA00": {
+        "phone_number": "PHONE_NUMBER01",
+        "id": "MEDIA00"
+      },
+      "MEDIA01": {
+        "phone_number": "PHONE_NUMBER01",
+        "id": "MEDIA01"
+      },
+      "MEDIA02": {
+        "phone_number": "PHONE_NUMBER01",
+        "id": "MEDIA02"
+      }
+    }
+  },
+  "new": {
+    "media": {
+      "media_ref01": {}
+    }
+  }
+}

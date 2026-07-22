@@ -1,0 +1,99 @@
+# Entity: whats_app_template_get_v2_pagination
+
+main: kit: entity: whats_app_template_get_v2_pagination: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "current_page"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "item"
+      req: false
+      type: [
+        "`$ONE`"
+        [
+          "`$ARRAY`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    {
+      name: "page"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "result"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "results_per_page"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "whats_app_template_get_v2_pagination"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: 1
+                kind: "query"
+                name: "page"
+                orig: "page"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 25
+                kind: "query"
+                name: "size"
+                orig: "size"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "sort"
+                orig: "sort"
+                reqd: false
+                type: "`$ARRAY`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/whatsapp/v2/templates"
+          parts: [
+            "whatsapp"
+            "v2"
+            "templates"
+          ]
+          select: {
+            exist: [
+              "page"
+              "size"
+              "sort"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,48 @@
+# Entity: whats_app_template_get_v2
+
+main: kit: entity: whats_app_template_get_v2: {
+
+  alias: field: {}
+
+  name: "whats_app_template_get_v2"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/whatsapp/v2/templates/{id}"
+          parts: [
+            "whatsapp"
+            "v2"
+            "templates"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
