@@ -5,6 +5,10 @@
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -18,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "manage_template": {
           "active": true,
@@ -45,6 +50,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "DELETE",
                   "orig": "/whatsapp/v2/templates/{id}",
                   "parts": [
@@ -107,6 +113,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/whatsapp/v2/{phoneNumber}/media",
                   "parts": [
@@ -157,6 +164,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/whatsapp/v2/messages",
                   "parts": [
@@ -203,7 +211,7 @@
             },
             {
               "active": true,
-              "name": "component",
+              "name": "components",
               "op": {
                 "update": {
                   "req": false,
@@ -221,7 +229,7 @@
             },
             {
               "active": true,
-              "name": "created_date",
+              "name": "createdDate",
               "req": false,
               "type": "`$STRING`"
             },
@@ -251,13 +259,13 @@
             },
             {
               "active": true,
-              "name": "library_template_body_input",
+              "name": "library_template_body_inputs",
               "req": false,
               "type": "`$OBJECT`"
             },
             {
               "active": true,
-              "name": "library_template_button_input",
+              "name": "library_template_button_inputs",
               "req": false,
               "type": [
                 "`$ONE`",
@@ -281,13 +289,13 @@
             },
             {
               "active": true,
-              "name": "message_send_ttl_second",
+              "name": "message_send_ttl_seconds",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "modified_date",
+              "name": "modifiedDate",
               "req": false,
               "type": [
                 "`$ONE`",
@@ -347,6 +355,7 @@
                 {
                   "active": true,
                   "args": {},
+                  "kind": "http",
                   "method": "POST",
                   "orig": "/whatsapp/v2/templates",
                   "parts": [
@@ -380,6 +389,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "PUT",
                   "orig": "/whatsapp/v2/templates/{id}",
                   "parts": [
@@ -431,6 +441,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/whatsapp/v2/templates/{id}",
                   "parts": [
@@ -464,13 +475,13 @@
           "fields": [
             {
               "active": true,
-              "name": "current_page",
+              "name": "currentPage",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "item",
+              "name": "items",
               "req": false,
               "type": [
                 "`$ONE`",
@@ -482,19 +493,19 @@
             },
             {
               "active": true,
-              "name": "page",
+              "name": "pages",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "result",
+              "name": "results",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "results_per_page",
+              "name": "resultsPerPage",
               "req": false,
               "type": "`$INTEGER`"
             }
@@ -537,6 +548,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/whatsapp/v2/templates",
                   "parts": [
@@ -837,18 +849,41 @@
         "website": "https://linkmobility.com"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "lm-whatsapp"
+            "goversion": "",
+            "name": "lm-whatsapp",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -870,22 +905,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "lm-whatsapp"
+            "goversion": "",
+            "name": "lm-whatsapp",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -924,21 +977,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "lm-whatsapp"
+            "goversion": "",
+            "name": "lm-whatsapp",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -977,12 +1048,17 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -994,10 +1070,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "lm-whatsapp"
+            "goversion": "",
+            "name": "lm-whatsapp",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1019,22 +1108,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "lm-whatsapp"
+            "goversion": "",
+            "name": "lm-whatsapp",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1056,13 +1163,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1074,10 +1186,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "lm-whatsapp"
+            "goversion": "",
+            "name": "lm-whatsapp",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1099,13 +1224,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "rb": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -1122,10 +1252,23 @@
             }
           },
           "ext": "rb",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "lm-whatsapp"
+            "goversion": "",
+            "name": "lm-whatsapp",
+            "package": "",
+            "path": ""
           },
           "name": "rb",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1147,13 +1290,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Ruby"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -1176,10 +1324,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "lm-whatsapp"
+            "goversion": "",
+            "name": "lm-whatsapp",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -1201,9 +1362,17 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }

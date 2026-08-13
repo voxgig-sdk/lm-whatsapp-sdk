@@ -50,7 +50,8 @@ func TestWhatsAppTemplateGetV2Direct(t *testing.T) {
 		if setup.live {
 			// Live mode is lenient: synthetic IDs frequently 4xx. Skip
 			// rather than fail when the load endpoint isn't reachable with
-			// the IDs we can construct from setup.idmap.
+			// the IDs we can construct from setup.idmap — unless the model
+			// sets main.kit.test.live.strict.
 			if err != nil {
 				t.Skipf("load call failed (likely synthetic IDs against live API): %v", err)
 			}
@@ -115,21 +116,21 @@ func whats_app_template_get_v2DirectSetup(mockres any) *whats_app_template_get_v
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"LMWHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__ENTID": map[string]any{},
-		"LMWHATSAPP_TEST_LIVE":    "FALSE",
-		"LMWHATSAPP_APIKEY":       "NONE",
+		"LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID": map[string]any{},
+		"LM_WHATSAPP_TEST_LIVE":    "FALSE",
+		"LM_WHATSAPP_APIKEY":       "NONE",
 	})
 
-	live := env["LMWHATSAPP_TEST_LIVE"] == "TRUE"
+	live := env["LM_WHATSAPP_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["LMWHATSAPP_APIKEY"],
+			"apikey": env["LM_WHATSAPP_APIKEY"],
 		}
 		client := sdk.NewLmWhatsappSDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["LMWHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__ENTID"]; ok {
+		if entidRaw, ok := env["LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {

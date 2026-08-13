@@ -23,8 +23,8 @@ module LmWhatsappTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("LMWHATSAPP_TEST_LIVE")
-    override = getenv("LMWHATSAPP_TEST_OVERRIDE")
+    live = getenv("LM_WHATSAPP_TEST_LIVE")
+    override = getenv("LM_WHATSAPP_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module LmWhatsappTestRunner
       end
     end
 
-    explain = getenv("LMWHATSAPP_TEST_EXPLAIN")
-    m["LMWHATSAPP_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("LM_WHATSAPP_TEST_EXPLAIN")
+    m["LM_WHATSAPP_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

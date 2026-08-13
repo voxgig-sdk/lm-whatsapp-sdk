@@ -49,15 +49,15 @@ class Template
 {
     public ?bool $allow_category_change = null;
     public ?string $category = null;
-    public array $component;
-    public ?string $created_date = null;
+    public array $components;
+    public ?string $createdDate = null;
     public mixed $id = null;
     public ?string $language = null;
-    public ?array $library_template_body_input = null;
-    public mixed $library_template_button_input = null;
+    public ?array $library_template_body_inputs = null;
+    public mixed $library_template_button_inputs = null;
     public mixed $library_template_name = null;
-    public ?int $message_send_ttl_second = null;
-    public mixed $modified_date = null;
+    public ?int $message_send_ttl_seconds = null;
+    public mixed $modifiedDate = null;
     public mixed $name = null;
     public ?string $parameter_format = null;
     public ?string $status = null;
@@ -69,15 +69,15 @@ class TemplateCreateData
 {
     public ?bool $allow_category_change = null;
     public ?string $category = null;
-    public array $component;
-    public ?string $created_date = null;
+    public array $components;
+    public ?string $createdDate = null;
     public mixed $id = null;
     public ?string $language = null;
-    public ?array $library_template_body_input = null;
-    public mixed $library_template_button_input = null;
+    public ?array $library_template_body_inputs = null;
+    public mixed $library_template_button_inputs = null;
     public mixed $library_template_name = null;
-    public ?int $message_send_ttl_second = null;
-    public mixed $modified_date = null;
+    public ?int $message_send_ttl_seconds = null;
+    public mixed $modifiedDate = null;
     public mixed $name = null;
     public ?string $parameter_format = null;
     public ?string $status = null;
@@ -88,6 +88,20 @@ class TemplateCreateData
 class TemplateUpdateData
 {
     public string $id;
+    public ?bool $allow_category_change = null;
+    public ?string $category = null;
+    public ?array $components = null;
+    public ?string $createdDate = null;
+    public ?string $language = null;
+    public ?array $library_template_body_inputs = null;
+    public mixed $library_template_button_inputs = null;
+    public mixed $library_template_name = null;
+    public ?int $message_send_ttl_seconds = null;
+    public mixed $modifiedDate = null;
+    public mixed $name = null;
+    public ?string $parameter_format = null;
+    public ?string $status = null;
+    public ?string $sub_category = null;
 }
 
 /** WhatsAppTemplateGetV2 entity data model. */
@@ -104,20 +118,20 @@ class WhatsAppTemplateGetV2LoadMatch
 /** WhatsAppTemplateGetV2Pagination entity data model. */
 class WhatsAppTemplateGetV2Pagination
 {
-    public ?int $current_page = null;
-    public mixed $item = null;
-    public ?int $page = null;
-    public ?int $result = null;
-    public ?int $results_per_page = null;
+    public ?int $currentPage = null;
+    public mixed $items = null;
+    public ?int $pages = null;
+    public ?int $results = null;
+    public ?int $resultsPerPage = null;
 }
 
 /** Request payload for WhatsAppTemplateGetV2Pagination#load. */
 class WhatsAppTemplateGetV2PaginationLoadMatch
 {
-    public ?int $current_page = null;
-    public mixed $item = null;
-    public ?int $page = null;
-    public ?int $result = null;
-    public ?int $results_per_page = null;
+    public ?int $currentPage = null;
+    public mixed $items = null;
+    public ?int $pages = null;
+    public ?int $results = null;
+    public ?int $resultsPerPage = null;
 }
 

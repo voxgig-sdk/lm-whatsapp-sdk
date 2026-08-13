@@ -35,9 +35,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = LmWhatsappSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = LmWhatsappSDK.test({
+  entity: {
+    whats_app_template_get_v2: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const whatsapptemplategetv2 = await client.WhatsAppTemplateGetV2().load({ id: 'test01' })
-// whatsapptemplategetv2 is a bare WhatsAppTemplateGetV2 populated with mock data
+// whatsapptemplategetv2 is the WhatsAppTemplateGetV2 entity, populated with mock data
+// — call whatsapptemplategetv2.data() for the record itself
 console.log(whatsapptemplategetv2)
 ```
 
@@ -334,6 +343,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://api.linkmobility.com](https://api.linkmobility.com)
 

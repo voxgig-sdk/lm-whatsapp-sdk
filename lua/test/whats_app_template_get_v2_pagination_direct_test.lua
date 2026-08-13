@@ -60,16 +60,16 @@ function whats_app_template_get_v2_pagination_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["LMWHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__PAGINATION_ENTID"] = {},
-    ["LMWHATSAPP_TEST_LIVE"] = "FALSE",
-    ["LMWHATSAPP_APIKEY"] = "NONE",
+    ["LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID"] = {},
+    ["LM_WHATSAPP_TEST_LIVE"] = "FALSE",
+    ["LM_WHATSAPP_APIKEY"] = "NONE",
   })
 
-  local live = env["LMWHATSAPP_TEST_LIVE"] == "TRUE"
+  local live = env["LM_WHATSAPP_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["LMWHATSAPP_APIKEY"],
+      apikey = env["LM_WHATSAPP_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

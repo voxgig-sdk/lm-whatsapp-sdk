@@ -300,15 +300,15 @@ API path: `/whatsapp/v2/messages`
 | --- | --- |
 | `"allow_category_change"` |  |
 | `"category"` |  |
-| `"component"` |  |
-| `"created_date"` |  |
+| `"components"` |  |
+| `"createdDate"` |  |
 | `"id"` |  |
 | `"language"` |  |
-| `"library_template_body_input"` |  |
-| `"library_template_button_input"` |  |
+| `"library_template_body_inputs"` |  |
+| `"library_template_button_inputs"` |  |
 | `"library_template_name"` |  |
-| `"message_send_ttl_second"` |  |
-| `"modified_date"` |  |
+| `"message_send_ttl_seconds"` |  |
+| `"modifiedDate"` |  |
 | `"name"` |  |
 | `"parameter_format"` |  |
 | `"status"` |  |
@@ -331,11 +331,11 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `"current_page"` |  |
-| `"item"` |  |
-| `"page"` |  |
-| `"result"` |  |
-| `"results_per_page"` |  |
+| `"currentPage"` |  |
+| `"items"` |  |
+| `"pages"` |  |
+| `"results"` |  |
+| `"resultsPerPage"` |  |
 
 Operations: Load.
 
@@ -419,15 +419,15 @@ Create an instance: `template := client.Template(nil)`
 | --- | --- | --- |
 | `allow_category_change` | `bool` |  |
 | `category` | `string` |  |
-| `component` | `[]any` |  |
-| `created_date` | `string` |  |
+| `components` | `[]any` |  |
+| `createdDate` | `string` |  |
 | `id` | `any` |  |
 | `language` | `string` |  |
-| `library_template_body_input` | `map[string]any` |  |
-| `library_template_button_input` | `any` |  |
+| `library_template_body_inputs` | `map[string]any` |  |
+| `library_template_button_inputs` | `any` |  |
 | `library_template_name` | `any` |  |
-| `message_send_ttl_second` | `int` |  |
-| `modified_date` | `any` |  |
+| `message_send_ttl_seconds` | `int` |  |
+| `modifiedDate` | `any` |  |
 | `name` | `any` |  |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
@@ -437,7 +437,7 @@ Create an instance: `template := client.Template(nil)`
 
 ```go
 result, err := client.Template(nil).Create(map[string]any{
-    "component": []any{},
+    "components": []any{},
 }, nil)
 if err != nil {
     panic(err)
@@ -481,11 +481,11 @@ Create an instance: `whatsAppTemplateGetV2Pagination := client.WhatsAppTemplateG
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_page` | `int` |  |
-| `item` | `any` |  |
-| `page` | `int` |  |
-| `result` | `int` |  |
-| `results_per_page` | `int` |  |
+| `currentPage` | `int` |  |
+| `items` | `any` |  |
+| `pages` | `int` |  |
+| `results` | `int` |  |
+| `resultsPerPage` | `int` |  |
 
 #### Example: Load
 

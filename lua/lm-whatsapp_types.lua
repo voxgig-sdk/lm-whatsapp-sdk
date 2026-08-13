@@ -23,16 +23,16 @@
 ---@class Template
 ---@field allow_category_change? boolean
 ---@field category? string
----@field component table
----@field created_date? string
----@field id? any
+---@field components table
+---@field createdDate? string
+---@field id? string|nil
 ---@field language? string
----@field library_template_body_input? table
----@field library_template_button_input? any
----@field library_template_name? any
----@field message_send_ttl_second? number
----@field modified_date? any
----@field name? any
+---@field library_template_body_inputs? table
+---@field library_template_button_inputs? table|nil
+---@field library_template_name? string|nil
+---@field message_send_ttl_seconds? number
+---@field modifiedDate? string|nil
+---@field name? string|nil
 ---@field parameter_format? string
 ---@field status? string
 ---@field sub_category? string
@@ -40,22 +40,36 @@
 ---@class TemplateCreateData
 ---@field allow_category_change? boolean
 ---@field category? string
----@field component table
----@field created_date? string
----@field id? any
+---@field components table
+---@field createdDate? string
+---@field id? string|nil
 ---@field language? string
----@field library_template_body_input? table
----@field library_template_button_input? any
----@field library_template_name? any
----@field message_send_ttl_second? number
----@field modified_date? any
----@field name? any
+---@field library_template_body_inputs? table
+---@field library_template_button_inputs? table|nil
+---@field library_template_name? string|nil
+---@field message_send_ttl_seconds? number
+---@field modifiedDate? string|nil
+---@field name? string|nil
 ---@field parameter_format? string
 ---@field status? string
 ---@field sub_category? string
 
 ---@class TemplateUpdateData
 ---@field id string
+---@field allow_category_change? boolean
+---@field category? string
+---@field components? table
+---@field createdDate? string
+---@field language? string
+---@field library_template_body_inputs? table
+---@field library_template_button_inputs? table|nil
+---@field library_template_name? string|nil
+---@field message_send_ttl_seconds? number
+---@field modifiedDate? string|nil
+---@field name? string|nil
+---@field parameter_format? string
+---@field status? string
+---@field sub_category? string
 
 ---@class WhatsAppTemplateGetV2
 
@@ -63,18 +77,18 @@
 ---@field id string
 
 ---@class WhatsAppTemplateGetV2Pagination
----@field current_page? number
----@field item? any
----@field page? number
----@field result? number
----@field results_per_page? number
+---@field currentPage? number
+---@field items? table|nil
+---@field pages? number
+---@field results? number
+---@field resultsPerPage? number
 
 ---@class WhatsAppTemplateGetV2PaginationLoadMatch
----@field current_page? number
----@field item? any
----@field page? number
----@field result? number
----@field results_per_page? number
+---@field currentPage? number
+---@field items? table|nil
+---@field pages? number
+---@field results? number
+---@field resultsPerPage? number
 
 local M = {}
 

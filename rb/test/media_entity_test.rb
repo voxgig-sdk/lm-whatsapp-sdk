@@ -26,7 +26,7 @@ class MediaEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set LMWHATSAPP_TEST_MEDIA_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set LM_WHATSAPP_TEST_MEDIA_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -38,7 +38,7 @@ class MediaEntityTest < Minitest::Test
     media_ref01_data["phone_number"] = setup[:idmap]["phone_number01"]
 
     media_ref01_data_result = media_ref01_ent.create(media_ref01_data, nil)
-    media_ref01_data = Helpers.to_map(media_ref01_data_result)
+    media_ref01_data = Helpers.to_map(media_ref01_data_result.respond_to?(:data_get) ? media_ref01_data_result.data_get : media_ref01_data_result)
     assert !media_ref01_data.nil?
 
   end
@@ -70,39 +70,39 @@ def media_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["LMWHATSAPP_TEST_MEDIA_ENTID"]
+  entid_env_raw = ENV["LM_WHATSAPP_TEST_MEDIA_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "LMWHATSAPP_TEST_MEDIA_ENTID" => idmap,
-    "LMWHATSAPP_TEST_LIVE" => "FALSE",
-    "LMWHATSAPP_TEST_EXPLAIN" => "FALSE",
-    "LMWHATSAPP_APIKEY" => "NONE",
+    "LM_WHATSAPP_TEST_MEDIA_ENTID" => idmap,
+    "LM_WHATSAPP_TEST_LIVE" => "FALSE",
+    "LM_WHATSAPP_TEST_EXPLAIN" => "FALSE",
+    "LM_WHATSAPP_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["LMWHATSAPP_TEST_MEDIA_ENTID"])
+    env["LM_WHATSAPP_TEST_MEDIA_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["LMWHATSAPP_TEST_LIVE"] == "TRUE"
+  if env["LM_WHATSAPP_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LMWHATSAPP_APIKEY"],
+        "apikey" => env["LM_WHATSAPP_APIKEY"],
       },
       extra || {},
     ])
     client = LmWhatsappSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["LMWHATSAPP_TEST_LIVE"] == "TRUE"
+  live = env["LM_WHATSAPP_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["LMWHATSAPP_TEST_EXPLAIN"] == "TRUE",
+    explain: env["LM_WHATSAPP_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

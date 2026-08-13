@@ -314,16 +314,16 @@ const template = client.Template()
 | --- | --- | --- | --- |
 | `allow_category_change` | `boolean` | No |  |
 | `category` | `string` | No |  |
-| `component` | `any[]` | Yes |  |
-| `created_date` | `string` | No |  |
-| `id` | `any` | No |  |
+| `components` | `any[]` | Yes |  |
+| `createdDate` | `string` | No |  |
+| `id` | `string | null` | No |  |
 | `language` | `string` | No |  |
-| `library_template_body_input` | `Record<string, any>` | No |  |
-| `library_template_button_input` | `any` | No |  |
-| `library_template_name` | `any` | No |  |
-| `message_send_ttl_second` | `number` | No |  |
-| `modified_date` | `any` | No |  |
-| `name` | `any` | No |  |
+| `library_template_body_inputs` | `Record<string, any>` | No |  |
+| `library_template_button_inputs` | `any[] | null` | No |  |
+| `library_template_name` | `string | null` | No |  |
+| `message_send_ttl_seconds` | `number` | No |  |
+| `modifiedDate` | `string | null` | No |  |
+| `name` | `string | null` | No |  |
 | `parameter_format` | `string` | No |  |
 | `status` | `string` | No |  |
 | `sub_category` | `string` | No |  |
@@ -334,15 +334,15 @@ const template = client.Template()
 | --- | --- | --- |
 | `allow_category_change` | - | - |
 | `category` | Yes | - |
-| `component` | - | Yes |
-| `created_date` | - | - |
+| `components` | - | Yes |
+| `createdDate` | - | - |
 | `id` | - | - |
 | `language` | Yes | - |
-| `library_template_body_input` | - | - |
-| `library_template_button_input` | - | - |
+| `library_template_body_inputs` | - | - |
+| `library_template_button_inputs` | - | - |
 | `library_template_name` | - | - |
-| `message_send_ttl_second` | - | - |
-| `modified_date` | - | - |
+| `message_send_ttl_seconds` | - | - |
+| `modifiedDate` | - | - |
 | `name` | Yes | - |
 | `parameter_format` | - | - |
 | `status` | - | - |
@@ -356,7 +356,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Template().create({
-  component: [],
+  components: [],
 })
 ```
 
@@ -453,11 +453,11 @@ const whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Paginat
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_page` | `number` | No |  |
-| `item` | `any` | No |  |
-| `page` | `number` | No |  |
-| `result` | `number` | No |  |
-| `results_per_page` | `number` | No |  |
+| `currentPage` | `number` | No |  |
+| `items` | `any[] | null` | No |  |
+| `pages` | `number` | No |  |
+| `results` | `number` | No |  |
+| `resultsPerPage` | `number` | No |  |
 
 ### Operations
 

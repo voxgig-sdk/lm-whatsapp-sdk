@@ -117,7 +117,8 @@ client = LmWhatsappSDK.test({
   "entity" => { "whatsapptemplategetv2" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 whatsapptemplategetv2 = client.WhatsAppTemplateGetV2.load({ "id" => "test01" })
 puts whatsapptemplategetv2
 ```
@@ -273,15 +274,15 @@ API path: `/whatsapp/v2/messages`
 | --- | --- |
 | `allow_category_change` |  |
 | `category` |  |
-| `component` |  |
-| `created_date` |  |
+| `components` |  |
+| `createdDate` |  |
 | `id` |  |
 | `language` |  |
-| `library_template_body_input` |  |
-| `library_template_button_input` |  |
+| `library_template_body_inputs` |  |
+| `library_template_button_inputs` |  |
 | `library_template_name` |  |
-| `message_send_ttl_second` |  |
-| `modified_date` |  |
+| `message_send_ttl_seconds` |  |
+| `modifiedDate` |  |
 | `name` |  |
 | `parameter_format` |  |
 | `status` |  |
@@ -304,11 +305,11 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `current_page` |  |
-| `item` |  |
-| `page` |  |
-| `result` |  |
-| `results_per_page` |  |
+| `currentPage` |  |
+| `items` |  |
+| `pages` |  |
+| `results` |  |
+| `resultsPerPage` |  |
 
 Operations: Load.
 
@@ -384,15 +385,15 @@ Create an instance: `template = client.Template`
 | --- | --- | --- |
 | `allow_category_change` | `Boolean` |  |
 | `category` | `String` |  |
-| `component` | `Array` |  |
-| `created_date` | `String` |  |
+| `components` | `Array` |  |
+| `createdDate` | `String` |  |
 | `id` | `Object` |  |
 | `language` | `String` |  |
-| `library_template_body_input` | `Hash` |  |
-| `library_template_button_input` | `Object` |  |
+| `library_template_body_inputs` | `Hash` |  |
+| `library_template_button_inputs` | `Object` |  |
 | `library_template_name` | `Object` |  |
-| `message_send_ttl_second` | `Integer` |  |
-| `modified_date` | `Object` |  |
+| `message_send_ttl_seconds` | `Integer` |  |
+| `modifiedDate` | `Object` |  |
 | `name` | `Object` |  |
 | `parameter_format` | `String` |  |
 | `status` | `String` |  |
@@ -402,7 +403,7 @@ Create an instance: `template = client.Template`
 
 ```ruby
 template = client.Template.create({
-  "component" => [], # Array
+  "components" => [], # Array
 })
 ```
 
@@ -420,7 +421,7 @@ Create an instance: `whats_app_template_get_v2 = client.WhatsAppTemplateGetV2`
 #### Example: Load
 
 ```ruby
-# load returns the bare WhatsAppTemplateGetV2 record (raises on error).
+# load returns the ENTITY — call data_get for the WhatsAppTemplateGetV2 record (raises on error).
 whats_app_template_get_v2 = client.WhatsAppTemplateGetV2.load({ "id" => "whats_app_template_get_v2_id" })
 ```
 
@@ -439,16 +440,16 @@ Create an instance: `whats_app_template_get_v2_pagination = client.WhatsAppTempl
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_page` | `Integer` |  |
-| `item` | `Object` |  |
-| `page` | `Integer` |  |
-| `result` | `Integer` |  |
-| `results_per_page` | `Integer` |  |
+| `currentPage` | `Integer` |  |
+| `items` | `Object` |  |
+| `pages` | `Integer` |  |
+| `results` | `Integer` |  |
+| `resultsPerPage` | `Integer` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare WhatsAppTemplateGetV2Pagination record (raises on error).
+# load returns the ENTITY — call data_get for the WhatsAppTemplateGetV2Pagination record (raises on error).
 whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination.load()
 ```
 

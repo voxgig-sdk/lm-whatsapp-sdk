@@ -257,15 +257,15 @@ template = client.Template
 | --- | --- | --- | --- |
 | `allow_category_change` | `Boolean` | No |  |
 | `category` | `String` | No |  |
-| `component` | `Array` | Yes |  |
-| `created_date` | `String` | No |  |
+| `components` | `Array` | Yes |  |
+| `createdDate` | `String` | No |  |
 | `id` | `Object` | No |  |
 | `language` | `String` | No |  |
-| `library_template_body_input` | `Hash` | No |  |
-| `library_template_button_input` | `Object` | No |  |
+| `library_template_body_inputs` | `Hash` | No |  |
+| `library_template_button_inputs` | `Object` | No |  |
 | `library_template_name` | `Object` | No |  |
-| `message_send_ttl_second` | `Integer` | No |  |
-| `modified_date` | `Object` | No |  |
+| `message_send_ttl_seconds` | `Integer` | No |  |
+| `modifiedDate` | `Object` | No |  |
 | `name` | `Object` | No |  |
 | `parameter_format` | `String` | No |  |
 | `status` | `String` | No |  |
@@ -277,15 +277,15 @@ template = client.Template
 | --- | --- | --- |
 | `allow_category_change` | - | - |
 | `category` | Yes | - |
-| `component` | - | Yes |
-| `created_date` | - | - |
+| `components` | - | Yes |
+| `createdDate` | - | - |
 | `id` | - | - |
 | `language` | Yes | - |
-| `library_template_body_input` | - | - |
-| `library_template_button_input` | - | - |
+| `library_template_body_inputs` | - | - |
+| `library_template_button_inputs` | - | - |
 | `library_template_name` | - | - |
-| `message_send_ttl_second` | - | - |
-| `modified_date` | - | - |
+| `message_send_ttl_seconds` | - | - |
+| `modifiedDate` | - | - |
 | `name` | Yes | - |
 | `parameter_format` | - | - |
 | `status` | - | - |
@@ -299,7 +299,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Template.create({
-  "component" => [], # Array
+  "components" => [], # Array
 })
 ```
 
@@ -400,11 +400,11 @@ whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_page` | `Integer` | No |  |
-| `item` | `Object` | No |  |
-| `page` | `Integer` | No |  |
-| `result` | `Integer` | No |  |
-| `results_per_page` | `Integer` | No |  |
+| `currentPage` | `Integer` | No |  |
+| `items` | `Object` | No |  |
+| `pages` | `Integer` | No |  |
+| `results` | `Integer` | No |  |
+| `resultsPerPage` | `Integer` | No |  |
 
 ### Operations
 

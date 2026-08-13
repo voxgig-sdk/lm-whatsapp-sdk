@@ -22,7 +22,7 @@ main: kit: entity: template: {
       type: "`$STRING`"
     }
     {
-      name: "component"
+      name: "components"
       op: {
         update: {
           req: false
@@ -39,7 +39,7 @@ main: kit: entity: template: {
       type: "`$ARRAY`"
     }
     {
-      name: "created_date"
+      name: "createdDate"
       req: false
       type: "`$STRING`"
     }
@@ -66,12 +66,12 @@ main: kit: entity: template: {
       type: "`$STRING`"
     }
     {
-      name: "library_template_body_input"
+      name: "library_template_body_inputs"
       req: false
       type: "`$OBJECT`"
     }
     {
-      name: "library_template_button_input"
+      name: "library_template_button_inputs"
       req: false
       type: [
         "`$ONE`"
@@ -93,12 +93,12 @@ main: kit: entity: template: {
       ]
     }
     {
-      name: "message_send_ttl_second"
+      name: "message_send_ttl_seconds"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "modified_date"
+      name: "modifiedDate"
       req: false
       type: [
         "`$ONE`"

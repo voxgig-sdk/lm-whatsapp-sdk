@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import LmWhatsappSDK
-from core.error import LmWhatsappError
-from core.result import LmWhatsappResult
-from core.response import LmWhatsappResponse
-from core.spec import LmWhatsappSpec
-from feature.base_feature import LmWhatsappBaseFeature
+from projectname_sdk.core.error import LmWhatsappError
+from projectname_sdk.core.result import LmWhatsappResult
+from projectname_sdk.core.response import LmWhatsappResponse
+from projectname_sdk.core.spec import LmWhatsappSpec
+from projectname_sdk.feature.base_feature import LmWhatsappBaseFeature
 
 
 def _client():

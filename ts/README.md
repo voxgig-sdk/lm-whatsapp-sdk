@@ -119,7 +119,8 @@ Create a mock client for unit testing — no server required:
 const client = LmWhatsappSDK.test()
 
 const whatsapptemplategetv2 = await client.WhatsAppTemplateGetV2().load({ id: 'test01' })
-// whatsapptemplategetv2 is a bare entity populated with mock response data
+// whatsapptemplategetv2 is the entity, populated with mock response data
+// — call whatsapptemplategetv2.data() for the record itself
 console.log(whatsapptemplategetv2)
 ```
 
@@ -324,15 +325,15 @@ API path: `/whatsapp/v2/messages`
 | --- | --- |
 | `allow_category_change` |  |
 | `category` |  |
-| `component` |  |
-| `created_date` |  |
+| `components` |  |
+| `createdDate` |  |
 | `id` |  |
 | `language` |  |
-| `library_template_body_input` |  |
-| `library_template_button_input` |  |
+| `library_template_body_inputs` |  |
+| `library_template_button_inputs` |  |
 | `library_template_name` |  |
-| `message_send_ttl_second` |  |
-| `modified_date` |  |
+| `message_send_ttl_seconds` |  |
+| `modifiedDate` |  |
 | `name` |  |
 | `parameter_format` |  |
 | `status` |  |
@@ -355,11 +356,11 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `current_page` |  |
-| `item` |  |
-| `page` |  |
-| `result` |  |
-| `results_per_page` |  |
+| `currentPage` |  |
+| `items` |  |
+| `pages` |  |
+| `results` |  |
+| `resultsPerPage` |  |
 
 Operations: load.
 
@@ -435,16 +436,16 @@ Create an instance: `const template = client.Template()`
 | --- | --- | --- |
 | `allow_category_change` | `boolean` |  |
 | `category` | `string` |  |
-| `component` | `any[]` |  |
-| `created_date` | `string` |  |
-| `id` | `any` |  |
+| `components` | `any[]` |  |
+| `createdDate` | `string` |  |
+| `id` | `string | null` |  |
 | `language` | `string` |  |
-| `library_template_body_input` | `Record<string, any>` |  |
-| `library_template_button_input` | `any` |  |
-| `library_template_name` | `any` |  |
-| `message_send_ttl_second` | `number` |  |
-| `modified_date` | `any` |  |
-| `name` | `any` |  |
+| `library_template_body_inputs` | `Record<string, any>` |  |
+| `library_template_button_inputs` | `any[] | null` |  |
+| `library_template_name` | `string | null` |  |
+| `message_send_ttl_seconds` | `number` |  |
+| `modifiedDate` | `string | null` |  |
+| `name` | `string | null` |  |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
 | `sub_category` | `string` |  |
@@ -453,7 +454,7 @@ Create an instance: `const template = client.Template()`
 
 ```ts
 const template = await client.Template().create({
-  component: [],
+  components: [],
 })
 ```
 
@@ -489,11 +490,11 @@ Create an instance: `const whats_app_template_get_v2_pagination = client.WhatsAp
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_page` | `number` |  |
-| `item` | `any` |  |
-| `page` | `number` |  |
-| `result` | `number` |  |
-| `results_per_page` | `number` |  |
+| `currentPage` | `number` |  |
+| `items` | `any[] | null` |  |
+| `pages` | `number` |  |
+| `results` | `number` |  |
+| `resultsPerPage` | `number` |  |
 
 #### Example: Load
 

@@ -43,8 +43,8 @@ class LmWhatsappTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('LMWHATSAPP_TEST_LIVE');
-        $override = self::getenv('LMWHATSAPP_TEST_OVERRIDE');
+        $live = self::getenv('LM_WHATSAPP_TEST_LIVE');
+        $override = self::getenv('LM_WHATSAPP_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class LmWhatsappTestRunner
             }
         }
 
-        $explain = self::getenv('LMWHATSAPP_TEST_EXPLAIN');
+        $explain = self::getenv('LM_WHATSAPP_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['LMWHATSAPP_TEST_EXPLAIN'] = $explain;
+            $m['LM_WHATSAPP_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

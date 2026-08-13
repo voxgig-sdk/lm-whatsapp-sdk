@@ -223,9 +223,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local manage_template, err = client:ManageTemplate():load()
+    local whats_app_template_get_v2, err = client:WhatsAppTemplateGetV2():load({ id = "example_id" })
     if err then error(err) end
-    -- manage_template is the loaded record
+    -- whats_app_template_get_v2 is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -265,15 +265,15 @@ API path: `/whatsapp/v2/messages`
 | --- | --- |
 | `allow_category_change` |  |
 | `category` |  |
-| `component` |  |
-| `created_date` |  |
+| `components` |  |
+| `createdDate` |  |
 | `id` |  |
 | `language` |  |
-| `library_template_body_input` |  |
-| `library_template_button_input` |  |
+| `library_template_body_inputs` |  |
+| `library_template_button_inputs` |  |
 | `library_template_name` |  |
-| `message_send_ttl_second` |  |
-| `modified_date` |  |
+| `message_send_ttl_seconds` |  |
+| `modifiedDate` |  |
 | `name` |  |
 | `parameter_format` |  |
 | `status` |  |
@@ -296,11 +296,11 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `current_page` |  |
-| `item` |  |
-| `page` |  |
-| `result` |  |
-| `results_per_page` |  |
+| `currentPage` |  |
+| `items` |  |
+| `pages` |  |
+| `results` |  |
+| `resultsPerPage` |  |
 
 Operations: Load.
 
@@ -376,16 +376,16 @@ Create an instance: `local template = client:Template(nil)`
 | --- | --- | --- |
 | `allow_category_change` | `boolean` |  |
 | `category` | `string` |  |
-| `component` | `table` |  |
-| `created_date` | `string` |  |
-| `id` | `any` |  |
+| `components` | `table` |  |
+| `createdDate` | `string` |  |
+| `id` | `string|nil` |  |
 | `language` | `string` |  |
-| `library_template_body_input` | `table` |  |
-| `library_template_button_input` | `any` |  |
-| `library_template_name` | `any` |  |
-| `message_send_ttl_second` | `number` |  |
-| `modified_date` | `any` |  |
-| `name` | `any` |  |
+| `library_template_body_inputs` | `table` |  |
+| `library_template_button_inputs` | `table|nil` |  |
+| `library_template_name` | `string|nil` |  |
+| `message_send_ttl_seconds` | `number` |  |
+| `modifiedDate` | `string|nil` |  |
+| `name` | `string|nil` |  |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
 | `sub_category` | `string` |  |
@@ -394,7 +394,7 @@ Create an instance: `local template = client:Template(nil)`
 
 ```lua
 local template, err = client:Template():create({
-  component = {}, -- table
+  components = {}, -- table
 })
 ```
 
@@ -430,11 +430,11 @@ Create an instance: `local whats_app_template_get_v2_pagination = client:WhatsAp
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_page` | `number` |  |
-| `item` | `any` |  |
-| `page` | `number` |  |
-| `result` | `number` |  |
-| `results_per_page` | `number` |  |
+| `currentPage` | `number` |  |
+| `items` | `table|nil` |  |
+| `pages` | `number` |  |
+| `results` | `number` |  |
+| `resultsPerPage` | `number` |  |
 
 #### Example: Load
 

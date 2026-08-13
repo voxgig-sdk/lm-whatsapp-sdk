@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from lmwhatsapp_sdk.utility.voxgig_struct import voxgig_struct as vs
 from lmwhatsapp_sdk import LmWhatsappSDK
-from core import helpers
+from lmwhatsapp_sdk.core import helpers
 from test import runner
 
 
@@ -56,16 +56,16 @@ def _whats_app_template_get_v2_pagination_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "LMWHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__PAGINATION_ENTID": {},
-        "LMWHATSAPP_TEST_LIVE": "FALSE",
-        "LMWHATSAPP_APIKEY": "NONE",
+        "LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID": {},
+        "LM_WHATSAPP_TEST_LIVE": "FALSE",
+        "LM_WHATSAPP_APIKEY": "NONE",
     })
 
-    live = env.get("LMWHATSAPP_TEST_LIVE") == "TRUE"
+    live = env.get("LM_WHATSAPP_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("LMWHATSAPP_APIKEY"),
+            "apikey": env.get("LM_WHATSAPP_APIKEY"),
         }
         client = LmWhatsappSDK(merged_opts)
         return {

@@ -35,8 +35,8 @@ end
 
 
 function runner.env_override(m)
-  local live = runner.getenv("LMWHATSAPP_TEST_LIVE")
-  local override = runner.getenv("LMWHATSAPP_TEST_OVERRIDE")
+  local live = runner.getenv("LM_WHATSAPP_TEST_LIVE")
+  local override = runner.getenv("LM_WHATSAPP_TEST_OVERRIDE")
 
   if live == "TRUE" or override == "TRUE" then
     for key, _ in pairs(m) do
@@ -56,9 +56,9 @@ function runner.env_override(m)
     end
   end
 
-  local explain = runner.getenv("LMWHATSAPP_TEST_EXPLAIN")
+  local explain = runner.getenv("LM_WHATSAPP_TEST_EXPLAIN")
   if explain ~= nil and explain ~= "" then
-    m["LMWHATSAPP_TEST_EXPLAIN"] = explain
+    m["LM_WHATSAPP_TEST_EXPLAIN"] = explain
   end
 
   return m

@@ -120,7 +120,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = LmWhatsappSDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 whatsapptemplategetv2 = client.WhatsAppTemplateGetV2().load({"id": "test01"})
 # whatsapptemplategetv2 contains the mock response record
 ```
@@ -226,7 +227,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -277,15 +278,15 @@ API path: `/whatsapp/v2/messages`
 | --- | --- |
 | `allow_category_change` |  |
 | `category` |  |
-| `component` |  |
-| `created_date` |  |
+| `components` |  |
+| `createdDate` |  |
 | `id` |  |
 | `language` |  |
-| `library_template_body_input` |  |
-| `library_template_button_input` |  |
+| `library_template_body_inputs` |  |
+| `library_template_button_inputs` |  |
 | `library_template_name` |  |
-| `message_send_ttl_second` |  |
-| `modified_date` |  |
+| `message_send_ttl_seconds` |  |
+| `modifiedDate` |  |
 | `name` |  |
 | `parameter_format` |  |
 | `status` |  |
@@ -308,11 +309,11 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `current_page` |  |
-| `item` |  |
-| `page` |  |
-| `result` |  |
-| `results_per_page` |  |
+| `currentPage` |  |
+| `items` |  |
+| `pages` |  |
+| `results` |  |
+| `resultsPerPage` |  |
 
 Operations: Load.
 
@@ -388,16 +389,16 @@ Create an instance: `template = client.Template()`
 | --- | --- | --- |
 | `allow_category_change` | `bool` |  |
 | `category` | `str` |  |
-| `component` | `list` |  |
-| `created_date` | `str` |  |
-| `id` | `Any` |  |
+| `components` | `list` |  |
+| `createdDate` | `str` |  |
+| `id` | `str | None` |  |
 | `language` | `str` |  |
-| `library_template_body_input` | `dict` |  |
-| `library_template_button_input` | `Any` |  |
-| `library_template_name` | `Any` |  |
-| `message_send_ttl_second` | `int` |  |
-| `modified_date` | `Any` |  |
-| `name` | `Any` |  |
+| `library_template_body_inputs` | `dict` |  |
+| `library_template_button_inputs` | `list | None` |  |
+| `library_template_name` | `str | None` |  |
+| `message_send_ttl_seconds` | `int` |  |
+| `modifiedDate` | `str | None` |  |
+| `name` | `str | None` |  |
 | `parameter_format` | `str` |  |
 | `status` | `str` |  |
 | `sub_category` | `str` |  |
@@ -406,7 +407,7 @@ Create an instance: `template = client.Template()`
 
 ```python
 template = client.Template().create({
-    "component": [],  # list
+    "components": [],  # list
 })
 ```
 
@@ -442,11 +443,11 @@ Create an instance: `whats_app_template_get_v2_pagination = client.WhatsAppTempl
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_page` | `int` |  |
-| `item` | `Any` |  |
-| `page` | `int` |  |
-| `result` | `int` |  |
-| `results_per_page` | `int` |  |
+| `currentPage` | `int` |  |
+| `items` | `list | None` |  |
+| `pages` | `int` |  |
+| `results` | `int` |  |
+| `resultsPerPage` | `int` |  |
 
 #### Example: Load
 

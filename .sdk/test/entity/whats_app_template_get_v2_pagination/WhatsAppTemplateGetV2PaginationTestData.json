@@ -2,27 +2,27 @@
   "existing": {
     "whats_app_template_get_v2_pagination": {
       "WHATS_APP_TEMPLATE_GET_V2_PAGINATION00": {
-        "current_page": "s32",
-        "item": "s33",
-        "page": "s34",
-        "result": "s35",
-        "results_per_page": "s36",
+        "currentPage": "s32",
+        "items": "s33",
+        "pages": "s34",
+        "results": "s35",
+        "resultsPerPage": "s36",
         "id": "WHATS_APP_TEMPLATE_GET_V2_PAGINATION00"
       },
       "WHATS_APP_TEMPLATE_GET_V2_PAGINATION01": {
-        "current_page": "s64",
-        "item": "s65",
-        "page": "s66",
-        "result": "s67",
-        "results_per_page": "s68",
+        "currentPage": "s64",
+        "items": "s65",
+        "pages": "s66",
+        "results": "s67",
+        "resultsPerPage": "s68",
         "id": "WHATS_APP_TEMPLATE_GET_V2_PAGINATION01"
       },
       "WHATS_APP_TEMPLATE_GET_V2_PAGINATION02": {
-        "current_page": "s96",
-        "item": "s97",
-        "page": "s98",
-        "result": "s99",
-        "results_per_page": "s9a",
+        "currentPage": "s96",
+        "items": "s97",
+        "pages": "s98",
+        "results": "s99",
+        "resultsPerPage": "s9a",
         "id": "WHATS_APP_TEMPLATE_GET_V2_PAGINATION02"
       }
     }
@@ -30,11 +30,11 @@
   "new": {
     "whats_app_template_get_v2_pagination": {
       "whats_app_template_get_v2_pagination_ref01": {
-        "current_page": "sc8",
-        "item": "sc9",
-        "page": "sca",
-        "result": "scb",
-        "results_per_page": "scc"
+        "currentPage": "sc8",
+        "items": "sc9",
+        "pages": "sca",
+        "results": "scb",
+        "resultsPerPage": "scc"
       }
     }
   }

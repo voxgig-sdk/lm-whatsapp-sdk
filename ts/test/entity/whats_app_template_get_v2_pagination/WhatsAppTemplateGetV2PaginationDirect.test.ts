@@ -19,11 +19,15 @@ import {
 describe('WhatsAppTemplateGetV2PaginationDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when LMWHATSAPP_TEST_LIVE=TRUE.
-  afterEach(liveDelay('LMWHATSAPP_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when LM_WHATSAPP_TEST_LIVE=TRUE.
+  afterEach(liveDelay('LM_WHATSAPP_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new LmWhatsappSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -72,19 +76,19 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'LMWHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__PAGINATION_ENTID': {},
-    'LMWHATSAPP_TEST_LIVE': 'FALSE',
-    'LMWHATSAPP_APIKEY': 'NONE',
+    'LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID': {},
+    'LM_WHATSAPP_TEST_LIVE': 'FALSE',
+    'LM_WHATSAPP_APIKEY': 'NONE',
   })
 
-  const live = 'TRUE' === env.LMWHATSAPP_TEST_LIVE
+  const live = 'TRUE' === env.LM_WHATSAPP_TEST_LIVE
 
   if (live) {
     const client = new LmWhatsappSDK({
-      apikey: env.LMWHATSAPP_APIKEY,
+      apikey: env.LM_WHATSAPP_APIKEY,
     })
 
-    let idmap: any = env['LMWHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__PAGINATION_ENTID']
+    let idmap: any = env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

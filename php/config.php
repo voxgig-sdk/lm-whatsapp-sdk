@@ -59,6 +59,7 @@ class LmWhatsappConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/whatsapp/v2/templates/{id}',
                   'parts' => [
@@ -120,6 +121,7 @@ class LmWhatsappConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/whatsapp/v2/{phoneNumber}/media',
                   'parts' => [
@@ -168,6 +170,7 @@ class LmWhatsappConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/whatsapp/v2/messages',
                   'parts' => [
@@ -214,7 +217,7 @@ class LmWhatsappConfig
             ],
             [
               'active' => true,
-              'name' => 'component',
+              'name' => 'components',
               'op' => [
                 'update' => [
                   'req' => false,
@@ -233,7 +236,7 @@ class LmWhatsappConfig
             ],
             [
               'active' => true,
-              'name' => 'created_date',
+              'name' => 'createdDate',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 3,
@@ -266,14 +269,14 @@ class LmWhatsappConfig
             ],
             [
               'active' => true,
-              'name' => 'library_template_body_input',
+              'name' => 'library_template_body_inputs',
               'req' => false,
               'type' => '`$OBJECT`',
               'index$' => 6,
             ],
             [
               'active' => true,
-              'name' => 'library_template_button_input',
+              'name' => 'library_template_button_inputs',
               'req' => false,
               'type' => [
                 '`$ONE`',
@@ -299,14 +302,14 @@ class LmWhatsappConfig
             ],
             [
               'active' => true,
-              'name' => 'message_send_ttl_second',
+              'name' => 'message_send_ttl_seconds',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 9,
             ],
             [
               'active' => true,
-              'name' => 'modified_date',
+              'name' => 'modifiedDate',
               'req' => false,
               'type' => [
                 '`$ONE`',
@@ -367,6 +370,7 @@ class LmWhatsappConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/whatsapp/v2/templates',
                   'parts' => [
@@ -403,6 +407,7 @@ class LmWhatsappConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/whatsapp/v2/templates/{id}',
                   'parts' => [
@@ -453,6 +458,7 @@ class LmWhatsappConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/whatsapp/v2/templates/{id}',
                   'parts' => [
@@ -484,14 +490,14 @@ class LmWhatsappConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'current_page',
+              'name' => 'currentPage',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'item',
+              'name' => 'items',
               'req' => false,
               'type' => [
                 '`$ONE`',
@@ -504,21 +510,21 @@ class LmWhatsappConfig
             ],
             [
               'active' => true,
-              'name' => 'page',
+              'name' => 'pages',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 2,
             ],
             [
               'active' => true,
-              'name' => 'result',
+              'name' => 'results',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 3,
             ],
             [
               'active' => true,
-              'name' => 'results_per_page',
+              'name' => 'resultsPerPage',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 4,
@@ -562,6 +568,7 @@ class LmWhatsappConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/whatsapp/v2/templates',
                   'parts' => [

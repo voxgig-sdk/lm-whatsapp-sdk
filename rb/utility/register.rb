@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ LmWhatsappUtility.registrar = ->(u) {
   u.prepare_params = LmWhatsappUtilities::PrepareParams
   u.prepare_path = LmWhatsappUtilities::PreparePath
   u.prepare_query = LmWhatsappUtilities::PrepareQuery
+  u.graphql_body = LmWhatsappUtilities::GraphqlBody
+  u.graphql_errors = LmWhatsappUtilities::GraphqlErrors
   u.result_basic = LmWhatsappUtilities::ResultBasic
   u.result_body = LmWhatsappUtilities::ResultBody
   u.result_headers = LmWhatsappUtilities::ResultHeaders

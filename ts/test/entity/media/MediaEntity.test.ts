@@ -26,8 +26,8 @@ import {
 describe('MediaEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when LMWHATSAPP_TEST_LIVE=TRUE.
-  afterEach(liveDelay('LMWHATSAPP_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when LM_WHATSAPP_TEST_LIVE=TRUE.
+  afterEach(liveDelay('LM_WHATSAPP_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = LmWhatsappSDK.test()
@@ -63,7 +63,7 @@ describe('MediaEntity', async () => {
     let media_ref01_data = setup.data.new.media['media_ref01']
     media_ref01_data['phone_number'] = setup.idmap['phone_number01']
 
-    media_ref01_data = await media_ref01_ent.create(media_ref01_data)
+    media_ref01_data = (await media_ref01_ent.create(media_ref01_data)).data()
     assert(null != media_ref01_data)
 
 

@@ -62,8 +62,8 @@ function makeCtrl(explain: boolean) {
 // Overrides configuration values with environment variables if available
 function envOverride(m: Record<string, any>) {
   if (
-    'TRUE' === process.env.LMWHATSAPP_TEST_LIVE ||
-    'TRUE' === process.env.LMWHATSAPP_TEST_OVERRIDE
+    'TRUE' === process.env.LM_WHATSAPP_TEST_LIVE ||
+    'TRUE' === process.env.LM_WHATSAPP_TEST_OVERRIDE
   ) {
     Object.entries(m).map(n => {
       let envval = process.env[n[0]]
@@ -74,7 +74,7 @@ function envOverride(m: Record<string, any>) {
     })
   }
 
-  m.LMWHATSAPP_TEST_EXPLAIN = process.env.LMWHATSAPP_TEST_EXPLAIN || m.LMWHATSAPP_TEST_EXPLAIN
+  m.LM_WHATSAPP_TEST_EXPLAIN = process.env.LM_WHATSAPP_TEST_EXPLAIN || m.LM_WHATSAPP_TEST_EXPLAIN
 
   return m
 }

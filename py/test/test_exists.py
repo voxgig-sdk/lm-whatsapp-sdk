@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# LmWhatsapp SDK exists test
 
 import pytest
 from lmwhatsapp_sdk import LmWhatsappSDK

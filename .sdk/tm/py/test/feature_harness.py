@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import LmWhatsappControl
-from core.error import LmWhatsappError
-from core.result import LmWhatsappResult
-from core.spec import LmWhatsappSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import LmWhatsappControl
+from projectname_sdk.core.error import LmWhatsappError
+from projectname_sdk.core.result import LmWhatsappResult
+from projectname_sdk.core.spec import LmWhatsappSpec
 
 
 # True when this SDK was generated with the named feature.

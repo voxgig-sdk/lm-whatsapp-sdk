@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ LmWhatsappUtility::setRegistrar(function (LmWhatsappUtility $u): void {
     $u->prepare_params = [LmWhatsappPrepareParams::class, 'call'];
     $u->prepare_path = [LmWhatsappPreparePath::class, 'call'];
     $u->prepare_query = [LmWhatsappPrepareQuery::class, 'call'];
+    $u->graphql_body = [LmWhatsappGraphql::class, 'body'];
+    $u->graphql_errors = [LmWhatsappGraphql::class, 'errors'];
     $u->result_basic = [LmWhatsappResultBasic::class, 'call'];
     $u->result_body = [LmWhatsappResultBody::class, 'call'];
     $u->result_headers = [LmWhatsappResultHeaders::class, 'call'];

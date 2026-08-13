@@ -259,15 +259,15 @@ fmt.Println(template.GetName()) // "template"
 | --- | --- | --- | --- |
 | `allow_category_change` | `bool` | No |  |
 | `category` | `string` | No |  |
-| `component` | `[]any` | Yes |  |
-| `created_date` | `string` | No |  |
+| `components` | `[]any` | Yes |  |
+| `createdDate` | `string` | No |  |
 | `id` | `any` | No |  |
 | `language` | `string` | No |  |
-| `library_template_body_input` | `map[string]any` | No |  |
-| `library_template_button_input` | `any` | No |  |
+| `library_template_body_inputs` | `map[string]any` | No |  |
+| `library_template_button_inputs` | `any` | No |  |
 | `library_template_name` | `any` | No |  |
-| `message_send_ttl_second` | `int` | No |  |
-| `modified_date` | `any` | No |  |
+| `message_send_ttl_seconds` | `int` | No |  |
+| `modifiedDate` | `any` | No |  |
 | `name` | `any` | No |  |
 | `parameter_format` | `string` | No |  |
 | `status` | `string` | No |  |
@@ -279,15 +279,15 @@ fmt.Println(template.GetName()) // "template"
 | --- | --- | --- |
 | `allow_category_change` | - | - |
 | `category` | Yes | - |
-| `component` | - | Yes |
-| `created_date` | - | - |
+| `components` | - | Yes |
+| `createdDate` | - | - |
 | `id` | - | - |
 | `language` | Yes | - |
-| `library_template_body_input` | - | - |
-| `library_template_button_input` | - | - |
+| `library_template_body_inputs` | - | - |
+| `library_template_button_inputs` | - | - |
 | `library_template_name` | - | - |
-| `message_send_ttl_second` | - | - |
-| `modified_date` | - | - |
+| `message_send_ttl_seconds` | - | - |
+| `modifiedDate` | - | - |
 | `name` | Yes | - |
 | `parameter_format` | - | - |
 | `status` | - | - |
@@ -301,7 +301,7 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Template(nil).Create(map[string]any{
-    "component": []any{},
+    "components": []any{},
 }, nil)
 if err != nil {
     panic(err)
@@ -404,11 +404,11 @@ fmt.Println(whatsAppTemplateGetV2Pagination.GetName()) // "whats_app_template_ge
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_page` | `int` | No |  |
-| `item` | `any` | No |  |
-| `page` | `int` | No |  |
-| `result` | `int` | No |  |
-| `results_per_page` | `int` | No |  |
+| `currentPage` | `int` | No |  |
+| `items` | `any` | No |  |
+| `pages` | `int` | No |  |
+| `results` | `int` | No |  |
+| `resultsPerPage` | `int` | No |  |
 
 ### Operations
 

@@ -26,8 +26,8 @@ import {
 describe('ManageTemplateEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when LMWHATSAPP_TEST_LIVE=TRUE.
-  afterEach(liveDelay('LMWHATSAPP_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when LM_WHATSAPP_TEST_LIVE=TRUE.
+  afterEach(liveDelay('LM_WHATSAPP_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = LmWhatsappSDK.test()

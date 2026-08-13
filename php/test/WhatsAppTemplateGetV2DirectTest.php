@@ -75,16 +75,16 @@ function whats_app_template_get_v2_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "LMWHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__ENTID" => [],
-        "LMWHATSAPP_TEST_LIVE" => "FALSE",
-        "LMWHATSAPP_APIKEY" => "NONE",
+        "LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID" => [],
+        "LM_WHATSAPP_TEST_LIVE" => "FALSE",
+        "LM_WHATSAPP_APIKEY" => "NONE",
     ]);
 
-    $live = $env["LMWHATSAPP_TEST_LIVE"] === "TRUE";
+    $live = $env["LM_WHATSAPP_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["LMWHATSAPP_APIKEY"],
+            "apikey" => $env["LM_WHATSAPP_APIKEY"],
         ];
         $client = new LmWhatsappSDK($merged_opts);
         return [

@@ -248,16 +248,16 @@ template = client.Template()
 | --- | --- | --- | --- |
 | `allow_category_change` | `bool` | No |  |
 | `category` | `str` | No |  |
-| `component` | `list` | Yes |  |
-| `created_date` | `str` | No |  |
-| `id` | `Any` | No |  |
+| `components` | `list` | Yes |  |
+| `createdDate` | `str` | No |  |
+| `id` | `str | None` | No |  |
 | `language` | `str` | No |  |
-| `library_template_body_input` | `dict` | No |  |
-| `library_template_button_input` | `Any` | No |  |
-| `library_template_name` | `Any` | No |  |
-| `message_send_ttl_second` | `int` | No |  |
-| `modified_date` | `Any` | No |  |
-| `name` | `Any` | No |  |
+| `library_template_body_inputs` | `dict` | No |  |
+| `library_template_button_inputs` | `list | None` | No |  |
+| `library_template_name` | `str | None` | No |  |
+| `message_send_ttl_seconds` | `int` | No |  |
+| `modifiedDate` | `str | None` | No |  |
+| `name` | `str | None` | No |  |
 | `parameter_format` | `str` | No |  |
 | `status` | `str` | No |  |
 | `sub_category` | `str` | No |  |
@@ -268,15 +268,15 @@ template = client.Template()
 | --- | --- | --- |
 | `allow_category_change` | - | - |
 | `category` | Yes | - |
-| `component` | - | Yes |
-| `created_date` | - | - |
+| `components` | - | Yes |
+| `createdDate` | - | - |
 | `id` | - | - |
 | `language` | Yes | - |
-| `library_template_body_input` | - | - |
-| `library_template_button_input` | - | - |
+| `library_template_body_inputs` | - | - |
+| `library_template_button_inputs` | - | - |
 | `library_template_name` | - | - |
-| `message_send_ttl_second` | - | - |
-| `modified_date` | - | - |
+| `message_send_ttl_seconds` | - | - |
+| `modifiedDate` | - | - |
 | `name` | Yes | - |
 | `parameter_format` | - | - |
 | `status` | - | - |
@@ -290,7 +290,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Template().create({
-    "component": [],  # list
+    "components": [],  # list
 })
 ```
 
@@ -389,11 +389,11 @@ whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_page` | `int` | No |  |
-| `item` | `Any` | No |  |
-| `page` | `int` | No |  |
-| `result` | `int` | No |  |
-| `results_per_page` | `int` | No |  |
+| `currentPage` | `int` | No |  |
+| `items` | `list | None` | No |  |
+| `pages` | `int` | No |  |
+| `results` | `int` | No |  |
+| `resultsPerPage` | `int` | No |  |
 
 ### Operations
 

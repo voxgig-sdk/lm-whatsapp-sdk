@@ -6,7 +6,11 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/voxgig-sdk/lm-whatsapp-sdk/go/core"
+)
 
 // ManageTemplate is the typed data model for the manage_template entity.
 type ManageTemplate struct {
@@ -38,15 +42,15 @@ type SendMessageCreateData struct {
 type Template struct {
 	AllowCategoryChange *bool `json:"allow_category_change,omitempty"`
 	Category *string `json:"category,omitempty"`
-	Component []any `json:"component"`
-	CreatedDate *string `json:"created_date,omitempty"`
+	Components []any `json:"components"`
+	CreatedDate *string `json:"createdDate,omitempty"`
 	Id *any `json:"id,omitempty"`
 	Language *string `json:"language,omitempty"`
-	LibraryTemplateBodyInput *map[string]any `json:"library_template_body_input,omitempty"`
-	LibraryTemplateButtonInput *any `json:"library_template_button_input,omitempty"`
+	LibraryTemplateBodyInputs *map[string]any `json:"library_template_body_inputs,omitempty"`
+	LibraryTemplateButtonInputs *any `json:"library_template_button_inputs,omitempty"`
 	LibraryTemplateName *any `json:"library_template_name,omitempty"`
-	MessageSendTtlSecond *int `json:"message_send_ttl_second,omitempty"`
-	ModifiedDate *any `json:"modified_date,omitempty"`
+	MessageSendTtlSeconds *int `json:"message_send_ttl_seconds,omitempty"`
+	ModifiedDate *any `json:"modifiedDate,omitempty"`
 	Name *any `json:"name,omitempty"`
 	ParameterFormat *string `json:"parameter_format,omitempty"`
 	Status *string `json:"status,omitempty"`
@@ -57,15 +61,15 @@ type Template struct {
 type TemplateCreateData struct {
 	AllowCategoryChange *bool `json:"allow_category_change,omitempty"`
 	Category *string `json:"category,omitempty"`
-	Component []any `json:"component"`
-	CreatedDate *string `json:"created_date,omitempty"`
+	Components []any `json:"components"`
+	CreatedDate *string `json:"createdDate,omitempty"`
 	Id *any `json:"id,omitempty"`
 	Language *string `json:"language,omitempty"`
-	LibraryTemplateBodyInput *map[string]any `json:"library_template_body_input,omitempty"`
-	LibraryTemplateButtonInput *any `json:"library_template_button_input,omitempty"`
+	LibraryTemplateBodyInputs *map[string]any `json:"library_template_body_inputs,omitempty"`
+	LibraryTemplateButtonInputs *any `json:"library_template_button_inputs,omitempty"`
 	LibraryTemplateName *any `json:"library_template_name,omitempty"`
-	MessageSendTtlSecond *int `json:"message_send_ttl_second,omitempty"`
-	ModifiedDate *any `json:"modified_date,omitempty"`
+	MessageSendTtlSeconds *int `json:"message_send_ttl_seconds,omitempty"`
+	ModifiedDate *any `json:"modifiedDate,omitempty"`
 	Name *any `json:"name,omitempty"`
 	ParameterFormat *string `json:"parameter_format,omitempty"`
 	Status *string `json:"status,omitempty"`
@@ -75,6 +79,20 @@ type TemplateCreateData struct {
 // TemplateUpdateData is the typed request payload for Template.UpdateTyped.
 type TemplateUpdateData struct {
 	Id string `json:"id"`
+	AllowCategoryChange *bool `json:"allow_category_change,omitempty"`
+	Category *string `json:"category,omitempty"`
+	Components *[]any `json:"components,omitempty"`
+	CreatedDate *string `json:"createdDate,omitempty"`
+	Language *string `json:"language,omitempty"`
+	LibraryTemplateBodyInputs *map[string]any `json:"library_template_body_inputs,omitempty"`
+	LibraryTemplateButtonInputs *any `json:"library_template_button_inputs,omitempty"`
+	LibraryTemplateName *any `json:"library_template_name,omitempty"`
+	MessageSendTtlSeconds *int `json:"message_send_ttl_seconds,omitempty"`
+	ModifiedDate *any `json:"modifiedDate,omitempty"`
+	Name *any `json:"name,omitempty"`
+	ParameterFormat *string `json:"parameter_format,omitempty"`
+	Status *string `json:"status,omitempty"`
+	SubCategory *string `json:"sub_category,omitempty"`
 }
 
 // WhatsAppTemplateGetV2 is the typed data model for the whats_app_template_get_v2 entity.
@@ -88,20 +106,20 @@ type WhatsAppTemplateGetV2LoadMatch struct {
 
 // WhatsAppTemplateGetV2Pagination is the typed data model for the whats_app_template_get_v2_pagination entity.
 type WhatsAppTemplateGetV2Pagination struct {
-	CurrentPage *int `json:"current_page,omitempty"`
-	Item *any `json:"item,omitempty"`
-	Page *int `json:"page,omitempty"`
-	Result *int `json:"result,omitempty"`
-	ResultsPerPage *int `json:"results_per_page,omitempty"`
+	CurrentPage *int `json:"currentPage,omitempty"`
+	Items *any `json:"items,omitempty"`
+	Pages *int `json:"pages,omitempty"`
+	Results *int `json:"results,omitempty"`
+	ResultsPerPage *int `json:"resultsPerPage,omitempty"`
 }
 
 // WhatsAppTemplateGetV2PaginationLoadMatch is the typed request payload for WhatsAppTemplateGetV2Pagination.LoadTyped.
 type WhatsAppTemplateGetV2PaginationLoadMatch struct {
-	CurrentPage *int `json:"current_page,omitempty"`
-	Item *any `json:"item,omitempty"`
-	Page *int `json:"page,omitempty"`
-	Result *int `json:"result,omitempty"`
-	ResultsPerPage *int `json:"results_per_page,omitempty"`
+	CurrentPage *int `json:"currentPage,omitempty"`
+	Items *any `json:"items,omitempty"`
+	Pages *int `json:"pages,omitempty"`
+	Results *int `json:"results,omitempty"`
+	ResultsPerPage *int `json:"resultsPerPage,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the
@@ -116,12 +134,26 @@ func asMap(v any) map[string]any {
 	return out
 }
 
-// typedFrom decodes a runtime value (a map[string]any produced by the op
-// pipeline) into a typed model T via a JSON round-trip. On any error it
-// returns the zero value of T; the op's own (value, error) tuple carries the
-// real error.
+// entityData unwraps an entity to its data map.
+//
+// Operations resolve to the ENTITY, not the raw data (see AGENTS.md), and an
+// entity's fields are UNEXPORTED — marshalling one directly yields `{}`, so
+// every typed accessor would silently hand back a zero-valued struct. The
+// typed boundary therefore takes the data hop first.
+func entityData(v any) any {
+	if ent, ok := v.(core.Entity); ok {
+		return ent.Data()
+	}
+	return v
+}
+
+// typedFrom decodes a runtime value (an entity, or the map[string]any the op
+// pipeline produced) into a typed model T via a JSON round-trip. On any error
+// it returns the zero value of T; the op's own (value, error) tuple carries
+// the real error.
 func typedFrom[T any](v any) T {
 	var out T
+	v = entityData(v)
 	if v == nil {
 		return out
 	}
@@ -133,12 +165,20 @@ func typedFrom[T any](v any) T {
 	return out
 }
 
-// typedSliceFrom decodes a runtime list value ([]any of maps) into a typed
-// slice []T via a JSON round-trip, for list ops.
+// typedSliceFrom decodes a runtime list value into a typed slice []T via a
+// JSON round-trip, for list ops. `list` resolves to a slice of ENTITY
+// instances, so each element takes the data hop.
 func typedSliceFrom[T any](v any) []T {
 	var out []T
 	if v == nil {
 		return out
+	}
+	if list, ok := v.([]any); ok {
+		unwrapped := make([]any, 0, len(list))
+		for _, item := range list {
+			unwrapped = append(unwrapped, entityData(item))
+		}
+		v = unwrapped
 	}
 	b, err := json.Marshal(v)
 	if err != nil {

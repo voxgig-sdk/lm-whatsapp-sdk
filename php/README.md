@@ -123,7 +123,8 @@ $client = LmWhatsappSDK::test([
     "entity" => ["whatsapptemplategetv2" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $whatsapptemplategetv2 = $client->WhatsAppTemplateGetV2()->load(["id" => "test01"]);
 print_r($whatsapptemplategetv2);
 ```
@@ -232,7 +233,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -283,15 +284,15 @@ API path: `/whatsapp/v2/messages`
 | --- | --- |
 | `allow_category_change` |  |
 | `category` |  |
-| `component` |  |
-| `created_date` |  |
+| `components` |  |
+| `createdDate` |  |
 | `id` |  |
 | `language` |  |
-| `library_template_body_input` |  |
-| `library_template_button_input` |  |
+| `library_template_body_inputs` |  |
+| `library_template_button_inputs` |  |
 | `library_template_name` |  |
-| `message_send_ttl_second` |  |
-| `modified_date` |  |
+| `message_send_ttl_seconds` |  |
+| `modifiedDate` |  |
 | `name` |  |
 | `parameter_format` |  |
 | `status` |  |
@@ -314,11 +315,11 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `current_page` |  |
-| `item` |  |
-| `page` |  |
-| `result` |  |
-| `results_per_page` |  |
+| `currentPage` |  |
+| `items` |  |
+| `pages` |  |
+| `results` |  |
+| `resultsPerPage` |  |
 
 Operations: Load.
 
@@ -394,15 +395,15 @@ Create an instance: `$template = $client->Template();`
 | --- | --- | --- |
 | `allow_category_change` | `bool` |  |
 | `category` | `string` |  |
-| `component` | `array` |  |
-| `created_date` | `string` |  |
+| `components` | `array` |  |
+| `createdDate` | `string` |  |
 | `id` | `mixed` |  |
 | `language` | `string` |  |
-| `library_template_body_input` | `array` |  |
-| `library_template_button_input` | `mixed` |  |
+| `library_template_body_inputs` | `array` |  |
+| `library_template_button_inputs` | `mixed` |  |
 | `library_template_name` | `mixed` |  |
-| `message_send_ttl_second` | `int` |  |
-| `modified_date` | `mixed` |  |
+| `message_send_ttl_seconds` | `int` |  |
+| `modifiedDate` | `mixed` |  |
 | `name` | `mixed` |  |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
@@ -412,7 +413,7 @@ Create an instance: `$template = $client->Template();`
 
 ```php
 $template = $client->Template()->create([
-    "component" => null, // array
+    "components" => null, // array
 ]);
 ```
 
@@ -430,7 +431,7 @@ Create an instance: `$whats_app_template_get_v2 = $client->WhatsAppTemplateGetV2
 #### Example: Load
 
 ```php
-// load() returns the bare WhatsAppTemplateGetV2 record (throws on error).
+// load() returns the ENTITY — call data_get() for the WhatsAppTemplateGetV2 record (throws on error).
 $whats_app_template_get_v2 = $client->WhatsAppTemplateGetV2()->load(["id" => "whats_app_template_get_v2_id"]);
 ```
 
@@ -449,16 +450,16 @@ Create an instance: `$whats_app_template_get_v2_pagination = $client->WhatsAppTe
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `current_page` | `int` |  |
-| `item` | `mixed` |  |
-| `page` | `int` |  |
-| `result` | `int` |  |
-| `results_per_page` | `int` |  |
+| `currentPage` | `int` |  |
+| `items` | `mixed` |  |
+| `pages` | `int` |  |
+| `results` | `int` |  |
+| `resultsPerPage` | `int` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare WhatsAppTemplateGetV2Pagination record (throws on error).
+// load() returns the ENTITY — call data_get() for the WhatsAppTemplateGetV2Pagination record (throws on error).
 $whats_app_template_get_v2_pagination = $client->WhatsAppTemplateGetV2Pagination()->load();
 ```
 

@@ -53,6 +53,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "DELETE",
 								"orig": "/whatsapp/v2/templates/{id}",
 								"parts": []any{
@@ -73,7 +74,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "remove",
 					},
 				},
 				"relations": map[string]any{
@@ -114,6 +114,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/whatsapp/v2/{phoneNumber}/media",
 								"parts": []any{
@@ -140,7 +141,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 				},
 				"relations": map[string]any{
@@ -162,6 +162,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/whatsapp/v2/messages",
 								"parts": []any{
@@ -177,7 +178,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 				},
 				"relations": map[string]any{
@@ -208,7 +208,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "component",
+						"name": "components",
 						"op": map[string]any{
 							"update": map[string]any{
 								"req": false,
@@ -227,7 +227,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "created_date",
+						"name": "createdDate",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 3,
@@ -260,14 +260,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "library_template_body_input",
+						"name": "library_template_body_inputs",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 6,
 					},
 					map[string]any{
 						"active": true,
-						"name": "library_template_button_input",
+						"name": "library_template_button_inputs",
 						"req": false,
 						"type": []any{
 							"`$ONE`",
@@ -293,14 +293,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "message_send_ttl_second",
+						"name": "message_send_ttl_seconds",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 9,
 					},
 					map[string]any{
 						"active": true,
-						"name": "modified_date",
+						"name": "modifiedDate",
 						"req": false,
 						"type": []any{
 							"`$ONE`",
@@ -361,6 +361,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/whatsapp/v2/templates",
 								"parts": []any{
@@ -376,7 +377,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"update": map[string]any{
 						"input": "data",
@@ -397,6 +397,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "PUT",
 								"orig": "/whatsapp/v2/templates/{id}",
 								"parts": []any{
@@ -417,7 +418,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "update",
 					},
 				},
 				"relations": map[string]any{
@@ -447,6 +447,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/whatsapp/v2/templates/{id}",
 								"parts": []any{
@@ -467,7 +468,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -478,14 +478,14 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "current_page",
+						"name": "currentPage",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "item",
+						"name": "items",
 						"req": false,
 						"type": []any{
 							"`$ONE`",
@@ -498,21 +498,21 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "page",
+						"name": "pages",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
-						"name": "result",
+						"name": "results",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "results_per_page",
+						"name": "resultsPerPage",
 						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 4,
@@ -556,6 +556,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/whatsapp/v2/templates",
 								"parts": []any{
@@ -577,7 +578,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

@@ -6,12 +6,12 @@ main: kit: entity: whats_app_template_get_v2_pagination: {
 
   fields: [
     {
-      name: "current_page"
+      name: "currentPage"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "item"
+      name: "items"
       req: false
       type: [
         "`$ONE`"
@@ -22,17 +22,17 @@ main: kit: entity: whats_app_template_get_v2_pagination: {
       ]
     }
     {
-      name: "page"
+      name: "pages"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "result"
+      name: "results"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "results_per_page"
+      name: "resultsPerPage"
       req: false
       type: "`$INTEGER`"
     }
