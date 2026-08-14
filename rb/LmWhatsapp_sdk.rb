@@ -28,7 +28,7 @@ class LmWhatsappSDK
     utility = LmWhatsappUtility.new
     @_utility = utility
 
-    config = LmWhatsappConfig.make_config
+    config = LmWhatsappConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

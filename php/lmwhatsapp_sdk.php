@@ -40,7 +40,7 @@ class LmWhatsappSDK
         $utility = new LmWhatsappUtility();
         $this->_utility = $utility;
 
-        $config = LmWhatsappConfig::make_config();
+        $config = LmWhatsappConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

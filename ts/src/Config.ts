@@ -80,17 +80,14 @@ class Config {
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -111,11 +108,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         }
       },
       "relations": {
@@ -131,11 +126,9 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {
                 "header": [
                   {
-                    "active": true,
                     "kind": "header",
                     "name": "x_link_upload_filename",
                     "orig": "x_link_upload_filename",
@@ -145,14 +138,12 @@ class Config {
                 ],
                 "params": [
                   {
-                    "active": true,
                     "example": "+15551234567 or %2b15551234567 or %2B15551234567",
                     "kind": "param",
                     "name": "phone_number",
                     "orig": "phone_number",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -179,11 +170,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         }
       },
       "relations": {
@@ -203,7 +192,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -217,11 +205,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         }
       },
       "relations": {
@@ -231,14 +217,10 @@ class Config {
     "template": {
       "fields": [
         {
-          "active": true,
           "name": "allow_category_change",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 0
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "category",
           "op": {
             "create": {
@@ -246,16 +228,12 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "components",
           "op": {
             "update": {
-              "req": false,
               "type": [
                 "`$ONE`",
                 [
@@ -266,31 +244,23 @@ class Config {
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 2
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "createdDate",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 3
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
-          "req": false,
           "type": [
             "`$ONE`",
             [
               "`$STRING`",
               "`$NULL`"
             ]
-          ],
-          "index$": 4
+          ]
         },
         {
-          "active": true,
           "name": "language",
           "op": {
             "create": {
@@ -298,65 +268,47 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 5
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "library_template_body_inputs",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 6
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "library_template_button_inputs",
-          "req": false,
           "type": [
             "`$ONE`",
             [
               "`$ARRAY`",
               "`$NULL`"
             ]
-          ],
-          "index$": 7
+          ]
         },
         {
-          "active": true,
           "name": "library_template_name",
-          "req": false,
           "type": [
             "`$ONE`",
             [
               "`$STRING`",
               "`$NULL`"
             ]
-          ],
-          "index$": 8
+          ]
         },
         {
-          "active": true,
           "name": "message_send_ttl_seconds",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 9
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "modifiedDate",
-          "req": false,
           "type": [
             "`$ONE`",
             [
               "`$STRING`",
               "`$NULL`"
             ]
-          ],
-          "index$": 10
+          ]
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "create": {
@@ -364,36 +316,25 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
           "type": [
             "`$ONE`",
             [
               "`$STRING`",
               "`$NULL`"
             ]
-          ],
-          "index$": 11
+          ]
         },
         {
-          "active": true,
           "name": "parameter_format",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 12
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "status",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 13
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "sub_category",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 14
+          "type": "`$STRING`"
         }
       ],
       "name": "template",
@@ -403,7 +344,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -417,28 +357,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -459,11 +394,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -479,17 +412,14 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -510,11 +440,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -524,45 +452,30 @@ class Config {
     "whats_app_template_get_v2_pagination": {
       "fields": [
         {
-          "active": true,
           "name": "currentPage",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "items",
-          "req": false,
           "type": [
             "`$ONE`",
             [
               "`$ARRAY`",
               "`$NULL`"
             ]
-          ],
-          "index$": 1
+          ]
         },
         {
-          "active": true,
           "name": "pages",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 2
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "results",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "resultsPerPage",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 4
+          "type": "`$INTEGER`"
         }
       ],
       "name": "whats_app_template_get_v2_pagination",
@@ -572,33 +485,26 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": 1,
                     "kind": "query",
                     "name": "page",
                     "orig": "page",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "example": 25,
                     "kind": "query",
                     "name": "size",
                     "orig": "size",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "sort",
                     "orig": "sort",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   }
                 ]
@@ -621,11 +527,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {

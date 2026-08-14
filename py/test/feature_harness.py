@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from lmwhatsapp_sdk.config import make_config
+from lmwhatsapp_sdk.config import shared_config
 from lmwhatsapp_sdk.features import _make_feature
 from lmwhatsapp_sdk.core.control import LmWhatsappControl
 from lmwhatsapp_sdk.core.error import LmWhatsappError
@@ -24,7 +24,7 @@ from lmwhatsapp_sdk.core.spec import LmWhatsappSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

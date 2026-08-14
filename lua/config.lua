@@ -1,5 +1,8 @@
 -- LmWhatsapp SDK configuration
 
+-- Build a fresh, fully materialised config table. Every call rebuilds the
+-- whole structure, so prefer require("config_shared") unless you need a
+-- private copy you intend to mutate.
 local function make_config()
   return {
     main = {
@@ -39,17 +42,14 @@ local function make_config()
             ["name"] = "remove",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -71,10 +71,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "remove",
           },
         },
         ["relations"] = {
@@ -90,11 +88,9 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["header"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "header",
                       ["name"] = "x_link_upload_filename",
                       ["orig"] = "x_link_upload_filename",
@@ -104,14 +100,12 @@ local function make_config()
                   },
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "+15551234567 or %2b15551234567 or %2B15551234567",
                       ["kind"] = "param",
                       ["name"] = "phone_number",
                       ["orig"] = "phone_number",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -139,10 +133,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "create",
           },
         },
         ["relations"] = {
@@ -162,7 +154,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
@@ -177,10 +168,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "create",
           },
         },
         ["relations"] = {
@@ -190,14 +179,10 @@ local function make_config()
       ["template"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "allow_category_change",
-            ["req"] = false,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "category",
             ["op"] = {
               ["create"] = {
@@ -205,16 +190,12 @@ local function make_config()
                 ["type"] = "`$STRING`",
               },
             },
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "components",
             ["op"] = {
               ["update"] = {
-                ["req"] = false,
                 ["type"] = {
                   "`$ONE`",
                   {
@@ -226,19 +207,13 @@ local function make_config()
             },
             ["req"] = true,
             ["type"] = "`$ARRAY`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "createdDate",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "id",
-            ["req"] = false,
             ["type"] = {
               "`$ONE`",
               {
@@ -246,10 +221,8 @@ local function make_config()
                 "`$NULL`",
               },
             },
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "language",
             ["op"] = {
               ["create"] = {
@@ -257,21 +230,14 @@ local function make_config()
                 ["type"] = "`$STRING`",
               },
             },
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "library_template_body_inputs",
-            ["req"] = false,
             ["type"] = "`$OBJECT`",
-            ["index$"] = 6,
           },
           {
-            ["active"] = true,
             ["name"] = "library_template_button_inputs",
-            ["req"] = false,
             ["type"] = {
               "`$ONE`",
               {
@@ -279,12 +245,9 @@ local function make_config()
                 "`$NULL`",
               },
             },
-            ["index$"] = 7,
           },
           {
-            ["active"] = true,
             ["name"] = "library_template_name",
-            ["req"] = false,
             ["type"] = {
               "`$ONE`",
               {
@@ -292,19 +255,13 @@ local function make_config()
                 "`$NULL`",
               },
             },
-            ["index$"] = 8,
           },
           {
-            ["active"] = true,
             ["name"] = "message_send_ttl_seconds",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 9,
           },
           {
-            ["active"] = true,
             ["name"] = "modifiedDate",
-            ["req"] = false,
             ["type"] = {
               "`$ONE`",
               {
@@ -312,10 +269,8 @@ local function make_config()
                 "`$NULL`",
               },
             },
-            ["index$"] = 10,
           },
           {
-            ["active"] = true,
             ["name"] = "name",
             ["op"] = {
               ["create"] = {
@@ -323,7 +278,6 @@ local function make_config()
                 ["type"] = "`$STRING`",
               },
             },
-            ["req"] = false,
             ["type"] = {
               "`$ONE`",
               {
@@ -331,28 +285,18 @@ local function make_config()
                 "`$NULL`",
               },
             },
-            ["index$"] = 11,
           },
           {
-            ["active"] = true,
             ["name"] = "parameter_format",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 12,
           },
           {
-            ["active"] = true,
             ["name"] = "status",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 13,
           },
           {
-            ["active"] = true,
             ["name"] = "sub_category",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 14,
           },
         },
         ["name"] = "template",
@@ -362,7 +306,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
@@ -377,27 +320,22 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "create",
           },
           ["update"] = {
             ["input"] = "data",
             ["name"] = "update",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -419,10 +357,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "update",
           },
         },
         ["relations"] = {
@@ -438,17 +374,14 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -470,10 +403,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -483,16 +414,11 @@ local function make_config()
       ["whats_app_template_get_v2_pagination"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "currentPage",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "items",
-            ["req"] = false,
             ["type"] = {
               "`$ONE`",
               {
@@ -500,28 +426,18 @@ local function make_config()
                 "`$NULL`",
               },
             },
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "pages",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "results",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "resultsPerPage",
-            ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 4,
           },
         },
         ["name"] = "whats_app_template_get_v2_pagination",
@@ -531,33 +447,26 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["example"] = 1,
                       ["kind"] = "query",
                       ["name"] = "page",
                       ["orig"] = "page",
-                      ["reqd"] = false,
                       ["type"] = "`$INTEGER`",
                     },
                     {
-                      ["active"] = true,
                       ["example"] = 25,
                       ["kind"] = "query",
                       ["name"] = "size",
                       ["orig"] = "size",
-                      ["reqd"] = false,
                       ["type"] = "`$INTEGER`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "sort",
                       ["orig"] = "sort",
-                      ["reqd"] = false,
                       ["type"] = "`$ARRAY`",
                     },
                   },
@@ -581,10 +490,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
