@@ -35,12 +35,26 @@ declare class LmWhatsappSDK {
         headers?: undefined;
         data?: undefined;
     }>;
-    ManageTemplate(data?: any): ManageTemplateEntity;
-    Media(data?: any): MediaEntity;
-    SendMessage(data?: any): SendMessageEntity;
-    Template(data?: any): TemplateEntity;
-    WhatsAppTemplateGetV2(data?: any): WhatsAppTemplateGetV2Entity;
-    WhatsAppTemplateGetV2Pagination(data?: any): WhatsAppTemplateGetV2PaginationEntity;
+    _rawRequest(fetchargs?: any): Promise<Error | {
+        ok: boolean;
+        status: number;
+        headers: any;
+        data: any;
+        err?: undefined;
+    } | {
+        ok: boolean;
+        err: any;
+        status?: undefined;
+        headers?: undefined;
+        data?: undefined;
+    }>;
+    graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
+    ManageTemplate(entopts?: Record<string, any>): ManageTemplateEntity;
+    Media(entopts?: Record<string, any>): MediaEntity;
+    SendMessage(entopts?: Record<string, any>): SendMessageEntity;
+    Template(entopts?: Record<string, any>): TemplateEntity;
+    WhatsAppTemplateGetV2(entopts?: Record<string, any>): WhatsAppTemplateGetV2Entity;
+    WhatsAppTemplateGetV2Pagination(entopts?: Record<string, any>): WhatsAppTemplateGetV2PaginationEntity;
     static test(testoptsarg?: any, sdkoptsarg?: any): LmWhatsappSDK;
     tester(testopts?: any, sdkopts?: any): LmWhatsappSDK;
     toJSON(): {

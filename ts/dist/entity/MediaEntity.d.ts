@@ -5,6 +5,6 @@ import type { Media, MediaCreateData } from '../LmWhatsappTypes';
 declare class MediaEntity extends LmWhatsappEntityBase<Media> {
     constructor(client: LmWhatsappSDK, entopts: any);
     make(this: MediaEntity): MediaEntity;
-    create(this: any, reqdata?: MediaCreateData, ctrl?: Control): Promise<Media>;
+    create(this: any, reqdata?: MediaCreateData, ctrl?: Control): Promise<MediaEntity>;
 }
 export { MediaEntity };

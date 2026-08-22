@@ -312,18 +312,18 @@ const template = client.Template()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `allow_category_change` | `boolean` | No |  |
+| `allow_category_change` | `boolean` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` | No |  |
-| `components` | `any[]` | Yes |  |
+| `components` | `any[]` | Yes | Array of components that make up the template. |
 | `createdDate` | `string` | No |  |
-| `id` | `string | null` | No |  |
+| `id` | `string | null` | No | ID |
 | `language` | `string` | No |  |
 | `library_template_body_inputs` | `Record<string, any>` | No |  |
-| `library_template_button_inputs` | `any[] | null` | No |  |
-| `library_template_name` | `string | null` | No |  |
-| `message_send_ttl_seconds` | `number` | No |  |
+| `library_template_button_inputs` | `any[] | null` | No | Optional data during creation of a template from a library template. |
+| `library_template_name` | `string | null` | No | Library template name |
+| `message_send_ttl_seconds` | `number` | No | Time to live for message template sent. |
 | `modifiedDate` | `string | null` | No |  |
-| `name` | `string | null` | No |  |
+| `name` | `string | null` | No | The message template name |
 | `parameter_format` | `string` | No |  |
 | `status` | `string` | No |  |
 | `sub_category` | `string` | No |  |

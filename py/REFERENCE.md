@@ -246,18 +246,18 @@ template = client.Template()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `allow_category_change` | `bool` | No |  |
+| `allow_category_change` | `bool` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `str` | No |  |
-| `components` | `list` | Yes |  |
+| `components` | `list` | Yes | Array of components that make up the template. |
 | `createdDate` | `str` | No |  |
-| `id` | `str | None` | No |  |
+| `id` | `str | None` | No | ID |
 | `language` | `str` | No |  |
 | `library_template_body_inputs` | `dict` | No |  |
-| `library_template_button_inputs` | `list | None` | No |  |
-| `library_template_name` | `str | None` | No |  |
-| `message_send_ttl_seconds` | `int` | No |  |
+| `library_template_button_inputs` | `list | None` | No | Optional data during creation of a template from a library template. |
+| `library_template_name` | `str | None` | No | Library template name |
+| `message_send_ttl_seconds` | `int` | No | Time to live for message template sent. |
 | `modifiedDate` | `str | None` | No |  |
-| `name` | `str | None` | No |  |
+| `name` | `str | None` | No | The message template name |
 | `parameter_format` | `str` | No |  |
 | `status` | `str` | No |  |
 | `sub_category` | `str` | No |  |

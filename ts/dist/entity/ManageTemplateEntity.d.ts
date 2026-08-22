@@ -5,6 +5,6 @@ import type { ManageTemplate, ManageTemplateRemoveMatch } from '../LmWhatsappTyp
 declare class ManageTemplateEntity extends LmWhatsappEntityBase<ManageTemplate> {
     constructor(client: LmWhatsappSDK, entopts: any);
     make(this: ManageTemplateEntity): ManageTemplateEntity;
-    remove(this: any, reqmatch?: ManageTemplateRemoveMatch, ctrl?: Control): Promise<ManageTemplate>;
+    remove(this: any, reqmatch?: ManageTemplateRemoveMatch, ctrl?: Control): Promise<ManageTemplateEntity>;
 }
 export { ManageTemplateEntity };

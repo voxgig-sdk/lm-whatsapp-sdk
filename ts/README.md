@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -323,18 +323,18 @@ API path: `/whatsapp/v2/messages`
 
 | Field | Description |
 | --- | --- |
-| `allow_category_change` |  |
+| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` |  |
-| `components` |  |
+| `components` | Array of components that make up the template. |
 | `createdDate` |  |
-| `id` |  |
+| `id` | ID |
 | `language` |  |
 | `library_template_body_inputs` |  |
-| `library_template_button_inputs` |  |
-| `library_template_name` |  |
-| `message_send_ttl_seconds` |  |
+| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
+| `library_template_name` | Library template name |
+| `message_send_ttl_seconds` | Time to live for message template sent. |
 | `modifiedDate` |  |
-| `name` |  |
+| `name` | The message template name |
 | `parameter_format` |  |
 | `status` |  |
 | `sub_category` |  |
@@ -434,18 +434,18 @@ Create an instance: `const template = client.Template()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `allow_category_change` | `boolean` |  |
+| `allow_category_change` | `boolean` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` |  |
-| `components` | `any[]` |  |
+| `components` | `any[]` | Array of components that make up the template. |
 | `createdDate` | `string` |  |
-| `id` | `string | null` |  |
+| `id` | `string | null` | ID |
 | `language` | `string` |  |
 | `library_template_body_inputs` | `Record<string, any>` |  |
-| `library_template_button_inputs` | `any[] | null` |  |
-| `library_template_name` | `string | null` |  |
-| `message_send_ttl_seconds` | `number` |  |
+| `library_template_button_inputs` | `any[] | null` | Optional data during creation of a template from a library template. |
+| `library_template_name` | `string | null` | Library template name |
+| `message_send_ttl_seconds` | `number` | Time to live for message template sent. |
 | `modifiedDate` | `string | null` |  |
-| `name` | `string | null` |  |
+| `name` | `string | null` | The message template name |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
 | `sub_category` | `string` |  |

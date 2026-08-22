@@ -15,16 +15,16 @@ export interface SendMessageCreateData {
 export interface Template {
     allow_category_change?: boolean;
     category?: string;
-    component: any[];
-    created_date?: string;
-    id?: any;
+    components: any[];
+    createdDate?: string;
+    id?: string | null;
     language?: string;
-    library_template_body_input?: Record<string, any>;
-    library_template_button_input?: any;
-    library_template_name?: any;
-    message_send_ttl_second?: number;
-    modified_date?: any;
-    name?: any;
+    library_template_body_inputs?: Record<string, any>;
+    library_template_button_inputs?: any[] | null;
+    library_template_name?: string | null;
+    message_send_ttl_seconds?: number;
+    modifiedDate?: string | null;
+    name?: string | null;
     parameter_format?: string;
     status?: string;
     sub_category?: string;
@@ -32,22 +32,36 @@ export interface Template {
 export interface TemplateCreateData {
     allow_category_change?: boolean;
     category?: string;
-    component: any[];
-    created_date?: string;
-    id?: any;
+    components: any[];
+    createdDate?: string;
+    id?: string | null;
     language?: string;
-    library_template_body_input?: Record<string, any>;
-    library_template_button_input?: any;
-    library_template_name?: any;
-    message_send_ttl_second?: number;
-    modified_date?: any;
-    name?: any;
+    library_template_body_inputs?: Record<string, any>;
+    library_template_button_inputs?: any[] | null;
+    library_template_name?: string | null;
+    message_send_ttl_seconds?: number;
+    modifiedDate?: string | null;
+    name?: string | null;
     parameter_format?: string;
     status?: string;
     sub_category?: string;
 }
 export interface TemplateUpdateData {
     id: string;
+    allow_category_change?: boolean;
+    category?: string;
+    components?: any[];
+    createdDate?: string;
+    language?: string;
+    library_template_body_inputs?: Record<string, any>;
+    library_template_button_inputs?: any[] | null;
+    library_template_name?: string | null;
+    message_send_ttl_seconds?: number;
+    modifiedDate?: string | null;
+    name?: string | null;
+    parameter_format?: string;
+    status?: string;
+    sub_category?: string;
 }
 export interface WhatsAppTemplateGetV2 {
 }
@@ -55,16 +69,16 @@ export interface WhatsAppTemplateGetV2LoadMatch {
     id: string;
 }
 export interface WhatsAppTemplateGetV2Pagination {
-    current_page?: number;
-    item?: any;
-    page?: number;
-    result?: number;
-    results_per_page?: number;
+    currentPage?: number;
+    items?: any[] | null;
+    pages?: number;
+    results?: number;
+    resultsPerPage?: number;
 }
 export interface WhatsAppTemplateGetV2PaginationLoadMatch {
-    current_page?: number;
-    item?: any;
-    page?: number;
-    result?: number;
-    results_per_page?: number;
+    currentPage?: number;
+    items?: any[] | null;
+    pages?: number;
+    results?: number;
+    resultsPerPage?: number;
 }

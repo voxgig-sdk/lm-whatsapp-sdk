@@ -254,18 +254,18 @@ $template = $client->Template();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `allow_category_change` | `bool` | No |  |
+| `allow_category_change` | `bool` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` | No |  |
-| `components` | `array` | Yes |  |
+| `components` | `array` | Yes | Array of components that make up the template. |
 | `createdDate` | `string` | No |  |
-| `id` | `mixed` | No |  |
+| `id` | `mixed` | No | ID |
 | `language` | `string` | No |  |
 | `library_template_body_inputs` | `array` | No |  |
-| `library_template_button_inputs` | `mixed` | No |  |
-| `library_template_name` | `mixed` | No |  |
-| `message_send_ttl_seconds` | `int` | No |  |
+| `library_template_button_inputs` | `mixed` | No | Optional data during creation of a template from a library template. |
+| `library_template_name` | `mixed` | No | Library template name |
+| `message_send_ttl_seconds` | `int` | No | Time to live for message template sent. |
 | `modifiedDate` | `mixed` | No |  |
-| `name` | `mixed` | No |  |
+| `name` | `mixed` | No | The message template name |
 | `parameter_format` | `string` | No |  |
 | `status` | `string` | No |  |
 | `sub_category` | `string` | No |  |

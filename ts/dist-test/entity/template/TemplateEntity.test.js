@@ -46,8 +46,8 @@ const __1 = require("../../..");
 const utility_1 = require("../../utility");
 (0, node_test_1.describe)('TemplateEntity', async () => {
     // Per-test live pacing. Delay is read from sdk-test-control.json's
-    // `test.live.delayMs`; only sleeps when LMWHATSAPP_TEST_LIVE=TRUE.
-    (0, node_test_1.afterEach)((0, utility_1.liveDelay)('LMWHATSAPP_TEST_LIVE'));
+    // `test.live.delayMs`; only sleeps when LM_WHATSAPP_TEST_LIVE=TRUE.
+    (0, node_test_1.afterEach)((0, utility_1.liveDelay)('LM_WHATSAPP_TEST_LIVE'));
     (0, node_test_1.test)('instance', async () => {
         const testsdk = __1.LmWhatsappSDK.test();
         const ent = testsdk.Template();
@@ -74,14 +74,14 @@ const utility_1 = require("../../utility");
         // CREATE
         const template_ref01_ent = client.Template();
         let template_ref01_data = setup.data.new.template['template_ref01'];
-        template_ref01_data = await template_ref01_ent.create(template_ref01_data);
+        template_ref01_data = (await template_ref01_ent.create(template_ref01_data)).data();
         (0, node_assert_1.default)(null != template_ref01_data.id);
         // UPDATE
         const template_ref01_data_up0 = {};
         template_ref01_data_up0.id = template_ref01_data.id;
         const template_ref01_markdef_up0 = { name: 'category', value: 'Mark01-template_ref01_' + setup.now };
         template_ref01_data_up0[template_ref01_markdef_up0.name] = template_ref01_markdef_up0.value;
-        const template_ref01_resdata_up0 = await template_ref01_ent.update(template_ref01_data_up0);
+        const template_ref01_resdata_up0 = (await template_ref01_ent.update(template_ref01_data_up0)).data();
         (0, node_assert_1.default)(template_ref01_resdata_up0.id === template_ref01_data_up0.id);
         (0, node_assert_1.default)(template_ref01_resdata_up0[template_ref01_markdef_up0.name] === template_ref01_markdef_up0.value);
     });

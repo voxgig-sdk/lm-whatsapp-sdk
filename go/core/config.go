@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "LmWhatsapp",
+			"slug": "lm-whatsapp",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -184,6 +187,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "allow_category_change",
+						"short": "Set to true to allow to assign a category based on template guidelines and the template's contents.",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
@@ -210,6 +214,7 @@ func MakeConfig() map[string]any {
 							},
 						},
 						"req": true,
+						"short": "Array of components that make up the template.",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
@@ -218,6 +223,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "id",
+						"short": "ID",
 						"type": []any{
 							"`$ONE`",
 							[]any{
@@ -242,6 +248,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "library_template_button_inputs",
+						"short": "Optional data during creation of a template from a library template.",
 						"type": []any{
 							"`$ONE`",
 							[]any{
@@ -252,6 +259,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "library_template_name",
+						"short": "Library template name",
 						"type": []any{
 							"`$ONE`",
 							[]any{
@@ -262,6 +270,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "message_send_ttl_seconds",
+						"short": "Time to live for message template sent.",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
@@ -282,6 +291,7 @@ func MakeConfig() map[string]any {
 								"type": "`$STRING`",
 							},
 						},
+						"short": "The message template name",
 						"type": []any{
 							"`$ONE`",
 							[]any{

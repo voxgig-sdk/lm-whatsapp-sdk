@@ -6,7 +6,7 @@ The Golang SDK for the LmWhatsapp API — an entity-oriented client using standa
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.ManageTemplate(nil)` — each with the same small set of operations (`Load`, `Create`, `Update`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -298,18 +298,18 @@ API path: `/whatsapp/v2/messages`
 
 | Field | Description |
 | --- | --- |
-| `"allow_category_change"` |  |
+| `"allow_category_change"` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `"category"` |  |
-| `"components"` |  |
+| `"components"` | Array of components that make up the template. |
 | `"createdDate"` |  |
-| `"id"` |  |
+| `"id"` | ID |
 | `"language"` |  |
 | `"library_template_body_inputs"` |  |
-| `"library_template_button_inputs"` |  |
-| `"library_template_name"` |  |
-| `"message_send_ttl_seconds"` |  |
+| `"library_template_button_inputs"` | Optional data during creation of a template from a library template. |
+| `"library_template_name"` | Library template name |
+| `"message_send_ttl_seconds"` | Time to live for message template sent. |
 | `"modifiedDate"` |  |
-| `"name"` |  |
+| `"name"` | The message template name |
 | `"parameter_format"` |  |
 | `"status"` |  |
 | `"sub_category"` |  |
@@ -417,18 +417,18 @@ Create an instance: `template := client.Template(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `allow_category_change` | `bool` |  |
+| `allow_category_change` | `bool` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` |  |
-| `components` | `[]any` |  |
+| `components` | `[]any` | Array of components that make up the template. |
 | `createdDate` | `string` |  |
-| `id` | `any` |  |
+| `id` | `any` | ID |
 | `language` | `string` |  |
 | `library_template_body_inputs` | `map[string]any` |  |
-| `library_template_button_inputs` | `any` |  |
-| `library_template_name` | `any` |  |
-| `message_send_ttl_seconds` | `int` |  |
+| `library_template_button_inputs` | `any` | Optional data during creation of a template from a library template. |
+| `library_template_name` | `any` | Library template name |
+| `message_send_ttl_seconds` | `int` | Time to live for message template sent. |
 | `modifiedDate` | `any` |  |
-| `name` | `any` |  |
+| `name` | `any` | The message template name |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
 | `sub_category` | `string` |  |

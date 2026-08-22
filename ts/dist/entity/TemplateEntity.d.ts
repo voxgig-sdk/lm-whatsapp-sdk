@@ -5,7 +5,7 @@ import type { Template, TemplateCreateData, TemplateUpdateData } from '../LmWhat
 declare class TemplateEntity extends LmWhatsappEntityBase<Template> {
     constructor(client: LmWhatsappSDK, entopts: any);
     make(this: TemplateEntity): TemplateEntity;
-    create(this: any, reqdata?: TemplateCreateData, ctrl?: Control): Promise<Template>;
-    update(this: any, reqdata?: TemplateUpdateData, ctrl?: Control): Promise<Template>;
+    create(this: any, reqdata?: TemplateCreateData, ctrl?: Control): Promise<TemplateEntity>;
+    update(this: any, reqdata?: TemplateUpdateData, ctrl?: Control): Promise<TemplateEntity>;
 }
 export { TemplateEntity };

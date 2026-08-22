@@ -5,6 +5,6 @@ import type { WhatsAppTemplateGetV2Pagination, WhatsAppTemplateGetV2PaginationLo
 declare class WhatsAppTemplateGetV2PaginationEntity extends LmWhatsappEntityBase<WhatsAppTemplateGetV2Pagination> {
     constructor(client: LmWhatsappSDK, entopts: any);
     make(this: WhatsAppTemplateGetV2PaginationEntity): WhatsAppTemplateGetV2PaginationEntity;
-    load(this: any, reqmatch?: WhatsAppTemplateGetV2PaginationLoadMatch, ctrl?: Control): Promise<WhatsAppTemplateGetV2Pagination>;
+    load(this: any, reqmatch?: WhatsAppTemplateGetV2PaginationLoadMatch, ctrl?: Control): Promise<WhatsAppTemplateGetV2PaginationEntity>;
 }
 export { WhatsAppTemplateGetV2PaginationEntity };

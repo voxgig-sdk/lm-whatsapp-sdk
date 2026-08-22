@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'LmWhatsapp',
+        slug: "lm-whatsapp",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -36,7 +47,7 @@ class Config {
 
 
   options = {
-    base: 'https://api.linkmobility.com',
+    base: "https://api.linkmobility.com",
 
     auth: {
       prefix: 'Bearer',
@@ -218,6 +229,7 @@ class Config {
       "fields": [
         {
           "name": "allow_category_change",
+          "short": "Set to true to allow to assign a category based on template guidelines and the template's contents.",
           "type": "`$BOOLEAN`"
         },
         {
@@ -244,6 +256,7 @@ class Config {
             }
           },
           "req": true,
+          "short": "Array of components that make up the template.",
           "type": "`$ARRAY`"
         },
         {
@@ -252,6 +265,7 @@ class Config {
         },
         {
           "name": "id",
+          "short": "ID",
           "type": [
             "`$ONE`",
             [
@@ -276,6 +290,7 @@ class Config {
         },
         {
           "name": "library_template_button_inputs",
+          "short": "Optional data during creation of a template from a library template.",
           "type": [
             "`$ONE`",
             [
@@ -286,6 +301,7 @@ class Config {
         },
         {
           "name": "library_template_name",
+          "short": "Library template name",
           "type": [
             "`$ONE`",
             [
@@ -296,6 +312,7 @@ class Config {
         },
         {
           "name": "message_send_ttl_seconds",
+          "short": "Time to live for message template sent.",
           "type": "`$INTEGER`"
         },
         {
@@ -316,6 +333,7 @@ class Config {
               "type": "`$STRING`"
             }
           },
+          "short": "The message template name",
           "type": [
             "`$ONE`",
             [

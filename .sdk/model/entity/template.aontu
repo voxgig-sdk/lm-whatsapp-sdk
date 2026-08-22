@@ -8,6 +8,7 @@ main: kit: entity: template: {
     {
       name: "allow_category_change"
       req: false
+      short: "Set to true to allow to assign a category based on template guidelines and the template's contents."
       type: "`$BOOLEAN`"
     }
     {
@@ -36,6 +37,7 @@ main: kit: entity: template: {
         }
       }
       req: true
+      short: "Array of components that make up the template."
       type: "`$ARRAY`"
     }
     {
@@ -46,6 +48,7 @@ main: kit: entity: template: {
     {
       name: "id"
       req: false
+      short: "ID"
       type: [
         "`$ONE`"
         [
@@ -73,6 +76,7 @@ main: kit: entity: template: {
     {
       name: "library_template_button_inputs"
       req: false
+      short: "Optional data during creation of a template from a library template."
       type: [
         "`$ONE`"
         [
@@ -84,6 +88,7 @@ main: kit: entity: template: {
     {
       name: "library_template_name"
       req: false
+      short: "Library template name"
       type: [
         "`$ONE`"
         [
@@ -95,6 +100,7 @@ main: kit: entity: template: {
     {
       name: "message_send_ttl_seconds"
       req: false
+      short: "Time to live for message template sent."
       type: "`$INTEGER`"
     }
     {
@@ -117,6 +123,7 @@ main: kit: entity: template: {
         }
       }
       req: false
+      short: "The message template name"
       type: [
         "`$ONE`"
         [

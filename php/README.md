@@ -282,18 +282,18 @@ API path: `/whatsapp/v2/messages`
 
 | Field | Description |
 | --- | --- |
-| `allow_category_change` |  |
+| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` |  |
-| `components` |  |
+| `components` | Array of components that make up the template. |
 | `createdDate` |  |
-| `id` |  |
+| `id` | ID |
 | `language` |  |
 | `library_template_body_inputs` |  |
-| `library_template_button_inputs` |  |
-| `library_template_name` |  |
-| `message_send_ttl_seconds` |  |
+| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
+| `library_template_name` | Library template name |
+| `message_send_ttl_seconds` | Time to live for message template sent. |
 | `modifiedDate` |  |
-| `name` |  |
+| `name` | The message template name |
 | `parameter_format` |  |
 | `status` |  |
 | `sub_category` |  |
@@ -393,18 +393,18 @@ Create an instance: `$template = $client->Template();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `allow_category_change` | `bool` |  |
+| `allow_category_change` | `bool` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` |  |
-| `components` | `array` |  |
+| `components` | `array` | Array of components that make up the template. |
 | `createdDate` | `string` |  |
-| `id` | `mixed` |  |
+| `id` | `mixed` | ID |
 | `language` | `string` |  |
 | `library_template_body_inputs` | `array` |  |
-| `library_template_button_inputs` | `mixed` |  |
-| `library_template_name` | `mixed` |  |
-| `message_send_ttl_seconds` | `int` |  |
+| `library_template_button_inputs` | `mixed` | Optional data during creation of a template from a library template. |
+| `library_template_name` | `mixed` | Library template name |
+| `message_send_ttl_seconds` | `int` | Time to live for message template sent. |
 | `modifiedDate` | `mixed` |  |
-| `name` | `mixed` |  |
+| `name` | `mixed` | The message template name |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
 | `sub_category` | `string` |  |

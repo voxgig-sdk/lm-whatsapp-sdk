@@ -257,18 +257,18 @@ fmt.Println(template.GetName()) // "template"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `allow_category_change` | `bool` | No |  |
+| `allow_category_change` | `bool` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` | No |  |
-| `components` | `[]any` | Yes |  |
+| `components` | `[]any` | Yes | Array of components that make up the template. |
 | `createdDate` | `string` | No |  |
-| `id` | `any` | No |  |
+| `id` | `any` | No | ID |
 | `language` | `string` | No |  |
 | `library_template_body_inputs` | `map[string]any` | No |  |
-| `library_template_button_inputs` | `any` | No |  |
-| `library_template_name` | `any` | No |  |
-| `message_send_ttl_seconds` | `int` | No |  |
+| `library_template_button_inputs` | `any` | No | Optional data during creation of a template from a library template. |
+| `library_template_name` | `any` | No | Library template name |
+| `message_send_ttl_seconds` | `int` | No | Time to live for message template sent. |
 | `modifiedDate` | `any` | No |  |
-| `name` | `any` | No |  |
+| `name` | `any` | No | The message template name |
 | `parameter_format` | `string` | No |  |
 | `status` | `string` | No |  |
 | `sub_category` | `string` | No |  |

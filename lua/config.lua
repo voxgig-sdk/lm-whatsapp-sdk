@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "LmWhatsapp",
+      slug = "lm-whatsapp",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -180,6 +183,7 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "allow_category_change",
+            ["short"] = "Set to true to allow to assign a category based on template guidelines and the template's contents.",
             ["type"] = "`$BOOLEAN`",
           },
           {
@@ -206,6 +210,7 @@ local function make_config()
               },
             },
             ["req"] = true,
+            ["short"] = "Array of components that make up the template.",
             ["type"] = "`$ARRAY`",
           },
           {
@@ -214,6 +219,7 @@ local function make_config()
           },
           {
             ["name"] = "id",
+            ["short"] = "ID",
             ["type"] = {
               "`$ONE`",
               {
@@ -238,6 +244,7 @@ local function make_config()
           },
           {
             ["name"] = "library_template_button_inputs",
+            ["short"] = "Optional data during creation of a template from a library template.",
             ["type"] = {
               "`$ONE`",
               {
@@ -248,6 +255,7 @@ local function make_config()
           },
           {
             ["name"] = "library_template_name",
+            ["short"] = "Library template name",
             ["type"] = {
               "`$ONE`",
               {
@@ -258,6 +266,7 @@ local function make_config()
           },
           {
             ["name"] = "message_send_ttl_seconds",
+            ["short"] = "Time to live for message template sent.",
             ["type"] = "`$INTEGER`",
           },
           {
@@ -278,6 +287,7 @@ local function make_config()
                 ["type"] = "`$STRING`",
               },
             },
+            ["short"] = "The message template name",
             ["type"] = {
               "`$ONE`",
               {

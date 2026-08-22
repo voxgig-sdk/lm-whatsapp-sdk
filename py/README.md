@@ -276,18 +276,18 @@ API path: `/whatsapp/v2/messages`
 
 | Field | Description |
 | --- | --- |
-| `allow_category_change` |  |
+| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` |  |
-| `components` |  |
+| `components` | Array of components that make up the template. |
 | `createdDate` |  |
-| `id` |  |
+| `id` | ID |
 | `language` |  |
 | `library_template_body_inputs` |  |
-| `library_template_button_inputs` |  |
-| `library_template_name` |  |
-| `message_send_ttl_seconds` |  |
+| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
+| `library_template_name` | Library template name |
+| `message_send_ttl_seconds` | Time to live for message template sent. |
 | `modifiedDate` |  |
-| `name` |  |
+| `name` | The message template name |
 | `parameter_format` |  |
 | `status` |  |
 | `sub_category` |  |
@@ -387,18 +387,18 @@ Create an instance: `template = client.Template()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `allow_category_change` | `bool` |  |
+| `allow_category_change` | `bool` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `str` |  |
-| `components` | `list` |  |
+| `components` | `list` | Array of components that make up the template. |
 | `createdDate` | `str` |  |
-| `id` | `str | None` |  |
+| `id` | `str | None` | ID |
 | `language` | `str` |  |
 | `library_template_body_inputs` | `dict` |  |
-| `library_template_button_inputs` | `list | None` |  |
-| `library_template_name` | `str | None` |  |
-| `message_send_ttl_seconds` | `int` |  |
+| `library_template_button_inputs` | `list | None` | Optional data during creation of a template from a library template. |
+| `library_template_name` | `str | None` | Library template name |
+| `message_send_ttl_seconds` | `int` | Time to live for message template sent. |
 | `modifiedDate` | `str | None` |  |
-| `name` | `str | None` |  |
+| `name` | `str | None` | The message template name |
 | `parameter_format` | `str` |  |
 | `status` | `str` |  |
 | `sub_category` | `str` |  |

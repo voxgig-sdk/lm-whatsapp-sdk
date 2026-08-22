@@ -46,8 +46,8 @@ const __1 = require("../../..");
 const utility_1 = require("../../utility");
 (0, node_test_1.describe)('WhatsAppTemplateGetV2PaginationEntity', async () => {
     // Per-test live pacing. Delay is read from sdk-test-control.json's
-    // `test.live.delayMs`; only sleeps when LMWHATSAPP_TEST_LIVE=TRUE.
-    (0, node_test_1.afterEach)((0, utility_1.liveDelay)('LMWHATSAPP_TEST_LIVE'));
+    // `test.live.delayMs`; only sleeps when LM_WHATSAPP_TEST_LIVE=TRUE.
+    (0, node_test_1.afterEach)((0, utility_1.liveDelay)('LM_WHATSAPP_TEST_LIVE'));
     (0, node_test_1.test)('instance', async () => {
         const testsdk = __1.LmWhatsappSDK.test();
         const ent = testsdk.WhatsAppTemplateGetV2Pagination();
@@ -64,7 +64,7 @@ const utility_1 = require("../../utility");
         // fixture (entity TestData.json). Those don't exist on the live API.
         // Skip live runs unless the user provided a real ENTID env override.
         if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__PAGINATION_ENTID JSON to run live');
+            t.skip('live entity test uses synthetic IDs from fixture — set LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID JSON to run live');
             return;
         }
         const client = setup.client;
@@ -75,7 +75,7 @@ const utility_1 = require("../../utility");
         // LOAD
         const whats_app_template_get_v2_pagination_ref01_ent = client.WhatsAppTemplateGetV2Pagination();
         const whats_app_template_get_v2_pagination_ref01_match_dt0 = {};
-        const whats_app_template_get_v2_pagination_ref01_data_dt0 = await whats_app_template_get_v2_pagination_ref01_ent.load(whats_app_template_get_v2_pagination_ref01_match_dt0);
+        const whats_app_template_get_v2_pagination_ref01_data_dt0 = (await whats_app_template_get_v2_pagination_ref01_ent.load(whats_app_template_get_v2_pagination_ref01_match_dt0)).data();
         (0, node_assert_1.default)(null != whats_app_template_get_v2_pagination_ref01_data_dt0);
     });
 });
@@ -103,15 +103,15 @@ function basicSetup(extra) {
     // basic flow consumes synthetic IDs from the fixture file; without an
     // override those synthetic IDs reach the live API and 4xx. Surface this
     // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__PAGINATION_ENTID'];
+    const idmapEnvVal = process.env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID'];
     const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
-        'LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__PAGINATION_ENTID': idmap,
+        'LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID': idmap,
         'LM_WHATSAPP_TEST_LIVE': 'FALSE',
         'LM_WHATSAPP_TEST_EXPLAIN': 'FALSE',
         'LM_WHATSAPP_APIKEY': 'NONE',
     });
-    idmap = env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V__PAGINATION_ENTID'];
+    idmap = env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID'];
     const live = 'TRUE' === env.LM_WHATSAPP_TEST_LIVE;
     if (live) {
         client = new __1.LmWhatsappSDK(merge([
