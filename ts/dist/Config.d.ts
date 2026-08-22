@@ -215,7 +215,19 @@ declare class Config {
                         parts: string[];
                         select: {};
                         transform: {
-                            req: string;
+                            req: {
+                                allow_category_change: string;
+                                category: string;
+                                components: string;
+                                language: string;
+                                library_template_body_inputs: string;
+                                library_template_button_inputs: string;
+                                library_template_name: string;
+                                message_send_ttl_seconds: string;
+                                name: string;
+                                parameter_format: string;
+                                sub_category: string;
+                            };
                             res: string;
                         };
                     }[];
@@ -241,7 +253,12 @@ declare class Config {
                             exist: string[];
                         };
                         transform: {
-                            req: string;
+                            req: {
+                                category: string;
+                                components: string;
+                                message_send_ttl_seconds: string;
+                                parameter_format: string;
+                            };
                             res: string;
                         };
                     }[];

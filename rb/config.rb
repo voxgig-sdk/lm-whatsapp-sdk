@@ -20,7 +20,7 @@ module LmWhatsappConfig
       "main" => {
         "name" => "LmWhatsapp",
         "slug" => "lm-whatsapp",
-        "version" => "0.0.1",
+        "version" => "0.1.1",
         "target" => "rb",
       },
       "feature" => {
@@ -339,7 +339,19 @@ module LmWhatsappConfig
                   ],
                   "select" => {},
                   "transform" => {
-                    "req" => "`reqdata`",
+                    "req" => {
+                      "allow_category_change" => "`reqdata.allow_category_change`",
+                      "category" => "`reqdata.category`",
+                      "components" => "`reqdata.component`",
+                      "language" => "`reqdata.language`",
+                      "library_template_body_inputs" => "`reqdata.library_template_body_input`",
+                      "library_template_button_inputs" => "`reqdata.library_template_button_input`",
+                      "library_template_name" => "`reqdata.library_template_name`",
+                      "message_send_ttl_seconds" => "`reqdata.message_send_ttl_second`",
+                      "name" => "`reqdata.name`",
+                      "parameter_format" => "`reqdata.parameter_format`",
+                      "sub_category" => "`reqdata.sub_category`",
+                    },
                     "res" => "`body`",
                   },
                 },
@@ -376,7 +388,12 @@ module LmWhatsappConfig
                     ],
                   },
                   "transform" => {
-                    "req" => "`reqdata`",
+                    "req" => {
+                      "category" => "`reqdata.category`",
+                      "components" => "`reqdata.component`",
+                      "message_send_ttl_seconds" => "`reqdata.message_send_ttl_second`",
+                      "parameter_format" => "`reqdata.parameter_format`",
+                    },
                     "res" => "`body`",
                   },
                 },

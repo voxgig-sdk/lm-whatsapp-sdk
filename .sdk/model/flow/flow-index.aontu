@@ -1,8 +1,0 @@
-# Flows
-
-@"BasicManageTemplateFlow.aontu"
-@"BasicMediaFlow.aontu"
-@"BasicSendMessageFlow.aontu"
-@"BasicTemplateFlow.aontu"
-@"BasicWhatsAppTemplateGetV2Flow.aontu"
-@"BasicWhatsAppTemplateGetV2PaginationFlow.aontu"

@@ -1,0 +1,8 @@
+# Entity Models
+
+@"manage_template.aon"
+@"media.aon"
+@"send_message.aon"
+@"template.aon"
+@"whats_app_template_get_v2.aon"
+@"whats_app_template_get_v2_pagination.aon"

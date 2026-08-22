@@ -12,7 +12,7 @@ func MakeConfig() map[string]any {
 		"main": map[string]any{
 			"name": "LmWhatsapp",
 			"slug": "lm-whatsapp",
-			"version": "0.0.1",
+			"version": "0.1.1",
 			"target": "go",
 		},
 		"feature": map[string]any{
@@ -331,7 +331,19 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
-									"req": "`reqdata`",
+									"req": map[string]any{
+										"allow_category_change": "`reqdata.allow_category_change`",
+										"category": "`reqdata.category`",
+										"components": "`reqdata.component`",
+										"language": "`reqdata.language`",
+										"library_template_body_inputs": "`reqdata.library_template_body_input`",
+										"library_template_button_inputs": "`reqdata.library_template_button_input`",
+										"library_template_name": "`reqdata.library_template_name`",
+										"message_send_ttl_seconds": "`reqdata.message_send_ttl_second`",
+										"name": "`reqdata.name`",
+										"parameter_format": "`reqdata.parameter_format`",
+										"sub_category": "`reqdata.sub_category`",
+									},
 									"res": "`body`",
 								},
 							},
@@ -368,7 +380,12 @@ func MakeConfig() map[string]any {
 									},
 								},
 								"transform": map[string]any{
-									"req": "`reqdata`",
+									"req": map[string]any{
+										"category": "`reqdata.category`",
+										"components": "`reqdata.component`",
+										"message_send_ttl_seconds": "`reqdata.message_send_ttl_second`",
+										"parameter_format": "`reqdata.parameter_format`",
+									},
 									"res": "`body`",
 								},
 							},
