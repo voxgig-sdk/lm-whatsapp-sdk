@@ -1,6 +1,15 @@
 {
+  "NAME": "LM-WHATSAPP",
+  "Name": "LmWhatsapp",
   "def": "whatsapp-openapi.json",
   "main": {
+    "api": {
+      "entity": {},
+      "guide": {}
+    },
+    "custom": {
+      "plurals": {}
+    },
     "def": {
       "desc": ""
     },
@@ -1430,5 +1439,8 @@
     }
   },
   "name": "lm-whatsapp",
+  "name-": "lm-whatsapp",
+  "name_": "lm_whatsapp",
+  "name__orig": "lm-whatsapp",
   "origin": "voxgig-sdk"
 }
