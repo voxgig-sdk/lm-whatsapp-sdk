@@ -271,6 +271,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 
 Operations: Remove.
 
@@ -322,6 +323,7 @@ API path: `/whatsapp/v2/templates`
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 
 Operations: Load.
 
@@ -355,6 +357,12 @@ Create an instance: `manageTemplate := client.ManageTemplate(nil)`
 | Method | Description |
 | --- | --- |
 | `Remove(match, ctrl)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
 
 
 ### Media
@@ -455,6 +463,12 @@ Create an instance: `whatsAppTemplateGetV2 := client.WhatsAppTemplateGetV2(nil)`
 | Method | Description |
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
 
 #### Example: Load
 

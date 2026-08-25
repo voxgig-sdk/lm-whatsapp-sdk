@@ -14,6 +14,7 @@ import (
 
 // ManageTemplate is the typed data model for the manage_template entity.
 type ManageTemplate struct {
+	Id *string `json:"id,omitempty"`
 }
 
 // ManageTemplateRemoveMatch is the typed request payload for ManageTemplate.RemoveTyped.
@@ -97,6 +98,7 @@ type TemplateUpdateData struct {
 
 // WhatsAppTemplateGetV2 is the typed data model for the whats_app_template_get_v2 entity.
 type WhatsAppTemplateGetV2 struct {
+	Id *string `json:"id,omitempty"`
 }
 
 // WhatsAppTemplateGetV2LoadMatch is the typed request payload for WhatsAppTemplateGetV2.LoadTyped.

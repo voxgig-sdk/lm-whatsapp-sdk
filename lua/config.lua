@@ -38,7 +38,12 @@ local function make_config()
     },
     entity = {
       ["manage_template"] = {
-        ["fields"] = {},
+        ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+        },
         ["name"] = "manage_template",
         ["op"] = {
           ["remove"] = {
@@ -394,7 +399,12 @@ local function make_config()
         },
       },
       ["whats_app_template_get_v2"] = {
-        ["fields"] = {},
+        ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+        },
         ["name"] = "whats_app_template_get_v2",
         ["op"] = {
           ["load"] = {

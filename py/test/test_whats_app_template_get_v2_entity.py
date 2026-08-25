@@ -48,9 +48,13 @@ class TestWhatsAppTemplateGetV2Entity:
 
         # LOAD
         whats_app_template_get_v2_ref01_ent = client.WhatsAppTemplateGetV2(None)
-        whats_app_template_get_v2_ref01_match_dt0 = {}
+        whats_app_template_get_v2_ref01_match_dt0 = {
+            "id": whats_app_template_get_v2_ref01_data["id"],
+        }
         whats_app_template_get_v2_ref01_data_dt0_loaded = whats_app_template_get_v2_ref01_ent.load(whats_app_template_get_v2_ref01_match_dt0, None)
-        assert whats_app_template_get_v2_ref01_data_dt0_loaded is not None
+        whats_app_template_get_v2_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(whats_app_template_get_v2_ref01_data_dt0_loaded))
+        assert whats_app_template_get_v2_ref01_data_dt0_load_result is not None
+        assert whats_app_template_get_v2_ref01_data_dt0_load_result["id"] == whats_app_template_get_v2_ref01_data["id"]
 
 
 

@@ -1,4 +1,5 @@
 export interface ManageTemplate {
+    id?: string;
 }
 export interface ManageTemplateRemoveMatch {
     id: string;
@@ -64,6 +65,7 @@ export interface TemplateUpdateData {
     sub_category?: string;
 }
 export interface WhatsAppTemplateGetV2 {
+    id?: string;
 }
 export interface WhatsAppTemplateGetV2LoadMatch {
     id: string;

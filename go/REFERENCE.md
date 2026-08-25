@@ -115,6 +115,12 @@ manageTemplate := client.ManageTemplate(nil)
 fmt.Println(manageTemplate.GetName()) // "manage_template"
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `Remove(reqmatch, ctrl map[string]any) (any, error)`
@@ -354,6 +360,12 @@ Return the entity name.
 whatsAppTemplateGetV2 := client.WhatsAppTemplateGetV2(nil)
 fmt.Println(whatsAppTemplateGetV2.GetName()) // "whats_app_template_get_v2"
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 

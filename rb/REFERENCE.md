@@ -110,6 +110,12 @@ same parameters as `direct()`. Raises on error.
 manage_template = client.ManageTemplate
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `String` | No |  |
+
 ### Operations
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -349,6 +355,12 @@ Return the entity name.
 ```ruby
 whats_app_template_get_v2 = client.WhatsAppTemplateGetV2
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `String` | No |  |
 
 ### Operations
 

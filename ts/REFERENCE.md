@@ -173,6 +173,12 @@ Alias for `LmWhatsappSDK.test()`.
 const manage_template = client.ManageTemplate()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `remove(match: object, ctrl?: object)`
@@ -404,6 +410,12 @@ Return a copy of the entity options.
 ```ts
 const whats_app_template_get_v2 = client.WhatsAppTemplateGetV2()
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 

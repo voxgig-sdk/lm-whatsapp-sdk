@@ -4,6 +4,19 @@ main: kit: entity: manage_template: {
 
   alias: field: {}
 
+  fields: [
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
   name: "manage_template"
   op: {
     remove: {

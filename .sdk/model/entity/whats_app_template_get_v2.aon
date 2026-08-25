@@ -4,6 +4,19 @@ main: kit: entity: whats_app_template_get_v2: {
 
   alias: field: {}
 
+  fields: [
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
   name: "whats_app_template_get_v2"
   op: {
     load: {

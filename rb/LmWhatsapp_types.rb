@@ -9,8 +9,13 @@
 # annotations document the shapes. Do not edit by hand.
 
 # ManageTemplate entity data model.
-class ManageTemplate
-end
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+ManageTemplate = Struct.new(
+  :id,
+  keyword_init: true
+)
 
 # Request payload for ManageTemplate#remove.
 #
@@ -238,8 +243,13 @@ TemplateUpdateData = Struct.new(
 )
 
 # WhatsAppTemplateGetV2 entity data model.
-class WhatsAppTemplateGetV2
-end
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+WhatsAppTemplateGetV2 = Struct.new(
+  :id,
+  keyword_init: true
+)
 
 # Request payload for WhatsAppTemplateGetV2#load.
 #

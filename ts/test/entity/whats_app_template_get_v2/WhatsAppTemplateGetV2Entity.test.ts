@@ -59,9 +59,12 @@ describe('WhatsAppTemplateGetV2Entity', async () => {
 
     let whats_app_template_get_v2_ref01_data = Object.values(setup.data.existing.whats_app_template_get_v2)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const whats_app_template_get_v2_ref01_ent = client.WhatsAppTemplateGetV2()
+    const whats_app_template_get_v2_ref01_match_dt0: any = {}
+    whats_app_template_get_v2_ref01_match_dt0.id = whats_app_template_get_v2_ref01_data.id
+    const whats_app_template_get_v2_ref01_data_dt0 = (await whats_app_template_get_v2_ref01_ent.load(whats_app_template_get_v2_ref01_match_dt0)).data()
+    assert(whats_app_template_get_v2_ref01_data_dt0.id === whats_app_template_get_v2_ref01_data.id)
 
 
   })

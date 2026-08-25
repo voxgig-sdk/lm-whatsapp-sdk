@@ -16,8 +16,8 @@ from __future__ import annotations
 from typing import TypedDict, Any
 
 
-class ManageTemplate(TypedDict):
-    pass
+class ManageTemplate(TypedDict, total=False):
+    id: str
 
 
 class ManageTemplateRemoveMatch(TypedDict):
@@ -103,8 +103,8 @@ class TemplateUpdateData(TemplateUpdateDataRequired, total=False):
     sub_category: str
 
 
-class WhatsAppTemplateGetV2(TypedDict):
-    pass
+class WhatsAppTemplateGetV2(TypedDict, total=False):
+    id: str
 
 
 class WhatsAppTemplateGetV2LoadMatch(TypedDict):

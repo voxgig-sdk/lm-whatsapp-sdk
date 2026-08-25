@@ -6,6 +6,7 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface ManageTemplate {
+  id?: string
 }
 
 export interface ManageTemplateRemoveMatch {
@@ -80,6 +81,7 @@ export interface TemplateUpdateData {
 }
 
 export interface WhatsAppTemplateGetV2 {
+  id?: string
 }
 
 export interface WhatsAppTemplateGetV2LoadMatch {

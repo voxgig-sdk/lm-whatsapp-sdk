@@ -107,6 +107,12 @@ same parameters as `direct()`.
 local manage_template = client:ManageTemplate(nil)
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -346,6 +352,12 @@ Return the entity name.
 ```lua
 local whats_app_template_get_v2 = client:WhatsAppTemplateGetV2(nil)
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 

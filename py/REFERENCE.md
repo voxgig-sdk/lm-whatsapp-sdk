@@ -104,6 +104,12 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 manage_template = client.ManageTemplate()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `str` | No |  |
+
 ### Operations
 
 #### `remove(reqmatch, ctrl=None) -> dict`
@@ -339,6 +345,12 @@ Return the entity name.
 ```python
 whats_app_template_get_v2 = client.WhatsAppTemplateGetV2()
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `str` | No |  |
 
 ### Operations
 

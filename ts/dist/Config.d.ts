@@ -35,7 +35,10 @@ declare class Config {
     };
     entity: {
         manage_template: {
-            fields: never[];
+            fields: {
+                name: string;
+                type: string;
+            }[];
             name: string;
             op: {
                 remove: {
@@ -270,7 +273,10 @@ declare class Config {
             };
         };
         whats_app_template_get_v2: {
-            fields: never[];
+            fields: {
+                name: string;
+                type: string;
+            }[];
             name: string;
             op: {
                 load: {

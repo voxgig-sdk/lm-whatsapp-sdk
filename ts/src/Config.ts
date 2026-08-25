@@ -84,7 +84,12 @@ class Config {
 
   entity = {
     "manage_template": {
-      "fields": [],
+      "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        }
+      ],
       "name": "manage_template",
       "op": {
         "remove": {
@@ -440,7 +445,12 @@ class Config {
       }
     },
     "whats_app_template_get_v2": {
-      "fields": [],
+      "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        }
+      ],
       "name": "whats_app_template_get_v2",
       "op": {
         "load": {

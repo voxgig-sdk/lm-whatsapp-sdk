@@ -7,6 +7,7 @@
 -- edit by hand.
 
 ---@class ManageTemplate
+---@field id? string
 
 ---@class ManageTemplateRemoveMatch
 ---@field id string
@@ -72,6 +73,7 @@
 ---@field sub_category? string
 
 ---@class WhatsAppTemplateGetV2
+---@field id? string
 
 ---@class WhatsAppTemplateGetV2LoadMatch
 ---@field id string

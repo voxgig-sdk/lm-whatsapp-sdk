@@ -41,9 +41,13 @@ class WhatsAppTemplateGetV2EntityTest < Minitest::Test
 
     # LOAD
     whats_app_template_get_v2_ref01_ent = client.WhatsAppTemplateGetV2(nil)
-    whats_app_template_get_v2_ref01_match_dt0 = {}
+    whats_app_template_get_v2_ref01_match_dt0 = {
+      "id" => whats_app_template_get_v2_ref01_data["id"],
+    }
     whats_app_template_get_v2_ref01_data_dt0_loaded = whats_app_template_get_v2_ref01_ent.load(whats_app_template_get_v2_ref01_match_dt0, nil)
-    assert !whats_app_template_get_v2_ref01_data_dt0_loaded.nil?
+    whats_app_template_get_v2_ref01_data_dt0_load_result = Helpers.to_map(whats_app_template_get_v2_ref01_data_dt0_loaded.respond_to?(:data_get) ? whats_app_template_get_v2_ref01_data_dt0_loaded.data_get : whats_app_template_get_v2_ref01_data_dt0_loaded)
+    assert !whats_app_template_get_v2_ref01_data_dt0_load_result.nil?
+    assert_equal whats_app_template_get_v2_ref01_data_dt0_load_result["id"], whats_app_template_get_v2_ref01_data["id"]
 
   end
 end

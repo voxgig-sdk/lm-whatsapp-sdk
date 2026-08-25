@@ -109,6 +109,12 @@ Prepare a fetch definition without sending the request. Returns the
 $manage_template = $client->ManageTemplate();
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
@@ -348,6 +354,12 @@ Return the entity name.
 ```php
 $whats_app_template_get_v2 = $client->WhatsAppTemplateGetV2();
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 

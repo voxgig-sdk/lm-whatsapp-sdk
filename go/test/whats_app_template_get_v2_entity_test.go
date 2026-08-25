@@ -61,13 +61,19 @@ func TestWhatsAppTemplateGetV2Entity(t *testing.T) {
 
 		// LOAD
 		whatsAppTemplateGetV2Ref01Ent := client.WhatsAppTemplateGetV2(nil)
-		whatsAppTemplateGetV2Ref01MatchDt0 := map[string]any{}
+		whatsAppTemplateGetV2Ref01MatchDt0 := map[string]any{
+			"id": whatsAppTemplateGetV2Ref01Data["id"],
+		}
 		whatsAppTemplateGetV2Ref01DataDt0Loaded, err := whatsAppTemplateGetV2Ref01Ent.Load(whatsAppTemplateGetV2Ref01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if whatsAppTemplateGetV2Ref01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		whatsAppTemplateGetV2Ref01DataDt0LoadResult := core.ToMapAny(entityData(whatsAppTemplateGetV2Ref01DataDt0Loaded))
+		if whatsAppTemplateGetV2Ref01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if whatsAppTemplateGetV2Ref01DataDt0LoadResult["id"] != whatsAppTemplateGetV2Ref01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

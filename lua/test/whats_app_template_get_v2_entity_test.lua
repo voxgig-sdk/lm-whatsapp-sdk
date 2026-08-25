@@ -44,10 +44,14 @@ describe("WhatsAppTemplateGetV2Entity", function()
 
     -- LOAD
     local whats_app_template_get_v2_ref01_ent = client:WhatsAppTemplateGetV2(nil)
-    local whats_app_template_get_v2_ref01_match_dt0 = {}
+    local whats_app_template_get_v2_ref01_match_dt0 = {
+      id = whats_app_template_get_v2_ref01_data["id"],
+    }
     local whats_app_template_get_v2_ref01_data_dt0_loaded, err = whats_app_template_get_v2_ref01_ent:load(whats_app_template_get_v2_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(whats_app_template_get_v2_ref01_data_dt0_loaded)
+    local whats_app_template_get_v2_ref01_data_dt0_load_result = helpers.to_map(type(whats_app_template_get_v2_ref01_data_dt0_loaded) == 'table' and whats_app_template_get_v2_ref01_data_dt0_loaded.data_get and whats_app_template_get_v2_ref01_data_dt0_loaded:data_get() or whats_app_template_get_v2_ref01_data_dt0_loaded)
+    assert.is_not_nil(whats_app_template_get_v2_ref01_data_dt0_load_result)
+    assert.are.equal(whats_app_template_get_v2_ref01_data_dt0_load_result["id"], whats_app_template_get_v2_ref01_data["id"])
 
   end)
 end)

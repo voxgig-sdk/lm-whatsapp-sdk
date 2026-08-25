@@ -15,6 +15,7 @@ declare(strict_types=1);
 /** ManageTemplate entity data model. */
 class ManageTemplate
 {
+    public ?string $id = null;
 }
 
 /** Request payload for ManageTemplate#remove. */
@@ -107,6 +108,7 @@ class TemplateUpdateData
 /** WhatsAppTemplateGetV2 entity data model. */
 class WhatsAppTemplateGetV2
 {
+    public ?string $id = null;
 }
 
 /** Request payload for WhatsAppTemplateGetV2#load. */

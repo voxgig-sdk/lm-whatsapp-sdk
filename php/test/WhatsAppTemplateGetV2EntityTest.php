@@ -48,9 +48,13 @@ class WhatsAppTemplateGetV2EntityTest extends TestCase
 
         // LOAD
         $whats_app_template_get_v2_ref01_ent = $client->WhatsAppTemplateGetV2(null);
-        $whats_app_template_get_v2_ref01_match_dt0 = [];
+        $whats_app_template_get_v2_ref01_match_dt0 = [
+            "id" => $whats_app_template_get_v2_ref01_data["id"],
+        ];
         $whats_app_template_get_v2_ref01_data_dt0_loaded = $whats_app_template_get_v2_ref01_ent->load($whats_app_template_get_v2_ref01_match_dt0, null);
-        $this->assertNotNull($whats_app_template_get_v2_ref01_data_dt0_loaded);
+        $whats_app_template_get_v2_ref01_data_dt0_load_result = Helpers::to_map(is_object($whats_app_template_get_v2_ref01_data_dt0_loaded) && method_exists($whats_app_template_get_v2_ref01_data_dt0_loaded, 'data_get') ? $whats_app_template_get_v2_ref01_data_dt0_loaded->data_get() : $whats_app_template_get_v2_ref01_data_dt0_loaded);
+        $this->assertNotNull($whats_app_template_get_v2_ref01_data_dt0_load_result);
+        $this->assertEquals($whats_app_template_get_v2_ref01_data_dt0_load_result["id"], $whats_app_template_get_v2_ref01_data["id"]);
 
     }
 }

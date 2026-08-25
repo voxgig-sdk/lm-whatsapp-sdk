@@ -72,9 +72,12 @@ const utility_1 = require("../../utility");
         const isempty = struct.isempty;
         const select = struct.select;
         let whats_app_template_get_v2_ref01_data = Object.values(setup.data.existing.whats_app_template_get_v2)[0];
-        // LOAD: skipped — no entity id field and load requires path params.
-        // Entity-var is declared here so later flow steps still compile.
+        // LOAD
         const whats_app_template_get_v2_ref01_ent = client.WhatsAppTemplateGetV2();
+        const whats_app_template_get_v2_ref01_match_dt0 = {};
+        whats_app_template_get_v2_ref01_match_dt0.id = whats_app_template_get_v2_ref01_data.id;
+        const whats_app_template_get_v2_ref01_data_dt0 = (await whats_app_template_get_v2_ref01_ent.load(whats_app_template_get_v2_ref01_match_dt0)).data();
+        (0, node_assert_1.default)(whats_app_template_get_v2_ref01_data_dt0.id === whats_app_template_get_v2_ref01_data.id);
     });
 });
 function basicSetup(extra) {

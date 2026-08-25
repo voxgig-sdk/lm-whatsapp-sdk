@@ -42,7 +42,12 @@ func MakeConfig() map[string]any {
 		},
 		"entity": map[string]any{
 			"manage_template": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
+				},
 				"name": "manage_template",
 				"op": map[string]any{
 					"remove": map[string]any{
@@ -398,7 +403,12 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"whats_app_template_get_v2": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
+				},
 				"name": "whats_app_template_get_v2",
 				"op": map[string]any{
 					"load": map[string]any{
