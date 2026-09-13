@@ -1,10 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.config = void 0;
+exports.FEATURE_PLUGINS = exports.config = void 0;
 const TestFeature_1 = require("./feature/test/TestFeature");
 const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
 };
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS = {};
+exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
@@ -57,6 +65,10 @@ class Config {
                     "type": "`$STRING`"
                 }
             ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
             "name": "manage_template",
             "op": {
                 "remove": {
@@ -78,11 +90,19 @@ class Config {
                             "kind": "http",
                             "method": "DELETE",
                             "orig": "/whatsapp/v2/templates/{id}",
-                            "parts": [
-                                "whatsapp",
-                                "v2",
-                                "templates",
-                                "{id}"
+                            "segments": [
+                                {
+                                    "lit": "whatsapp"
+                                },
+                                {
+                                    "lit": "v2"
+                                },
+                                {
+                                    "lit": "templates"
+                                },
+                                {
+                                    "var": "id"
+                                }
                             ],
                             "select": {
                                 "exist": [
@@ -92,7 +112,13 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "whatsapp",
+                                "v2",
+                                "templates",
+                                "{id}"
+                            ]
                         }
                     ]
                 }
@@ -134,17 +160,25 @@ class Config {
                             "kind": "http",
                             "method": "POST",
                             "orig": "/whatsapp/v2/{phoneNumber}/media",
-                            "parts": [
-                                "whatsapp",
-                                "v2",
-                                "{phone_number}",
-                                "media"
-                            ],
                             "rename": {
                                 "param": {
                                     "phoneNumber": "phone_number"
                                 }
                             },
+                            "segments": [
+                                {
+                                    "lit": "whatsapp"
+                                },
+                                {
+                                    "lit": "v2"
+                                },
+                                {
+                                    "var": "phone_number"
+                                },
+                                {
+                                    "lit": "media"
+                                }
+                            ],
                             "select": {
                                 "exist": [
                                     "phone_number",
@@ -154,7 +188,13 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "whatsapp",
+                                "v2",
+                                "{phone_number}",
+                                "media"
+                            ]
                         }
                     ]
                 }
@@ -180,16 +220,27 @@ class Config {
                             "kind": "http",
                             "method": "POST",
                             "orig": "/whatsapp/v2/messages",
-                            "parts": [
-                                "whatsapp",
-                                "v2",
-                                "messages"
+                            "segments": [
+                                {
+                                    "lit": "whatsapp"
+                                },
+                                {
+                                    "lit": "v2"
+                                },
+                                {
+                                    "lit": "messages"
+                                }
                             ],
                             "select": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "whatsapp",
+                                "v2",
+                                "messages"
+                            ]
                         }
                     ]
                 }
@@ -233,6 +284,7 @@ class Config {
                     "type": "`$ARRAY`"
                 },
                 {
+                    "format": "date-time",
                     "name": "createdDate",
                     "type": "`$STRING`"
                 },
@@ -284,11 +336,13 @@ class Config {
                     ]
                 },
                 {
+                    "format": "int64",
                     "name": "message_send_ttl_seconds",
                     "short": "Time to live for message template sent.",
                     "type": "`$INTEGER`"
                 },
                 {
+                    "format": "date-time",
                     "name": "modifiedDate",
                     "type": [
                         "`$ONE`",
@@ -328,6 +382,10 @@ class Config {
                     "type": "`$STRING`"
                 }
             ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
             "name": "template",
             "op": {
                 "create": {
@@ -339,10 +397,16 @@ class Config {
                             "kind": "http",
                             "method": "POST",
                             "orig": "/whatsapp/v2/templates",
-                            "parts": [
-                                "whatsapp",
-                                "v2",
-                                "templates"
+                            "segments": [
+                                {
+                                    "lit": "whatsapp"
+                                },
+                                {
+                                    "lit": "v2"
+                                },
+                                {
+                                    "lit": "templates"
+                                }
                             ],
                             "select": {},
                             "transform": {
@@ -360,7 +424,12 @@ class Config {
                                     "sub_category": "`reqdata.sub_category`"
                                 },
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "whatsapp",
+                                "v2",
+                                "templates"
+                            ]
                         }
                     ]
                 },
@@ -383,11 +452,19 @@ class Config {
                             "kind": "http",
                             "method": "PUT",
                             "orig": "/whatsapp/v2/templates/{id}",
-                            "parts": [
-                                "whatsapp",
-                                "v2",
-                                "templates",
-                                "{id}"
+                            "segments": [
+                                {
+                                    "lit": "whatsapp"
+                                },
+                                {
+                                    "lit": "v2"
+                                },
+                                {
+                                    "lit": "templates"
+                                },
+                                {
+                                    "var": "id"
+                                }
                             ],
                             "select": {
                                 "exist": [
@@ -402,7 +479,13 @@ class Config {
                                     "parameter_format": "`reqdata.parameter_format`"
                                 },
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "whatsapp",
+                                "v2",
+                                "templates",
+                                "{id}"
+                            ]
                         }
                     ]
                 }
@@ -418,6 +501,10 @@ class Config {
                     "type": "`$STRING`"
                 }
             ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
             "name": "whats_app_template_get_v2",
             "op": {
                 "load": {
@@ -439,11 +526,19 @@ class Config {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/whatsapp/v2/templates/{id}",
-                            "parts": [
-                                "whatsapp",
-                                "v2",
-                                "templates",
-                                "{id}"
+                            "segments": [
+                                {
+                                    "lit": "whatsapp"
+                                },
+                                {
+                                    "lit": "v2"
+                                },
+                                {
+                                    "lit": "templates"
+                                },
+                                {
+                                    "var": "id"
+                                }
                             ],
                             "select": {
                                 "exist": [
@@ -453,7 +548,13 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "whatsapp",
+                                "v2",
+                                "templates",
+                                "{id}"
+                            ]
                         }
                     ]
                 }
@@ -465,6 +566,7 @@ class Config {
         "whats_app_template_get_v2_pagination": {
             "fields": [
                 {
+                    "format": "int32",
                     "name": "currentPage",
                     "type": "`$INTEGER`"
                 },
@@ -479,14 +581,17 @@ class Config {
                     ]
                 },
                 {
+                    "format": "int32",
                     "name": "pages",
                     "type": "`$INTEGER`"
                 },
                 {
+                    "format": "int32",
                     "name": "results",
                     "type": "`$INTEGER`"
                 },
                 {
+                    "format": "int32",
                     "name": "resultsPerPage",
                     "type": "`$INTEGER`"
                 }
@@ -525,10 +630,16 @@ class Config {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/whatsapp/v2/templates",
-                            "parts": [
-                                "whatsapp",
-                                "v2",
-                                "templates"
+                            "segments": [
+                                {
+                                    "lit": "whatsapp"
+                                },
+                                {
+                                    "lit": "v2"
+                                },
+                                {
+                                    "lit": "templates"
+                                }
                             ],
                             "select": {
                                 "exist": [
@@ -540,7 +651,12 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            }
+                            },
+                            "parts": [
+                                "whatsapp",
+                                "v2",
+                                "templates"
+                            ]
                         }
                     ]
                 }

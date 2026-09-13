@@ -12,10 +12,16 @@ main: kit: entity: send_message: {
         {
           method: "POST"
           orig: "/whatsapp/v2/messages"
-          parts: [
-            "whatsapp"
-            "v2"
-            "messages"
+          segments: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              lit: "messages"
+            }
           ]
           transform: {
             req: "`reqdata`"

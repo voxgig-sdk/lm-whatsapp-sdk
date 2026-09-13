@@ -36,11 +36,19 @@ main: kit: entity: whats_app_template_get_v2: {
           }
           method: "GET"
           orig: "/whatsapp/v2/templates/{id}"
-          parts: [
-            "whatsapp"
-            "v2"
-            "templates"
-            "{id}"
+          segments: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              lit: "templates"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

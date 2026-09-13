@@ -71,15 +71,17 @@ def whats_app_template_get_v2_direct_setup(mockres)
   env = Runner.env_override({
     "LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID" => {},
     "LM_WHATSAPP_TEST_LIVE" => "FALSE",
-    "LM_WHATSAPP_APIKEY" => "NONE",
+    "LM_WHATSAPP_APIKEY" => "",
   })
 
   live = env["LM_WHATSAPP_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
       "apikey" => env["LM_WHATSAPP_APIKEY"],
-    }
+    })
     client = LmWhatsappSDK.new(merged_opts)
     return {
       client: client,

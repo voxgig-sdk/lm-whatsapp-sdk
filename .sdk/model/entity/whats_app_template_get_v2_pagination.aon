@@ -6,6 +6,7 @@ main: kit: entity: whats_app_template_get_v2_pagination: {
 
   fields: [
     {
+      format: "int32"
       name: "currentPage"
       req: false
       type: "`$INTEGER`"
@@ -22,16 +23,19 @@ main: kit: entity: whats_app_template_get_v2_pagination: {
       ]
     }
     {
+      format: "int32"
       name: "pages"
       req: false
       type: "`$INTEGER`"
     }
     {
+      format: "int32"
       name: "results"
       req: false
       type: "`$INTEGER`"
     }
     {
+      format: "int32"
       name: "resultsPerPage"
       req: false
       type: "`$INTEGER`"
@@ -73,10 +77,16 @@ main: kit: entity: whats_app_template_get_v2_pagination: {
           }
           method: "GET"
           orig: "/whatsapp/v2/templates"
-          parts: [
-            "whatsapp"
-            "v2"
-            "templates"
+          segments: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              lit: "templates"
+            }
           ]
           select: {
             exist: [

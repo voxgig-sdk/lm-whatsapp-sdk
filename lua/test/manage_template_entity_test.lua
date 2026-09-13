@@ -84,7 +84,7 @@ function manage_template_basic_setup(extra)
     ["LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID"] = idmap,
     ["LM_WHATSAPP_TEST_LIVE"] = "FALSE",
     ["LM_WHATSAPP_TEST_EXPLAIN"] = "FALSE",
-    ["LM_WHATSAPP_APIKEY"] = "NONE",
+    ["LM_WHATSAPP_APIKEY"] = "",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -95,6 +95,9 @@ function manage_template_basic_setup(extra)
 
   if env["LM_WHATSAPP_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
+      -- FIRST, so the generated fields below win: sdk-test-control.json's
+      -- test.client.options adds to the live client, it does not redirect it.
+      runner.live_client_options(),
       {
         apikey = env["LM_WHATSAPP_APIKEY"],
       },

@@ -48,7 +48,7 @@ func TestManageTemplateEntity(t *testing.T) {
 			return
 		}
 		// Bootstrap entity data from existing test data (no create step in flow).
-		manageTemplateRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.manage_template", setup.data)))
+		manageTemplateRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.manage_template")))
 		var manageTemplateRef01Data map[string]any
 		if len(manageTemplateRef01DataRaw) > 0 {
 			manageTemplateRef01Data = core.ToMapAny(manageTemplateRef01DataRaw[0][1])
@@ -84,7 +84,7 @@ func manage_templateBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"manage_template01", "manage_template02", "manage_template03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -104,7 +104,7 @@ func manage_templateBasicSetup(extra map[string]any) *entityTestSetup {
 		"LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID": idmap,
 		"LM_WHATSAPP_TEST_LIVE":      "FALSE",
 		"LM_WHATSAPP_TEST_EXPLAIN":   "FALSE",
-		"LM_WHATSAPP_APIKEY":         "NONE",
+		"LM_WHATSAPP_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID"])
@@ -113,11 +113,23 @@ func manage_templateBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["LM_WHATSAPP_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["LM_WHATSAPP_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewLmWhatsappSDK(core.ToMapAny(mergedOpts))
 	}

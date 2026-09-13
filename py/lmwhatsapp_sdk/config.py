@@ -1,6 +1,14 @@
 # LmWhatsapp SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -65,6 +73,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "manage_template",
         "op": {
           "remove": {
@@ -86,11 +98,19 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/whatsapp/v2/templates/{id}",
-                "parts": [
-                  "whatsapp",
-                  "v2",
-                  "templates",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "whatsapp",
+                  },
+                  {
+                    "lit": "v2",
+                  },
+                  {
+                    "lit": "templates",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -101,6 +121,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "whatsapp",
+                  "v2",
+                  "templates",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -142,17 +168,25 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/whatsapp/v2/{phoneNumber}/media",
-                "parts": [
-                  "whatsapp",
-                  "v2",
-                  "{phone_number}",
-                  "media",
-                ],
                 "rename": {
                   "param": {
                     "phoneNumber": "phone_number",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "whatsapp",
+                  },
+                  {
+                    "lit": "v2",
+                  },
+                  {
+                    "var": "phone_number",
+                  },
+                  {
+                    "lit": "media",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "phone_number",
@@ -163,6 +197,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "whatsapp",
+                  "v2",
+                  "{phone_number}",
+                  "media",
+                ],
               },
             ],
           },
@@ -188,16 +228,27 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/whatsapp/v2/messages",
-                "parts": [
-                  "whatsapp",
-                  "v2",
-                  "messages",
+                "segments": [
+                  {
+                    "lit": "whatsapp",
+                  },
+                  {
+                    "lit": "v2",
+                  },
+                  {
+                    "lit": "messages",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "whatsapp",
+                  "v2",
+                  "messages",
+                ],
               },
             ],
           },
@@ -241,6 +292,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "createdDate",
             "type": "`$STRING`",
           },
@@ -292,11 +344,13 @@ def make_config():
             ],
           },
           {
+            "format": "int64",
             "name": "message_send_ttl_seconds",
             "short": "Time to live for message template sent.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "modifiedDate",
             "type": [
               "`$ONE`",
@@ -336,6 +390,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "template",
         "op": {
           "create": {
@@ -347,10 +405,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/whatsapp/v2/templates",
-                "parts": [
-                  "whatsapp",
-                  "v2",
-                  "templates",
+                "segments": [
+                  {
+                    "lit": "whatsapp",
+                  },
+                  {
+                    "lit": "v2",
+                  },
+                  {
+                    "lit": "templates",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -369,6 +433,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "whatsapp",
+                  "v2",
+                  "templates",
+                ],
               },
             ],
           },
@@ -391,11 +460,19 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/whatsapp/v2/templates/{id}",
-                "parts": [
-                  "whatsapp",
-                  "v2",
-                  "templates",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "whatsapp",
+                  },
+                  {
+                    "lit": "v2",
+                  },
+                  {
+                    "lit": "templates",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -411,6 +488,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "whatsapp",
+                  "v2",
+                  "templates",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -426,6 +509,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "whats_app_template_get_v2",
         "op": {
           "load": {
@@ -447,11 +534,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/whatsapp/v2/templates/{id}",
-                "parts": [
-                  "whatsapp",
-                  "v2",
-                  "templates",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "whatsapp",
+                  },
+                  {
+                    "lit": "v2",
+                  },
+                  {
+                    "lit": "templates",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -462,6 +557,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "whatsapp",
+                  "v2",
+                  "templates",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -473,6 +574,7 @@ def make_config():
       "whats_app_template_get_v2_pagination": {
         "fields": [
           {
+            "format": "int32",
             "name": "currentPage",
             "type": "`$INTEGER`",
           },
@@ -487,14 +589,17 @@ def make_config():
             ],
           },
           {
+            "format": "int32",
             "name": "pages",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int32",
             "name": "results",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int32",
             "name": "resultsPerPage",
             "type": "`$INTEGER`",
           },
@@ -533,10 +638,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/whatsapp/v2/templates",
-                "parts": [
-                  "whatsapp",
-                  "v2",
-                  "templates",
+                "segments": [
+                  {
+                    "lit": "whatsapp",
+                  },
+                  {
+                    "lit": "v2",
+                  },
+                  {
+                    "lit": "templates",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -549,6 +660,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "whatsapp",
+                  "v2",
+                  "templates",
+                ],
               },
             ],
           },

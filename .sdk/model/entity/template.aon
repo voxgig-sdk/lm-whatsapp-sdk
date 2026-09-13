@@ -41,6 +41,7 @@ main: kit: entity: template: {
       type: "`$ARRAY`"
     }
     {
+      format: "date-time"
       name: "createdDate"
       req: false
       type: "`$STRING`"
@@ -98,12 +99,14 @@ main: kit: entity: template: {
       ]
     }
     {
+      format: "int64"
       name: "message_send_ttl_seconds"
       req: false
       short: "Time to live for message template sent."
       type: "`$INTEGER`"
     }
     {
+      format: "date-time"
       name: "modifiedDate"
       req: false
       type: [
@@ -162,10 +165,16 @@ main: kit: entity: template: {
         {
           method: "POST"
           orig: "/whatsapp/v2/templates"
-          parts: [
-            "whatsapp"
-            "v2"
-            "templates"
+          segments: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              lit: "templates"
+            }
           ]
           transform: {
             req: {
@@ -203,11 +212,19 @@ main: kit: entity: template: {
           }
           method: "PUT"
           orig: "/whatsapp/v2/templates/{id}"
-          parts: [
-            "whatsapp"
-            "v2"
-            "templates"
-            "{id}"
+          segments: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              lit: "templates"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

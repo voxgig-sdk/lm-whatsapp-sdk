@@ -56,6 +56,10 @@ module LmWhatsappConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "manage_template",
           "op" => {
             "remove" => {
@@ -77,11 +81,19 @@ module LmWhatsappConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/whatsapp/v2/templates/{id}",
-                  "parts" => [
-                    "whatsapp",
-                    "v2",
-                    "templates",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "whatsapp",
+                    },
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "templates",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -92,6 +104,12 @@ module LmWhatsappConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "whatsapp",
+                    "v2",
+                    "templates",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -133,17 +151,25 @@ module LmWhatsappConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/whatsapp/v2/{phoneNumber}/media",
-                  "parts" => [
-                    "whatsapp",
-                    "v2",
-                    "{phone_number}",
-                    "media",
-                  ],
                   "rename" => {
                     "param" => {
                       "phoneNumber" => "phone_number",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "whatsapp",
+                    },
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "var" => "phone_number",
+                    },
+                    {
+                      "lit" => "media",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "phone_number",
@@ -154,6 +180,12 @@ module LmWhatsappConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "whatsapp",
+                    "v2",
+                    "{phone_number}",
+                    "media",
+                  ],
                 },
               ],
             },
@@ -179,16 +211,27 @@ module LmWhatsappConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/whatsapp/v2/messages",
-                  "parts" => [
-                    "whatsapp",
-                    "v2",
-                    "messages",
+                  "segments" => [
+                    {
+                      "lit" => "whatsapp",
+                    },
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "messages",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "whatsapp",
+                    "v2",
+                    "messages",
+                  ],
                 },
               ],
             },
@@ -232,6 +275,7 @@ module LmWhatsappConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "createdDate",
               "type" => "`$STRING`",
             },
@@ -283,11 +327,13 @@ module LmWhatsappConfig
               ],
             },
             {
+              "format" => "int64",
               "name" => "message_send_ttl_seconds",
               "short" => "Time to live for message template sent.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "modifiedDate",
               "type" => [
                 "`$ONE`",
@@ -327,6 +373,10 @@ module LmWhatsappConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "template",
           "op" => {
             "create" => {
@@ -338,10 +388,16 @@ module LmWhatsappConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/whatsapp/v2/templates",
-                  "parts" => [
-                    "whatsapp",
-                    "v2",
-                    "templates",
+                  "segments" => [
+                    {
+                      "lit" => "whatsapp",
+                    },
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "templates",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -360,6 +416,11 @@ module LmWhatsappConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "whatsapp",
+                    "v2",
+                    "templates",
+                  ],
                 },
               ],
             },
@@ -382,11 +443,19 @@ module LmWhatsappConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/whatsapp/v2/templates/{id}",
-                  "parts" => [
-                    "whatsapp",
-                    "v2",
-                    "templates",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "whatsapp",
+                    },
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "templates",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -402,6 +471,12 @@ module LmWhatsappConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "whatsapp",
+                    "v2",
+                    "templates",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -417,6 +492,10 @@ module LmWhatsappConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "whats_app_template_get_v2",
           "op" => {
             "load" => {
@@ -438,11 +517,19 @@ module LmWhatsappConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/whatsapp/v2/templates/{id}",
-                  "parts" => [
-                    "whatsapp",
-                    "v2",
-                    "templates",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "whatsapp",
+                    },
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "templates",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -453,6 +540,12 @@ module LmWhatsappConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "whatsapp",
+                    "v2",
+                    "templates",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -464,6 +557,7 @@ module LmWhatsappConfig
         "whats_app_template_get_v2_pagination" => {
           "fields" => [
             {
+              "format" => "int32",
               "name" => "currentPage",
               "type" => "`$INTEGER`",
             },
@@ -478,14 +572,17 @@ module LmWhatsappConfig
               ],
             },
             {
+              "format" => "int32",
               "name" => "pages",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int32",
               "name" => "results",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int32",
               "name" => "resultsPerPage",
               "type" => "`$INTEGER`",
             },
@@ -524,10 +621,16 @@ module LmWhatsappConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/whatsapp/v2/templates",
-                  "parts" => [
-                    "whatsapp",
-                    "v2",
-                    "templates",
+                  "segments" => [
+                    {
+                      "lit" => "whatsapp",
+                    },
+                    {
+                      "lit" => "v2",
+                    },
+                    {
+                      "lit" => "templates",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -540,6 +643,11 @@ module LmWhatsappConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "whatsapp",
+                    "v2",
+                    "templates",
+                  ],
                 },
               ],
             },

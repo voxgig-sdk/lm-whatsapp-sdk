@@ -48,6 +48,10 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
+				},
 				"name": "manage_template",
 				"op": map[string]any{
 					"remove": map[string]any{
@@ -69,11 +73,19 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/whatsapp/v2/templates/{id}",
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
-									"{id}",
+								"segments": []any{
+									map[string]any{
+										"lit": "whatsapp",
+									},
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "templates",
+									},
+									map[string]any{
+										"var": "id",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -83,6 +95,12 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
+									"{id}",
 								},
 							},
 						},
@@ -125,15 +143,23 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/whatsapp/v2/{phoneNumber}/media",
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"{phone_number}",
-									"media",
-								},
 								"rename": map[string]any{
 									"param": map[string]any{
 										"phoneNumber": "phone_number",
+									},
+								},
+								"segments": []any{
+									map[string]any{
+										"lit": "whatsapp",
+									},
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"var": "phone_number",
+									},
+									map[string]any{
+										"lit": "media",
 									},
 								},
 								"select": map[string]any{
@@ -145,6 +171,12 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"{phone_number}",
+									"media",
 								},
 							},
 						},
@@ -171,15 +203,26 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/whatsapp/v2/messages",
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"messages",
+								"segments": []any{
+									map[string]any{
+										"lit": "whatsapp",
+									},
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "messages",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"messages",
 								},
 							},
 						},
@@ -224,6 +267,7 @@ func MakeConfig() map[string]any {
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "createdDate",
 						"type": "`$STRING`",
 					},
@@ -275,11 +319,13 @@ func MakeConfig() map[string]any {
 						},
 					},
 					map[string]any{
+						"format": "int64",
 						"name": "message_send_ttl_seconds",
 						"short": "Time to live for message template sent.",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "modifiedDate",
 						"type": []any{
 							"`$ONE`",
@@ -319,6 +365,10 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
+				},
 				"name": "template",
 				"op": map[string]any{
 					"create": map[string]any{
@@ -330,10 +380,16 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/whatsapp/v2/templates",
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
+								"segments": []any{
+									map[string]any{
+										"lit": "whatsapp",
+									},
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "templates",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
@@ -351,6 +407,11 @@ func MakeConfig() map[string]any {
 										"sub_category": "`reqdata.sub_category`",
 									},
 									"res": "`body`",
+								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
 								},
 							},
 						},
@@ -374,11 +435,19 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "PUT",
 								"orig": "/whatsapp/v2/templates/{id}",
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
-									"{id}",
+								"segments": []any{
+									map[string]any{
+										"lit": "whatsapp",
+									},
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "templates",
+									},
+									map[string]any{
+										"var": "id",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -394,6 +463,12 @@ func MakeConfig() map[string]any {
 									},
 									"res": "`body`",
 								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
+									"{id}",
+								},
 							},
 						},
 					},
@@ -408,6 +483,10 @@ func MakeConfig() map[string]any {
 						"name": "id",
 						"type": "`$STRING`",
 					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
 				},
 				"name": "whats_app_template_get_v2",
 				"op": map[string]any{
@@ -430,11 +509,19 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/whatsapp/v2/templates/{id}",
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
-									"{id}",
+								"segments": []any{
+									map[string]any{
+										"lit": "whatsapp",
+									},
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "templates",
+									},
+									map[string]any{
+										"var": "id",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -444,6 +531,12 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
+									"{id}",
 								},
 							},
 						},
@@ -456,6 +549,7 @@ func MakeConfig() map[string]any {
 			"whats_app_template_get_v2_pagination": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"format": "int32",
 						"name": "currentPage",
 						"type": "`$INTEGER`",
 					},
@@ -470,14 +564,17 @@ func MakeConfig() map[string]any {
 						},
 					},
 					map[string]any{
+						"format": "int32",
 						"name": "pages",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "int32",
 						"name": "results",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "int32",
 						"name": "resultsPerPage",
 						"type": "`$INTEGER`",
 					},
@@ -516,10 +613,16 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/whatsapp/v2/templates",
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
+								"segments": []any{
+									map[string]any{
+										"lit": "whatsapp",
+									},
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "templates",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -532,6 +635,11 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
+								},
 							},
 						},
 					},
@@ -542,6 +650,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

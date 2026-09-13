@@ -120,8 +120,6 @@ class WhatsAppTemplateGetV2Pagination(TypedDict, total=False):
 
 
 class WhatsAppTemplateGetV2PaginationLoadMatch(TypedDict, total=False):
-    currentPage: int
-    items: list | None
-    pages: int
-    results: int
-    resultsPerPage: int
+    page: int
+    size: int
+    sort: list

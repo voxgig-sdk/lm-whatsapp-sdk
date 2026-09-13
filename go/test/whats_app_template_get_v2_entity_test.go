@@ -50,7 +50,7 @@ func TestWhatsAppTemplateGetV2Entity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		whatsAppTemplateGetV2Ref01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.whats_app_template_get_v2", setup.data)))
+		whatsAppTemplateGetV2Ref01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.whats_app_template_get_v2")))
 		var whatsAppTemplateGetV2Ref01Data map[string]any
 		if len(whatsAppTemplateGetV2Ref01DataRaw) > 0 {
 			whatsAppTemplateGetV2Ref01Data = core.ToMapAny(whatsAppTemplateGetV2Ref01DataRaw[0][1])
@@ -103,7 +103,7 @@ func whats_app_template_get_v2BasicSetup(extra map[string]any) *entityTestSetup 
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"whats_app_template_get_v201", "whats_app_template_get_v202", "whats_app_template_get_v203"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -123,7 +123,7 @@ func whats_app_template_get_v2BasicSetup(extra map[string]any) *entityTestSetup 
 		"LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID": idmap,
 		"LM_WHATSAPP_TEST_LIVE":      "FALSE",
 		"LM_WHATSAPP_TEST_EXPLAIN":   "FALSE",
-		"LM_WHATSAPP_APIKEY":         "NONE",
+		"LM_WHATSAPP_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID"])
@@ -132,11 +132,23 @@ func whats_app_template_get_v2BasicSetup(extra map[string]any) *entityTestSetup 
 	}
 
 	if env["LM_WHATSAPP_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["LM_WHATSAPP_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewLmWhatsappSDK(core.ToMapAny(mergedOpts))
 	}

@@ -130,10 +130,8 @@ class WhatsAppTemplateGetV2Pagination
 /** Request payload for WhatsAppTemplateGetV2Pagination#load. */
 class WhatsAppTemplateGetV2PaginationLoadMatch
 {
-    public ?int $currentPage = null;
-    public mixed $items = null;
-    public ?int $pages = null;
-    public ?int $results = null;
-    public ?int $resultsPerPage = null;
+    public ?int $page = null;
+    public ?int $size = null;
+    public ?array $sort = null;
 }
 

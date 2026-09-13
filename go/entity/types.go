@@ -117,11 +117,9 @@ type WhatsAppTemplateGetV2Pagination struct {
 
 // WhatsAppTemplateGetV2PaginationLoadMatch is the typed request payload for WhatsAppTemplateGetV2Pagination.LoadTyped.
 type WhatsAppTemplateGetV2PaginationLoadMatch struct {
-	CurrentPage *int `json:"currentPage,omitempty"`
-	Items *any `json:"items,omitempty"`
-	Pages *int `json:"pages,omitempty"`
-	Results *int `json:"results,omitempty"`
-	ResultsPerPage *int `json:"resultsPerPage,omitempty"`
+	Page *int `json:"page,omitempty"`
+	Size *int `json:"size,omitempty"`
+	Sort *[]any `json:"sort,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

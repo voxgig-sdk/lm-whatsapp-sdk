@@ -287,26 +287,18 @@ WhatsAppTemplateGetV2Pagination = Struct.new(
 
 # Request payload for WhatsAppTemplateGetV2Pagination#load.
 #
-# @!attribute [rw] currentPage
+# @!attribute [rw] page
 #   @return [Integer, nil]
 #
-# @!attribute [rw] items
-#   @return [Object, nil]
-#
-# @!attribute [rw] pages
+# @!attribute [rw] size
 #   @return [Integer, nil]
 #
-# @!attribute [rw] results
-#   @return [Integer, nil]
-#
-# @!attribute [rw] resultsPerPage
-#   @return [Integer, nil]
+# @!attribute [rw] sort
+#   @return [Array, nil]
 WhatsAppTemplateGetV2PaginationLoadMatch = Struct.new(
-  :currentPage,
-  :items,
-  :pages,
-  :results,
-  :resultsPerPage,
+  :page,
+  :size,
+  :sort,
   keyword_init: true
 )
 

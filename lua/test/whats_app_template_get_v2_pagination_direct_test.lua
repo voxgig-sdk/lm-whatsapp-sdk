@@ -62,7 +62,7 @@ function whats_app_template_get_v2_pagination_direct_setup(mockres)
   local env = runner.env_override({
     ["LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID"] = {},
     ["LM_WHATSAPP_TEST_LIVE"] = "FALSE",
-    ["LM_WHATSAPP_APIKEY"] = "NONE",
+    ["LM_WHATSAPP_APIKEY"] = "",
   })
 
   local live = env["LM_WHATSAPP_TEST_LIVE"] == "TRUE"
@@ -71,6 +71,13 @@ function whats_app_template_get_v2_pagination_direct_setup(mockres)
     local merged_opts = {
       apikey = env["LM_WHATSAPP_APIKEY"],
     }
+    -- sdk-test-control.json's test.client.options goes UNDER the generated
+    -- fields: it adds to the live client, it does not redirect it.
+    for _k, _v in pairs(runner.live_client_options()) do
+      if merged_opts[_k] == nil then
+        merged_opts[_k] = _v
+      end
+    end
     local client = sdk.new(merged_opts)
     return {
       client = client,

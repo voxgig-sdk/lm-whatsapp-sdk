@@ -33,17 +33,25 @@ main: kit: entity: media: {
           }
           method: "POST"
           orig: "/whatsapp/v2/{phoneNumber}/media"
-          parts: [
-            "whatsapp"
-            "v2"
-            "{phone_number}"
-            "media"
-          ]
           rename: {
             param: {
               phoneNumber: "phone_number"
             }
           }
+          segments: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              var: "phone_number"
+            }
+            {
+              lit: "media"
+            }
+          ]
           select: {
             exist: [
               "phone_number"

@@ -97,10 +97,8 @@ export interface WhatsAppTemplateGetV2Pagination {
 }
 
 export interface WhatsAppTemplateGetV2PaginationLoadMatch {
-  currentPage?: number
-  items?: any[] | null
-  pages?: number
-  results?: number
-  resultsPerPage?: number
+  page?: number
+  size?: number
+  sort?: any[]
 }
 

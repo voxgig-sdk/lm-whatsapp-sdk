@@ -86,11 +86,9 @@
 ---@field resultsPerPage? number
 
 ---@class WhatsAppTemplateGetV2PaginationLoadMatch
----@field currentPage? number
----@field items? table|nil
----@field pages? number
----@field results? number
----@field resultsPerPage? number
+---@field page? number
+---@field size? number
+---@field sort? table
 
 local M = {}
 
