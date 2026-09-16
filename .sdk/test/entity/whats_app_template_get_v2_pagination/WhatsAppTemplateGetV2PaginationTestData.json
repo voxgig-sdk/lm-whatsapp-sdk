@@ -2,27 +2,27 @@
   "existing": {
     "whats_app_template_get_v2_pagination": {
       "WHATS_APP_TEMPLATE_GET_V2_PAGINATION00": {
-        "currentPage": "s32",
+        "currentPage": 50,
         "items": "s33",
-        "pages": "s34",
-        "results": "s35",
-        "resultsPerPage": "s36",
+        "pages": 52,
+        "results": 53,
+        "resultsPerPage": 54,
         "id": "WHATS_APP_TEMPLATE_GET_V2_PAGINATION00"
       },
       "WHATS_APP_TEMPLATE_GET_V2_PAGINATION01": {
-        "currentPage": "s64",
+        "currentPage": 100,
         "items": "s65",
-        "pages": "s66",
-        "results": "s67",
-        "resultsPerPage": "s68",
+        "pages": 102,
+        "results": 103,
+        "resultsPerPage": 104,
         "id": "WHATS_APP_TEMPLATE_GET_V2_PAGINATION01"
       },
       "WHATS_APP_TEMPLATE_GET_V2_PAGINATION02": {
-        "currentPage": "s96",
+        "currentPage": 150,
         "items": "s97",
-        "pages": "s98",
-        "results": "s99",
-        "resultsPerPage": "s9a",
+        "pages": 152,
+        "results": 153,
+        "resultsPerPage": 154,
         "id": "WHATS_APP_TEMPLATE_GET_V2_PAGINATION02"
       }
     }
@@ -30,11 +30,404 @@
   "new": {
     "whats_app_template_get_v2_pagination": {
       "whats_app_template_get_v2_pagination_ref01": {
-        "currentPage": "sc8",
+        "currentPage": 200,
         "items": "sc9",
-        "pages": "sca",
-        "results": "scb",
-        "resultsPerPage": "scc"
+        "pages": 202,
+        "results": 203,
+        "resultsPerPage": 204
+      }
+    }
+  },
+  "requests": {
+    "GET /whatsapp/v2/templates": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [
+          {
+            "description": "List of fields used to sort results",
+            "in": "query",
+            "name": "sort",
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Requested page",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "default": 1,
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of items per page",
+            "in": "query",
+            "name": "size",
+            "schema": {
+              "default": 25,
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 0,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "currentPage": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "items": {
+                      "items": {
+                        "oneOf": [
+                          {
+                            "additionalProperties": false,
+                            "allOf": [
+                              {
+                                "additionalProperties": false,
+                                "type": "object"
+                              }
+                            ],
+                            "properties": {
+                              "category": {
+                                "enum": [
+                                  "AUTHENTICATION",
+                                  "MARKETING",
+                                  "UTILITY"
+                                ],
+                                "type": "string"
+                              },
+                              "createdDate": {
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "id": {
+                                "description": "ID",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "language": {
+                                "enum": [
+                                  "af",
+                                  "sq",
+                                  "ar",
+                                  "az",
+                                  "bn",
+                                  "bg",
+                                  "ca",
+                                  "zh_CN",
+                                  "zh_HK",
+                                  "zh_TW",
+                                  "hr",
+                                  "cs",
+                                  "da",
+                                  "nl",
+                                  "en",
+                                  "en_GB",
+                                  "en_US",
+                                  "et",
+                                  "fil",
+                                  "fi",
+                                  "fr",
+                                  "de",
+                                  "el",
+                                  "gu",
+                                  "ha",
+                                  "he",
+                                  "hi",
+                                  "hu",
+                                  "id",
+                                  "ga",
+                                  "it",
+                                  "ja",
+                                  "kn",
+                                  "kk",
+                                  "ko",
+                                  "lo",
+                                  "lv",
+                                  "lt",
+                                  "mk",
+                                  "ms",
+                                  "ml",
+                                  "mr",
+                                  "nb",
+                                  "fa",
+                                  "pl",
+                                  "pt_BR",
+                                  "pt_PT",
+                                  "pa",
+                                  "ro",
+                                  "ru",
+                                  "sr",
+                                  "sk",
+                                  "sl",
+                                  "es",
+                                  "es_AR",
+                                  "es_ES",
+                                  "es_MX",
+                                  "sw",
+                                  "sv",
+                                  "ta",
+                                  "te",
+                                  "th",
+                                  "tr",
+                                  "uk",
+                                  "ur",
+                                  "uz",
+                                  "vi",
+                                  "zu"
+                                ],
+                                "type": "string"
+                              },
+                              "modifiedDate": {
+                                "format": "date-time",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "name": {
+                                "description": "The message template name",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "status": {
+                                "enum": [
+                                  "APPROVED",
+                                  "IN_APPEAL",
+                                  "PENDING",
+                                  "REJECTED",
+                                  "PENDING_DELETION",
+                                  "DELETED",
+                                  "DISABLED",
+                                  "PAUSED",
+                                  "LIMIT_EXCEEDED"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "type": [
+                        "array",
+                        "null"
+                      ]
+                    },
+                    "pages": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "results": {
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "resultsPerPage": {
+                      "format": "int32",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Server Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "securitySchemes": {
+          "Bearer": {
+            "description": "Bearer token",
+            "flows": {
+              "clientCredentials": {
+                "scopes": {},
+                "tokenUrl": "https://sso.linkmobility.com/auth/realms/CPaaS/protocol/openid-connect/token"
+              }
+            },
+            "type": "oauth2"
+          }
+        },
+        "securitySource": "definition"
       }
     }
   }

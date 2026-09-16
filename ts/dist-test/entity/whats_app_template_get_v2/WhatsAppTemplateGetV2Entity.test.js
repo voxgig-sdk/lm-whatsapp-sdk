@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.LM_WHATSAPP_TEST_LIVE;
         for (const op of ['load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'whats_app_template_get_v2.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'whats_app_template_get_v2.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "id", "req": false, "type": "`$STRING`", "index$": 0 }], "id": { "field": "id", "name": "id" }, "name": "whats_app_template_get_v2", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "params": [{ "active": true, "kind": "param", "name": "id", "orig": "id", "reqd": true, "type": "`$STRING`", "index$": 0 }] }, "contract": { "id": "GET /whatsapp/v2/templates/{id}", "json": "{\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"format\":\"uuid\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"allOf\":[{\"additionalProperties\":false,\"type\":\"object\"}],\"properties\":{\"category\":{\"enum\":[\"AUTHENTICATION\",\"MARKETING\",\"UTILITY\"],\"type\":\"string\"},\"components\":{\"description\":\"An array of JSON objects describing the message template components.\",\"items\":{\"additionalProperties\":false,\"properties\":{\"buttons\":{\"description\":\"Button components to be used in the template.\",\"items\":{\"additionalProperties\":false,\"properties\":{\"examples\":{\"description\":\"Example\",\"items\":{\"type\":\"string\"},\"type\":[\"array\",\"null\"]},\"flow_action\":{\"enum\":[\"NAVIGATE\",\"DATA_EXCHANGE\"],\"type\":\"string\"},\"flow_id\":{\"description\":\"Flow ID\",\"format\":\"int64\",\"type\":\"integer\"},\"navigate_screen\":{\"description\":\"Navigate screen\",\"type\":[\"string\",\"null\"]},\"phone_number\":{\"description\":\"Phone number\",\"type\":[\"string\",\"null\"]},\"supported_apps\":{\"description\":\"Supported apps\",\"items\":{\"additionalProperties\":false,\"properties\":{\"package_name\":{\"description\":\"Package name\",\"minLength\":1,\"type\":\"string\"},\"signature_hash\":{\"description\":\"Signature hash\",\"minLength\":1,\"type\":\"string\"}},\"required\":[\"package_name\",\"signature_hash\"],\"type\":\"object\"},\"type\":[\"array\",\"null\"]},\"text\":{\"description\":\"Button text.\",\"type\":[\"string\",\"null\"]},\"type\":{\"enum\":[\"QUICK_REPLY\",\"URL\",\"PHONE_NUMBER\",\"OTP\",\"MPM\",\"CATALOG\",\"FLOW\",\"VOICE_CALL\",\"APP\",\"POSTBACK\"],\"type\":\"string\"},\"url\":{\"description\":\"URL\",\"type\":[\"string\",\"null\"]},\"zero_tap_terms_accepted\":{\"description\":\"Zero tap terms accepted\",\"type\":\"boolean\"}},\"required\":[\"type\"],\"type\":\"object\"},\"type\":[\"array\",\"null\"]},\"examples\":{\"additionalProperties\":false,\"properties\":{\"body_text\":{\"description\":\"Body text\",\"items\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"type\":[\"array\",\"null\"]},\"header_handle\":{\"description\":\"Header handle\",\"items\":{\"type\":\"string\"},\"type\":[\"array\",\"null\"]},\"header_text\":{\"description\":\"Header text\",\"items\":{\"type\":\"string\"},\"type\":[\"array\",\"null\"]}},\"type\":\"object\"},\"format\":{\"enum\":[\"TEXT\",\"IMAGE\",\"DOCUMENT\",\"VIDEO\",\"LOCATION\"],\"type\":\"string\"},\"text\":{\"description\":\"Component text.\\r\\nRequired for components with type HEADER, BODY or FOOTER.\",\"type\":[\"string\",\"null\"]},\"type\":{\"enum\":[\"GREETING\",\"HEADER\",\"BODY\",\"FOOTER\",\"BUTTONS\",\"CAROUSEL\",\"LIMITED_TIME_OFFER\"],\"type\":\"string\"}},\"type\":\"object\"},\"type\":[\"array\",\"null\"]},\"correct_category\":{\"enum\":[\"AUTHENTICATION\",\"MARKETING\",\"UTILITY\"],\"type\":\"string\"},\"createdDate\":{\"format\":\"date-time\",\"type\":\"string\"},\"cta_url_link_tracking_opted_out\":{\"description\":\"Optional boolean field for opting out/in of link tracking at template level\",\"type\":\"boolean\"},\"id\":{\"description\":\"ID\",\"type\":\"string\"},\"language\":{\"enum\":[\"af\",\"sq\",\"ar\",\"az\",\"bn\",\"bg\",\"ca\",\"zh_CN\",\"zh_HK\",\"zh_TW\",\"hr\",\"cs\",\"da\",\"nl\",\"en\",\"en_GB\",\"en_US\",\"et\",\"fil\",\"fi\",\"fr\",\"de\",\"el\",\"gu\",\"ha\",\"he\",\"hi\",\"hu\",\"id\",\"ga\",\"it\",\"ja\",\"kn\",\"kk\",\"ko\",\"lo\",\"lv\",\"lt\",\"mk\",\"ms\",\"ml\",\"mr\",\"nb\",\"fa\",\"pl\",\"pt_BR\",\"pt_PT\",\"pa\",\"ro\",\"ru\",\"sr\",\"sk\",\"sl\",\"es\",\"es_AR\",\"es_ES\",\"es_MX\",\"sw\",\"sv\",\"ta\",\"te\",\"th\",\"tr\",\"uk\",\"ur\",\"uz\",\"vi\",\"zu\"],\"type\":\"string\"},\"library_template_name\":{\"description\":\"Template Library name that this HSM is clone from\",\"type\":[\"string\",\"null\"]},\"message_send_ttl_seconds\":{\"description\":\"Template message delivery retry time-to-live (TTL) override value.\\r\\nIf we are unable to deliver a message to a WhatsApp user, we will retry the delivery for a period of time known as a time-to-live, TTL, or the message validity period.\\r\\nTTL can be configured for certain message types.\",\"format\":\"int32\",\"type\":\"integer\"},\"modifiedDate\":{\"format\":\"date-time\",\"type\":[\"string\",\"null\"]},\"name\":{\"description\":\"The message template name\",\"type\":[\"string\",\"null\"]},\"parameter_format\":{\"enum\":[\"NAMED\",\"POSITIONAL\"],\"type\":\"string\"},\"previous_category\":{\"enum\":[\"AUTHENTICATION\",\"MARKETING\",\"UTILITY\"],\"type\":\"string\"},\"quality_score\":{\"additionalProperties\":false,\"properties\":{\"date\":{\"description\":\"Timestamp of the quality score\",\"type\":[\"string\",\"null\"]},\"reasons\":{\"description\":\"List of reasons for the score of the HSM\",\"items\":{\"type\":\"string\"},\"type\":[\"array\",\"null\"]},\"score\":{\"description\":\"Quality score of the HSM\",\"type\":[\"string\",\"null\"]}},\"type\":\"object\"},\"rejected_reason\":{\"enum\":[\"ABUSIVE_CONTENT\",\"INVALID_FORMAT\",\"NONE\",\"PROMOTIONAL\",\"TAG_CONTENT_MISMATCH\",\"SCAM\"],\"type\":\"string\"},\"status\":{\"enum\":[\"APPROVED\",\"IN_APPEAL\",\"PENDING\",\"REJECTED\",\"PENDING_DELETION\",\"DELETED\",\"DISABLED\",\"PAUSED\",\"LIMIT_EXCEEDED\"],\"type\":\"string\"},\"sub_category\":{\"enum\":[\"ORDER_DETAILS\",\"ORDER_STATUS\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Success\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"code\":{\"description\":\"Unique Link Message ID generated as part of the processing the request.\",\"type\":[\"string\",\"null\"]},\"description\":{\"description\":\"Recipient of the message as submitted in the corresponding Message.\",\"type\":[\"string\",\"null\"]}}}}},\"description\":\"Bad Request\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"code\":{\"description\":\"Unique Link Message ID generated as part of the processing the request.\",\"type\":[\"string\",\"null\"]},\"description\":{\"description\":\"Recipient of the message as submitted in the corresponding Message.\",\"type\":[\"string\",\"null\"]}}}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"code\":{\"description\":\"Unique Link Message ID generated as part of the processing the request.\",\"type\":[\"string\",\"null\"]},\"description\":{\"description\":\"Recipient of the message as submitted in the corresponding Message.\",\"type\":[\"string\",\"null\"]}}}}},\"description\":\"Forbidden\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"code\":{\"description\":\"Unique Link Message ID generated as part of the processing the request.\",\"type\":[\"string\",\"null\"]},\"description\":{\"description\":\"Recipient of the message as submitted in the corresponding Message.\",\"type\":[\"string\",\"null\"]}}}}},\"description\":\"Too Many Requests\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"code\":{\"description\":\"Unique Link Message ID generated as part of the processing the request.\",\"type\":[\"string\",\"null\"]},\"description\":{\"description\":\"Recipient of the message as submitted in the corresponding Message.\",\"type\":[\"string\",\"null\"]}}}}},\"description\":\"Server Error\"},\"502\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"code\":{\"description\":\"Unique Link Message ID generated as part of the processing the request.\",\"type\":[\"string\",\"null\"]},\"description\":{\"description\":\"Recipient of the message as submitted in the corresponding Message.\",\"type\":[\"string\",\"null\"]}}}}},\"description\":\"Server Error\"}},\"security\":[{\"Bearer\":[]}],\"securitySchemes\":{\"Bearer\":{\"description\":\"Bearer token\",\"flows\":{\"clientCredentials\":{\"scopes\":{},\"tokenUrl\":\"https://sso.linkmobility.com/auth/realms/CPaaS/protocol/openid-connect/token\"}},\"type\":\"oauth2\"}},\"securitySource\":\"definition\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/whatsapp/v2/templates/{id}", "segments": [{ "lit": "whatsapp" }, { "lit": "v2" }, { "lit": "templates" }, { "var": "id" }], "select": { "exist": ["id"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "whats_app_template_get_v2", "name__orig": "whats_app_template_get_v2", "Name": "WhatsAppTemplateGetV2", "name_": "whats_app_template_get_v2", "name-": "whats-app-template-get-v2", "NAME": "WHATS_APP_TEMPLATE_GET_V2", "index$": 4 }, { "active": true, "entity": "whats_app_template_get_v2", "key$": "BasicWhatsAppTemplateGetV2Flow", "kind": "basic", "name": "BasicWhatsAppTemplateGetV2Flow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "whats_app_template_get_v2_ref01", "srcdatavar": "whats_app_template_get_v2_ref01_data", "suffix": "_dt0" }, "match": { "id": "whats_app_template_get_v201" }, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-whats_app_template_get_v2_ref01" } }], "index$": 0 }] }, 'WhatsAppTemplateGetV2');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -103,12 +101,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID': idmap,
         'LM_WHATSAPP_TEST_LIVE': 'FALSE',
@@ -117,7 +109,13 @@ function basicSetup(extra) {
     });
     idmap = env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID'];
     const live = 'TRUE' === env.LM_WHATSAPP_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.LmWhatsappSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -130,7 +128,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -142,7 +141,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.LM_WHATSAPP_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

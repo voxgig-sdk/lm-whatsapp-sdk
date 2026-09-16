@@ -4,7 +4,14 @@ declare(strict_types=1);
 // LmWhatsapp SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/DebugFeature.php';
+require_once __DIR__ . '/feature/IdempotencyFeature.php';
+require_once __DIR__ . '/feature/MetricsFeature.php';
+require_once __DIR__ . '/feature/PagingFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class LmWhatsappFeatures
@@ -14,8 +21,22 @@ class LmWhatsappFeatures
         switch ($name) {
             case "base":
                 return new LmWhatsappBaseFeature();
+            case "debug":
+                return new LmWhatsappDebugFeature();
+            case "idempotency":
+                return new LmWhatsappIdempotencyFeature();
+            case "metrics":
+                return new LmWhatsappMetricsFeature();
+            case "paging":
+                return new LmWhatsappPagingFeature();
+            case "ratelimit":
+                return new LmWhatsappRatelimitFeature();
+            case "retry":
+                return new LmWhatsappRetryFeature();
             case "test":
                 return new LmWhatsappTestFeature();
+            case "timeout":
+                return new LmWhatsappTimeoutFeature();
             default:
                 return new LmWhatsappBaseFeature();
         }
@@ -31,7 +52,14 @@ class LmWhatsappFeatures
     {
         switch ($name) {
             case "base":
+            case "debug":
+            case "idempotency":
+            case "metrics":
+            case "paging":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

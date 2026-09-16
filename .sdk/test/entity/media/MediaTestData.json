@@ -19,5 +19,237 @@
     "media": {
       "media_ref01": {}
     }
+  },
+  "requests": {
+    "POST /whatsapp/v2/{phoneNumber}/media": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [
+          {
+            "description": "The uploaded file's name.",
+            "in": "header",
+            "name": "X-Link-Upload-Filename",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The sender's phone number. Should start with + sign or its URL-encoded equivalent - %2B | %2b",
+            "example": "+15551234567 or %2b15551234567 or %2B15551234567",
+            "in": "path",
+            "name": "phoneNumber",
+            "required": true,
+            "schema": {
+              "pattern": "^(?:\\+|%2[bB])\\d+$",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/msword": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "application/pdf": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "application/vnd.ms-excel": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "application/vnd.ms-powerpoint": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "audio/aac": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "audio/amr": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "audio/mp4": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "audio/mpeg": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "audio/ogg": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "audio/opus": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "image/jpeg": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "image/png": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "image/webp": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "video/3gp": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            },
+            "video/mp4": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "example": "1455590888989863",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "correlationId": {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "error": {
+                      "description": "Status code",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "example": "Unauthorized",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "example": "You do not have the correct permissions to access the resource.",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "500": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "example": "The server encountered an internal error and was unable to complete your request.",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "securitySchemes": {
+          "Bearer": {
+            "description": "Bearer token",
+            "flows": {
+              "clientCredentials": {
+                "scopes": {},
+                "tokenUrl": "https://sso.linkmobility.com/auth/realms/CPaaS/protocol/openid-connect/token"
+              }
+            },
+            "type": "oauth2"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

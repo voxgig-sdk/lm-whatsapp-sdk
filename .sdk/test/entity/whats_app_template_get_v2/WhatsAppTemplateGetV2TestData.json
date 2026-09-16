@@ -16,5 +16,616 @@
     "whats_app_template_get_v2": {
       "whats_app_template_get_v2_ref01": {}
     }
+  },
+  "requests": {
+    "GET /whatsapp/v2/templates/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "allOf": [
+                    {
+                      "additionalProperties": false,
+                      "type": "object"
+                    }
+                  ],
+                  "properties": {
+                    "category": {
+                      "enum": [
+                        "AUTHENTICATION",
+                        "MARKETING",
+                        "UTILITY"
+                      ],
+                      "type": "string"
+                    },
+                    "components": {
+                      "description": "An array of JSON objects describing the message template components.",
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "buttons": {
+                            "description": "Button components to be used in the template.",
+                            "items": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "examples": {
+                                  "description": "Example",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": [
+                                    "array",
+                                    "null"
+                                  ]
+                                },
+                                "flow_action": {
+                                  "enum": [
+                                    "NAVIGATE",
+                                    "DATA_EXCHANGE"
+                                  ],
+                                  "type": "string"
+                                },
+                                "flow_id": {
+                                  "description": "Flow ID",
+                                  "format": "int64",
+                                  "type": "integer"
+                                },
+                                "navigate_screen": {
+                                  "description": "Navigate screen",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ]
+                                },
+                                "phone_number": {
+                                  "description": "Phone number",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ]
+                                },
+                                "supported_apps": {
+                                  "description": "Supported apps",
+                                  "items": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "package_name": {
+                                        "description": "Package name",
+                                        "minLength": 1,
+                                        "type": "string"
+                                      },
+                                      "signature_hash": {
+                                        "description": "Signature hash",
+                                        "minLength": 1,
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "package_name",
+                                      "signature_hash"
+                                    ],
+                                    "type": "object"
+                                  },
+                                  "type": [
+                                    "array",
+                                    "null"
+                                  ]
+                                },
+                                "text": {
+                                  "description": "Button text.",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ]
+                                },
+                                "type": {
+                                  "enum": [
+                                    "QUICK_REPLY",
+                                    "URL",
+                                    "PHONE_NUMBER",
+                                    "OTP",
+                                    "MPM",
+                                    "CATALOG",
+                                    "FLOW",
+                                    "VOICE_CALL",
+                                    "APP",
+                                    "POSTBACK"
+                                  ],
+                                  "type": "string"
+                                },
+                                "url": {
+                                  "description": "URL",
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ]
+                                },
+                                "zero_tap_terms_accepted": {
+                                  "description": "Zero tap terms accepted",
+                                  "type": "boolean"
+                                }
+                              },
+                              "required": [
+                                "type"
+                              ],
+                              "type": "object"
+                            },
+                            "type": [
+                              "array",
+                              "null"
+                            ]
+                          },
+                          "examples": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "body_text": {
+                                "description": "Body text",
+                                "items": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                },
+                                "type": [
+                                  "array",
+                                  "null"
+                                ]
+                              },
+                              "header_handle": {
+                                "description": "Header handle",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "type": [
+                                  "array",
+                                  "null"
+                                ]
+                              },
+                              "header_text": {
+                                "description": "Header text",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "type": [
+                                  "array",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "format": {
+                            "enum": [
+                              "TEXT",
+                              "IMAGE",
+                              "DOCUMENT",
+                              "VIDEO",
+                              "LOCATION"
+                            ],
+                            "type": "string"
+                          },
+                          "text": {
+                            "description": "Component text.\r\nRequired for components with type HEADER, BODY or FOOTER.",
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "type": {
+                            "enum": [
+                              "GREETING",
+                              "HEADER",
+                              "BODY",
+                              "FOOTER",
+                              "BUTTONS",
+                              "CAROUSEL",
+                              "LIMITED_TIME_OFFER"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": [
+                        "array",
+                        "null"
+                      ]
+                    },
+                    "correct_category": {
+                      "enum": [
+                        "AUTHENTICATION",
+                        "MARKETING",
+                        "UTILITY"
+                      ],
+                      "type": "string"
+                    },
+                    "createdDate": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "cta_url_link_tracking_opted_out": {
+                      "description": "Optional boolean field for opting out/in of link tracking at template level",
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "description": "ID",
+                      "type": "string"
+                    },
+                    "language": {
+                      "enum": [
+                        "af",
+                        "sq",
+                        "ar",
+                        "az",
+                        "bn",
+                        "bg",
+                        "ca",
+                        "zh_CN",
+                        "zh_HK",
+                        "zh_TW",
+                        "hr",
+                        "cs",
+                        "da",
+                        "nl",
+                        "en",
+                        "en_GB",
+                        "en_US",
+                        "et",
+                        "fil",
+                        "fi",
+                        "fr",
+                        "de",
+                        "el",
+                        "gu",
+                        "ha",
+                        "he",
+                        "hi",
+                        "hu",
+                        "id",
+                        "ga",
+                        "it",
+                        "ja",
+                        "kn",
+                        "kk",
+                        "ko",
+                        "lo",
+                        "lv",
+                        "lt",
+                        "mk",
+                        "ms",
+                        "ml",
+                        "mr",
+                        "nb",
+                        "fa",
+                        "pl",
+                        "pt_BR",
+                        "pt_PT",
+                        "pa",
+                        "ro",
+                        "ru",
+                        "sr",
+                        "sk",
+                        "sl",
+                        "es",
+                        "es_AR",
+                        "es_ES",
+                        "es_MX",
+                        "sw",
+                        "sv",
+                        "ta",
+                        "te",
+                        "th",
+                        "tr",
+                        "uk",
+                        "ur",
+                        "uz",
+                        "vi",
+                        "zu"
+                      ],
+                      "type": "string"
+                    },
+                    "library_template_name": {
+                      "description": "Template Library name that this HSM is clone from",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "message_send_ttl_seconds": {
+                      "description": "Template message delivery retry time-to-live (TTL) override value.\r\nIf we are unable to deliver a message to a WhatsApp user, we will retry the delivery for a period of time known as a time-to-live, TTL, or the message validity period.\r\nTTL can be configured for certain message types.",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "modifiedDate": {
+                      "format": "date-time",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "name": {
+                      "description": "The message template name",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "parameter_format": {
+                      "enum": [
+                        "NAMED",
+                        "POSITIONAL"
+                      ],
+                      "type": "string"
+                    },
+                    "previous_category": {
+                      "enum": [
+                        "AUTHENTICATION",
+                        "MARKETING",
+                        "UTILITY"
+                      ],
+                      "type": "string"
+                    },
+                    "quality_score": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "date": {
+                          "description": "Timestamp of the quality score",
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "reasons": {
+                          "description": "List of reasons for the score of the HSM",
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": [
+                            "array",
+                            "null"
+                          ]
+                        },
+                        "score": {
+                          "description": "Quality score of the HSM",
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "rejected_reason": {
+                      "enum": [
+                        "ABUSIVE_CONTENT",
+                        "INVALID_FORMAT",
+                        "NONE",
+                        "PROMOTIONAL",
+                        "TAG_CONTENT_MISMATCH",
+                        "SCAM"
+                      ],
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "APPROVED",
+                        "IN_APPEAL",
+                        "PENDING",
+                        "REJECTED",
+                        "PENDING_DELETION",
+                        "DELETED",
+                        "DISABLED",
+                        "PAUSED",
+                        "LIMIT_EXCEEDED"
+                      ],
+                      "type": "string"
+                    },
+                    "sub_category": {
+                      "enum": [
+                        "ORDER_DETAILS",
+                        "ORDER_STATUS"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Server Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "code": {
+                      "description": "Unique Link Message ID generated as part of the processing the request.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "description": "Recipient of the message as submitted in the corresponding Message.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Server Error"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "securitySchemes": {
+          "Bearer": {
+            "description": "Bearer token",
+            "flows": {
+              "clientCredentials": {
+                "scopes": {},
+                "tokenUrl": "https://sso.linkmobility.com/auth/realms/CPaaS/protocol/openid-connect/token"
+              }
+            },
+            "type": "oauth2"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }
