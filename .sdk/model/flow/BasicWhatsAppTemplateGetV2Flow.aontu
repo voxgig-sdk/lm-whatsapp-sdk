@@ -1,0 +1,32 @@
+# BasicWhatsAppTemplateGetV2Flow
+
+main: kit: flow: BasicWhatsAppTemplateGetV2Flow:
+{
+  entity: "whats_app_template_get_v2",
+  kind: "basic",
+  name: "BasicWhatsAppTemplateGetV2Flow",
+  step: [
+    {
+      i: {
+        ref: "whats_app_template_get_v2_ref01",
+        srcdatavar: "whats_app_template_get_v2_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "whats_app_template_get_v201"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-whats_app_template_get_v2_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicWhatsAppTemplateGetV2Flow"
+}

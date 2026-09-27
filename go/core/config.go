@@ -169,6 +169,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 				},
@@ -183,17 +184,6 @@ func MakeConfig() map[string]any {
 						"name": "remove",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/whatsapp/v2/templates/{id}",
@@ -211,20 +201,32 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"whatsapp",
 									"v2",
 									"templates",
 									"{id}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -243,35 +245,9 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"header": []any{
-										map[string]any{
-											"kind": "header",
-											"name": "x_link_upload_filename",
-											"orig": "x_link_upload_filename",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"params": []any{
-										map[string]any{
-											"example": "+15551234567 or %2b15551234567 or %2B15551234567",
-											"kind": "param",
-											"name": "phone_number",
-											"orig": "phone_number",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/whatsapp/v2/{phoneNumber}/media",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"phoneNumber": "phone_number",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "whatsapp",
@@ -286,32 +262,54 @@ func MakeConfig() map[string]any {
 										"lit": "media",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"phone_number",
-										"x_link_upload_filename",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"whatsapp",
 									"v2",
 									"{phone_number}",
 									"media",
 								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"phoneNumber": "phone_number",
+									},
+								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"header": []any{
+										map[string]any{
+											"name": "x_link_upload_filename",
+											"orig": "x_link_upload_filename",
+											"type": "`$STRING`",
+											"kind": "header",
+											"reqd": true,
+										},
+									},
+									"params": []any{
+										map[string]any{
+											"name": "phone_number",
+											"orig": "phone_number",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "+15551234567 or %2b15551234567 or %2B15551234567",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"phone_number",
+										"x_link_upload_filename",
+									},
+								},
 							},
 						},
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"v2",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 			"send_message": map[string]any{
@@ -323,7 +321,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/whatsapp/v2/messages",
@@ -338,16 +335,18 @@ func MakeConfig() map[string]any {
 										"lit": "messages",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"whatsapp",
 									"v2",
 									"messages",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -360,21 +359,26 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "allow_category_change",
-						"short": "Set to true to allow to assign a category based on template guidelines and the template's contents.",
+						"title": "Allow Category Change",
 						"type": "`$BOOLEAN`",
+						"short": "Set to true to allow to assign a category based on template guidelines and the template's contents.",
 					},
 					map[string]any{
 						"name": "category",
+						"title": "Category",
+						"type": "`$STRING`",
 						"op": map[string]any{
 							"create": map[string]any{
 								"req": true,
 								"type": "`$STRING`",
 							},
 						},
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "components",
+						"title": "Components",
+						"type": "`$ARRAY`",
+						"req": true,
 						"op": map[string]any{
 							"update": map[string]any{
 								"type": []any{
@@ -386,18 +390,17 @@ func MakeConfig() map[string]any {
 								},
 							},
 						},
-						"req": true,
 						"short": "Array of components that make up the template.",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "createdDate",
+						"title": "Created Date",
 						"type": "`$STRING`",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "id",
-						"short": "ID",
+						"title": "Id",
 						"type": []any{
 							"`$ONE`",
 							[]any{
@@ -405,24 +408,27 @@ func MakeConfig() map[string]any {
 								"`$NULL`",
 							},
 						},
+						"short": "ID",
 					},
 					map[string]any{
 						"name": "language",
+						"title": "Language",
+						"type": "`$STRING`",
 						"op": map[string]any{
 							"create": map[string]any{
 								"req": true,
 								"type": "`$STRING`",
 							},
 						},
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "library_template_body_inputs",
+						"title": "Library Template Body Inputs",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "library_template_button_inputs",
-						"short": "Optional data during creation of a template from a library template.",
+						"title": "Library Template Button Inputs",
 						"type": []any{
 							"`$ONE`",
 							[]any{
@@ -430,27 +436,30 @@ func MakeConfig() map[string]any {
 								"`$NULL`",
 							},
 						},
+						"short": "Optional data during creation of a template from a library template.",
 					},
 					map[string]any{
 						"name": "library_template_name",
+						"title": "Library Template Name",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$STRING`",
+								"`$NULL`",
+							},
+						},
 						"short": "Library template name",
-						"type": []any{
-							"`$ONE`",
-							[]any{
-								"`$STRING`",
-								"`$NULL`",
-							},
-						},
 					},
 					map[string]any{
-						"format": "int64",
 						"name": "message_send_ttl_seconds",
-						"short": "Time to live for message template sent.",
+						"title": "Message Send Ttl Seconds",
 						"type": "`$INTEGER`",
+						"short": "Time to live for message template sent.",
+						"format": "int64",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "modifiedDate",
+						"title": "Modified Date",
 						"type": []any{
 							"`$ONE`",
 							[]any{
@@ -458,9 +467,18 @@ func MakeConfig() map[string]any {
 								"`$NULL`",
 							},
 						},
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "name",
+						"title": "Name",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$STRING`",
+								"`$NULL`",
+							},
+						},
 						"op": map[string]any{
 							"create": map[string]any{
 								"req": true,
@@ -468,24 +486,20 @@ func MakeConfig() map[string]any {
 							},
 						},
 						"short": "The message template name",
-						"type": []any{
-							"`$ONE`",
-							[]any{
-								"`$STRING`",
-								"`$NULL`",
-							},
-						},
 					},
 					map[string]any{
 						"name": "parameter_format",
+						"title": "Parameter Format",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "status",
+						"title": "Status",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "sub_category",
+						"title": "Sub Category",
 						"type": "`$STRING`",
 					},
 				},
@@ -500,7 +514,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/whatsapp/v2/templates",
@@ -515,7 +528,12 @@ func MakeConfig() map[string]any {
 										"lit": "templates",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": map[string]any{
 										"allow_category_change": "`reqdata.allow_category_change`",
@@ -532,11 +550,8 @@ func MakeConfig() map[string]any {
 									},
 									"res": "`body`",
 								},
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -545,17 +560,6 @@ func MakeConfig() map[string]any {
 						"name": "update",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "PUT",
 								"orig": "/whatsapp/v2/templates/{id}",
@@ -573,11 +577,13 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-									},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
+									"{id}",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": map[string]any{
 										"category": "`reqdata.category`",
@@ -587,11 +593,21 @@ func MakeConfig() map[string]any {
 									},
 									"res": "`body`",
 								},
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -605,6 +621,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 				},
@@ -619,17 +636,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/whatsapp/v2/templates/{id}",
@@ -647,20 +653,32 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"whatsapp",
 									"v2",
 									"templates",
 									"{id}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -673,12 +691,14 @@ func MakeConfig() map[string]any {
 			"whats_app_template_get_v2_pagination": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"format": "int32",
 						"name": "currentPage",
+						"title": "Current Page",
 						"type": "`$INTEGER`",
+						"format": "int32",
 					},
 					map[string]any{
 						"name": "items",
+						"title": "Items",
 						"type": []any{
 							"`$ONE`",
 							[]any{
@@ -688,19 +708,22 @@ func MakeConfig() map[string]any {
 						},
 					},
 					map[string]any{
-						"format": "int32",
 						"name": "pages",
+						"title": "Pages",
 						"type": "`$INTEGER`",
+						"format": "int32",
 					},
 					map[string]any{
-						"format": "int32",
 						"name": "results",
+						"title": "Results",
 						"type": "`$INTEGER`",
+						"format": "int32",
 					},
 					map[string]any{
-						"format": "int32",
 						"name": "resultsPerPage",
+						"title": "Results Per Page",
 						"type": "`$INTEGER`",
+						"format": "int32",
 					},
 				},
 				"name": "whats_app_template_get_v2_pagination",
@@ -710,30 +733,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 1,
-											"kind": "query",
-											"name": "page",
-											"orig": "page",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": 25,
-											"kind": "query",
-											"name": "size",
-											"orig": "size",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "sort",
-											"orig": "sort",
-											"type": "`$ARRAY`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/whatsapp/v2/templates",
@@ -748,21 +747,46 @@ func MakeConfig() map[string]any {
 										"lit": "templates",
 									},
 								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "page",
+											"orig": "page",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 1,
+										},
+										map[string]any{
+											"name": "size",
+											"orig": "size",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 25,
+										},
+										map[string]any{
+											"name": "sort",
+											"orig": "sort",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"page",
 										"size",
 										"sort",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
 								},
 							},
 						},

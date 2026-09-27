@@ -1,7 +1,7 @@
 // Typed models for the LmWhatsapp SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,7 +14,6 @@ import (
 
 // ManageTemplate is the typed data model for the manage_template entity.
 type ManageTemplate struct {
-	Id *string `json:"id,omitempty"`
 }
 
 // ManageTemplateRemoveMatch is the typed request payload for ManageTemplate.RemoveTyped.
@@ -41,21 +40,6 @@ type SendMessageCreateData struct {
 
 // Template is the typed data model for the template entity.
 type Template struct {
-	AllowCategoryChange *bool `json:"allow_category_change,omitempty"`
-	Category *string `json:"category,omitempty"`
-	Components []any `json:"components"`
-	CreatedDate *string `json:"createdDate,omitempty"`
-	Id *any `json:"id,omitempty"`
-	Language *string `json:"language,omitempty"`
-	LibraryTemplateBodyInputs *map[string]any `json:"library_template_body_inputs,omitempty"`
-	LibraryTemplateButtonInputs *any `json:"library_template_button_inputs,omitempty"`
-	LibraryTemplateName *any `json:"library_template_name,omitempty"`
-	MessageSendTtlSeconds *int `json:"message_send_ttl_seconds,omitempty"`
-	ModifiedDate *any `json:"modifiedDate,omitempty"`
-	Name *any `json:"name,omitempty"`
-	ParameterFormat *string `json:"parameter_format,omitempty"`
-	Status *string `json:"status,omitempty"`
-	SubCategory *string `json:"sub_category,omitempty"`
 }
 
 // TemplateCreateData is the typed request payload for Template.CreateTyped.
@@ -98,7 +82,6 @@ type TemplateUpdateData struct {
 
 // WhatsAppTemplateGetV2 is the typed data model for the whats_app_template_get_v2 entity.
 type WhatsAppTemplateGetV2 struct {
-	Id *string `json:"id,omitempty"`
 }
 
 // WhatsAppTemplateGetV2LoadMatch is the typed request payload for WhatsAppTemplateGetV2.LoadTyped.
@@ -108,11 +91,6 @@ type WhatsAppTemplateGetV2LoadMatch struct {
 
 // WhatsAppTemplateGetV2Pagination is the typed data model for the whats_app_template_get_v2_pagination entity.
 type WhatsAppTemplateGetV2Pagination struct {
-	CurrentPage *int `json:"currentPage,omitempty"`
-	Items *any `json:"items,omitempty"`
-	Pages *int `json:"pages,omitempty"`
-	Results *int `json:"results,omitempty"`
-	ResultsPerPage *int `json:"resultsPerPage,omitempty"`
 }
 
 // WhatsAppTemplateGetV2PaginationLoadMatch is the typed request payload for WhatsAppTemplateGetV2Pagination.LoadTyped.

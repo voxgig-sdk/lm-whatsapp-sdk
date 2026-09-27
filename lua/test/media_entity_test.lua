@@ -68,7 +68,7 @@ function media_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "media01", "media02", "media03", "v201", "v202", "v203", "phone_number01" },
+    { "media01", "media02", "media03", "phone_number01" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

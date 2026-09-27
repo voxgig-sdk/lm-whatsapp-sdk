@@ -66,7 +66,7 @@ function media_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["media01", "media02", "media03", "v201", "v202", "v203", "phone_number01"] as $k) {
+    foreach (["media01", "media02", "media03", "phone_number01"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

@@ -50,6 +50,10 @@ Results: Success.
 
 SDK operations: `load`.
 
+Key fields to recognise:
+
+- `id`: ID
+
 ### [WhatsAppTemplateGetV2Pagination](docs/api/whats_app_template_get_v2_pagination.html)
 
 Results: Success.

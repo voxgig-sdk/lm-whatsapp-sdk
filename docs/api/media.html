@@ -24,14 +24,14 @@
 <a href="../sdks/ts.html">TypeScript</a></details>
 <details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
 <a href="../tools/go-mcp.html">Go MCP server</a></details>
-<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
-<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
-<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
-<a href="../features/paging.html">Pagination signals for list operations</a>
-<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
-<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
-<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
-<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="media">Media</h1>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="media">Media</h1>
 <h2 id="operations">Operations</h2>
 <p>Every route this entity exposes. Each route links to its own reference on this page.</p>
 <table>
@@ -52,6 +52,36 @@
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">created, err := client.Media(nil).Create(map[string]any{&quot;phone_number&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local created, err = client:Media():create({ phone_number = &quot;example&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$created = $client-&gt;Media()-&gt;create([&quot;phone_number&quot; =&gt; &quot;example&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">created = client.Media().create({ &quot;phone_number&quot;: &quot;example&quot; })
+</code></pre>
+<h3 id="ruby">Ruby</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/rb.html#set-up-the-client">Ruby setup</a>, then call the operations:</p>
+<pre><code class="language-rb">created = client.Media.create({ &quot;phone_number&quot; =&gt; &quot;example&quot; })
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const created = await client.Media().create({ phone_number: &quot;example&quot; })
+</code></pre>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -72,43 +102,43 @@
 | <code>X-Link-Upload-Filename</code> | <code>header</code> | <code>string</code> | Yes | The uploaded file's name. |
 | <code>phoneNumber</code> | <code>path</code> | <code>string</code> | Yes | The sender's phone number. Should start with + sign or its URL-encoded equivalent - %2B | %2b |</p>
 <h4 id="request-body">Request body</h4>
-<p><code>application/msword</code></p>
+<p><code>text/plain</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
 <p><code>application/pdf</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
+<p><code>application/vnd.ms-powerpoint</code></p>
+<p>The request body is <code>string (binary)</code>.</p>
+<p><code>application/msword</code></p>
+<p>The request body is <code>string (binary)</code>.</p>
 <p><code>application/vnd.ms-excel</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
-<p><code>application/vnd.ms-powerpoint</code></p>
+<p><code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
 <p><code>application/vnd.openxmlformats-officedocument.presentationml.presentation</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
 <p><code>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
-<p><code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code></p>
+<p><code>image/png</code></p>
+<p>The request body is <code>string (binary)</code>.</p>
+<p><code>image/jpeg</code></p>
+<p>The request body is <code>string (binary)</code>.</p>
+<p><code>image/webp</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
 <p><code>audio/aac</code></p>
-<p>The request body is <code>string (binary)</code>.</p>
-<p><code>audio/amr</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
 <p><code>audio/mp4</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
 <p><code>audio/mpeg</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
+<p><code>audio/amr</code></p>
+<p>The request body is <code>string (binary)</code>.</p>
 <p><code>audio/ogg</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
 <p><code>audio/opus</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
-<p><code>image/jpeg</code></p>
-<p>The request body is <code>string (binary)</code>.</p>
-<p><code>image/png</code></p>
-<p>The request body is <code>string (binary)</code>.</p>
-<p><code>image/webp</code></p>
-<p>The request body is <code>string (binary)</code>.</p>
-<p><code>text/plain</code></p>
+<p><code>video/mp4</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
 <p><code>video/3gp</code></p>
-<p>The request body is <code>string (binary)</code>.</p>
-<p><code>video/mp4</code></p>
 <p>The request body is <code>string (binary)</code>.</p>
 <h4 id="responses">Responses</h4>
 <h5 id="200-ok" class="status" data-status="2xx">200: OK</h5>

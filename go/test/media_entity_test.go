@@ -92,7 +92,7 @@ func mediaBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"media01", "media02", "media03", "v201", "v202", "v203", "phone_number01"},
+		[]any{"media01", "media02", "media03", "phone_number01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

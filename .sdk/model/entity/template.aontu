@@ -1,0 +1,275 @@
+# Entity: template
+
+main: kit: entity: template: {
+
+  alias: field: {}
+
+  fields: {
+    allow_category_change: {
+      h: "Allow Category Change"
+      n: "allow_category_change"
+      r: false
+      sh: "Set to true to allow to assign a category based on template guidelines and the template's contents."
+      t: "`$BOOLEAN`"
+    }
+    category: {
+      h: "Category"
+      n: "category"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    components: {
+      h: "Components"
+      n: "components"
+      op: {
+        update: {
+          req: false
+          type: [
+            "`$ONE`"
+            [
+              "`$ARRAY`"
+              "`$NULL`"
+            ]
+          ]
+        }
+      }
+      r: true
+      sh: "Array of components that make up the template."
+      t: "`$ARRAY`"
+    }
+    createdDate: {
+      fo: "date-time"
+      h: "Created Date"
+      n: "createdDate"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "ID"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    library_template_body_inputs: {
+      h: "Library Template Body Inputs"
+      n: "library_template_body_inputs"
+      r: false
+      t: "`$OBJECT`"
+    }
+    library_template_button_inputs: {
+      h: "Library Template Button Inputs"
+      n: "library_template_button_inputs"
+      r: false
+      sh: "Optional data during creation of a template from a library template."
+      t: [
+        "`$ONE`"
+        [
+          "`$ARRAY`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    library_template_name: {
+      h: "Library Template Name"
+      n: "library_template_name"
+      r: false
+      sh: "Library template name"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    message_send_ttl_seconds: {
+      fo: "int64"
+      h: "Message Send Ttl Seconds"
+      n: "message_send_ttl_seconds"
+      r: false
+      sh: "Time to live for message template sent."
+      t: "`$INTEGER`"
+    }
+    modifiedDate: {
+      fo: "date-time"
+      h: "Modified Date"
+      n: "modifiedDate"
+      r: false
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The message template name"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    parameter_format: {
+      h: "Parameter Format"
+      n: "parameter_format"
+      r: false
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$STRING`"
+    }
+    sub_category: {
+      h: "Sub Category"
+      n: "sub_category"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "template"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /whatsapp/v2/templates"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/whatsapp/v2/templates"
+          s: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              lit: "templates"
+            }
+          ]
+          t: {
+            req: {
+              allow_category_change: "`reqdata.allow_category_change`"
+              category: "`reqdata.category`"
+              components: "`reqdata.component`"
+              language: "`reqdata.language`"
+              library_template_body_inputs: "`reqdata.library_template_body_input`"
+              library_template_button_inputs: "`reqdata.library_template_button_input`"
+              library_template_name: "`reqdata.library_template_name`"
+              message_send_ttl_seconds: "`reqdata.message_send_ttl_second`"
+              name: "`reqdata.name`"
+              parameter_format: "`reqdata.parameter_format`"
+              sub_category: "`reqdata.sub_category`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PUT /whatsapp/v2/templates/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PUT"
+          o: "/whatsapp/v2/templates/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              lit: "templates"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: {
+              category: "`reqdata.category`"
+              components: "`reqdata.component`"
+              message_send_ttl_seconds: "`reqdata.message_send_ttl_second`"
+              parameter_format: "`reqdata.parameter_format`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

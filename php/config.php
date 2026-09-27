@@ -191,6 +191,7 @@ class LmWhatsappConfig
           'fields' => [
             [
               'name' => 'id',
+              'title' => 'Id',
               'type' => '`$STRING`',
             ],
           ],
@@ -205,17 +206,6 @@ class LmWhatsappConfig
               'name' => 'remove',
               'points' => [
                 [
-                  'args' => [
-                    'params' => [
-                      [
-                        'kind' => 'param',
-                        'name' => 'id',
-                        'orig' => 'id',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/whatsapp/v2/templates/{id}',
@@ -233,20 +223,32 @@ class LmWhatsappConfig
                       'var' => 'id',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'id',
-                    ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
                   'parts' => [
                     'whatsapp',
                     'v2',
                     'templates',
                     '{id}',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'params' => [
+                      [
+                        'name' => 'id',
+                        'orig' => 'id',
+                        'type' => '`$STRING`',
+                        'kind' => 'param',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'id',
+                    ],
                   ],
                 ],
               ],
@@ -265,35 +267,9 @@ class LmWhatsappConfig
               'name' => 'create',
               'points' => [
                 [
-                  'args' => [
-                    'header' => [
-                      [
-                        'kind' => 'header',
-                        'name' => 'x_link_upload_filename',
-                        'orig' => 'x_link_upload_filename',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                    'params' => [
-                      [
-                        'example' => '+15551234567 or %2b15551234567 or %2B15551234567',
-                        'kind' => 'param',
-                        'name' => 'phone_number',
-                        'orig' => 'phone_number',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/whatsapp/v2/{phoneNumber}/media',
-                  'rename' => [
-                    'param' => [
-                      'phoneNumber' => 'phone_number',
-                    ],
-                  ],
                   'segments' => [
                     [
                       'lit' => 'whatsapp',
@@ -308,32 +284,54 @@ class LmWhatsappConfig
                       'lit' => 'media',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'phone_number',
-                      'x_link_upload_filename',
-                    ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
                   'parts' => [
                     'whatsapp',
                     'v2',
                     '{phone_number}',
                     'media',
                   ],
+                  'rename' => [
+                    'param' => [
+                      'phoneNumber' => 'phone_number',
+                    ],
+                  ],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'header' => [
+                      [
+                        'name' => 'x_link_upload_filename',
+                        'orig' => 'x_link_upload_filename',
+                        'type' => '`$STRING`',
+                        'kind' => 'header',
+                        'reqd' => true,
+                      ],
+                    ],
+                    'params' => [
+                      [
+                        'name' => 'phone_number',
+                        'orig' => 'phone_number',
+                        'type' => '`$STRING`',
+                        'kind' => 'param',
+                        'reqd' => true,
+                        'example' => '+15551234567 or %2b15551234567 or %2B15551234567',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'phone_number',
+                      'x_link_upload_filename',
+                    ],
+                  ],
                 ],
               ],
             ],
           ],
           'relations' => [
-            'ancestors' => [
-              [
-                'v2',
-              ],
-            ],
+            'ancestors' => [],
           ],
         ],
         'send_message' => [
@@ -345,7 +343,6 @@ class LmWhatsappConfig
               'name' => 'create',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/whatsapp/v2/messages',
@@ -360,16 +357,18 @@ class LmWhatsappConfig
                       'lit' => 'messages',
                     ],
                   ],
-                  'select' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
                   'parts' => [
                     'whatsapp',
                     'v2',
                     'messages',
                   ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],
@@ -382,21 +381,26 @@ class LmWhatsappConfig
           'fields' => [
             [
               'name' => 'allow_category_change',
-              'short' => 'Set to true to allow to assign a category based on template guidelines and the template\'s contents.',
+              'title' => 'Allow Category Change',
               'type' => '`$BOOLEAN`',
+              'short' => 'Set to true to allow to assign a category based on template guidelines and the template\'s contents.',
             ],
             [
               'name' => 'category',
+              'title' => 'Category',
+              'type' => '`$STRING`',
               'op' => [
                 'create' => [
                   'req' => true,
                   'type' => '`$STRING`',
                 ],
               ],
-              'type' => '`$STRING`',
             ],
             [
               'name' => 'components',
+              'title' => 'Components',
+              'type' => '`$ARRAY`',
+              'req' => true,
               'op' => [
                 'update' => [
                   'type' => [
@@ -408,18 +412,17 @@ class LmWhatsappConfig
                   ],
                 ],
               ],
-              'req' => true,
               'short' => 'Array of components that make up the template.',
-              'type' => '`$ARRAY`',
             ],
             [
-              'format' => 'date-time',
               'name' => 'createdDate',
+              'title' => 'Created Date',
               'type' => '`$STRING`',
+              'format' => 'date-time',
             ],
             [
               'name' => 'id',
-              'short' => 'ID',
+              'title' => 'Id',
               'type' => [
                 '`$ONE`',
                 [
@@ -427,24 +430,27 @@ class LmWhatsappConfig
                   '`$NULL`',
                 ],
               ],
+              'short' => 'ID',
             ],
             [
               'name' => 'language',
+              'title' => 'Language',
+              'type' => '`$STRING`',
               'op' => [
                 'create' => [
                   'req' => true,
                   'type' => '`$STRING`',
                 ],
               ],
-              'type' => '`$STRING`',
             ],
             [
               'name' => 'library_template_body_inputs',
+              'title' => 'Library Template Body Inputs',
               'type' => '`$OBJECT`',
             ],
             [
               'name' => 'library_template_button_inputs',
-              'short' => 'Optional data during creation of a template from a library template.',
+              'title' => 'Library Template Button Inputs',
               'type' => [
                 '`$ONE`',
                 [
@@ -452,27 +458,30 @@ class LmWhatsappConfig
                   '`$NULL`',
                 ],
               ],
+              'short' => 'Optional data during creation of a template from a library template.',
             ],
             [
               'name' => 'library_template_name',
+              'title' => 'Library Template Name',
+              'type' => [
+                '`$ONE`',
+                [
+                  '`$STRING`',
+                  '`$NULL`',
+                ],
+              ],
               'short' => 'Library template name',
-              'type' => [
-                '`$ONE`',
-                [
-                  '`$STRING`',
-                  '`$NULL`',
-                ],
-              ],
             ],
             [
-              'format' => 'int64',
               'name' => 'message_send_ttl_seconds',
-              'short' => 'Time to live for message template sent.',
+              'title' => 'Message Send Ttl Seconds',
               'type' => '`$INTEGER`',
+              'short' => 'Time to live for message template sent.',
+              'format' => 'int64',
             ],
             [
-              'format' => 'date-time',
               'name' => 'modifiedDate',
+              'title' => 'Modified Date',
               'type' => [
                 '`$ONE`',
                 [
@@ -480,9 +489,18 @@ class LmWhatsappConfig
                   '`$NULL`',
                 ],
               ],
+              'format' => 'date-time',
             ],
             [
               'name' => 'name',
+              'title' => 'Name',
+              'type' => [
+                '`$ONE`',
+                [
+                  '`$STRING`',
+                  '`$NULL`',
+                ],
+              ],
               'op' => [
                 'create' => [
                   'req' => true,
@@ -490,24 +508,20 @@ class LmWhatsappConfig
                 ],
               ],
               'short' => 'The message template name',
-              'type' => [
-                '`$ONE`',
-                [
-                  '`$STRING`',
-                  '`$NULL`',
-                ],
-              ],
             ],
             [
               'name' => 'parameter_format',
+              'title' => 'Parameter Format',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'status',
+              'title' => 'Status',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'sub_category',
+              'title' => 'Sub Category',
               'type' => '`$STRING`',
             ],
           ],
@@ -522,7 +536,6 @@ class LmWhatsappConfig
               'name' => 'create',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/whatsapp/v2/templates',
@@ -537,7 +550,12 @@ class LmWhatsappConfig
                       'lit' => 'templates',
                     ],
                   ],
-                  'select' => [],
+                  'parts' => [
+                    'whatsapp',
+                    'v2',
+                    'templates',
+                  ],
+                  'rename' => [],
                   'transform' => [
                     'req' => [
                       'allow_category_change' => '`reqdata.allow_category_change`',
@@ -554,11 +572,8 @@ class LmWhatsappConfig
                     ],
                     'res' => '`body`',
                   ],
-                  'parts' => [
-                    'whatsapp',
-                    'v2',
-                    'templates',
-                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],
@@ -567,17 +582,6 @@ class LmWhatsappConfig
               'name' => 'update',
               'points' => [
                 [
-                  'args' => [
-                    'params' => [
-                      [
-                        'kind' => 'param',
-                        'name' => 'id',
-                        'orig' => 'id',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/whatsapp/v2/templates/{id}',
@@ -595,11 +599,13 @@ class LmWhatsappConfig
                       'var' => 'id',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'id',
-                    ],
+                  'parts' => [
+                    'whatsapp',
+                    'v2',
+                    'templates',
+                    '{id}',
                   ],
+                  'rename' => [],
                   'transform' => [
                     'req' => [
                       'category' => '`reqdata.category`',
@@ -609,11 +615,21 @@ class LmWhatsappConfig
                     ],
                     'res' => '`body`',
                   ],
-                  'parts' => [
-                    'whatsapp',
-                    'v2',
-                    'templates',
-                    '{id}',
+                  'args' => [
+                    'params' => [
+                      [
+                        'name' => 'id',
+                        'orig' => 'id',
+                        'type' => '`$STRING`',
+                        'kind' => 'param',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'id',
+                    ],
                   ],
                 ],
               ],
@@ -627,6 +643,7 @@ class LmWhatsappConfig
           'fields' => [
             [
               'name' => 'id',
+              'title' => 'Id',
               'type' => '`$STRING`',
             ],
           ],
@@ -641,17 +658,6 @@ class LmWhatsappConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'params' => [
-                      [
-                        'kind' => 'param',
-                        'name' => 'id',
-                        'orig' => 'id',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/whatsapp/v2/templates/{id}',
@@ -669,20 +675,32 @@ class LmWhatsappConfig
                       'var' => 'id',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'id',
-                    ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
                   'parts' => [
                     'whatsapp',
                     'v2',
                     'templates',
                     '{id}',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'params' => [
+                      [
+                        'name' => 'id',
+                        'orig' => 'id',
+                        'type' => '`$STRING`',
+                        'kind' => 'param',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'id',
+                    ],
                   ],
                 ],
               ],
@@ -695,12 +713,14 @@ class LmWhatsappConfig
         'whats_app_template_get_v2_pagination' => [
           'fields' => [
             [
-              'format' => 'int32',
               'name' => 'currentPage',
+              'title' => 'Current Page',
               'type' => '`$INTEGER`',
+              'format' => 'int32',
             ],
             [
               'name' => 'items',
+              'title' => 'Items',
               'type' => [
                 '`$ONE`',
                 [
@@ -710,19 +730,22 @@ class LmWhatsappConfig
               ],
             ],
             [
-              'format' => 'int32',
               'name' => 'pages',
+              'title' => 'Pages',
               'type' => '`$INTEGER`',
+              'format' => 'int32',
             ],
             [
-              'format' => 'int32',
               'name' => 'results',
+              'title' => 'Results',
               'type' => '`$INTEGER`',
+              'format' => 'int32',
             ],
             [
-              'format' => 'int32',
               'name' => 'resultsPerPage',
+              'title' => 'Results Per Page',
               'type' => '`$INTEGER`',
+              'format' => 'int32',
             ],
           ],
           'name' => 'whats_app_template_get_v2_pagination',
@@ -732,30 +755,6 @@ class LmWhatsappConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => 1,
-                        'kind' => 'query',
-                        'name' => 'page',
-                        'orig' => 'page',
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'example' => 25,
-                        'kind' => 'query',
-                        'name' => 'size',
-                        'orig' => 'size',
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'sort',
-                        'orig' => 'sort',
-                        'type' => '`$ARRAY`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/whatsapp/v2/templates',
@@ -770,21 +769,46 @@ class LmWhatsappConfig
                       'lit' => 'templates',
                     ],
                   ],
+                  'parts' => [
+                    'whatsapp',
+                    'v2',
+                    'templates',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'page',
+                        'orig' => 'page',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'example' => 1,
+                      ],
+                      [
+                        'name' => 'size',
+                        'orig' => 'size',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'example' => 25,
+                      ],
+                      [
+                        'name' => 'sort',
+                        'orig' => 'sort',
+                        'type' => '`$ARRAY`',
+                        'kind' => 'query',
+                      ],
+                    ],
+                  ],
                   'select' => [
                     'exist' => [
                       'page',
                       'size',
                       'sort',
                     ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'parts' => [
-                    'whatsapp',
-                    'v2',
-                    'templates',
                   ],
                 ],
               ],

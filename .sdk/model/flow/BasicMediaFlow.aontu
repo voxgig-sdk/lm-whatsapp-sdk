@@ -1,0 +1,22 @@
+# BasicMediaFlow
+
+main: kit: flow: BasicMediaFlow:
+{
+  entity: "media",
+  kind: "basic",
+  name: "BasicMediaFlow",
+  step: [
+    {
+      i: {
+        ref: "media_ref01"
+      }
+
+      m: {
+        phone_number: "phone_number01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicMediaFlow"
+}

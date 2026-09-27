@@ -1,0 +1,80 @@
+# Entity: media
+
+main: kit: entity: media: {
+
+  alias: field: {}
+
+  name: "media"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /whatsapp/v2/{phoneNumber}/media"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            header: [
+              {
+                k: "header"
+                n: "x_link_upload_filename"
+                or: "x_link_upload_filename"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            params: [
+              {
+                ex: "+15551234567 or %2b15551234567 or %2B15551234567"
+                k: "param"
+                n: "phone_number"
+                or: "phone_number"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/whatsapp/v2/{phoneNumber}/media"
+          q: {
+            exist: [
+              "phone_number"
+              "x_link_upload_filename"
+            ]
+          }
+          r: {
+            param: {
+              phoneNumber: "phone_number"
+            }
+          }
+          s: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              var: "phone_number"
+            }
+            {
+              lit: "media"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}
