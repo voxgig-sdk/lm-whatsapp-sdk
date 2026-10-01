@@ -16,8 +16,62 @@ from __future__ import annotations
 from typing import TypedDict, Any
 
 
-class ManageTemplate(TypedDict, total=False):
-    id: str
+class ManageTemplateRequired(TypedDict):
+    components: list
+
+
+class ManageTemplate(ManageTemplateRequired, total=False):
+    allow_category_change: bool
+    category: str
+    createdDate: str
+    currentPage: int
+    id: str | None
+    items: list | None
+    language: str
+    library_template_body_inputs: dict
+    library_template_button_inputs: list | None
+    library_template_name: str | None
+    message_send_ttl_seconds: int
+    modifiedDate: str | None
+    name: str | None
+    pages: int
+    parameter_format: str
+    results: int
+    resultsPerPage: int
+    status: str
+    sub_category: str
+
+
+class ManageTemplateLoadMatch(TypedDict, total=False):
+    page: int
+    size: int
+    sort: list
+
+
+class ManageTemplateCreateDataRequired(TypedDict):
+    components: list
+
+
+class ManageTemplateCreateData(ManageTemplateCreateDataRequired, total=False):
+    allow_category_change: bool
+    category: str
+    createdDate: str
+    currentPage: int
+    id: str | None
+    items: list | None
+    language: str
+    library_template_body_inputs: dict
+    library_template_button_inputs: list | None
+    library_template_name: str | None
+    message_send_ttl_seconds: int
+    modifiedDate: str | None
+    name: str | None
+    pages: int
+    parameter_format: str
+    results: int
+    resultsPerPage: int
+    status: str
+    sub_category: str
 
 
 class ManageTemplateRemoveMatch(TypedDict):
@@ -33,53 +87,26 @@ class MediaCreateData(TypedDict):
 
 
 class SendMessage(TypedDict):
-    pass
+    messages: list
+    requestId: str
 
 
 class SendMessageCreateData(TypedDict):
-    pass
+    messages: list
+    requestId: str
 
 
-class TemplateRequired(TypedDict):
-    components: list
-
-
-class Template(TemplateRequired, total=False):
-    allow_category_change: bool
+class Template(TypedDict, total=False):
     category: str
+    components: list | None
     createdDate: str
     id: str | None
     language: str
-    library_template_body_inputs: dict
-    library_template_button_inputs: list | None
-    library_template_name: str | None
     message_send_ttl_seconds: int
     modifiedDate: str | None
     name: str | None
     parameter_format: str
     status: str
-    sub_category: str
-
-
-class TemplateCreateDataRequired(TypedDict):
-    components: list
-
-
-class TemplateCreateData(TemplateCreateDataRequired, total=False):
-    allow_category_change: bool
-    category: str
-    createdDate: str
-    id: str | None
-    language: str
-    library_template_body_inputs: dict
-    library_template_button_inputs: list | None
-    library_template_name: str | None
-    message_send_ttl_seconds: int
-    modifiedDate: str | None
-    name: str | None
-    parameter_format: str
-    status: str
-    sub_category: str
 
 
 class TemplateUpdateDataRequired(TypedDict):
@@ -87,20 +114,15 @@ class TemplateUpdateDataRequired(TypedDict):
 
 
 class TemplateUpdateData(TemplateUpdateDataRequired, total=False):
-    allow_category_change: bool
     category: str
-    components: list
+    components: list | None
     createdDate: str
     language: str
-    library_template_body_inputs: dict
-    library_template_button_inputs: list | None
-    library_template_name: str | None
     message_send_ttl_seconds: int
     modifiedDate: str | None
     name: str | None
     parameter_format: str
     status: str
-    sub_category: str
 
 
 class WhatsAppTemplateGetV2(TypedDict, total=False):
@@ -109,17 +131,3 @@ class WhatsAppTemplateGetV2(TypedDict, total=False):
 
 class WhatsAppTemplateGetV2LoadMatch(TypedDict):
     id: str
-
-
-class WhatsAppTemplateGetV2Pagination(TypedDict, total=False):
-    currentPage: int
-    items: list | None
-    pages: int
-    results: int
-    resultsPerPage: int
-
-
-class WhatsAppTemplateGetV2PaginationLoadMatch(TypedDict, total=False):
-    page: int
-    size: int
-    sort: list

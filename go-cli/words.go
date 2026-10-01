@@ -87,8 +87,6 @@ func entityFor(client *sdk.LmWhatsappSDK, name string) (sdk.LmWhatsappEntity, er
 		return client.Template(nil), nil
 	case "whats_app_template_get_v2":
 		return client.WhatsAppTemplateGetV2(nil), nil
-	case "whats_app_template_get_v2_pagination":
-		return client.WhatsAppTemplateGetV2Pagination(nil), nil
 
 	}
 	return nil, fmt.Errorf("unknown entity %q", name)

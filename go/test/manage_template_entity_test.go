@@ -32,7 +32,7 @@ func TestManageTemplateEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"create", "load", "remove"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "manage_template." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -47,15 +47,49 @@ func TestManageTemplateEntity(t *testing.T) {
 			t.Skip("live entity test uses synthetic IDs from fixture — set LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID JSON to run live")
 			return
 		}
-		// Bootstrap entity data from existing test data (no create step in flow).
-		manageTemplateRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.manage_template")))
-		var manageTemplateRef01Data map[string]any
-		if len(manageTemplateRef01DataRaw) > 0 {
-			manageTemplateRef01Data = core.ToMapAny(manageTemplateRef01DataRaw[0][1])
+		client := setup.client
+
+		// CREATE
+		manageTemplateRef01Ent := client.ManageTemplate(nil)
+		manageTemplateRef01Data := core.ToMapAny(vs.GetProp(
+			vs.GetPath(setup.data, []any{"new", "manage_template"}), "manage_template_ref01"))
+
+		manageTemplateRef01DataResult, err := manageTemplateRef01Ent.Create(manageTemplateRef01Data, nil)
+		if err != nil {
+			t.Fatalf("create failed: %v", err)
 		}
-		// Discard guards against Go's unused-var check when the flow's steps
-		// happen not to consume the bootstrap data (e.g. list-only flows).
-		_ = manageTemplateRef01Data
+		manageTemplateRef01Data = core.ToMapAny(entityData(manageTemplateRef01DataResult))
+		if manageTemplateRef01Data == nil {
+			t.Fatal("expected create result to be a map")
+		}
+		if manageTemplateRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
+		}
+
+		// LOAD
+		manageTemplateRef01MatchDt0 := map[string]any{
+			"id": manageTemplateRef01Data["id"],
+		}
+		manageTemplateRef01DataDt0Loaded, err := manageTemplateRef01Ent.Load(manageTemplateRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		manageTemplateRef01DataDt0LoadResult := core.ToMapAny(entityData(manageTemplateRef01DataDt0Loaded))
+		if manageTemplateRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if manageTemplateRef01DataDt0LoadResult["id"] != manageTemplateRef01Data["id"] {
+			t.Fatal("expected load result id to match")
+		}
+
+		// REMOVE
+		manageTemplateRef01MatchRm0 := map[string]any{
+			"id": manageTemplateRef01Data["id"],
+		}
+		_, err = manageTemplateRef01Ent.Remove(manageTemplateRef01MatchRm0, nil)
+		if err != nil {
+			t.Fatalf("remove failed: %v", err)
+		}
 
 	})
 }

@@ -6,7 +6,55 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface ManageTemplate {
-  id?: string
+  allow_category_change?: boolean
+  category?: string
+  components: any[]
+  createdDate?: string
+  currentPage?: number
+  id?: string | null
+  items?: any[] | null
+  language?: string
+  library_template_body_inputs?: Record<string, any>
+  library_template_button_inputs?: any[] | null
+  library_template_name?: string | null
+  message_send_ttl_seconds?: number
+  modifiedDate?: string | null
+  name?: string | null
+  pages?: number
+  parameter_format?: string
+  results?: number
+  resultsPerPage?: number
+  status?: string
+  sub_category?: string
+}
+
+export interface ManageTemplateLoadMatch {
+  page?: number
+  size?: number
+  sort?: any[]
+}
+
+export interface ManageTemplateCreateData {
+  allow_category_change?: boolean
+  category?: string
+  components: any[]
+  createdDate?: string
+  currentPage?: number
+  id?: string | null
+  items?: any[] | null
+  language?: string
+  library_template_body_inputs?: Record<string, any>
+  library_template_button_inputs?: any[] | null
+  library_template_name?: string | null
+  message_send_ttl_seconds?: number
+  modifiedDate?: string | null
+  name?: string | null
+  pages?: number
+  parameter_format?: string
+  results?: number
+  resultsPerPage?: number
+  status?: string
+  sub_category?: string
 }
 
 export interface ManageTemplateRemoveMatch {
@@ -21,63 +69,39 @@ export interface MediaCreateData {
 }
 
 export interface SendMessage {
+  messages: any[]
+  requestId: string
 }
 
 export interface SendMessageCreateData {
+  messages: any[]
+  requestId: string
 }
 
 export interface Template {
-  allow_category_change?: boolean
   category?: string
-  components: any[]
+  components?: any[] | null
   createdDate?: string
   id?: string | null
   language?: string
-  library_template_body_inputs?: Record<string, any>
-  library_template_button_inputs?: any[] | null
-  library_template_name?: string | null
   message_send_ttl_seconds?: number
   modifiedDate?: string | null
   name?: string | null
   parameter_format?: string
   status?: string
-  sub_category?: string
-}
-
-export interface TemplateCreateData {
-  allow_category_change?: boolean
-  category?: string
-  components: any[]
-  createdDate?: string
-  id?: string | null
-  language?: string
-  library_template_body_inputs?: Record<string, any>
-  library_template_button_inputs?: any[] | null
-  library_template_name?: string | null
-  message_send_ttl_seconds?: number
-  modifiedDate?: string | null
-  name?: string | null
-  parameter_format?: string
-  status?: string
-  sub_category?: string
 }
 
 export interface TemplateUpdateData {
   id: string
-  allow_category_change?: boolean
   category?: string
-  components?: any[]
+  components?: any[] | null
   createdDate?: string
   language?: string
-  library_template_body_inputs?: Record<string, any>
-  library_template_button_inputs?: any[] | null
-  library_template_name?: string | null
   message_send_ttl_seconds?: number
   modifiedDate?: string | null
   name?: string | null
   parameter_format?: string
   status?: string
-  sub_category?: string
 }
 
 export interface WhatsAppTemplateGetV2 {
@@ -86,19 +110,5 @@ export interface WhatsAppTemplateGetV2 {
 
 export interface WhatsAppTemplateGetV2LoadMatch {
   id: string
-}
-
-export interface WhatsAppTemplateGetV2Pagination {
-  currentPage?: number
-  items?: any[] | null
-  pages?: number
-  results?: number
-  resultsPerPage?: number
-}
-
-export interface WhatsAppTemplateGetV2PaginationLoadMatch {
-  page?: number
-  size?: number
-  sort?: any[]
 }
 

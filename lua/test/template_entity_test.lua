@@ -19,7 +19,7 @@ describe("TemplateEntity", function()
     local setup = template_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"create", "update"}) do
+    for _, _op in ipairs({"update"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "template." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -34,18 +34,16 @@ describe("TemplateEntity", function()
     end
     local client = setup.client
 
-    -- CREATE
-    local template_ref01_ent = client:Template(nil)
-    local template_ref01_data = helpers.to_map(vs.getprop(
-      vs.getpath(setup.data, "new.template"), "template_ref01"))
-
-    local template_ref01_data_result, err = template_ref01_ent:create(template_ref01_data, nil)
-    assert.is_nil(err)
-    template_ref01_data = helpers.to_map(type(template_ref01_data_result) == 'table' and template_ref01_data_result.data_get and template_ref01_data_result:data_get() or template_ref01_data_result)
-    assert.is_not_nil(template_ref01_data)
-    assert.is_not_nil(template_ref01_data["id"])
+    -- Bootstrap entity data from existing test data.
+    local template_ref01_data_raw = vs.items(helpers.to_map(
+      vs.getpath(setup.data, "existing.template")))
+    local template_ref01_data = nil
+    if #template_ref01_data_raw > 0 then
+      template_ref01_data = helpers.to_map(template_ref01_data_raw[1][2])
+    end
 
     -- UPDATE
+    local template_ref01_ent = client:Template(nil)
     local template_ref01_data_up0_up = {
       id = template_ref01_data["id"],
     }

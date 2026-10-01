@@ -27,7 +27,7 @@ class TestManageTemplateEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in []:
+        for _op in ["create", "load", "remove"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "manage_template." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -39,12 +39,29 @@ class TestManageTemplateEntity:
                         "set LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID JSON to run live")
         client = setup["client"]
 
-        # Bootstrap entity data from existing test data.
-        manage_template_ref01_data_raw = vs.items(helpers.to_map(
-            vs.getpath(setup["data"], "existing.manage_template")))
-        manage_template_ref01_data = None
-        if len(manage_template_ref01_data_raw) > 0:
-            manage_template_ref01_data = helpers.to_map(manage_template_ref01_data_raw[0][1])
+        # CREATE
+        manage_template_ref01_ent = client.ManageTemplate(None)
+        manage_template_ref01_data = helpers.to_map(vs.getprop(
+            vs.getpath(setup["data"], "new.manage_template"), "manage_template_ref01"))
+
+        manage_template_ref01_data = helpers.to_map(runner.entity_data(manage_template_ref01_ent.create(manage_template_ref01_data, None)))
+        assert manage_template_ref01_data is not None
+        assert manage_template_ref01_data["id"] is not None
+
+        # LOAD
+        manage_template_ref01_match_dt0 = {
+            "id": manage_template_ref01_data["id"],
+        }
+        manage_template_ref01_data_dt0_loaded = manage_template_ref01_ent.load(manage_template_ref01_match_dt0, None)
+        manage_template_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(manage_template_ref01_data_dt0_loaded))
+        assert manage_template_ref01_data_dt0_load_result is not None
+        assert manage_template_ref01_data_dt0_load_result["id"] == manage_template_ref01_data["id"]
+
+        # REMOVE
+        manage_template_ref01_match_rm0 = {
+            "id": manage_template_ref01_data["id"],
+        }
+        manage_template_ref01_ent.remove(manage_template_ref01_match_rm0, None)
 
 
 

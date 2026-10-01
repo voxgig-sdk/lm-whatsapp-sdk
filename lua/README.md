@@ -1,6 +1,6 @@
 # LmWhatsapp Lua SDK
 
-
+LINK Mobility MyLINK WhatsApp API clients in TypeScript, Python, PHP, Go, Ruby and Lua, plus a CLI and an MCP server for AI agents. All generated from LINK Mobility's public OpenAPI definition, so every surface stays in sync with the API.
 
 The Lua SDK for the LmWhatsapp API — an entity-oriented client using Lua conventions.
 
@@ -35,9 +35,21 @@ local client = sdk.new({
 })
 ```
 
+### 3. Load a managetemplate
+
+```lua
+local managetemplate, err = client:ManageTemplate():load()
+if err then error(err) end
+print(managetemplate)
+```
+
 ### 4. Create, update, and remove
 
 ```lua
+-- Create
+local created, err = client:ManageTemplate():create({ components = {} })
+if err then error(err) end
+
 -- Remove
 client:ManageTemplate():remove({ id = "example_id" })
 ```
@@ -49,7 +61,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local whatsapptemplategetv2, err = client:WhatsAppTemplateGetV2():load({ id = "example_id" })
+local managetemplate, err = client:ManageTemplate():load()
 if err then error(err) end
 ```
 
@@ -107,7 +119,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:WhatsAppTemplateGetV2():load({ id = "test01" })
+local result, err = client:ManageTemplate():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -193,7 +205,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `SendMessage` | `(data) -> SendMessageEntity` | Create a SendMessage entity instance. |
 | `Template` | `(data) -> TemplateEntity` | Create a Template entity instance. |
 | `WhatsAppTemplateGetV2` | `(data) -> WhatsAppTemplateGetV2Entity` | Create a WhatsAppTemplateGetV2 entity instance. |
-| `WhatsAppTemplateGetV2Pagination` | `(data) -> WhatsAppTemplateGetV2PaginationEntity` | Create a WhatsAppTemplateGetV2Pagination entity instance. |
 
 ### Entity interface
 
@@ -223,9 +234,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local whats_app_template_get_v2, err = client:WhatsAppTemplateGetV2():load({ id = "example_id" })
+    local manage_template, err = client:ManageTemplate():load()
     if err then error(err) end
-    -- whats_app_template_get_v2 is the loaded record
+    -- manage_template is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -236,11 +247,30 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` |  |
+| `components` | Array of components that make up the template. |
+| `createdDate` |  |
+| `currentPage` |  |
+| `id` | ID |
+| `items` |  |
+| `language` |  |
+| `library_template_body_inputs` |  |
+| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
+| `library_template_name` | Library template name |
+| `message_send_ttl_seconds` | Time to live for message template sent. |
+| `modifiedDate` |  |
+| `name` | The message template name |
+| `pages` |  |
+| `parameter_format` |  |
+| `results` |  |
+| `resultsPerPage` |  |
+| `status` |  |
+| `sub_category` |  |
 
-Operations: Remove.
+Operations: Create, Load, Remove.
 
-API path: `/whatsapp/v2/templates/{id}`
+API path: `/whatsapp/v2/templates`
 
 #### Media
 
@@ -255,6 +285,8 @@ API path: `/whatsapp/v2/{phoneNumber}/media`
 
 | Field | Description |
 | --- | --- |
+| `messages` |  |
+| `requestId` | Unique Id of the request made towards LINK Mobility. |
 
 Operations: Create.
 
@@ -264,25 +296,20 @@ API path: `/whatsapp/v2/messages`
 
 | Field | Description |
 | --- | --- |
-| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` |  |
-| `components` | Array of components that make up the template. |
+| `components` | The array containing all the content of the message template |
 | `createdDate` |  |
 | `id` | ID |
 | `language` |  |
-| `library_template_body_inputs` |  |
-| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
-| `library_template_name` | Library template name |
-| `message_send_ttl_seconds` | Time to live for message template sent. |
+| `message_send_ttl_seconds` | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` |  |
 | `name` | The message template name |
 | `parameter_format` |  |
 | `status` |  |
-| `sub_category` |  |
 
-Operations: Create, Update.
+Operations: Update.
 
-API path: `/whatsapp/v2/templates`
+API path: `/whatsapp/v2/templates/{id}`
 
 #### WhatsAppTemplateGetV2
 
@@ -293,20 +320,6 @@ API path: `/whatsapp/v2/templates`
 Operations: Load.
 
 API path: `/whatsapp/v2/templates/{id}`
-
-#### WhatsAppTemplateGetV2Pagination
-
-| Field | Description |
-| --- | --- |
-| `currentPage` |  |
-| `items` |  |
-| `pages` |  |
-| `results` |  |
-| `resultsPerPage` |  |
-
-Operations: Load.
-
-API path: `/whatsapp/v2/templates`
 
 
 
@@ -321,13 +334,48 @@ Create an instance: `local manage_template = client:ManageTemplate(nil)`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `allow_category_change` | `boolean` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` | `string` |  |
+| `components` | `table` | Array of components that make up the template. |
+| `createdDate` | `string` |  |
+| `currentPage` | `number` |  |
+| `id` | `string|nil` | ID |
+| `items` | `table|nil` |  |
+| `language` | `string` |  |
+| `library_template_body_inputs` | `table` |  |
+| `library_template_button_inputs` | `table|nil` | Optional data during creation of a template from a library template. |
+| `library_template_name` | `string|nil` | Library template name |
+| `message_send_ttl_seconds` | `number` | Time to live for message template sent. |
+| `modifiedDate` | `string|nil` |  |
+| `name` | `string|nil` | The message template name |
+| `pages` | `number` |  |
+| `parameter_format` | `string` |  |
+| `results` | `number` |  |
+| `resultsPerPage` | `number` |  |
+| `status` | `string` |  |
+| `sub_category` | `string` |  |
+
+#### Example: Load
+
+```lua
+local manage_template, err = client:ManageTemplate():load()
+```
+
+#### Example: Create
+
+```lua
+local manage_template, err = client:ManageTemplate():create({
+  components = {}, -- table
+})
+```
 
 
 ### Media
@@ -359,10 +407,19 @@ Create an instance: `local send_message = client:SendMessage(nil)`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `messages` | `table` |  |
+| `requestId` | `string` | Unique Id of the request made towards LINK Mobility. |
+
 #### Example: Create
 
 ```lua
 local send_message, err = client:SendMessage():create({
+  messages = {}, -- table
+  requestId = "example_requestId", -- string
 })
 ```
 
@@ -375,36 +432,22 @@ Create an instance: `local template = client:Template(nil)`
 
 | Method | Description |
 | --- | --- |
-| `create(data)` | Create a new entity with the given data. |
 | `update(data)` | Update an existing entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `allow_category_change` | `boolean` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` |  |
-| `components` | `table` | Array of components that make up the template. |
+| `components` | `table|nil` | The array containing all the content of the message template |
 | `createdDate` | `string` |  |
 | `id` | `string|nil` | ID |
 | `language` | `string` |  |
-| `library_template_body_inputs` | `table` |  |
-| `library_template_button_inputs` | `table|nil` | Optional data during creation of a template from a library template. |
-| `library_template_name` | `string|nil` | Library template name |
-| `message_send_ttl_seconds` | `number` | Time to live for message template sent. |
+| `message_send_ttl_seconds` | `number` | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` | `string|nil` |  |
 | `name` | `string|nil` | The message template name |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
-| `sub_category` | `string` |  |
-
-#### Example: Create
-
-```lua
-local template, err = client:Template():create({
-  components = {}, -- table
-})
-```
 
 
 ### WhatsAppTemplateGetV2
@@ -427,33 +470,6 @@ Create an instance: `local whats_app_template_get_v2 = client:WhatsAppTemplateGe
 
 ```lua
 local whats_app_template_get_v2, err = client:WhatsAppTemplateGetV2():load({ id = "whats_app_template_get_v2_id" })
-```
-
-
-### WhatsAppTemplateGetV2Pagination
-
-Create an instance: `local whats_app_template_get_v2_pagination = client:WhatsAppTemplateGetV2Pagination(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `currentPage` | `number` |  |
-| `items` | `table|nil` |  |
-| `pages` | `number` |  |
-| `results` | `number` |  |
-| `resultsPerPage` | `number` |  |
-
-#### Example: Load
-
-```lua
-local whats_app_template_get_v2_pagination, err = client:WhatsAppTemplateGetV2Pagination():load()
 ```
 
 ## Features
@@ -677,11 +693,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local whatsapptemplategetv2 = client:WhatsAppTemplateGetV2()
-whatsapptemplategetv2:load({ id = "example_id" })
+local managetemplate = client:ManageTemplate()
+managetemplate:load()
 
--- whatsapptemplategetv2:data_get() now returns the whatsapptemplategetv2 data from the last load
--- whatsapptemplategetv2:match_get() returns the last match criteria
+-- managetemplate:data_get() now returns the managetemplate data from the last load
+-- managetemplate:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

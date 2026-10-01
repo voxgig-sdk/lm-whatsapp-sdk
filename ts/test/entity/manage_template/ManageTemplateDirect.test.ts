@@ -20,7 +20,7 @@ import {
 loadEnvLocal(__dirname + '/../../../.env.local')
 
 
-describe('WhatsAppTemplateGetV2PaginationDirect', async () => {
+describe('ManageTemplateDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
   // `test.live.delayMs`; only sleeps when LM_WHATSAPP_TEST_LIVE=TRUE.
@@ -36,10 +36,10 @@ describe('WhatsAppTemplateGetV2PaginationDirect', async () => {
   })
 
 
-  test('direct-load-whats_app_template_get_v2_pagination', async (t: any) => {
+  test('direct-load-manage_template', async (t: any) => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
     const setup = directSetup({ id: 'direct01' })
-    if (maybeSkipControl(t, 'direct', 'direct-load-whats_app_template_get_v2_pagination', setup.live)) return
+    if (maybeSkipControl(t, 'direct', 'direct-load-manage_template', setup.live)) return
     const { client, calls } = setup
 
     const params: any = {}
@@ -85,7 +85,7 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID': {},
+    'LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID': {},
     'LM_WHATSAPP_TEST_LIVE': 'FALSE',
     'LM_WHATSAPP_APIKEY': '',
   })
@@ -101,7 +101,7 @@ function directSetup(mockres?: any) {
       apikey: env.LM_WHATSAPP_APIKEY,
       }))
 
-    let idmap: any = env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID']
+    let idmap: any = env['LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

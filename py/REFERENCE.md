@@ -62,10 +62,6 @@ Create a new `TemplateEntity` instance. Pass `None` for no initial data.
 
 Create a new `WhatsAppTemplateGetV2Entity` instance. Pass `None` for no initial data.
 
-#### `WhatsAppTemplateGetV2Pagination(data=None)`
-
-Create a new `WhatsAppTemplateGetV2PaginationEntity` instance. Pass `None` for no initial data.
-
 #### `options_map() -> dict`
 
 Return a deep copy of the current SDK options.
@@ -108,9 +104,71 @@ manage_template = client.ManageTemplate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `str` | No |  |
+| `allow_category_change` | `bool` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` | `str` | No |  |
+| `components` | `list` | Yes | Array of components that make up the template. |
+| `createdDate` | `str` | No |  |
+| `currentPage` | `int` | No |  |
+| `id` | `str | None` | No | ID |
+| `items` | `list | None` | No |  |
+| `language` | `str` | No |  |
+| `library_template_body_inputs` | `dict` | No |  |
+| `library_template_button_inputs` | `list | None` | No | Optional data during creation of a template from a library template. |
+| `library_template_name` | `str | None` | No | Library template name |
+| `message_send_ttl_seconds` | `int` | No | Time to live for message template sent. |
+| `modifiedDate` | `str | None` | No |  |
+| `name` | `str | None` | No | The message template name |
+| `pages` | `int` | No |  |
+| `parameter_format` | `str` | No |  |
+| `results` | `int` | No |  |
+| `resultsPerPage` | `int` | No |  |
+| `status` | `str` | No |  |
+| `sub_category` | `str` | No |  |
+
+### Field Usage by Operation
+
+| Field | load | create | remove |
+| --- | --- | --- | --- |
+| `allow_category_change` | - | - | - |
+| `category` | - | Yes | - |
+| `components` | - | - | - |
+| `createdDate` | - | - | - |
+| `currentPage` | - | - | - |
+| `id` | - | - | - |
+| `items` | - | - | - |
+| `language` | - | Yes | - |
+| `library_template_body_inputs` | - | - | - |
+| `library_template_button_inputs` | - | - | - |
+| `library_template_name` | - | - | - |
+| `message_send_ttl_seconds` | - | - | - |
+| `modifiedDate` | - | - | - |
+| `name` | - | Yes | - |
+| `pages` | - | - | - |
+| `parameter_format` | - | - | - |
+| `results` | - | - | - |
+| `resultsPerPage` | - | - | - |
+| `status` | - | - | - |
+| `sub_category` | - | - | - |
 
 ### Operations
+
+#### `create(reqdata, ctrl=None) -> dict`
+
+Create a new entity with the given data. Returns the created entity data and raises on error.
+
+```python
+result = client.ManageTemplate().create({
+    "components": [],  # list
+})
+```
+
+#### `load(reqmatch, ctrl=None) -> dict`
+
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
+
+```python
+result = client.ManageTemplate().load()
+```
 
 #### `remove(reqmatch, ctrl=None) -> dict`
 
@@ -202,6 +260,13 @@ Return the entity name.
 send_message = client.SendMessage()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `messages` | `list` | Yes |  |
+| `requestId` | `str` | Yes | Unique Id of the request made towards LINK Mobility. |
+
 ### Operations
 
 #### `create(reqdata, ctrl=None) -> dict`
@@ -210,6 +275,8 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.SendMessage().create({
+    "messages": [],  # list
+    "requestId": "example_requestId",  # str
 })
 ```
 
@@ -252,53 +319,18 @@ template = client.Template()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `allow_category_change` | `bool` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `str` | No |  |
-| `components` | `list` | Yes | Array of components that make up the template. |
+| `components` | `list | None` | No | The array containing all the content of the message template |
 | `createdDate` | `str` | No |  |
 | `id` | `str | None` | No | ID |
 | `language` | `str` | No |  |
-| `library_template_body_inputs` | `dict` | No |  |
-| `library_template_button_inputs` | `list | None` | No | Optional data during creation of a template from a library template. |
-| `library_template_name` | `str | None` | No | Library template name |
-| `message_send_ttl_seconds` | `int` | No | Time to live for message template sent. |
+| `message_send_ttl_seconds` | `int` | No | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` | `str | None` | No |  |
 | `name` | `str | None` | No | The message template name |
 | `parameter_format` | `str` | No |  |
 | `status` | `str` | No |  |
-| `sub_category` | `str` | No |  |
-
-### Field Usage by Operation
-
-| Field | create | update |
-| --- | --- | --- |
-| `allow_category_change` | - | - |
-| `category` | Yes | - |
-| `components` | - | Yes |
-| `createdDate` | - | - |
-| `id` | - | - |
-| `language` | Yes | - |
-| `library_template_body_inputs` | - | - |
-| `library_template_button_inputs` | - | - |
-| `library_template_name` | - | - |
-| `message_send_ttl_seconds` | - | - |
-| `modifiedDate` | - | - |
-| `name` | Yes | - |
-| `parameter_format` | - | - |
-| `status` | - | - |
-| `sub_category` | - | - |
 
 ### Operations
-
-#### `create(reqdata, ctrl=None) -> dict`
-
-Create a new entity with the given data. Returns the created entity data and raises on error.
-
-```python
-result = client.Template().create({
-    "components": [],  # list
-})
-```
 
 #### `update(reqdata, ctrl=None) -> dict`
 
@@ -383,61 +415,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `WhatsAppTemplateGetV2Entity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## WhatsAppTemplateGetV2PaginationEntity
-
-```python
-whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `currentPage` | `int` | No |  |
-| `items` | `list | None` | No |  |
-| `pages` | `int` | No |  |
-| `results` | `int` | No |  |
-| `resultsPerPage` | `int` | No |  |
-
-### Operations
-
-#### `load(reqmatch, ctrl=None) -> dict`
-
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
-
-```python
-result = client.WhatsAppTemplateGetV2Pagination().load()
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `WhatsAppTemplateGetV2PaginationEntity` instance with the same options.
 
 #### `get_name() -> str`
 

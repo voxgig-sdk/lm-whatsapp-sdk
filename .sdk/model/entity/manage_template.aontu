@@ -5,9 +5,191 @@ main: kit: entity: manage_template: {
   alias: field: {}
 
   fields: {
+    allow_category_change: {
+      h: "Allow Category Change"
+      n: "allow_category_change"
+      r: false
+      sh: "Set to true to allow to assign a category based on template guidelines and the template's contents."
+      t: "`$BOOLEAN`"
+    }
+    category: {
+      h: "Category"
+      n: "category"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    components: {
+      h: "Components"
+      n: "components"
+      r: true
+      sh: "Array of components that make up the template."
+      t: "`$ARRAY`"
+    }
+    createdDate: {
+      fo: "date-time"
+      h: "Created Date"
+      n: "createdDate"
+      r: false
+      t: "`$STRING`"
+    }
+    currentPage: {
+      fo: "int32"
+      h: "Current Page"
+      n: "currentPage"
+      r: false
+      t: "`$INTEGER`"
+    }
     id: {
       h: "Id"
       n: "id"
+      r: false
+      sh: "ID"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    items: {
+      h: "Items"
+      n: "items"
+      r: false
+      t: [
+        "`$ONE`"
+        [
+          "`$ARRAY`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      t: "`$STRING`"
+    }
+    library_template_body_inputs: {
+      h: "Library Template Body Inputs"
+      n: "library_template_body_inputs"
+      r: false
+      t: "`$OBJECT`"
+    }
+    library_template_button_inputs: {
+      h: "Library Template Button Inputs"
+      n: "library_template_button_inputs"
+      r: false
+      sh: "Optional data during creation of a template from a library template."
+      t: [
+        "`$ONE`"
+        [
+          "`$ARRAY`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    library_template_name: {
+      h: "Library Template Name"
+      n: "library_template_name"
+      r: false
+      sh: "Library template name"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    message_send_ttl_seconds: {
+      fo: "int64"
+      h: "Message Send Ttl Seconds"
+      n: "message_send_ttl_seconds"
+      r: false
+      sh: "Time to live for message template sent."
+      t: "`$INTEGER`"
+    }
+    modifiedDate: {
+      fo: "date-time"
+      h: "Modified Date"
+      n: "modifiedDate"
+      r: false
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "The message template name"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    pages: {
+      fo: "int32"
+      h: "Pages"
+      n: "pages"
+      r: false
+      t: "`$INTEGER`"
+    }
+    parameter_format: {
+      h: "Parameter Format"
+      n: "parameter_format"
+      r: false
+      t: "`$STRING`"
+    }
+    results: {
+      fo: "int32"
+      h: "Results"
+      n: "results"
+      r: false
+      t: "`$INTEGER`"
+    }
+    resultsPerPage: {
+      fo: "int32"
+      h: "Results Per Page"
+      n: "resultsPerPage"
+      r: false
+      t: "`$INTEGER`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$STRING`"
+    }
+    sub_category: {
+      h: "Sub Category"
+      n: "sub_category"
       r: false
       t: "`$STRING`"
     }
@@ -20,6 +202,110 @@ main: kit: entity: manage_template: {
 
   name: "manage_template"
   op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /whatsapp/v2/templates"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/whatsapp/v2/templates"
+          s: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              lit: "templates"
+            }
+          ]
+          t: {
+            req: {
+              allow_category_change: "`reqdata.allow_category_change`"
+              category: "`reqdata.category`"
+              components: "`reqdata.component`"
+              language: "`reqdata.language`"
+              library_template_body_inputs: "`reqdata.library_template_body_input`"
+              library_template_button_inputs: "`reqdata.library_template_button_input`"
+              library_template_name: "`reqdata.library_template_name`"
+              message_send_ttl_seconds: "`reqdata.message_send_ttl_second`"
+              name: "`reqdata.name`"
+              parameter_format: "`reqdata.parameter_format`"
+              sub_category: "`reqdata.sub_category`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /whatsapp/v2/templates"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 1
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 25
+                k: "query"
+                n: "size"
+                or: "size"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "sort"
+                or: "sort"
+                r: false
+                t: "`$ARRAY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/whatsapp/v2/templates"
+          q: {
+            exist: [
+              "page"
+              "size"
+              "sort"
+            ]
+          }
+          s: [
+            {
+              lit: "whatsapp"
+            }
+            {
+              lit: "v2"
+            }
+            {
+              lit: "templates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
     remove: {
       name: "remove"
       points: [

@@ -61,10 +61,6 @@ Create a new `Template` entity instance. Pass `nil` for no initial data.
 
 Create a new `WhatsAppTemplateGetV2` entity instance. Pass `nil` for no initial data.
 
-#### `WhatsAppTemplateGetV2Pagination(data)`
-
-Create a new `WhatsAppTemplateGetV2Pagination` entity instance. Pass `nil` for no initial data.
-
 #### `options_map() -> table`
 
 Return a deep copy of the current SDK options.
@@ -111,9 +107,71 @@ local manage_template = client:ManageTemplate(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `allow_category_change` | `boolean` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` | `string` | No |  |
+| `components` | `table` | Yes | Array of components that make up the template. |
+| `createdDate` | `string` | No |  |
+| `currentPage` | `number` | No |  |
+| `id` | `string|nil` | No | ID |
+| `items` | `table|nil` | No |  |
+| `language` | `string` | No |  |
+| `library_template_body_inputs` | `table` | No |  |
+| `library_template_button_inputs` | `table|nil` | No | Optional data during creation of a template from a library template. |
+| `library_template_name` | `string|nil` | No | Library template name |
+| `message_send_ttl_seconds` | `number` | No | Time to live for message template sent. |
+| `modifiedDate` | `string|nil` | No |  |
+| `name` | `string|nil` | No | The message template name |
+| `pages` | `number` | No |  |
+| `parameter_format` | `string` | No |  |
+| `results` | `number` | No |  |
+| `resultsPerPage` | `number` | No |  |
+| `status` | `string` | No |  |
+| `sub_category` | `string` | No |  |
+
+### Field Usage by Operation
+
+| Field | load | create | remove |
+| --- | --- | --- | --- |
+| `allow_category_change` | - | - | - |
+| `category` | - | Yes | - |
+| `components` | - | - | - |
+| `createdDate` | - | - | - |
+| `currentPage` | - | - | - |
+| `id` | - | - | - |
+| `items` | - | - | - |
+| `language` | - | Yes | - |
+| `library_template_body_inputs` | - | - | - |
+| `library_template_button_inputs` | - | - | - |
+| `library_template_name` | - | - | - |
+| `message_send_ttl_seconds` | - | - | - |
+| `modifiedDate` | - | - | - |
+| `name` | - | Yes | - |
+| `pages` | - | - | - |
+| `parameter_format` | - | - | - |
+| `results` | - | - | - |
+| `resultsPerPage` | - | - | - |
+| `status` | - | - | - |
+| `sub_category` | - | - | - |
 
 ### Operations
+
+#### `create(reqdata, ctrl) -> any, err`
+
+Create a new entity with the given data.
+
+```lua
+local result, err = client:ManageTemplate():create({
+  components = --[[ table ]],
+})
+```
+
+#### `load(reqmatch, ctrl) -> any, err`
+
+Load a single entity matching the given criteria.
+
+```lua
+local result, err = client:ManageTemplate():load()
+```
 
 #### `remove(reqmatch, ctrl) -> any, err`
 
@@ -207,6 +265,13 @@ Return the entity name.
 local send_message = client:SendMessage(nil)
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `messages` | `table` | Yes |  |
+| `requestId` | `string` | Yes | Unique Id of the request made towards LINK Mobility. |
+
 ### Operations
 
 #### `create(reqdata, ctrl) -> any, err`
@@ -215,6 +280,8 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:SendMessage():create({
+  messages = --[[ table ]],
+  requestId = --[[ string ]],
 })
 ```
 
@@ -258,53 +325,18 @@ local template = client:Template(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `allow_category_change` | `boolean` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` | No |  |
-| `components` | `table` | Yes | Array of components that make up the template. |
+| `components` | `table|nil` | No | The array containing all the content of the message template |
 | `createdDate` | `string` | No |  |
 | `id` | `string|nil` | No | ID |
 | `language` | `string` | No |  |
-| `library_template_body_inputs` | `table` | No |  |
-| `library_template_button_inputs` | `table|nil` | No | Optional data during creation of a template from a library template. |
-| `library_template_name` | `string|nil` | No | Library template name |
-| `message_send_ttl_seconds` | `number` | No | Time to live for message template sent. |
+| `message_send_ttl_seconds` | `number` | No | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` | `string|nil` | No |  |
 | `name` | `string|nil` | No | The message template name |
 | `parameter_format` | `string` | No |  |
 | `status` | `string` | No |  |
-| `sub_category` | `string` | No |  |
-
-### Field Usage by Operation
-
-| Field | create | update |
-| --- | --- | --- |
-| `allow_category_change` | - | - |
-| `category` | Yes | - |
-| `components` | - | Yes |
-| `createdDate` | - | - |
-| `id` | - | - |
-| `language` | Yes | - |
-| `library_template_body_inputs` | - | - |
-| `library_template_button_inputs` | - | - |
-| `library_template_name` | - | - |
-| `message_send_ttl_seconds` | - | - |
-| `modifiedDate` | - | - |
-| `name` | Yes | - |
-| `parameter_format` | - | - |
-| `status` | - | - |
-| `sub_category` | - | - |
 
 ### Operations
-
-#### `create(reqdata, ctrl) -> any, err`
-
-Create a new entity with the given data.
-
-```lua
-local result, err = client:Template():create({
-  components = --[[ table ]],
-})
-```
 
 #### `update(reqdata, ctrl) -> any, err`
 
@@ -390,62 +422,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `WhatsAppTemplateGetV2Entity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## WhatsAppTemplateGetV2PaginationEntity
-
-```lua
-local whats_app_template_get_v2_pagination = client:WhatsAppTemplateGetV2Pagination(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `currentPage` | `number` | No |  |
-| `items` | `table|nil` | No |  |
-| `pages` | `number` | No |  |
-| `results` | `number` | No |  |
-| `resultsPerPage` | `number` | No |  |
-
-### Operations
-
-#### `load(reqmatch, ctrl) -> any, err`
-
-Load a single entity matching the given criteria.
-
-```lua
-local result, err = client:WhatsAppTemplateGetV2Pagination():load()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `WhatsAppTemplateGetV2PaginationEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`

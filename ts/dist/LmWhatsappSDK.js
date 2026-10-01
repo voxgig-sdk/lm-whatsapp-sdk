@@ -7,7 +7,6 @@ const MediaEntity_1 = require("./entity/MediaEntity");
 const SendMessageEntity_1 = require("./entity/SendMessageEntity");
 const TemplateEntity_1 = require("./entity/TemplateEntity");
 const WhatsAppTemplateGetV2Entity_1 = require("./entity/WhatsAppTemplateGetV2Entity");
-const WhatsAppTemplateGetV2PaginationEntity_1 = require("./entity/WhatsAppTemplateGetV2PaginationEntity");
 const node_util_1 = require("node:util");
 const Config_1 = require("./Config");
 Object.defineProperty(exports, "config", { enumerable: true, get: function () { return Config_1.config; } });
@@ -33,6 +32,11 @@ class LmWhatsappSDK {
             shared: new WeakMap()
         });
         this._options = this._utility.makeOptions(this._rootctx);
+        for (const key of ['_options', '_rootctx', '_features']) {
+            Object.defineProperty(this, key, {
+                value: this[key], enumerable: false, writable: true, configurable: true
+            });
+        }
         const struct = this._utility.struct;
         const getpath = struct.getpath;
         if (true === getpath(this._options.feature, 'test.active')) {
@@ -149,7 +153,7 @@ class LmWhatsappSDK {
                 return { ok: false, err: ctx.error('direct_no_response', 'response: undefined') };
             }
             else if (fetched instanceof Error) {
-                return { ok: false, err: fetched };
+                return { ok: false, err: utility.clean(ctx, fetched) };
             }
             const status = fetched.status;
             // No body responses (204 No Content, 304 Not Modified) and explicit
@@ -179,7 +183,7 @@ class LmWhatsappSDK {
             };
         }
         catch (err) {
-            return { ok: false, err };
+            return { ok: false, err: utility.clean(ctx, err) };
         }
     }
     async graphql(query, variables, ctrl) {
@@ -249,13 +253,6 @@ class LmWhatsappSDK {
     WhatsAppTemplateGetV2(entopts) {
         const self = this;
         return new WhatsAppTemplateGetV2Entity_1.WhatsAppTemplateGetV2Entity(self, entopts);
-    }
-    // Entity access: `client.WhatsAppTemplateGetV2Pagination().list()` / `client.WhatsAppTemplateGetV2Pagination().load({ id })`.
-    // The argument is the entity OPTIONS object (passed to the entity
-    // constructor as entopts), not initial entity data.
-    WhatsAppTemplateGetV2Pagination(entopts) {
-        const self = this;
-        return new WhatsAppTemplateGetV2PaginationEntity_1.WhatsAppTemplateGetV2PaginationEntity(self, entopts);
     }
     static test(testoptsarg, sdkoptsarg) {
         const struct = stdutil.struct;

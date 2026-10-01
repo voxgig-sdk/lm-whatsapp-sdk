@@ -2,22 +2,109 @@
   "existing": {
     "manage_template": {
       "MANAGE_TEMPLATE00": {
-        "id": "MANAGE_TEMPLATE00"
+        "allow_category_change": true,
+        "category": "sc9",
+        "components": [],
+        "createdDate": "scb",
+        "currentPage": 204,
+        "id": "MANAGE_TEMPLATE00",
+        "items": "sce",
+        "language": "scf",
+        "library_template_body_inputs": {},
+        "library_template_button_inputs": "sd1",
+        "library_template_name": "sd2",
+        "message_send_ttl_seconds": 211,
+        "modifiedDate": "sd4",
+        "name": "sd5",
+        "pages": 214,
+        "parameter_format": "sd7",
+        "results": 216,
+        "resultsPerPage": 217,
+        "status": "sda",
+        "sub_category": "sdb"
       },
       "MANAGE_TEMPLATE01": {
-        "id": "MANAGE_TEMPLATE01"
+        "allow_category_change": true,
+        "category": "s191",
+        "components": [],
+        "createdDate": "s193",
+        "currentPage": 404,
+        "id": "MANAGE_TEMPLATE01",
+        "items": "s196",
+        "language": "s197",
+        "library_template_body_inputs": {},
+        "library_template_button_inputs": "s199",
+        "library_template_name": "s19a",
+        "message_send_ttl_seconds": 411,
+        "modifiedDate": "s19c",
+        "name": "s19d",
+        "pages": 414,
+        "parameter_format": "s19f",
+        "results": 416,
+        "resultsPerPage": 417,
+        "status": "s1a2",
+        "sub_category": "s1a3"
       },
       "MANAGE_TEMPLATE02": {
-        "id": "MANAGE_TEMPLATE02"
+        "allow_category_change": true,
+        "category": "s259",
+        "components": [],
+        "createdDate": "s25b",
+        "currentPage": 604,
+        "id": "MANAGE_TEMPLATE02",
+        "items": "s25e",
+        "language": "s25f",
+        "library_template_body_inputs": {},
+        "library_template_button_inputs": "s261",
+        "library_template_name": "s262",
+        "message_send_ttl_seconds": 611,
+        "modifiedDate": "s264",
+        "name": "s265",
+        "pages": 614,
+        "parameter_format": "s267",
+        "results": 616,
+        "resultsPerPage": 617,
+        "status": "s26a",
+        "sub_category": "s26b"
       }
     }
   },
   "new": {
     "manage_template": {
-      "manage_template_ref01": {}
+      "manage_template_ref01": {
+        "allow_category_change": true,
+        "category": "s321",
+        "components": [],
+        "createdDate": "s323",
+        "currentPage": 804,
+        "items": "s326",
+        "language": "s327",
+        "library_template_body_inputs": {},
+        "library_template_button_inputs": "s329",
+        "library_template_name": "s32a",
+        "message_send_ttl_seconds": 811,
+        "modifiedDate": "s32c",
+        "name": "s32d",
+        "pages": 814,
+        "parameter_format": "s32f",
+        "results": 816,
+        "resultsPerPage": 817,
+        "status": "s332",
+        "sub_category": "s333"
+      }
     }
   },
   "requests": {
+    "POST /whatsapp/v2/templates": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /whatsapp/v2/templates": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
     "DELETE /whatsapp/v2/templates/{id}": {
       "provenance": "operation-contract",
       "version": 2,

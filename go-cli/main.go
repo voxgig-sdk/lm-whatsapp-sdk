@@ -20,7 +20,7 @@ import (
 const prompt = "lm-whatsapp"
 
 // entitiesHelp is the space-separated entity list shown by /help.
-const entitiesHelp = "manage_template media send_message template whats_app_template_get_v2 whats_app_template_get_v2_pagination"
+const entitiesHelp = "manage_template media send_message template whats_app_template_get_v2"
 
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdin, os.Stdout, os.Stderr))

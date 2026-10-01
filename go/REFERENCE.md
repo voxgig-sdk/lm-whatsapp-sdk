@@ -68,10 +68,6 @@ Create a new `Template` entity instance. Pass `nil` for no initial data.
 
 Create a new `WhatsAppTemplateGetV2` entity instance. Pass `nil` for no initial data.
 
-#### `WhatsAppTemplateGetV2Pagination(data map[string]any) LmWhatsappEntity`
-
-Create a new `WhatsAppTemplateGetV2Pagination` entity instance. Pass `nil` for no initial data.
-
 #### `OptionsMap() map[string]any`
 
 Return a deep copy of the current SDK options.
@@ -119,9 +115,79 @@ fmt.Println(manageTemplate.GetName()) // "manage_template"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `allow_category_change` | `bool` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` | `string` | No |  |
+| `components` | `[]any` | Yes | Array of components that make up the template. |
+| `createdDate` | `string` | No |  |
+| `currentPage` | `int` | No |  |
+| `id` | `any` | No | ID |
+| `items` | `any` | No |  |
+| `language` | `string` | No |  |
+| `library_template_body_inputs` | `map[string]any` | No |  |
+| `library_template_button_inputs` | `any` | No | Optional data during creation of a template from a library template. |
+| `library_template_name` | `any` | No | Library template name |
+| `message_send_ttl_seconds` | `int` | No | Time to live for message template sent. |
+| `modifiedDate` | `any` | No |  |
+| `name` | `any` | No | The message template name |
+| `pages` | `int` | No |  |
+| `parameter_format` | `string` | No |  |
+| `results` | `int` | No |  |
+| `resultsPerPage` | `int` | No |  |
+| `status` | `string` | No |  |
+| `sub_category` | `string` | No |  |
+
+### Field Usage by Operation
+
+| Field | load | create | remove |
+| --- | --- | --- | --- |
+| `allow_category_change` | - | - | - |
+| `category` | - | Yes | - |
+| `components` | - | - | - |
+| `createdDate` | - | - | - |
+| `currentPage` | - | - | - |
+| `id` | - | - | - |
+| `items` | - | - | - |
+| `language` | - | Yes | - |
+| `library_template_body_inputs` | - | - | - |
+| `library_template_button_inputs` | - | - | - |
+| `library_template_name` | - | - | - |
+| `message_send_ttl_seconds` | - | - | - |
+| `modifiedDate` | - | - | - |
+| `name` | - | Yes | - |
+| `pages` | - | - | - |
+| `parameter_format` | - | - | - |
+| `results` | - | - | - |
+| `resultsPerPage` | - | - | - |
+| `status` | - | - | - |
+| `sub_category` | - | - | - |
 
 ### Operations
+
+#### `Load(reqmatch, ctrl map[string]any) (any, error)`
+
+Load a single entity matching the given criteria.
+
+```go
+result, err := client.ManageTemplate(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data.
+
+```go
+result, err := client.ManageTemplate(nil).Create(map[string]any{
+    "components": []any{},
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
 
 #### `Remove(reqmatch, ctrl map[string]any) (any, error)`
 
@@ -213,6 +279,13 @@ sendMessage := client.SendMessage(nil)
 fmt.Println(sendMessage.GetName()) // "send_message"
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `messages` | `[]any` | Yes |  |
+| `requestId` | `string` | Yes | Unique Id of the request made towards LINK Mobility. |
+
 ### Operations
 
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
@@ -221,6 +294,8 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.SendMessage(nil).Create(map[string]any{
+    "messages": []any{},
+    "requestId": "example_requestId",
 }, nil)
 if err != nil {
     panic(err)
@@ -263,57 +338,18 @@ fmt.Println(template.GetName()) // "template"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `allow_category_change` | `bool` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` | No |  |
-| `components` | `[]any` | Yes | Array of components that make up the template. |
+| `components` | `any` | No | The array containing all the content of the message template |
 | `createdDate` | `string` | No |  |
 | `id` | `any` | No | ID |
 | `language` | `string` | No |  |
-| `library_template_body_inputs` | `map[string]any` | No |  |
-| `library_template_button_inputs` | `any` | No | Optional data during creation of a template from a library template. |
-| `library_template_name` | `any` | No | Library template name |
-| `message_send_ttl_seconds` | `int` | No | Time to live for message template sent. |
+| `message_send_ttl_seconds` | `int` | No | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` | `any` | No |  |
 | `name` | `any` | No | The message template name |
 | `parameter_format` | `string` | No |  |
 | `status` | `string` | No |  |
-| `sub_category` | `string` | No |  |
-
-### Field Usage by Operation
-
-| Field | create | update |
-| --- | --- | --- |
-| `allow_category_change` | - | - |
-| `category` | Yes | - |
-| `components` | - | Yes |
-| `createdDate` | - | - |
-| `id` | - | - |
-| `language` | Yes | - |
-| `library_template_body_inputs` | - | - |
-| `library_template_button_inputs` | - | - |
-| `library_template_name` | - | - |
-| `message_send_ttl_seconds` | - | - |
-| `modifiedDate` | - | - |
-| `name` | Yes | - |
-| `parameter_format` | - | - |
-| `status` | - | - |
-| `sub_category` | - | - |
 
 ### Operations
-
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Template(nil).Create(map[string]any{
-    "components": []any{},
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result)
-```
 
 #### `Update(reqdata, ctrl map[string]any) (any, error)`
 
@@ -396,61 +432,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `WhatsAppTemplateGetV2Entity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## WhatsAppTemplateGetV2PaginationEntity
-
-```go
-whatsAppTemplateGetV2Pagination := client.WhatsAppTemplateGetV2Pagination(nil)
-fmt.Println(whatsAppTemplateGetV2Pagination.GetName()) // "whats_app_template_get_v2_pagination"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `currentPage` | `int` | No |  |
-| `items` | `any` | No |  |
-| `pages` | `int` | No |  |
-| `results` | `int` | No |  |
-| `resultsPerPage` | `int` | No |  |
-
-### Operations
-
-#### `Load(reqmatch, ctrl map[string]any) (any, error)`
-
-Load a single entity matching the given criteria.
-
-```go
-result, err := client.WhatsAppTemplateGetV2Pagination(nil).Load(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result)
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `WhatsAppTemplateGetV2PaginationEntity` instance with the same client and
 options.
 
 #### `GetName() string`

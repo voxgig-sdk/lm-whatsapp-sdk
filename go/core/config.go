@@ -161,15 +161,178 @@ func MakeConfig() map[string]any {
 				"send_message": map[string]any{},
 				"template": map[string]any{},
 				"whats_app_template_get_v2": map[string]any{},
-				"whats_app_template_get_v2_pagination": map[string]any{},
 			},
 		},
 		"entity": map[string]any{
 			"manage_template": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"name": "allow_category_change",
+						"title": "Allow Category Change",
+						"type": "`$BOOLEAN`",
+						"short": "Set to true to allow to assign a category based on template guidelines and the template's contents.",
+					},
+					map[string]any{
+						"name": "category",
+						"title": "Category",
+						"type": "`$STRING`",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
+					},
+					map[string]any{
+						"name": "components",
+						"title": "Components",
+						"type": "`$ARRAY`",
+						"req": true,
+						"short": "Array of components that make up the template.",
+					},
+					map[string]any{
+						"name": "createdDate",
+						"title": "Created Date",
+						"type": "`$STRING`",
+						"format": "date-time",
+					},
+					map[string]any{
+						"name": "currentPage",
+						"title": "Current Page",
+						"type": "`$INTEGER`",
+						"format": "int32",
+					},
+					map[string]any{
 						"name": "id",
 						"title": "Id",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$STRING`",
+								"`$NULL`",
+							},
+						},
+						"short": "ID",
+					},
+					map[string]any{
+						"name": "items",
+						"title": "Items",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$ARRAY`",
+								"`$NULL`",
+							},
+						},
+					},
+					map[string]any{
+						"name": "language",
+						"title": "Language",
+						"type": "`$STRING`",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
+					},
+					map[string]any{
+						"name": "library_template_body_inputs",
+						"title": "Library Template Body Inputs",
+						"type": "`$OBJECT`",
+					},
+					map[string]any{
+						"name": "library_template_button_inputs",
+						"title": "Library Template Button Inputs",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$ARRAY`",
+								"`$NULL`",
+							},
+						},
+						"short": "Optional data during creation of a template from a library template.",
+					},
+					map[string]any{
+						"name": "library_template_name",
+						"title": "Library Template Name",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$STRING`",
+								"`$NULL`",
+							},
+						},
+						"short": "Library template name",
+					},
+					map[string]any{
+						"name": "message_send_ttl_seconds",
+						"title": "Message Send Ttl Seconds",
+						"type": "`$INTEGER`",
+						"short": "Time to live for message template sent.",
+						"format": "int64",
+					},
+					map[string]any{
+						"name": "modifiedDate",
+						"title": "Modified Date",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$STRING`",
+								"`$NULL`",
+							},
+						},
+						"format": "date-time",
+					},
+					map[string]any{
+						"name": "name",
+						"title": "Name",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$STRING`",
+								"`$NULL`",
+							},
+						},
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
+						"short": "The message template name",
+					},
+					map[string]any{
+						"name": "pages",
+						"title": "Pages",
+						"type": "`$INTEGER`",
+						"format": "int32",
+					},
+					map[string]any{
+						"name": "parameter_format",
+						"title": "Parameter Format",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "results",
+						"title": "Results",
+						"type": "`$INTEGER`",
+						"format": "int32",
+					},
+					map[string]any{
+						"name": "resultsPerPage",
+						"title": "Results Per Page",
+						"type": "`$INTEGER`",
+						"format": "int32",
+					},
+					map[string]any{
+						"name": "status",
+						"title": "Status",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "sub_category",
+						"title": "Sub Category",
 						"type": "`$STRING`",
 					},
 				},
@@ -179,6 +342,115 @@ func MakeConfig() map[string]any {
 				},
 				"name": "manage_template",
 				"op": map[string]any{
+					"create": map[string]any{
+						"input": "data",
+						"name": "create",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "POST",
+								"orig": "/whatsapp/v2/templates",
+								"segments": []any{
+									map[string]any{
+										"lit": "whatsapp",
+									},
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "templates",
+									},
+								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": map[string]any{
+										"allow_category_change": "`reqdata.allow_category_change`",
+										"category": "`reqdata.category`",
+										"components": "`reqdata.component`",
+										"language": "`reqdata.language`",
+										"library_template_body_inputs": "`reqdata.library_template_body_input`",
+										"library_template_button_inputs": "`reqdata.library_template_button_input`",
+										"library_template_name": "`reqdata.library_template_name`",
+										"message_send_ttl_seconds": "`reqdata.message_send_ttl_second`",
+										"name": "`reqdata.name`",
+										"parameter_format": "`reqdata.parameter_format`",
+										"sub_category": "`reqdata.sub_category`",
+									},
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
+							},
+						},
+					},
+					"load": map[string]any{
+						"input": "data",
+						"name": "load",
+						"points": []any{
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/whatsapp/v2/templates",
+								"segments": []any{
+									map[string]any{
+										"lit": "whatsapp",
+									},
+									map[string]any{
+										"lit": "v2",
+									},
+									map[string]any{
+										"lit": "templates",
+									},
+								},
+								"parts": []any{
+									"whatsapp",
+									"v2",
+									"templates",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "page",
+											"orig": "page",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 1,
+										},
+										map[string]any{
+											"name": "size",
+											"orig": "size",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 25,
+										},
+										map[string]any{
+											"name": "sort",
+											"orig": "sort",
+											"type": "`$ARRAY`",
+											"kind": "query",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"page",
+										"size",
+										"sort",
+									},
+								},
+							},
+						},
+					},
 					"remove": map[string]any{
 						"input": "data",
 						"name": "remove",
@@ -281,7 +553,7 @@ func MakeConfig() map[string]any {
 									"header": []any{
 										map[string]any{
 											"name": "x_link_upload_filename",
-											"orig": "x_link_upload_filename",
+											"orig": "X-Link-Upload-Filename",
 											"type": "`$STRING`",
 											"kind": "header",
 											"reqd": true,
@@ -290,7 +562,7 @@ func MakeConfig() map[string]any {
 									"params": []any{
 										map[string]any{
 											"name": "phone_number",
-											"orig": "phone_number",
+											"orig": "phoneNumber",
 											"type": "`$STRING`",
 											"kind": "param",
 											"reqd": true,
@@ -313,7 +585,22 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"send_message": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "messages",
+						"title": "Messages",
+						"type": "`$ARRAY`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "requestId",
+						"title": "Request Id",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "Unique Id of the request made towards LINK Mobility.",
+						"format": "uuid",
+					},
+				},
 				"name": "send_message",
 				"op": map[string]any{
 					"create": map[string]any{
@@ -342,7 +629,7 @@ func MakeConfig() map[string]any {
 								},
 								"rename": map[string]any{},
 								"transform": map[string]any{
-									"req": "`reqdata`",
+									"req": "`reqdata.messages`",
 									"res": "`body`",
 								},
 								"args": map[string]any{},
@@ -358,39 +645,21 @@ func MakeConfig() map[string]any {
 			"template": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "allow_category_change",
-						"title": "Allow Category Change",
-						"type": "`$BOOLEAN`",
-						"short": "Set to true to allow to assign a category based on template guidelines and the template's contents.",
-					},
-					map[string]any{
 						"name": "category",
 						"title": "Category",
 						"type": "`$STRING`",
-						"op": map[string]any{
-							"create": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
 					},
 					map[string]any{
 						"name": "components",
 						"title": "Components",
-						"type": "`$ARRAY`",
-						"req": true,
-						"op": map[string]any{
-							"update": map[string]any{
-								"type": []any{
-									"`$ONE`",
-									[]any{
-										"`$ARRAY`",
-										"`$NULL`",
-									},
-								},
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$ARRAY`",
+								"`$NULL`",
 							},
 						},
-						"short": "Array of components that make up the template.",
+						"short": "The array containing all the content of the message template",
 					},
 					map[string]any{
 						"name": "createdDate",
@@ -414,48 +683,13 @@ func MakeConfig() map[string]any {
 						"name": "language",
 						"title": "Language",
 						"type": "`$STRING`",
-						"op": map[string]any{
-							"create": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
-					},
-					map[string]any{
-						"name": "library_template_body_inputs",
-						"title": "Library Template Body Inputs",
-						"type": "`$OBJECT`",
-					},
-					map[string]any{
-						"name": "library_template_button_inputs",
-						"title": "Library Template Button Inputs",
-						"type": []any{
-							"`$ONE`",
-							[]any{
-								"`$ARRAY`",
-								"`$NULL`",
-							},
-						},
-						"short": "Optional data during creation of a template from a library template.",
-					},
-					map[string]any{
-						"name": "library_template_name",
-						"title": "Library Template Name",
-						"type": []any{
-							"`$ONE`",
-							[]any{
-								"`$STRING`",
-								"`$NULL`",
-							},
-						},
-						"short": "Library template name",
 					},
 					map[string]any{
 						"name": "message_send_ttl_seconds",
 						"title": "Message Send Ttl Seconds",
 						"type": "`$INTEGER`",
-						"short": "Time to live for message template sent.",
-						"format": "int64",
+						"short": "Template message delivery retry time-to-live (TTL) override value.",
+						"format": "int32",
 					},
 					map[string]any{
 						"name": "modifiedDate",
@@ -479,12 +713,6 @@ func MakeConfig() map[string]any {
 								"`$NULL`",
 							},
 						},
-						"op": map[string]any{
-							"create": map[string]any{
-								"req": true,
-								"type": "`$STRING`",
-							},
-						},
 						"short": "The message template name",
 					},
 					map[string]any{
@@ -497,11 +725,6 @@ func MakeConfig() map[string]any {
 						"title": "Status",
 						"type": "`$STRING`",
 					},
-					map[string]any{
-						"name": "sub_category",
-						"title": "Sub Category",
-						"type": "`$STRING`",
-					},
 				},
 				"id": map[string]any{
 					"field": "id",
@@ -509,52 +732,6 @@ func MakeConfig() map[string]any {
 				},
 				"name": "template",
 				"op": map[string]any{
-					"create": map[string]any{
-						"input": "data",
-						"name": "create",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "POST",
-								"orig": "/whatsapp/v2/templates",
-								"segments": []any{
-									map[string]any{
-										"lit": "whatsapp",
-									},
-									map[string]any{
-										"lit": "v2",
-									},
-									map[string]any{
-										"lit": "templates",
-									},
-								},
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": map[string]any{
-										"allow_category_change": "`reqdata.allow_category_change`",
-										"category": "`reqdata.category`",
-										"components": "`reqdata.component`",
-										"language": "`reqdata.language`",
-										"library_template_body_inputs": "`reqdata.library_template_body_input`",
-										"library_template_button_inputs": "`reqdata.library_template_button_input`",
-										"library_template_name": "`reqdata.library_template_name`",
-										"message_send_ttl_seconds": "`reqdata.message_send_ttl_second`",
-										"name": "`reqdata.name`",
-										"parameter_format": "`reqdata.parameter_format`",
-										"sub_category": "`reqdata.sub_category`",
-									},
-									"res": "`body`",
-								},
-								"args": map[string]any{},
-								"select": map[string]any{},
-							},
-						},
-					},
 					"update": map[string]any{
 						"input": "data",
 						"name": "update",
@@ -678,114 +855,6 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"id",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"whats_app_template_get_v2_pagination": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "currentPage",
-						"title": "Current Page",
-						"type": "`$INTEGER`",
-						"format": "int32",
-					},
-					map[string]any{
-						"name": "items",
-						"title": "Items",
-						"type": []any{
-							"`$ONE`",
-							[]any{
-								"`$ARRAY`",
-								"`$NULL`",
-							},
-						},
-					},
-					map[string]any{
-						"name": "pages",
-						"title": "Pages",
-						"type": "`$INTEGER`",
-						"format": "int32",
-					},
-					map[string]any{
-						"name": "results",
-						"title": "Results",
-						"type": "`$INTEGER`",
-						"format": "int32",
-					},
-					map[string]any{
-						"name": "resultsPerPage",
-						"title": "Results Per Page",
-						"type": "`$INTEGER`",
-						"format": "int32",
-					},
-				},
-				"name": "whats_app_template_get_v2_pagination",
-				"op": map[string]any{
-					"load": map[string]any{
-						"input": "data",
-						"name": "load",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/whatsapp/v2/templates",
-								"segments": []any{
-									map[string]any{
-										"lit": "whatsapp",
-									},
-									map[string]any{
-										"lit": "v2",
-									},
-									map[string]any{
-										"lit": "templates",
-									},
-								},
-								"parts": []any{
-									"whatsapp",
-									"v2",
-									"templates",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"name": "page",
-											"orig": "page",
-											"type": "`$INTEGER`",
-											"kind": "query",
-											"example": 1,
-										},
-										map[string]any{
-											"name": "size",
-											"orig": "size",
-											"type": "`$INTEGER`",
-											"kind": "query",
-											"example": 25,
-										},
-										map[string]any{
-											"name": "sort",
-											"orig": "sort",
-											"type": "`$ARRAY`",
-											"kind": "query",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"page",
-										"size",
-										"sort",
 									},
 								},
 							},

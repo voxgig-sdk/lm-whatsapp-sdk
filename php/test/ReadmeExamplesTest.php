@@ -45,7 +45,6 @@ class ReadmeExamplesTest extends TestCase
         "SendMessage" => "send_message",
         "Template" => "template",
         "WhatsAppTemplateGetV2" => "whats_app_template_get_v2",
-        "WhatsAppTemplateGetV2Pagination" => "whats_app_template_get_v2_pagination",
     ];
 
     // Documented SDK method names — used only to recognise the NARROW

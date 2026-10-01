@@ -1,6 +1,6 @@
 # LmWhatsapp SDK
 
-MyLINK WhatsApp API client, generated from the OpenAPI spec.
+LINK Mobility MyLINK WhatsApp API clients in TypeScript, Python, PHP, Go, Ruby and Lua, plus a CLI and an MCP server for AI agents. All generated from LINK Mobility's public OpenAPI definition, so every surface stays in sync with the API.
 
 <div> <h2>Purpose and functionality</h2> <p>MyLINK WhatsApp API is a REST-based API that supports sending WhatsApp messages to the recipients you want to reach.</p> <h2>Current supported functionality</h2> <ul style="list-style:disc inside…
 
@@ -12,19 +12,93 @@ Learn more about Voxgig SDKs at [voxgig.com/sdk](https://voxgig.com/sdk/).
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
+> **Features:** `debug`, `idempotency`, `metrics`, `paging`, `ratelimit`, `retry`, `test`, `timeout` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
+## About MyLINK WhatsApp API
+
+**Unofficial. Not affiliated with LINK Mobility.** This is an unofficial SDK for the LINK Mobility MyLINK WhatsApp API, built by [Voxgig](https://voxgig.com/sdk). It is not affiliated with, endorsed by, or sponsored by LINK Mobility.
+
+**Why this exists:** LINK Mobility publishes an OpenAPI definition for the MyLINK WhatsApp API, but no client libraries for it. Voxgig builds public SDK and MCP examples for APIs we think are interesting, and this is one of them. MIT-licensed, take whatever's useful.
+
+It is one of five repositories for LINK Mobility's MyLINK and Umbrella APIs: [Multichannel](https://github.com/voxgig-sdk/lm-multichannel-sdk), [SMS](https://github.com/voxgig-sdk/lm-sms-sdk), [Email](https://github.com/voxgig-sdk/lm-email-sdk), [WhatsApp](https://github.com/voxgig-sdk/lm-whatsapp-sdk) and [Permission](https://github.com/voxgig-sdk/lm-umbrella-sdk).
+
+### Try it (TypeScript)
+
+```bash
+git clone https://github.com/voxgig-sdk/lm-whatsapp-sdk
+cd lm-whatsapp-sdk/ts
+npm install
+npm run build
+npm test
+```
+
+The test suite runs fully offline. Every SDK here ships a test mode that swaps the HTTP transport for an in-memory mock, so you can try it without credentials or a network.
+
+### Send a template message
+
+```ts
+import { LmWhatsappSDK } from '@voxgig-sdk/lm-whatsapp-sdk'
+
+const client = new LmWhatsappSDK({ apikey: process.env.LM_WHATSAPP_APIKEY })
+
+// The API takes a batch, so messages always go in an array.
+const sent = await client.SendMessage().create({
+  messages: [
+    {
+      recipient: '+4712345678',
+      content: {
+        media: { type: 'template', template: { name: 'hello_world', language: { code: 'en_US' } } },
+        options: { sender: 'your-sender-id' },
+      },
+    },
+  ],
+  // The generated type also asks for requestId, a response field. It is not sent.
+  requestId: '',
+})
+console.log(sent.data())
+
+// One template, by id
+const template = await client.WhatsAppTemplateGetV2().load({ id: 'template-id' })
+```
+
+### Base URL
+
+LINK Mobility's definition of this API names no server, so the base URL is set when the SDK is generated: `https://api.linkmobility.com`, the host the sibling MyLINK SMS, Email and RCS definitions name, and one that answers this API's routes. Pass `base` to the client, or set `LM_WHATSAPP_BASE` for the CLI and MCP server, to use another. The definition itself is unchanged; `.sdk/def/PROVENANCE.md` has the evidence.
+
+### Authentication
+
+The API uses OAuth2 client credentials, and the SDK does not fetch the token for you. Request an access token with the client-credentials grant from `https://sso.linkmobility.com/auth/realms/CPaaS/protocol/openid-connect/token`, using the client ID and secret from the Messaging APIs page in MyLINK. Pass the token as `apikey`, and the SDK sends it as `Authorization: Bearer <token>`. The CLI and the MCP server read it from `LM_WHATSAPP_APIKEY`.
+
+### Using the MCP server
+
+```bash
+cd go-mcp && go build -o lm-whatsapp-mcp .
+export LM_WHATSAPP_APIKEY=<access token>
+claude mcp add --scope user lm-whatsapp -- "$PWD/lm-whatsapp-mcp" -transport stdio
+```
+
+The MCP server is read-only for now. It has two tools, `lm-whatsapp_list` and `lm-whatsapp_load`, and in this API only the load tool has work to do: entity `manage_template` returns the paged template list, and `whats_app_template_get_v2` returns one template. No entity here has a list operation, so the list tool answers with an error. Sending goes through the SDKs.
+
+### Honest state
+
+Generated from LINK Mobility's public OpenAPI definition of the MyLINK WhatsApp API (v2, from docs.linkmobility.com) on 2026-10-01. Not production-tuned. Known rough edge: media upload does not work yet. That endpoint takes the raw file as the request body, and the generated SDKs only send JSON, so upload media another way and refer to it in your message. Template calls are also spread across three entities named after the definition's schemas: ManageTemplate (create, the paged template list, and remove), Template (update) and WhatsAppTemplateGetV2 (load one). The typed create input also asks for requestId, which is a response field, so pass an empty string; it is not sent. The SDK leaves the OAuth2 token exchange to you, as described above. Use it as a starting point or a reference.
+
+When teams want SDKs like these production-grade, idiomatic per language, tested, documented, and released through a real pipeline, Voxgig does that work as a consulting engagement. The toolkit also generates Java and C# if your customers need them. Questions: richard@voxgig.com.
+
+If you are from LINK Mobility and would like this repository removed, or transferred to your own GitHub organisation, email richard@voxgig.com and it will be done within two business days, no questions asked.
+
 ## Entities, not endpoints
 
-This SDK exposes the API as a small set of **semantic entities** — ManageTemplate, Media, SendMessage, Template, WhatsAppTemplateGetV2 and WhatsAppTemplateGetV2Pagination — that you
+This SDK exposes the API as a small set of **semantic entities** — ManageTemplate, Media, SendMessage, Template and WhatsAppTemplateGetV2 — that you
 call directly, instead of assembling URL paths and query strings. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`load`, `create`, `update`, `remove`):
 
 ```ts
 const client = new LmWhatsappSDK()
+const managetemplate = await client.ManageTemplate().load()
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -43,23 +117,23 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = LmWhatsappSDK.test({
   entity: {
-    whats_app_template_get_v2: {
-      test01: { id: 'test01' },
+    manage_template: {
+      test01: { id: 'test01', components: [] },
     },
   },
 })
-const whatsapptemplategetv2 = await client.WhatsAppTemplateGetV2().load({ id: 'test01' })
-// whatsapptemplategetv2 is the WhatsAppTemplateGetV2 entity, populated with mock data
-// — call whatsapptemplategetv2.data() for the record itself
-console.log(whatsapptemplategetv2)
+const managetemplate = await client.ManageTemplate().load()
+// managetemplate is the ManageTemplate entity, populated with mock data
+// — call managetemplate.data() for the record itself
+console.log(managetemplate)
 ```
 
 ### Python
 
 ```python
 client = LmWhatsappSDK.test()
-whatsapptemplategetv2 = client.WhatsAppTemplateGetV2().load({"id": "test01"})
-print(whatsapptemplategetv2)
+managetemplate = client.ManageTemplate().load()
+print(managetemplate)
 ```
 
 ### PHP
@@ -67,17 +141,17 @@ print(whatsapptemplategetv2)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = LmWhatsappSDK::test([
-    "entity" => ["whatsapptemplategetv2" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["managetemplate" => ["test01" => []]],
 ]);
-$whatsapptemplategetv2 = $client->WhatsAppTemplateGetV2()->load(["id" => "test01"]);
+$managetemplate = $client->ManageTemplate()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.WhatsAppTemplateGetV2(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+result, err := client.ManageTemplate(nil).Load(
+    nil, nil,
 )
 ```
 
@@ -86,28 +160,28 @@ result, err := client.WhatsAppTemplateGetV2(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = LmWhatsappSDK.test({
-  "entity" => { "whatsapptemplategetv2" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "managetemplate" => { "test01" => {} } },
 })
-whatsapptemplategetv2 = client.WhatsAppTemplateGetV2.load({ "id" => "test01" })
+managetemplate = client.ManageTemplate.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:WhatsAppTemplateGetV2():load({ id = "test01" })
+local result, err = client:ManageTemplate():load()
 ```
 
 ## Packages
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/lm-whatsapp-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/lm-whatsapp-sdk/tags) |
-| Python | `voxgig-sdk-lm-whatsapp-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/lm-whatsapp-sdk/tags) |
-| PHP | `voxgig-sdk/lm-whatsapp-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/lm-whatsapp-sdk/tags) |
+| TypeScript | `@voxgig-sdk/lm-whatsapp-sdk` | publish pending — [install from source](ts/README.md#install) |
+| Python | `voxgig-sdk-lm-whatsapp-sdk` | publish pending — [install from source](py/README.md#install) |
+| PHP | `voxgig-sdk/lm-whatsapp-sdk` | publish pending — [install from source](php/README.md#install) |
 | Golang | `github.com/voxgig-sdk/lm-whatsapp-sdk/go` | `go get github.com/voxgig-sdk/lm-whatsapp-sdk/go@latest` |
-| Ruby | `voxgig-sdk-lm-whatsapp-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/lm-whatsapp-sdk/tags) |
-| Lua | `voxgig-sdk-lm-whatsapp-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/lm-whatsapp-sdk/tags) |
+| Ruby | `voxgig-sdk-lm-whatsapp-sdk` | publish pending — [install from source](rb/README.md#install) |
+| Lua | `voxgig-sdk-lm-whatsapp-sdk` | publish pending — [install from source](lua/README.md#install) |
 | Go CLI | `github.com/voxgig-sdk/lm-whatsapp-sdk/go-cli` | `go install github.com/voxgig-sdk/lm-whatsapp-sdk/go-cli/cmd/lm-whatsapp@latest` |
 | Go MCP server | `github.com/voxgig-sdk/lm-whatsapp-sdk/go-mcp` | `go get github.com/voxgig-sdk/lm-whatsapp-sdk/go-mcp@latest` |
 
@@ -122,6 +196,9 @@ const client = new LmWhatsappSDK({
   apikey: process.env.LM_WHATSAPP_APIKEY,
 })
 
+// Load managetemplate data (returns a ManageTemplate)
+const managetemplate = await client.ManageTemplate().load()
+console.log(managetemplate)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -158,16 +235,15 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 6 entities:
+The API exposes 5 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **ManageTemplate** | The ManageTemplate entity (remove). | `/whatsapp/v2/templates/{id}` |
+| **ManageTemplate** | The ManageTemplate entity (create, load, remove). | `/whatsapp/v2/templates` |
 | **Media** | The Media entity (create). | `/whatsapp/v2/{phoneNumber}/media` |
 | **SendMessage** | The SendMessage entity (create). | `/whatsapp/v2/messages` |
-| **Template** | The Template entity (create, update). | `/whatsapp/v2/templates` |
+| **Template** | The Template entity (update). | `/whatsapp/v2/templates/{id}` |
 | **WhatsAppTemplateGetV2** | The WhatsAppTemplateGetV2 entity (load). | `/whatsapp/v2/templates/{id}` |
-| **WhatsAppTemplateGetV2Pagination** | The WhatsAppTemplateGetV2Pagination entity (load). | `/whatsapp/v2/templates` |
 
 The operations available across these entities are **load**, **create**, **update**, **remove** — see each entity's
 own list above for exactly which it supports.
@@ -184,6 +260,10 @@ client = LmWhatsappSDK({
     "apikey": os.environ.get("LM_WHATSAPP_APIKEY"),
 })
 
+
+# Load a specific managetemplate (returns the record, raises on error)
+managetemplate = client.ManageTemplate().load()
+print(managetemplate)
 ```
 
 ### PHP
@@ -196,6 +276,10 @@ $client = new LmWhatsappSDK([
     "apikey" => getenv("LM_WHATSAPP_APIKEY"),
 ]);
 
+
+// Load a specific managetemplate (returns the ENTITY; call data_get() for the record; throws on error)
+$managetemplate = $client->ManageTemplate()->load();
+print_r($managetemplate->data_get());
 ```
 
 ### Golang
@@ -207,6 +291,12 @@ client := sdk.NewLmWhatsappSDK(map[string]any{
     "apikey": os.Getenv("LM_WHATSAPP_APIKEY"),
 })
 
+// Load managetemplate data
+manageTemplate, err := client.ManageTemplate(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(manageTemplate)
 ```
 
 ### Ruby
@@ -218,6 +308,10 @@ client = LmWhatsappSDK.new({
   "apikey" => ENV["LM_WHATSAPP_APIKEY"],
 })
 
+
+# Load a specific managetemplate (returns the ENTITY; call data_get for the record)
+managetemplate = client.ManageTemplate.load()
+puts managetemplate
 ```
 
 ### Lua
@@ -229,6 +323,10 @@ local client = sdk.new({
   apikey = os.getenv("LM_WHATSAPP_APIKEY"),
 })
 
+
+-- Load a specific managetemplate
+local managetemplate, err = client:ManageTemplate():load()
+print(managetemplate)
 ```
 
 ## Direct and prepare
@@ -385,6 +483,7 @@ The OpenAPI spec(s) this SDK was generated from are kept in the
 [`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://api.linkmobility.com](https://api.linkmobility.com)
+- Documentation: [https://docs.linkmobility.com/api-reference/mylink-whatsapp-api](https://docs.linkmobility.com/api-reference/mylink-whatsapp-api)
 
 ## Security
 

@@ -30,5 +30,3 @@ var NewTemplateEntityFunc func(client *LmWhatsappSDK, entopts map[string]any) Lm
 
 var NewWhatsAppTemplateGetV2EntityFunc func(client *LmWhatsappSDK, entopts map[string]any) LmWhatsappEntity
 
-var NewWhatsAppTemplateGetV2PaginationEntityFunc func(client *LmWhatsappSDK, entopts map[string]any) LmWhatsappEntity
-

@@ -1,6 +1,6 @@
 # LmWhatsapp TypeScript SDK
 
-
+LINK Mobility MyLINK WhatsApp API clients in TypeScript, Python, PHP, Go, Ruby and Lua, plus a CLI and an MCP server for AI agents. All generated from LINK Mobility's public OpenAPI definition, so every surface stays in sync with the API.
 
 The TypeScript SDK for the LmWhatsapp API — a type-safe, entity-oriented client with full async/await support.
 
@@ -15,9 +15,13 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`):
+release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases)), or from a
+clone, which carries the compiled `dist/`:
 
-- Releases: [https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases](https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/lm-whatsapp-sdk
+npm install ./lm-whatsapp-sdk/ts
+```
 
 
 ## Tutorial: your first API call
@@ -35,9 +39,27 @@ const client = new LmWhatsappSDK({
 })
 ```
 
+### 3. Load a managetemplate
+
+`load()` returns the entity directly and throws on failure:
+
+```ts
+try {
+  const managetemplate = await client.ManageTemplate().load()
+  console.log(managetemplate)
+} catch (err) {
+  console.error('load failed:', err)
+}
+```
+
 ### 4. Create, update, and remove
 
 ```ts
+// Create — returns the created ManageTemplate ENTITY (.data() for the record)
+const created = await client.ManageTemplate().create({
+  components: [],
+})
+
 // Remove
 await client.ManageTemplate().remove({
   id: 'example_id',
@@ -51,8 +73,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const whatsapptemplategetv2 = await client.WhatsAppTemplateGetV2().load({ id: "example_id" })
-  console.log(whatsapptemplategetv2)
+  const managetemplate = await client.ManageTemplate().load()
+  console.log(managetemplate)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -118,10 +140,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = LmWhatsappSDK.test()
 
-const whatsapptemplategetv2 = await client.WhatsAppTemplateGetV2().load({ id: 'test01' })
-// whatsapptemplategetv2 is the entity, populated with mock response data
-// — call whatsapptemplategetv2.data() for the record itself
-console.log(whatsapptemplategetv2)
+const managetemplate = await client.ManageTemplate().load()
+// managetemplate is the entity, populated with mock response data
+// — call managetemplate.data() for the record itself
+console.log(managetemplate)
 ```
 
 You can also use the instance method:
@@ -136,10 +158,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.WhatsAppTemplateGetV2()
+const entity = client.ManageTemplate()
 
 // First call runs the operation and stores its result
-await entity.load({ id: 'example' })
+await entity.load()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -228,7 +250,6 @@ new LmWhatsappSDK(options?: {
 | `SendMessage(data?)` | `SendMessageEntity` | Create a SendMessage entity instance. |
 | `Template(data?)` | `TemplateEntity` | Create a Template entity instance. |
 | `WhatsAppTemplateGetV2(data?)` | `WhatsAppTemplateGetV2Entity` | Create a WhatsAppTemplateGetV2 entity instance. |
-| `WhatsAppTemplateGetV2Pagination(data?)` | `WhatsAppTemplateGetV2PaginationEntity` | Create a WhatsAppTemplateGetV2Pagination entity instance. |
 | `tester(testopts?, sdkopts?)` | `LmWhatsappSDK` | Create a test-mode client instance. |
 
 #### Static methods
@@ -301,11 +322,30 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` |  |
+| `components` | Array of components that make up the template. |
+| `createdDate` |  |
+| `currentPage` |  |
+| `id` | ID |
+| `items` |  |
+| `language` |  |
+| `library_template_body_inputs` |  |
+| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
+| `library_template_name` | Library template name |
+| `message_send_ttl_seconds` | Time to live for message template sent. |
+| `modifiedDate` |  |
+| `name` | The message template name |
+| `pages` |  |
+| `parameter_format` |  |
+| `results` |  |
+| `resultsPerPage` |  |
+| `status` |  |
+| `sub_category` |  |
 
-Operations: remove.
+Operations: create, load, remove.
 
-API path: `/whatsapp/v2/templates/{id}`
+API path: `/whatsapp/v2/templates`
 
 #### Media
 
@@ -320,6 +360,8 @@ API path: `/whatsapp/v2/{phoneNumber}/media`
 
 | Field | Description |
 | --- | --- |
+| `messages` |  |
+| `requestId` | Unique Id of the request made towards LINK Mobility. |
 
 Operations: create.
 
@@ -329,25 +371,20 @@ API path: `/whatsapp/v2/messages`
 
 | Field | Description |
 | --- | --- |
-| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` |  |
-| `components` | Array of components that make up the template. |
+| `components` | The array containing all the content of the message template |
 | `createdDate` |  |
 | `id` | ID |
 | `language` |  |
-| `library_template_body_inputs` |  |
-| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
-| `library_template_name` | Library template name |
-| `message_send_ttl_seconds` | Time to live for message template sent. |
+| `message_send_ttl_seconds` | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` |  |
 | `name` | The message template name |
 | `parameter_format` |  |
 | `status` |  |
-| `sub_category` |  |
 
-Operations: create, update.
+Operations: update.
 
-API path: `/whatsapp/v2/templates`
+API path: `/whatsapp/v2/templates/{id}`
 
 #### WhatsAppTemplateGetV2
 
@@ -358,20 +395,6 @@ API path: `/whatsapp/v2/templates`
 Operations: load.
 
 API path: `/whatsapp/v2/templates/{id}`
-
-#### WhatsAppTemplateGetV2Pagination
-
-| Field | Description |
-| --- | --- |
-| `currentPage` |  |
-| `items` |  |
-| `pages` |  |
-| `results` |  |
-| `resultsPerPage` |  |
-
-Operations: load.
-
-API path: `/whatsapp/v2/templates`
 
 
 
@@ -386,13 +409,48 @@ Create an instance: `const manage_template = client.ManageTemplate()`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `allow_category_change` | `boolean` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` | `string` |  |
+| `components` | `any[]` | Array of components that make up the template. |
+| `createdDate` | `string` |  |
+| `currentPage` | `number` |  |
+| `id` | `string | null` | ID |
+| `items` | `any[] | null` |  |
+| `language` | `string` |  |
+| `library_template_body_inputs` | `Record<string, any>` |  |
+| `library_template_button_inputs` | `any[] | null` | Optional data during creation of a template from a library template. |
+| `library_template_name` | `string | null` | Library template name |
+| `message_send_ttl_seconds` | `number` | Time to live for message template sent. |
+| `modifiedDate` | `string | null` |  |
+| `name` | `string | null` | The message template name |
+| `pages` | `number` |  |
+| `parameter_format` | `string` |  |
+| `results` | `number` |  |
+| `resultsPerPage` | `number` |  |
+| `status` | `string` |  |
+| `sub_category` | `string` |  |
+
+#### Example: Load
+
+```ts
+const manage_template = await client.ManageTemplate().load()
+```
+
+#### Example: Create
+
+```ts
+const manage_template = await client.ManageTemplate().create({
+  components: [],
+})
+```
 
 
 ### Media
@@ -424,10 +482,19 @@ Create an instance: `const send_message = client.SendMessage()`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `messages` | `any[]` |  |
+| `requestId` | `string` | Unique Id of the request made towards LINK Mobility. |
+
 #### Example: Create
 
 ```ts
 const send_message = await client.SendMessage().create({
+  messages: [],
+  requestId: 'example_requestId',
 })
 ```
 
@@ -440,36 +507,22 @@ Create an instance: `const template = client.Template()`
 
 | Method | Description |
 | --- | --- |
-| `create(data)` | Create a new entity with the given data. |
 | `update(data)` | Update an existing entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `allow_category_change` | `boolean` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` |  |
-| `components` | `any[]` | Array of components that make up the template. |
+| `components` | `any[] | null` | The array containing all the content of the message template |
 | `createdDate` | `string` |  |
 | `id` | `string | null` | ID |
 | `language` | `string` |  |
-| `library_template_body_inputs` | `Record<string, any>` |  |
-| `library_template_button_inputs` | `any[] | null` | Optional data during creation of a template from a library template. |
-| `library_template_name` | `string | null` | Library template name |
-| `message_send_ttl_seconds` | `number` | Time to live for message template sent. |
+| `message_send_ttl_seconds` | `number` | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` | `string | null` |  |
 | `name` | `string | null` | The message template name |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
-| `sub_category` | `string` |  |
-
-#### Example: Create
-
-```ts
-const template = await client.Template().create({
-  components: [],
-})
-```
 
 
 ### WhatsAppTemplateGetV2
@@ -492,33 +545,6 @@ Create an instance: `const whats_app_template_get_v2 = client.WhatsAppTemplateGe
 
 ```ts
 const whats_app_template_get_v2 = await client.WhatsAppTemplateGetV2().load({ id: 'whats_app_template_get_v2_id' })
-```
-
-
-### WhatsAppTemplateGetV2Pagination
-
-Create an instance: `const whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `currentPage` | `number` |  |
-| `items` | `any[] | null` |  |
-| `pages` | `number` |  |
-| `results` | `number` |  |
-| `resultsPerPage` | `number` |  |
-
-#### Example: Load
-
-```ts
-const whats_app_template_get_v2_pagination = await client.WhatsAppTemplateGetV2Pagination().load()
 ```
 
 ## Features
@@ -734,11 +760,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const whatsapptemplategetv2 = client.WhatsAppTemplateGetV2()
-await whatsapptemplategetv2.load({ id: "example_id" })
+const managetemplate = client.ManageTemplate()
+await managetemplate.load()
 
-// whatsapptemplategetv2.data() now returns the whatsapptemplategetv2 data from the last `load`
-// whatsapptemplategetv2.match() returns { id: "example_id" }
+// managetemplate.data() now returns the managetemplate data from the last `load`
+// managetemplate.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

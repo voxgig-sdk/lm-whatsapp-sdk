@@ -1,4 +1,4 @@
--- WhatsAppTemplateGetV2Pagination direct test
+-- ManageTemplate direct test
 
 local json = require("dkjson")
 local vs = require("utility.struct.struct")
@@ -6,10 +6,10 @@ local sdk = require("lm-whatsapp_sdk")
 local helpers = require("core.helpers")
 local runner = require("test.runner")
 
-describe("WhatsAppTemplateGetV2PaginationDirect", function()
-  it("should direct-load-whats_app_template_get_v2_pagination", function()
-    local setup = whats_app_template_get_v2_pagination_direct_setup({ id = "direct01" })
-    local _should_skip, _reason = runner.is_control_skipped("direct", "direct-load-whats_app_template_get_v2_pagination", setup.live and "live" or "unit")
+describe("ManageTemplateDirect", function()
+  it("should direct-load-manage_template", function()
+    local setup = manage_template_direct_setup({ id = "direct01" })
+    local _should_skip, _reason = runner.is_control_skipped("direct", "direct-load-manage_template", setup.live and "live" or "unit")
     if _should_skip then
       pending(_reason or "skipped via sdk-test-control.json")
       return
@@ -54,13 +54,13 @@ describe("WhatsAppTemplateGetV2PaginationDirect", function()
 end)
 
 
-function whats_app_template_get_v2_pagination_direct_setup(mockres)
+function manage_template_direct_setup(mockres)
   runner.load_env_local()
 
   local calls = {}
 
   local env = runner.env_override({
-    ["LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID"] = {},
+    ["LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID"] = {},
     ["LM_WHATSAPP_TEST_LIVE"] = "FALSE",
     ["LM_WHATSAPP_APIKEY"] = "",
   })

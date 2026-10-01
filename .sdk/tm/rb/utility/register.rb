@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 LmWhatsappUtility.registrar = ->(u) {
   u.clean = LmWhatsappUtilities::Clean
+  u.clean_add = LmWhatsappUtilities::CleanAdd
+  u.clean_explain = LmWhatsappUtilities::CleanExplain
   u.done = LmWhatsappUtilities::Done
   u.make_error = LmWhatsappUtilities::MakeError
   u.feature_add = LmWhatsappUtilities::FeatureAdd

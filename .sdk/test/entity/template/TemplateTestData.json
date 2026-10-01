@@ -2,84 +2,59 @@
   "existing": {
     "template": {
       "TEMPLATE00": {
-        "allow_category_change": true,
-        "category": "s97",
-        "components": [],
-        "createdDate": "s99",
+        "category": "s64",
+        "components": "s65",
+        "createdDate": "s66",
         "id": "TEMPLATE00",
-        "language": "s9b",
-        "library_template_body_inputs": {},
-        "library_template_button_inputs": "s9d",
-        "library_template_name": "s9e",
-        "message_send_ttl_seconds": 159,
-        "modifiedDate": "sa0",
-        "name": "sa1",
-        "parameter_format": "sa2",
-        "status": "sa3",
-        "sub_category": "sa4"
+        "language": "s68",
+        "message_send_ttl_seconds": 105,
+        "modifiedDate": "s6a",
+        "name": "s6b",
+        "parameter_format": "s6c",
+        "status": "s6d"
       },
       "TEMPLATE01": {
-        "allow_category_change": true,
-        "category": "s12d",
-        "components": [],
-        "createdDate": "s12f",
+        "category": "sc8",
+        "components": "sc9",
+        "createdDate": "sca",
         "id": "TEMPLATE01",
-        "language": "s131",
-        "library_template_body_inputs": {},
-        "library_template_button_inputs": "s133",
-        "library_template_name": "s134",
-        "message_send_ttl_seconds": 309,
-        "modifiedDate": "s136",
-        "name": "s137",
-        "parameter_format": "s138",
-        "status": "s139",
-        "sub_category": "s13a"
+        "language": "scc",
+        "message_send_ttl_seconds": 205,
+        "modifiedDate": "sce",
+        "name": "scf",
+        "parameter_format": "sd0",
+        "status": "sd1"
       },
       "TEMPLATE02": {
-        "allow_category_change": true,
-        "category": "s1c3",
-        "components": [],
-        "createdDate": "s1c5",
+        "category": "s12c",
+        "components": "s12d",
+        "createdDate": "s12e",
         "id": "TEMPLATE02",
-        "language": "s1c7",
-        "library_template_body_inputs": {},
-        "library_template_button_inputs": "s1c9",
-        "library_template_name": "s1ca",
-        "message_send_ttl_seconds": 459,
-        "modifiedDate": "s1cc",
-        "name": "s1cd",
-        "parameter_format": "s1ce",
-        "status": "s1cf",
-        "sub_category": "s1d0"
+        "language": "s130",
+        "message_send_ttl_seconds": 305,
+        "modifiedDate": "s132",
+        "name": "s133",
+        "parameter_format": "s134",
+        "status": "s135"
       }
     }
   },
   "new": {
     "template": {
       "template_ref01": {
-        "allow_category_change": true,
-        "category": "s259",
-        "components": [],
-        "createdDate": "s25b",
-        "language": "s25d",
-        "library_template_body_inputs": {},
-        "library_template_button_inputs": "s25f",
-        "library_template_name": "s260",
-        "message_send_ttl_seconds": 609,
-        "modifiedDate": "s262",
-        "name": "s263",
-        "parameter_format": "s264",
-        "status": "s265",
-        "sub_category": "s266"
+        "category": "s190",
+        "components": "s191",
+        "createdDate": "s192",
+        "language": "s194",
+        "message_send_ttl_seconds": 405,
+        "modifiedDate": "s196",
+        "name": "s197",
+        "parameter_format": "s198",
+        "status": "s199"
       }
     }
   },
   "requests": {
-    "POST /whatsapp/v2/templates": {
-      "provenance": "operation-contract",
-      "version": 2,
-      "source": "openapi3"
-    },
     "PUT /whatsapp/v2/templates/{id}": {
       "provenance": "operation-contract",
       "version": 2,

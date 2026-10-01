@@ -22,7 +22,7 @@ use Voxgig\Struct\Struct;
 // (_retry, _cache, _metrics, ...); allow them explicitly (PHP 8.2+
 // deprecates implicit dynamic properties).
 #[\AllowDynamicProperties]
-class LmWhatsappSDK
+class LmWhatsappSDK implements \JsonSerializable
 {
     public string $mode;
     public array $features;
@@ -115,6 +115,19 @@ class LmWhatsappSDK
     {
         $out = Struct::clone($this->options);
         return is_array($out) ? $out : [];
+    }
+
+    // The options hold the credential, so the default print and json form
+    // name the client and nothing more; options_map() is the way to read
+    // them back.
+    public function jsonSerialize(): array
+    {
+        return ['name' => 'LmWhatsapp'];
+    }
+
+    public function __debugInfo(): array
+    {
+        return $this->jsonSerialize();
     }
 
     public function get_utility()
@@ -242,7 +255,7 @@ class LmWhatsappSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return ["ok" => false, "err" => $fetch_err];
+            return ["ok" => false, "err" => ($utility->clean)($ctx, $fetch_err)];
         }
 
         if ($fetched === null) {
@@ -428,24 +441,6 @@ class LmWhatsappSDK
             return $this->_whats_app_template_get_v2;
         }
         return new WhatsAppTemplateGetV2Entity($this, $data);
-    }
-
-
-    private $_whats_app_template_get_v2_pagination = null;
-
-    // Canonical facade: $client->WhatsAppTemplateGetV2Pagination()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->whats_app_template_get_v2_pagination()
-    // resolves here too.
-    public function WhatsAppTemplateGetV2Pagination($data = null)
-    {
-        require_once __DIR__ . '/entity/whats_app_template_get_v2_pagination_entity.php';
-        if ($data === null) {
-            if ($this->_whats_app_template_get_v2_pagination === null) {
-                $this->_whats_app_template_get_v2_pagination = new WhatsAppTemplateGetV2PaginationEntity($this, null);
-            }
-            return $this->_whats_app_template_get_v2_pagination;
-        }
-        return new WhatsAppTemplateGetV2PaginationEntity($this, $data);
     }
 
 

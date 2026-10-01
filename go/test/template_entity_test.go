@@ -33,7 +33,7 @@ func TestTemplateEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{"create", "update"} {
+		for _, _op := range []string{"update"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "template." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -50,24 +50,18 @@ func TestTemplateEntity(t *testing.T) {
 		}
 		client := setup.client
 
-		// CREATE
-		templateRef01Ent := client.Template(nil)
-		templateRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath(setup.data, []any{"new", "template"}), "template_ref01"))
-
-		templateRef01DataResult, err := templateRef01Ent.Create(templateRef01Data, nil)
-		if err != nil {
-			t.Fatalf("create failed: %v", err)
+		// Bootstrap entity data from existing test data (no create step in flow).
+		templateRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.template")))
+		var templateRef01Data map[string]any
+		if len(templateRef01DataRaw) > 0 {
+			templateRef01Data = core.ToMapAny(templateRef01DataRaw[0][1])
 		}
-		templateRef01Data = core.ToMapAny(entityData(templateRef01DataResult))
-		if templateRef01Data == nil {
-			t.Fatal("expected create result to be a map")
-		}
-		if templateRef01Data["id"] == nil {
-			t.Fatal("expected created entity to have an id")
-		}
+		// Discard guards against Go's unused-var check when the flow's steps
+		// happen not to consume the bootstrap data (e.g. list-only flows).
+		_ = templateRef01Data
 
 		// UPDATE
+		templateRef01Ent := client.Template(nil)
 		templateRef01DataUp0Up := map[string]any{
 			"id": templateRef01Data["id"],
 		}

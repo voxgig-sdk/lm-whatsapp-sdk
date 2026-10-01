@@ -1,6 +1,6 @@
 # LmWhatsapp Python SDK
 
-
+LINK Mobility MyLINK WhatsApp API clients in TypeScript, Python, PHP, Go, Ruby and Lua, plus a CLI and an MCP server for AI agents. All generated from LINK Mobility's public OpenAPI definition, so every surface stays in sync with the API.
 
 The Python SDK for the LmWhatsapp API — an entity-oriented client following Pythonic conventions.
 
@@ -39,9 +39,24 @@ client = LmWhatsappSDK({
 })
 ```
 
+### 3. Load a managetemplate
+
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
+
+```python
+try:
+    managetemplate = client.ManageTemplate().load()
+    print(managetemplate)
+except Exception as err:
+    print(f"load failed: {err}")
+```
+
 ### 4. Create, update, and remove
 
 ```python
+# Create — returns the ENTITY (call data_get() for the record)
+created = client.ManageTemplate().create({"components": []})
+
 # Remove
 client.ManageTemplate().remove({"id": "example_id"})
 ```
@@ -53,8 +68,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    whatsapptemplategetv2 = client.WhatsAppTemplateGetV2().load({"id": "example_id"})
-    print(whatsapptemplategetv2)
+    managetemplate = client.ManageTemplate().load()
+    print(managetemplate)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -122,8 +137,8 @@ client = LmWhatsappSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-whatsapptemplategetv2 = client.WhatsAppTemplateGetV2().load({"id": "test01"})
-# whatsapptemplategetv2 contains the mock response record
+managetemplate = client.ManageTemplate().load()
+# managetemplate contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -206,7 +221,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `SendMessage` | `(data) -> SendMessageEntity` | Create a SendMessage entity instance. |
 | `Template` | `(data) -> TemplateEntity` | Create a Template entity instance. |
 | `WhatsAppTemplateGetV2` | `(data) -> WhatsAppTemplateGetV2Entity` | Create a WhatsAppTemplateGetV2 entity instance. |
-| `WhatsAppTemplateGetV2Pagination` | `(data) -> WhatsAppTemplateGetV2PaginationEntity` | Create a WhatsAppTemplateGetV2Pagination entity instance. |
 
 ### Entity interface
 
@@ -249,11 +263,30 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` |  |
+| `components` | Array of components that make up the template. |
+| `createdDate` |  |
+| `currentPage` |  |
+| `id` | ID |
+| `items` |  |
+| `language` |  |
+| `library_template_body_inputs` |  |
+| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
+| `library_template_name` | Library template name |
+| `message_send_ttl_seconds` | Time to live for message template sent. |
+| `modifiedDate` |  |
+| `name` | The message template name |
+| `pages` |  |
+| `parameter_format` |  |
+| `results` |  |
+| `resultsPerPage` |  |
+| `status` |  |
+| `sub_category` |  |
 
-Operations: Remove.
+Operations: Create, Load, Remove.
 
-API path: `/whatsapp/v2/templates/{id}`
+API path: `/whatsapp/v2/templates`
 
 #### Media
 
@@ -268,6 +301,8 @@ API path: `/whatsapp/v2/{phoneNumber}/media`
 
 | Field | Description |
 | --- | --- |
+| `messages` |  |
+| `requestId` | Unique Id of the request made towards LINK Mobility. |
 
 Operations: Create.
 
@@ -277,25 +312,20 @@ API path: `/whatsapp/v2/messages`
 
 | Field | Description |
 | --- | --- |
-| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` |  |
-| `components` | Array of components that make up the template. |
+| `components` | The array containing all the content of the message template |
 | `createdDate` |  |
 | `id` | ID |
 | `language` |  |
-| `library_template_body_inputs` |  |
-| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
-| `library_template_name` | Library template name |
-| `message_send_ttl_seconds` | Time to live for message template sent. |
+| `message_send_ttl_seconds` | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` |  |
 | `name` | The message template name |
 | `parameter_format` |  |
 | `status` |  |
-| `sub_category` |  |
 
-Operations: Create, Update.
+Operations: Update.
 
-API path: `/whatsapp/v2/templates`
+API path: `/whatsapp/v2/templates/{id}`
 
 #### WhatsAppTemplateGetV2
 
@@ -306,20 +336,6 @@ API path: `/whatsapp/v2/templates`
 Operations: Load.
 
 API path: `/whatsapp/v2/templates/{id}`
-
-#### WhatsAppTemplateGetV2Pagination
-
-| Field | Description |
-| --- | --- |
-| `currentPage` |  |
-| `items` |  |
-| `pages` |  |
-| `results` |  |
-| `resultsPerPage` |  |
-
-Operations: Load.
-
-API path: `/whatsapp/v2/templates`
 
 
 
@@ -334,13 +350,48 @@ Create an instance: `manage_template = client.ManageTemplate()`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `str` |  |
+| `allow_category_change` | `bool` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` | `str` |  |
+| `components` | `list` | Array of components that make up the template. |
+| `createdDate` | `str` |  |
+| `currentPage` | `int` |  |
+| `id` | `str | None` | ID |
+| `items` | `list | None` |  |
+| `language` | `str` |  |
+| `library_template_body_inputs` | `dict` |  |
+| `library_template_button_inputs` | `list | None` | Optional data during creation of a template from a library template. |
+| `library_template_name` | `str | None` | Library template name |
+| `message_send_ttl_seconds` | `int` | Time to live for message template sent. |
+| `modifiedDate` | `str | None` |  |
+| `name` | `str | None` | The message template name |
+| `pages` | `int` |  |
+| `parameter_format` | `str` |  |
+| `results` | `int` |  |
+| `resultsPerPage` | `int` |  |
+| `status` | `str` |  |
+| `sub_category` | `str` |  |
+
+#### Example: Load
+
+```python
+manage_template = client.ManageTemplate().load()
+```
+
+#### Example: Create
+
+```python
+manage_template = client.ManageTemplate().create({
+    "components": [],  # list
+})
+```
 
 
 ### Media
@@ -372,10 +423,19 @@ Create an instance: `send_message = client.SendMessage()`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `messages` | `list` |  |
+| `requestId` | `str` | Unique Id of the request made towards LINK Mobility. |
+
 #### Example: Create
 
 ```python
 send_message = client.SendMessage().create({
+    "messages": [],  # list
+    "requestId": "example_requestId",  # str
 })
 ```
 
@@ -388,36 +448,22 @@ Create an instance: `template = client.Template()`
 
 | Method | Description |
 | --- | --- |
-| `create(data)` | Create a new entity with the given data. |
 | `update(data)` | Update an existing entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `allow_category_change` | `bool` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `str` |  |
-| `components` | `list` | Array of components that make up the template. |
+| `components` | `list | None` | The array containing all the content of the message template |
 | `createdDate` | `str` |  |
 | `id` | `str | None` | ID |
 | `language` | `str` |  |
-| `library_template_body_inputs` | `dict` |  |
-| `library_template_button_inputs` | `list | None` | Optional data during creation of a template from a library template. |
-| `library_template_name` | `str | None` | Library template name |
-| `message_send_ttl_seconds` | `int` | Time to live for message template sent. |
+| `message_send_ttl_seconds` | `int` | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` | `str | None` |  |
 | `name` | `str | None` | The message template name |
 | `parameter_format` | `str` |  |
 | `status` | `str` |  |
-| `sub_category` | `str` |  |
-
-#### Example: Create
-
-```python
-template = client.Template().create({
-    "components": [],  # list
-})
-```
 
 
 ### WhatsAppTemplateGetV2
@@ -440,33 +486,6 @@ Create an instance: `whats_app_template_get_v2 = client.WhatsAppTemplateGetV2()`
 
 ```python
 whats_app_template_get_v2 = client.WhatsAppTemplateGetV2().load({"id": "whats_app_template_get_v2_id"})
-```
-
-
-### WhatsAppTemplateGetV2Pagination
-
-Create an instance: `whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `currentPage` | `int` |  |
-| `items` | `list | None` |  |
-| `pages` | `int` |  |
-| `results` | `int` |  |
-| `resultsPerPage` | `int` |  |
-
-#### Example: Load
-
-```python
-whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination().load()
 ```
 
 ## Features
@@ -689,11 +708,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-whatsapptemplategetv2 = client.WhatsAppTemplateGetV2()
-whatsapptemplategetv2.load({"id": "example_id"})
+managetemplate = client.ManageTemplate()
+managetemplate.load()
 
-# whatsapptemplategetv2.data_get() now returns the whatsapptemplategetv2 data from the last load
-# whatsapptemplategetv2.match_get() returns the last match criteria
+# managetemplate.data_get() now returns the managetemplate data from the last load
+# managetemplate.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

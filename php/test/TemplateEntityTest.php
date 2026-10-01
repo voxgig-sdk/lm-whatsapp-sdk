@@ -23,7 +23,7 @@ class TemplateEntityTest extends TestCase
         $setup = template_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["create", "update"] as $_op) {
+        foreach (["update"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "template." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -38,17 +38,16 @@ class TemplateEntityTest extends TestCase
         }
         $client = $setup["client"];
 
-        // CREATE
-        $template_ref01_ent = $client->Template(null);
-        $template_ref01_data = Helpers::to_map(Vs::getprop(
-            Vs::getpath($setup["data"], "new.template"), "template_ref01"));
-
-        $template_ref01_data_result = $template_ref01_ent->create($template_ref01_data, null);
-        $template_ref01_data = Helpers::to_map(is_object($template_ref01_data_result) && method_exists($template_ref01_data_result, 'data_get') ? $template_ref01_data_result->data_get() : $template_ref01_data_result);
-        $this->assertNotNull($template_ref01_data);
-        $this->assertNotNull($template_ref01_data["id"]);
+        // Bootstrap entity data from existing test data.
+        $template_ref01_data_raw = Vs::items(Helpers::to_map(
+            Vs::getpath($setup["data"], "existing.template")));
+        $template_ref01_data = null;
+        if (count($template_ref01_data_raw) > 0) {
+            $template_ref01_data = Helpers::to_map($template_ref01_data_raw[0][1]);
+        }
 
         // UPDATE
+        $template_ref01_ent = $client->Template(null);
         $template_ref01_data_up0_up = [
             "id" => $template_ref01_data["id"],
         ];

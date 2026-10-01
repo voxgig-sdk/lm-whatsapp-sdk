@@ -10,8 +10,7 @@
 <a href="../api/media.html">Media</a>
 <a href="../api/send_message.html">SendMessage</a>
 <a href="../api/template.html">Template</a>
-<a href="../api/whats_app_template_get_v2.html">WhatsAppTemplateGetV2</a>
-<a href="../api/whats_app_template_get_v2_pagination.html">WhatsAppTemplateGetV2Pagination</a></details>
+<a href="../api/whats_app_template_get_v2.html">WhatsAppTemplateGetV2</a></details>
 <details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
 <a href="../guides/first-call.html">Make your first API call</a>
 <a href="../guides/errors.html">Handle errors</a>
@@ -48,7 +47,7 @@
 <tbody>
 <tr>
 <td><a href="../api/manage_template.html">ManageTemplate</a></td>
-<td><code>remove</code></td>
+<td><code>create</code>, <code>load</code>, <code>remove</code></td>
 </tr>
 <tr>
 <td><a href="../api/media.html">Media</a></td>
@@ -60,14 +59,10 @@
 </tr>
 <tr>
 <td><a href="../api/template.html">Template</a></td>
-<td><code>create</code>, <code>update</code></td>
+<td><code>update</code></td>
 </tr>
 <tr>
 <td><a href="../api/whats_app_template_get_v2.html">WhatsAppTemplateGetV2</a></td>
-<td><code>load</code></td>
-</tr>
-<tr>
-<td><a href="../api/whats_app_template_get_v2_pagination.html">WhatsAppTemplateGetV2Pagination</a></td>
 <td><code>load</code></td>
 </tr>
 </tbody>
@@ -104,8 +99,7 @@ client = LmWhatsappSDK.new({&quot;apikey&quot; =&gt; ENV[&quot;LM_WHATSAPP_APIKE
     &quot;media&quot;: {},
     &quot;send_message&quot;: {},
     &quot;template&quot;: {},
-    &quot;whats_app_template_get_v2&quot;: {},
-    &quot;whats_app_template_get_v2_pagination&quot;: {}
+    &quot;whats_app_template_get_v2&quot;: {}
   }
 }
 </code></pre>

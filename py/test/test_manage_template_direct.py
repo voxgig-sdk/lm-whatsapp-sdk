@@ -1,4 +1,4 @@
-# WhatsAppTemplateGetV2Pagination direct test
+# ManageTemplate direct test
 
 import json
 import pytest
@@ -9,11 +9,11 @@ from lmwhatsapp_sdk.core import helpers
 from test import runner
 
 
-class TestWhatsAppTemplateGetV2PaginationDirect:
+class TestManageTemplateDirect:
 
-    def test_should_direct_load_whats_app_template_get_v2_pagination(self):
-        setup = _whats_app_template_get_v2_pagination_direct_setup({"id": "direct01"})
-        _skip, _reason = runner.is_control_skipped("direct", "direct-load-whats_app_template_get_v2_pagination", "live" if setup["live"] else "unit")
+    def test_should_direct_load_manage_template(self):
+        setup = _manage_template_direct_setup({"id": "direct01"})
+        _skip, _reason = runner.is_control_skipped("direct", "direct-load-manage_template", "live" if setup["live"] else "unit")
         if _skip:
             # pytest already imported at module scope
             pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -50,13 +50,13 @@ class TestWhatsAppTemplateGetV2PaginationDirect:
 
 
 
-def _whats_app_template_get_v2_pagination_direct_setup(mockres):
+def _manage_template_direct_setup(mockres):
     runner.load_env_local()
 
     calls = []
 
     env = runner.env_override({
-        "LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID": {},
+        "LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID": {},
         "LM_WHATSAPP_TEST_LIVE": "FALSE",
         "LM_WHATSAPP_APIKEY": "",
     })

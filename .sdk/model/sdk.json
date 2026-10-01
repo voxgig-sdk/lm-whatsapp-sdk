@@ -129,214 +129,6 @@
             "field": {}
           },
           "fields": {
-            "id": {
-              "a": true,
-              "h": "Id",
-              "n": "id",
-              "r": false,
-              "t": "`$STRING`"
-            }
-          },
-          "id": {
-            "field": "id",
-            "name": "id"
-          },
-          "name": "manage_template",
-          "op": {
-            "remove": {
-              "input": "data",
-              "name": "remove",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "DELETE /whatsapp/v2/templates/{id}",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "params": [
-                      {
-                        "a": true,
-                        "k": "param",
-                        "n": "id",
-                        "or": "id",
-                        "r": true,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "DELETE",
-                  "o": "/whatsapp/v2/templates/{id}",
-                  "q": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "whatsapp"
-                    },
-                    {
-                      "lit": "v2"
-                    },
-                    {
-                      "lit": "templates"
-                    },
-                    {
-                      "var": "id"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  }
-                }
-              ]
-            }
-          },
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "media": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": {},
-          "name": "media",
-          "op": {
-            "create": {
-              "input": "data",
-              "name": "create",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "POST /whatsapp/v2/{phoneNumber}/media",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "header": [
-                      {
-                        "a": true,
-                        "k": "header",
-                        "n": "x_link_upload_filename",
-                        "or": "x_link_upload_filename",
-                        "r": true,
-                        "t": "`$STRING`"
-                      }
-                    ],
-                    "params": [
-                      {
-                        "a": true,
-                        "ex": "+15551234567 or %2b15551234567 or %2B15551234567",
-                        "k": "param",
-                        "n": "phone_number",
-                        "or": "phone_number",
-                        "r": true,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "POST",
-                  "o": "/whatsapp/v2/{phoneNumber}/media",
-                  "q": {
-                    "exist": [
-                      "phone_number",
-                      "x_link_upload_filename"
-                    ]
-                  },
-                  "r": {
-                    "param": {
-                      "phoneNumber": "phone_number"
-                    }
-                  },
-                  "s": [
-                    {
-                      "lit": "whatsapp"
-                    },
-                    {
-                      "lit": "v2"
-                    },
-                    {
-                      "var": "phone_number"
-                    },
-                    {
-                      "lit": "media"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  }
-                }
-              ]
-            }
-          },
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "send_message": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": {},
-          "name": "send_message",
-          "op": {
-            "create": {
-              "input": "data",
-              "name": "create",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "POST /whatsapp/v2/messages",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {},
-                  "k": "http",
-                  "m": "POST",
-                  "o": "/whatsapp/v2/messages",
-                  "q": {},
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "whatsapp"
-                    },
-                    {
-                      "lit": "v2"
-                    },
-                    {
-                      "lit": "messages"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  }
-                }
-              ]
-            }
-          },
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "template": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": {
             "allow_category_change": {
               "a": true,
               "h": "Allow Category Change",
@@ -362,18 +154,6 @@
               "a": true,
               "h": "Components",
               "n": "components",
-              "op": {
-                "update": {
-                  "req": false,
-                  "type": [
-                    "`$ONE`",
-                    [
-                      "`$ARRAY`",
-                      "`$NULL`"
-                    ]
-                  ]
-                }
-              },
               "r": true,
               "sh": "Array of components that make up the template.",
               "t": "`$ARRAY`"
@@ -386,6 +166,14 @@
               "r": false,
               "t": "`$STRING`"
             },
+            "currentPage": {
+              "a": true,
+              "fo": "int32",
+              "h": "Current Page",
+              "n": "currentPage",
+              "r": false,
+              "t": "`$INTEGER`"
+            },
             "id": {
               "a": true,
               "h": "Id",
@@ -396,6 +184,19 @@
                 "`$ONE`",
                 [
                   "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "items": {
+              "a": true,
+              "h": "Items",
+              "n": "items",
+              "r": false,
+              "t": [
+                "`$ONE`",
+                [
+                  "`$ARRAY`",
                   "`$NULL`"
                 ]
               ]
@@ -491,12 +292,36 @@
                 ]
               ]
             },
+            "pages": {
+              "a": true,
+              "fo": "int32",
+              "h": "Pages",
+              "n": "pages",
+              "r": false,
+              "t": "`$INTEGER`"
+            },
             "parameter_format": {
               "a": true,
               "h": "Parameter Format",
               "n": "parameter_format",
               "r": false,
               "t": "`$STRING`"
+            },
+            "results": {
+              "a": true,
+              "fo": "int32",
+              "h": "Results",
+              "n": "results",
+              "r": false,
+              "t": "`$INTEGER`"
+            },
+            "resultsPerPage": {
+              "a": true,
+              "fo": "int32",
+              "h": "Results Per Page",
+              "n": "resultsPerPage",
+              "r": false,
+              "t": "`$INTEGER`"
             },
             "status": {
               "a": true,
@@ -517,7 +342,7 @@
             "field": "id",
             "name": "id"
           },
-          "name": "template",
+          "name": "manage_template",
           "op": {
             "create": {
               "input": "data",
@@ -566,6 +391,395 @@
                 }
               ]
             },
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "GET /whatsapp/v2/templates",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "query": [
+                      {
+                        "a": true,
+                        "ex": 1,
+                        "k": "query",
+                        "n": "page",
+                        "or": "page",
+                        "r": false,
+                        "t": "`$INTEGER`"
+                      },
+                      {
+                        "a": true,
+                        "ex": 25,
+                        "k": "query",
+                        "n": "size",
+                        "or": "size",
+                        "r": false,
+                        "t": "`$INTEGER`"
+                      },
+                      {
+                        "a": true,
+                        "k": "query",
+                        "n": "sort",
+                        "or": "sort",
+                        "r": false,
+                        "t": "`$ARRAY`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/whatsapp/v2/templates",
+                  "q": {
+                    "exist": [
+                      "page",
+                      "size",
+                      "sort"
+                    ]
+                  },
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "whatsapp"
+                    },
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "templates"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            },
+            "remove": {
+              "input": "data",
+              "name": "remove",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "DELETE /whatsapp/v2/templates/{id}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "params": [
+                      {
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "id",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "DELETE",
+                  "o": "/whatsapp/v2/templates/{id}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "whatsapp"
+                    },
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "templates"
+                    },
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "media": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {},
+          "name": "media",
+          "op": {
+            "create": {
+              "input": "data",
+              "name": "create",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "POST /whatsapp/v2/{phoneNumber}/media",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
+                    "header": [
+                      {
+                        "a": true,
+                        "k": "header",
+                        "n": "x_link_upload_filename",
+                        "or": "X-Link-Upload-Filename",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ],
+                    "params": [
+                      {
+                        "a": true,
+                        "ex": "+15551234567 or %2b15551234567 or %2B15551234567",
+                        "k": "param",
+                        "n": "phone_number",
+                        "or": "phoneNumber",
+                        "r": true,
+                        "t": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/whatsapp/v2/{phoneNumber}/media",
+                  "q": {
+                    "exist": [
+                      "phone_number",
+                      "x_link_upload_filename"
+                    ]
+                  },
+                  "r": {
+                    "param": {
+                      "phoneNumber": "phone_number"
+                    }
+                  },
+                  "s": [
+                    {
+                      "lit": "whatsapp"
+                    },
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "var": "phone_number"
+                    },
+                    {
+                      "lit": "media"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "send_message": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "messages": {
+              "a": true,
+              "h": "Messages",
+              "n": "messages",
+              "r": true,
+              "t": "`$ARRAY`"
+            },
+            "requestId": {
+              "a": true,
+              "fo": "uuid",
+              "h": "Request Id",
+              "n": "requestId",
+              "r": true,
+              "sh": "Unique Id of the request made towards LINK Mobility.",
+              "t": "`$STRING`"
+            }
+          },
+          "name": "send_message",
+          "op": {
+            "create": {
+              "input": "data",
+              "name": "create",
+              "points": [
+                {
+                  "a": true,
+                  "co": {
+                    "id": "POST /whatsapp/v2/messages",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/whatsapp/v2/messages",
+                  "q": {},
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "whatsapp"
+                    },
+                    {
+                      "lit": "v2"
+                    },
+                    {
+                      "lit": "messages"
+                    }
+                  ],
+                  "t": {
+                    "req": "`reqdata.messages`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "template": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": {
+            "category": {
+              "a": true,
+              "h": "Category",
+              "n": "category",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "components": {
+              "a": true,
+              "h": "Components",
+              "n": "components",
+              "r": false,
+              "sh": "The array containing all the content of the message template",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$ARRAY`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "createdDate": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Created Date",
+              "n": "createdDate",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "sh": "ID",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "language": {
+              "a": true,
+              "h": "Language",
+              "n": "language",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "message_send_ttl_seconds": {
+              "a": true,
+              "fo": "int32",
+              "h": "Message Send Ttl Seconds",
+              "n": "message_send_ttl_seconds",
+              "r": false,
+              "sh": "Template message delivery retry time-to-live (TTL) override value.",
+              "t": "`$INTEGER`"
+            },
+            "modifiedDate": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Modified Date",
+              "n": "modifiedDate",
+              "r": false,
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "The message template name",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "parameter_format": {
+              "a": true,
+              "h": "Parameter Format",
+              "n": "parameter_format",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "status": {
+              "a": true,
+              "h": "Status",
+              "n": "status",
+              "r": false,
+              "t": "`$STRING`"
+            }
+          },
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
+          "name": "template",
+          "op": {
             "update": {
               "input": "data",
               "name": "update",
@@ -693,135 +907,6 @@
                     },
                     {
                       "var": "id"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  }
-                }
-              ]
-            }
-          },
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "whats_app_template_get_v2_pagination": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": {
-            "currentPage": {
-              "a": true,
-              "fo": "int32",
-              "h": "Current Page",
-              "n": "currentPage",
-              "r": false,
-              "t": "`$INTEGER`"
-            },
-            "items": {
-              "a": true,
-              "h": "Items",
-              "n": "items",
-              "r": false,
-              "t": [
-                "`$ONE`",
-                [
-                  "`$ARRAY`",
-                  "`$NULL`"
-                ]
-              ]
-            },
-            "pages": {
-              "a": true,
-              "fo": "int32",
-              "h": "Pages",
-              "n": "pages",
-              "r": false,
-              "t": "`$INTEGER`"
-            },
-            "results": {
-              "a": true,
-              "fo": "int32",
-              "h": "Results",
-              "n": "results",
-              "r": false,
-              "t": "`$INTEGER`"
-            },
-            "resultsPerPage": {
-              "a": true,
-              "fo": "int32",
-              "h": "Results Per Page",
-              "n": "resultsPerPage",
-              "r": false,
-              "t": "`$INTEGER`"
-            }
-          },
-          "name": "whats_app_template_get_v2_pagination",
-          "op": {
-            "load": {
-              "input": "data",
-              "name": "load",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /whatsapp/v2/templates",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "query": [
-                      {
-                        "a": true,
-                        "ex": 1,
-                        "k": "query",
-                        "n": "page",
-                        "or": "page",
-                        "r": false,
-                        "t": "`$INTEGER`"
-                      },
-                      {
-                        "a": true,
-                        "ex": 25,
-                        "k": "query",
-                        "n": "size",
-                        "or": "size",
-                        "r": false,
-                        "t": "`$INTEGER`"
-                      },
-                      {
-                        "a": true,
-                        "k": "query",
-                        "n": "sort",
-                        "or": "sort",
-                        "r": false,
-                        "t": "`$ARRAY`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/whatsapp/v2/templates",
-                  "q": {
-                    "exist": [
-                      "page",
-                      "size",
-                      "sort"
-                    ]
-                  },
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "whatsapp"
-                    },
-                    {
-                      "lit": "v2"
-                    },
-                    {
-                      "lit": "templates"
                     }
                   ],
                   "t": {
@@ -1685,7 +1770,53 @@
           "kind": "basic",
           "name": "BasicManageTemplateFlow",
           "param": {},
-          "step": []
+          "step": [
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "manage_template_ref01"
+              },
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
+            },
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "manage_template_ref01",
+                "srcdatavar": "manage_template_ref01_data",
+                "suffix": "_dt0"
+              },
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-manage_template_ref01"
+                  }
+                }
+              ]
+            },
+            {
+              "a": true,
+              "d": {},
+              "i": {
+                "ref": "manage_template_ref01",
+                "suffix": "_rm0"
+              },
+              "m": {
+                "id": "manage_template01"
+              },
+              "o": "remove",
+              "s": [],
+              "v": []
+            }
+          ]
         },
         "BasicMediaFlow": {
           "active": true,
@@ -1743,17 +1874,6 @@
               "a": true,
               "d": {},
               "i": {
-                "ref": "template_ref01"
-              },
-              "m": {},
-              "o": "create",
-              "s": [],
-              "v": []
-            },
-            {
-              "a": true,
-              "d": {},
-              "i": {
                 "ref": "template_ref01",
                 "srcdatavar": "template_ref01_data",
                 "suffix": "_up0",
@@ -1804,40 +1924,12 @@
               ]
             }
           ]
-        },
-        "BasicWhatsAppTemplateGetV2PaginationFlow": {
-          "active": true,
-          "entity": "whats_app_template_get_v2_pagination",
-          "key$": "BasicWhatsAppTemplateGetV2PaginationFlow",
-          "kind": "basic",
-          "name": "BasicWhatsAppTemplateGetV2PaginationFlow",
-          "param": {},
-          "step": [
-            {
-              "a": true,
-              "d": {},
-              "i": {
-                "ref": "whats_app_template_get_v2_pagination_ref01",
-                "srcdatavar": "whats_app_template_get_v2_pagination_ref01_data",
-                "suffix": "_dt0"
-              },
-              "m": {},
-              "o": "load",
-              "s": [],
-              "v": [
-                {
-                  "apply": "TextFieldMark",
-                  "def": {
-                    "mark": "Mark01-whats_app_template_get_v2_pagination_ref01"
-                  }
-                }
-              ]
-            }
-          ]
         }
       },
       "info": {
+        "about_md": "**Unofficial. Not affiliated with LINK Mobility.** This is an unofficial SDK for the LINK Mobility MyLINK WhatsApp API, built by [Voxgig](https://voxgig.com/sdk). It is not affiliated with, endorsed by, or sponsored by LINK Mobility.\n\n**Why this exists:** LINK Mobility publishes an OpenAPI definition for the MyLINK WhatsApp API, but no client libraries for it. Voxgig builds public SDK and MCP examples for APIs we think are interesting, and this is one of them. MIT-licensed, take whatever's useful.\n\nIt is one of five repositories for LINK Mobility's MyLINK and Umbrella APIs: [Multichannel](https://github.com/voxgig-sdk/lm-multichannel-sdk), [SMS](https://github.com/voxgig-sdk/lm-sms-sdk), [Email](https://github.com/voxgig-sdk/lm-email-sdk), [WhatsApp](https://github.com/voxgig-sdk/lm-whatsapp-sdk) and [Permission](https://github.com/voxgig-sdk/lm-umbrella-sdk).\n\n### Try it (TypeScript)\n\n```bash\ngit clone https://github.com/voxgig-sdk/lm-whatsapp-sdk\ncd lm-whatsapp-sdk/ts\nnpm install\nnpm run build\nnpm test\n```\n\nThe test suite runs fully offline. Every SDK here ships a test mode that swaps the HTTP transport for an in-memory mock, so you can try it without credentials or a network.\n\n### Send a template message\n\n```ts\nimport { LmWhatsappSDK } from '@voxgig-sdk/lm-whatsapp-sdk'\n\nconst client = new LmWhatsappSDK({ apikey: process.env.LM_WHATSAPP_APIKEY })\n\n// The API takes a batch, so messages always go in an array.\nconst sent = await client.SendMessage().create({\n  messages: [\n    {\n      recipient: '+4712345678',\n      content: {\n        media: { type: 'template', template: { name: 'hello_world', language: { code: 'en_US' } } },\n        options: { sender: 'your-sender-id' },\n      },\n    },\n  ],\n  // The generated type also asks for requestId, a response field. It is not sent.\n  requestId: '',\n})\nconsole.log(sent.data())\n\n// One template, by id\nconst template = await client.WhatsAppTemplateGetV2().load({ id: 'template-id' })\n```\n\n### Base URL\n\nLINK Mobility's definition of this API names no server, so the base URL is set when the SDK is generated: `https://api.linkmobility.com`, the host the sibling MyLINK SMS, Email and RCS definitions name, and one that answers this API's routes. Pass `base` to the client, or set `LM_WHATSAPP_BASE` for the CLI and MCP server, to use another. The definition itself is unchanged; `.sdk/def/PROVENANCE.md` has the evidence.\n\n### Authentication\n\nThe API uses OAuth2 client credentials, and the SDK does not fetch the token for you. Request an access token with the client-credentials grant from `https://sso.linkmobility.com/auth/realms/CPaaS/protocol/openid-connect/token`, using the client ID and secret from the Messaging APIs page in MyLINK. Pass the token as `apikey`, and the SDK sends it as `Authorization: Bearer <token>`. The CLI and the MCP server read it from `LM_WHATSAPP_APIKEY`.\n\n### Using the MCP server\n\n```bash\ncd go-mcp && go build -o lm-whatsapp-mcp .\nexport LM_WHATSAPP_APIKEY=<access token>\nclaude mcp add --scope user lm-whatsapp -- \"$PWD/lm-whatsapp-mcp\" -transport stdio\n```\n\nThe MCP server is read-only for now. It has two tools, `lm-whatsapp_list` and `lm-whatsapp_load`, and in this API only the load tool has work to do: entity `manage_template` returns the paged template list, and `whats_app_template_get_v2` returns one template. No entity here has a list operation, so the list tool answers with an error. Sending goes through the SDKs.\n\n### Honest state\n\nGenerated from LINK Mobility's public OpenAPI definition of the MyLINK WhatsApp API (v2, from docs.linkmobility.com) on 2026-10-01. Not production-tuned. Known rough edge: media upload does not work yet. That endpoint takes the raw file as the request body, and the generated SDKs only send JSON, so upload media another way and refer to it in your message. Template calls are also spread across three entities named after the definition's schemas: ManageTemplate (create, the paged template list, and remove), Template (update) and WhatsAppTemplateGetV2 (load one). The typed create input also asks for requestId, which is a response field, so pass an empty string; it is not sent. The SDK leaves the OAuth2 token exchange to you, as described above. Use it as a starting point or a reference.\n\nWhen teams want SDKs like these production-grade, idiomatic per language, tested, documented, and released through a real pipeline, Voxgig does that work as a consulting engagement. The toolkit also generates Java and C# if your customers need them. Questions: richard@voxgig.com.\n\nIf you are from LINK Mobility and would like this repository removed, or transferred to your own GitHub organisation, email richard@voxgig.com and it will be done within two business days, no questions asked.",
         "description": "<div>\t<h2>Purpose and functionality</h2>\t<p>MyLINK WhatsApp API is a REST-based API that supports sending WhatsApp messages to the recipients you want to reach.</p>\t<h2>Current supported functionality</h2>\t<ul style=\"list-style:disc inside;\">\t\t<li>Send WhatsApp messages<ul style=\"list-style:circle;\"><li>Send a text WhatsApp message</li><li>Send a WhatsApp message with media (image, video, document, sticker, location)</li><li>Send an interactive WhatsApp message (containing list, catalogue, flow, carousel and more)</li><li>Send a WhatsApp template message (authentication, marketing or utility)</li></ul></li><li>Receive WhatsApp messages </li><li>Receive Delivery reports for sent messages</li><li>Create/Update/Delete and Retrieve templates via API</li></ul><p>In order to start sending on WhatsApp you must first create a template message. This process is mandated by Meta to improve the relevancy and trust consumers have in their inbox messages; ultimately filtering out potential spam content that reduces that channel's popularity amongst consumers. LINK can help you create templates. You can also follow this documentation on how to do it. </p><h2>Getting started</h2><p>To maximise the deliverability of your WhatsApp messages first you need to make sure that your configuration is correctly set up. The following steps are crucial for the success of your integration:</p><ul style=\"list-style:disc inside;\"><li>Get in touch with us to get a demo or sign up for the product: <a href=\"https://www.linkmobility.com/contact-us\">Click here</a></li><li>Accept your invitation to the MyLINK portal to generate your API secrets - simply go to the Messaging APIs page in the navigation menu, select the myLINK WhatsApp API product and generate your credentials(clientId and secret)</li><li>Revisit the developer portal for how to send a WhatsApp message</li></ul><p>All needed values for the configuration can be found on the Messaging APIs page in MyLINK. Once ready, revisit the developer portal for how to send WhatsApp messages.</p></div>",
+        "docs_url": "https://docs.linkmobility.com/api-reference/mylink-whatsapp-api",
         "security": {
           "in": "header",
           "name": "Authorization",
@@ -1847,11 +1939,11 @@
         },
         "servers": [
           {
-            "description": "LINK Mobility MyLINK (base shared with the sibling SMS/Email APIs)",
             "url": "https://api.linkmobility.com"
           }
         ],
         "summary": "<div> <h2>Purpose and functionality</h2> <p>MyLINK WhatsApp API is a REST-based API that supports sending WhatsApp messages to the recipients you want to reach.</p> <h2>Current supported functionality</h2> <ul style=\"list-style:disc inside…",
+        "tagline": "LINK Mobility MyLINK WhatsApp API clients in TypeScript, Python, PHP, Go, Ruby and Lua, plus a CLI and an MCP server for AI agents. All generated from LINK Mobility's public OpenAPI definition, so every surface stays in sync with the API.",
         "title": "MyLINK WhatsApp API",
         "version": "v2",
         "website": "https://linkmobility.com"
@@ -1871,7 +1963,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {
@@ -2187,7 +2284,7 @@
             "registry": {
               "active": false,
               "name": "luarocks",
-              "package": "",
+              "package": "voxgig-sdk-lm-whatsapp-sdk",
               "state": "pending",
               "url": "https://luarocks.org",
               "vault": {
@@ -2254,7 +2351,7 @@
             "registry": {
               "active": false,
               "name": "packagist",
-              "package": "",
+              "package": "voxgig-sdk/lm-whatsapp-sdk",
               "state": "pending",
               "url": "https://packagist.org",
               "vault": {
@@ -2327,7 +2424,7 @@
             "registry": {
               "active": false,
               "name": "pypi",
-              "package": "",
+              "package": "voxgig-sdk-lm-whatsapp-sdk",
               "state": "pending",
               "url": "https://pypi.org",
               "vault": {
@@ -2400,7 +2497,7 @@
             "registry": {
               "active": false,
               "name": "rubygems",
-              "package": "",
+              "package": "voxgig-sdk-lm-whatsapp-sdk",
               "state": "pending",
               "url": "https://rubygems.org",
               "vault": {
@@ -2478,7 +2575,7 @@
             "registry": {
               "active": false,
               "name": "npm",
-              "package": "",
+              "package": "@voxgig-sdk/lm-whatsapp-sdk",
               "state": "pending",
               "url": "https://registry.npmjs.org",
               "vault": {

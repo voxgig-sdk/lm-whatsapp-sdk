@@ -15,7 +15,7 @@ import (
 // reqdata map passed through to the SDK. For load, `query` should be
 // `{"id": <value>}`. For list, omit `query` or pass an empty map.
 type Args struct {
-	Entity string         `json:"entity" jsonschema:"manage_template | media | send_message | template | whats_app_template_get_v2 | whats_app_template_get_v2_pagination"`
+	Entity string         `json:"entity" jsonschema:"manage_template | media | send_message | template | whats_app_template_get_v2"`
 	Query  map[string]any `json:"query,omitempty" jsonschema:"optional match map e.g. {\"id\":1} for load, omit for list"`
 }
 
@@ -86,8 +86,6 @@ func entityFor(client *sdk.LmWhatsappSDK, name string) (sdk.LmWhatsappEntity, er
 		return client.Template(nil), nil
 	case "whats_app_template_get_v2":
 		return client.WhatsAppTemplateGetV2(nil), nil
-	case "whats_app_template_get_v2_pagination":
-		return client.WhatsAppTemplateGetV2Pagination(nil), nil
 
 	}
 	return nil, fmt.Errorf("unknown entity %q", name)

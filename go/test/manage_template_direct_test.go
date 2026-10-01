@@ -10,14 +10,14 @@ import (
 	"github.com/voxgig-sdk/lm-whatsapp-sdk/go/core"
 )
 
-func TestWhatsAppTemplateGetV2PaginationDirect(t *testing.T) {
-	t.Run("direct-load-whats_app_template_get_v2_pagination", func(t *testing.T) {
-		setup := whats_app_template_get_v2_paginationDirectSetup(map[string]any{"id": "direct01"})
+func TestManageTemplateDirect(t *testing.T) {
+	t.Run("direct-load-manage_template", func(t *testing.T) {
+		setup := manage_templateDirectSetup(map[string]any{"id": "direct01"})
 		_mode := "unit"
 		if setup.live {
 			_mode = "live"
 		}
-		if _shouldSkip, _reason := isControlSkipped("direct", "direct-load-whats_app_template_get_v2_pagination", _mode); _shouldSkip {
+		if _shouldSkip, _reason := isControlSkipped("direct", "direct-load-manage_template", _mode); _shouldSkip {
 			if _reason == "" {
 				_reason = "skipped via sdk-test-control.json"
 			}
@@ -85,20 +85,20 @@ func TestWhatsAppTemplateGetV2PaginationDirect(t *testing.T) {
 
 }
 
-type whats_app_template_get_v2_paginationDirectSetupResult struct {
+type manage_templateDirectSetupResult struct {
 	client *sdk.LmWhatsappSDK
 	calls  *[]map[string]any
 	live   bool
 	idmap  map[string]any
 }
 
-func whats_app_template_get_v2_paginationDirectSetup(mockres any) *whats_app_template_get_v2_paginationDirectSetupResult {
+func manage_templateDirectSetup(mockres any) *manage_templateDirectSetupResult {
 	loadEnvLocal()
 
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID": map[string]any{},
+		"LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID": map[string]any{},
 		"LM_WHATSAPP_TEST_LIVE":    "FALSE",
 		"LM_WHATSAPP_APIKEY":       "",
 	})
@@ -120,7 +120,7 @@ func whats_app_template_get_v2_paginationDirectSetup(mockres any) *whats_app_tem
 		client := sdk.NewLmWhatsappSDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID"]; ok {
+		if entidRaw, ok := env["LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {
@@ -128,7 +128,7 @@ func whats_app_template_get_v2_paginationDirectSetup(mockres any) *whats_app_tem
 			}
 		}
 
-		return &whats_app_template_get_v2_paginationDirectSetupResult{client: client, calls: calls, live: true, idmap: idmap}
+		return &manage_templateDirectSetupResult{client: client, calls: calls, live: true, idmap: idmap}
 	}
 
 	mockFetch := func(url string, init map[string]any) (map[string]any, error) {
@@ -153,7 +153,7 @@ func whats_app_template_get_v2_paginationDirectSetup(mockres any) *whats_app_tem
 		},
 	})
 
-	return &whats_app_template_get_v2_paginationDirectSetupResult{client: client, calls: calls, live: false, idmap: map[string]any{}}
+	return &manage_templateDirectSetupResult{client: client, calls: calls, live: false, idmap: map[string]any{}}
 }
 
 var _ = os.Getenv

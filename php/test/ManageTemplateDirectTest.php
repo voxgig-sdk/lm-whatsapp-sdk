@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-// WhatsAppTemplateGetV2Pagination direct test
+// ManageTemplate direct test
 
 require_once __DIR__ . '/../lmwhatsapp_sdk.php';
 require_once __DIR__ . '/Runner.php';
 
 use PHPUnit\Framework\TestCase;
 
-class WhatsAppTemplateGetV2PaginationDirectTest extends TestCase
+class ManageTemplateDirectTest extends TestCase
 {
-    public function test_direct_load_whats_app_template_get_v2_pagination(): void
+    public function test_direct_load_manage_template(): void
     {
-        $setup = whats_app_template_get_v2_pagination_direct_setup(["id" => "direct01"]);
-        [$_shouldSkip, $_reason] = Runner::is_control_skipped("direct", "direct-load-whats_app_template_get_v2_pagination", $setup["live"] ? "live" : "unit");
+        $setup = manage_template_direct_setup(["id" => "direct01"]);
+        [$_shouldSkip, $_reason] = Runner::is_control_skipped("direct", "direct-load-manage_template", $setup["live"] ? "live" : "unit");
         if ($_shouldSkip) {
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
@@ -58,14 +58,14 @@ class WhatsAppTemplateGetV2PaginationDirectTest extends TestCase
 }
 
 
-function whats_app_template_get_v2_pagination_direct_setup($mockres)
+function manage_template_direct_setup($mockres)
 {
     Runner::load_env_local();
 
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID" => [],
+        "LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID" => [],
         "LM_WHATSAPP_TEST_LIVE" => "FALSE",
         "LM_WHATSAPP_APIKEY" => "",
     ]);

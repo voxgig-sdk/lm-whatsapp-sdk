@@ -1,6 +1,6 @@
 # LmWhatsapp Ruby SDK
 
-
+LINK Mobility MyLINK WhatsApp API clients in TypeScript, Python, PHP, Go, Ruby and Lua, plus a CLI and an MCP server for AI agents. All generated from LINK Mobility's public OpenAPI definition, so every surface stays in sync with the API.
 
 The Ruby SDK for the LmWhatsapp API — an entity-oriented client using idiomatic Ruby conventions.
 
@@ -12,9 +12,18 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`):
+GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases)), or
+from a clone:
 
-- Releases: [https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases](https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/lm-whatsapp-sdk
+```
+
+Then add it to your `Gemfile` by path, and run `bundle install`:
+
+```ruby
+gem "voxgig-sdk-lm-whatsapp-sdk", path: "./lm-whatsapp-sdk/rb"
+```
 
 
 ## Tutorial: your first API call
@@ -32,9 +41,24 @@ client = LmWhatsappSDK.new({
 })
 ```
 
+### 3. Load a managetemplate
+
+```ruby
+begin
+  # load returns the ENTITY — call data_get for the ManageTemplate record (raises on error).
+  managetemplate = client.ManageTemplate.load()
+  puts managetemplate
+rescue => err
+  warn "load failed: #{err}"
+end
+```
+
 ### 4. Create, update, and remove
 
 ```ruby
+# create returns the ENTITY — call data_get for the created ManageTemplate record.
+created = client.ManageTemplate.create({ "components" => [] })
+
 # Remove
 client.ManageTemplate.remove({ "id" => "example_id" })
 ```
@@ -46,7 +70,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  whatsapptemplategetv2 = client.WhatsAppTemplateGetV2.load({ "id" => "example_id" })
+  managetemplate = client.ManageTemplate.load()
 rescue => err
   warn "load failed: #{err}"
 end
@@ -109,18 +133,15 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = LmWhatsappSDK.test({
-  "entity" => { "whatsapptemplategetv2" => { "test01" => { "id" => "test01" } } },
-})
+client = LmWhatsappSDK.test
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-whatsapptemplategetv2 = client.WhatsAppTemplateGetV2.load({ "id" => "test01" })
-puts whatsapptemplategetv2
+managetemplate = client.ManageTemplate.load()
+puts managetemplate
 ```
 
 ### Use a custom fetch function
@@ -203,7 +224,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `SendMessage` | `(data) -> SendMessageEntity` | Create a SendMessage entity instance. |
 | `Template` | `(data) -> TemplateEntity` | Create a Template entity instance. |
 | `WhatsAppTemplateGetV2` | `(data) -> WhatsAppTemplateGetV2Entity` | Create a WhatsAppTemplateGetV2 entity instance. |
-| `WhatsAppTemplateGetV2Pagination` | `(data) -> WhatsAppTemplateGetV2PaginationEntity` | Create a WhatsAppTemplateGetV2Pagination entity instance. |
 
 ### Entity interface
 
@@ -245,11 +265,30 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` |  |
+| `components` | Array of components that make up the template. |
+| `createdDate` |  |
+| `currentPage` |  |
+| `id` | ID |
+| `items` |  |
+| `language` |  |
+| `library_template_body_inputs` |  |
+| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
+| `library_template_name` | Library template name |
+| `message_send_ttl_seconds` | Time to live for message template sent. |
+| `modifiedDate` |  |
+| `name` | The message template name |
+| `pages` |  |
+| `parameter_format` |  |
+| `results` |  |
+| `resultsPerPage` |  |
+| `status` |  |
+| `sub_category` |  |
 
-Operations: Remove.
+Operations: Create, Load, Remove.
 
-API path: `/whatsapp/v2/templates/{id}`
+API path: `/whatsapp/v2/templates`
 
 #### Media
 
@@ -264,6 +303,8 @@ API path: `/whatsapp/v2/{phoneNumber}/media`
 
 | Field | Description |
 | --- | --- |
+| `messages` |  |
+| `requestId` | Unique Id of the request made towards LINK Mobility. |
 
 Operations: Create.
 
@@ -273,25 +314,20 @@ API path: `/whatsapp/v2/messages`
 
 | Field | Description |
 | --- | --- |
-| `allow_category_change` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` |  |
-| `components` | Array of components that make up the template. |
+| `components` | The array containing all the content of the message template |
 | `createdDate` |  |
 | `id` | ID |
 | `language` |  |
-| `library_template_body_inputs` |  |
-| `library_template_button_inputs` | Optional data during creation of a template from a library template. |
-| `library_template_name` | Library template name |
-| `message_send_ttl_seconds` | Time to live for message template sent. |
+| `message_send_ttl_seconds` | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` |  |
 | `name` | The message template name |
 | `parameter_format` |  |
 | `status` |  |
-| `sub_category` |  |
 
-Operations: Create, Update.
+Operations: Update.
 
-API path: `/whatsapp/v2/templates`
+API path: `/whatsapp/v2/templates/{id}`
 
 #### WhatsAppTemplateGetV2
 
@@ -302,20 +338,6 @@ API path: `/whatsapp/v2/templates`
 Operations: Load.
 
 API path: `/whatsapp/v2/templates/{id}`
-
-#### WhatsAppTemplateGetV2Pagination
-
-| Field | Description |
-| --- | --- |
-| `currentPage` |  |
-| `items` |  |
-| `pages` |  |
-| `results` |  |
-| `resultsPerPage` |  |
-
-Operations: Load.
-
-API path: `/whatsapp/v2/templates`
 
 
 
@@ -330,13 +352,49 @@ Create an instance: `manage_template = client.ManageTemplate`
 
 | Method | Description |
 | --- | --- |
+| `create(data)` | Create a new entity with the given data. |
+| `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `String` |  |
+| `allow_category_change` | `Boolean` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` | `String` |  |
+| `components` | `Array` | Array of components that make up the template. |
+| `createdDate` | `String` |  |
+| `currentPage` | `Integer` |  |
+| `id` | `Object` | ID |
+| `items` | `Object` |  |
+| `language` | `String` |  |
+| `library_template_body_inputs` | `Hash` |  |
+| `library_template_button_inputs` | `Object` | Optional data during creation of a template from a library template. |
+| `library_template_name` | `Object` | Library template name |
+| `message_send_ttl_seconds` | `Integer` | Time to live for message template sent. |
+| `modifiedDate` | `Object` |  |
+| `name` | `Object` | The message template name |
+| `pages` | `Integer` |  |
+| `parameter_format` | `String` |  |
+| `results` | `Integer` |  |
+| `resultsPerPage` | `Integer` |  |
+| `status` | `String` |  |
+| `sub_category` | `String` |  |
+
+#### Example: Load
+
+```ruby
+# load returns the ENTITY — call data_get for the ManageTemplate record (raises on error).
+manage_template = client.ManageTemplate.load()
+```
+
+#### Example: Create
+
+```ruby
+manage_template = client.ManageTemplate.create({
+  "components" => [], # Array
+})
+```
 
 
 ### Media
@@ -368,10 +426,19 @@ Create an instance: `send_message = client.SendMessage`
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `messages` | `Array` |  |
+| `requestId` | `String` | Unique Id of the request made towards LINK Mobility. |
+
 #### Example: Create
 
 ```ruby
 send_message = client.SendMessage.create({
+  "messages" => [], # Array
+  "requestId" => "example_requestId", # String
 })
 ```
 
@@ -384,36 +451,22 @@ Create an instance: `template = client.Template`
 
 | Method | Description |
 | --- | --- |
-| `create(data)` | Create a new entity with the given data. |
 | `update(data)` | Update an existing entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `allow_category_change` | `Boolean` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `String` |  |
-| `components` | `Array` | Array of components that make up the template. |
+| `components` | `Object` | The array containing all the content of the message template |
 | `createdDate` | `String` |  |
 | `id` | `Object` | ID |
 | `language` | `String` |  |
-| `library_template_body_inputs` | `Hash` |  |
-| `library_template_button_inputs` | `Object` | Optional data during creation of a template from a library template. |
-| `library_template_name` | `Object` | Library template name |
-| `message_send_ttl_seconds` | `Integer` | Time to live for message template sent. |
+| `message_send_ttl_seconds` | `Integer` | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` | `Object` |  |
 | `name` | `Object` | The message template name |
 | `parameter_format` | `String` |  |
 | `status` | `String` |  |
-| `sub_category` | `String` |  |
-
-#### Example: Create
-
-```ruby
-template = client.Template.create({
-  "components" => [], # Array
-})
-```
 
 
 ### WhatsAppTemplateGetV2
@@ -437,34 +490,6 @@ Create an instance: `whats_app_template_get_v2 = client.WhatsAppTemplateGetV2`
 ```ruby
 # load returns the ENTITY — call data_get for the WhatsAppTemplateGetV2 record (raises on error).
 whats_app_template_get_v2 = client.WhatsAppTemplateGetV2.load({ "id" => "whats_app_template_get_v2_id" })
-```
-
-
-### WhatsAppTemplateGetV2Pagination
-
-Create an instance: `whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `currentPage` | `Integer` |  |
-| `items` | `Object` |  |
-| `pages` | `Integer` |  |
-| `results` | `Integer` |  |
-| `resultsPerPage` | `Integer` |  |
-
-#### Example: Load
-
-```ruby
-# load returns the ENTITY — call data_get for the WhatsAppTemplateGetV2Pagination record (raises on error).
-whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination.load()
 ```
 
 ## Features
@@ -688,11 +713,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-whatsapptemplategetv2 = client.WhatsAppTemplateGetV2
-whatsapptemplategetv2.load({ "id" => "example_id" })
+managetemplate = client.ManageTemplate
+managetemplate.load()
 
-# whatsapptemplategetv2.data_get now returns the whatsapptemplategetv2 data from the last load
-# whatsapptemplategetv2.match_get returns the last match criteria
+# managetemplate.data_get now returns the managetemplate data from the last load
+# managetemplate.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

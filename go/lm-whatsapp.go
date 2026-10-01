@@ -68,9 +68,6 @@ func init() {
 	core.NewWhatsAppTemplateGetV2EntityFunc = func(client *core.LmWhatsappSDK, entopts map[string]any) core.LmWhatsappEntity {
 		return entity.NewWhatsAppTemplateGetV2Entity(client, entopts)
 	}
-	core.NewWhatsAppTemplateGetV2PaginationEntityFunc = func(client *core.LmWhatsappSDK, entopts map[string]any) core.LmWhatsappEntity {
-		return entity.NewWhatsAppTemplateGetV2PaginationEntity(client, entopts)
-	}
 }
 
 // Constructor re-exports.

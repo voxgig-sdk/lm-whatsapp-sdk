@@ -5,43 +5,24 @@ main: kit: entity: template: {
   alias: field: {}
 
   fields: {
-    allow_category_change: {
-      h: "Allow Category Change"
-      n: "allow_category_change"
-      r: false
-      sh: "Set to true to allow to assign a category based on template guidelines and the template's contents."
-      t: "`$BOOLEAN`"
-    }
     category: {
       h: "Category"
       n: "category"
-      op: {
-        create: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
       r: false
       t: "`$STRING`"
     }
     components: {
       h: "Components"
       n: "components"
-      op: {
-        update: {
-          req: false
-          type: [
-            "`$ONE`"
-            [
-              "`$ARRAY`"
-              "`$NULL`"
-            ]
-          ]
-        }
-      }
-      r: true
-      sh: "Array of components that make up the template."
-      t: "`$ARRAY`"
+      r: false
+      sh: "The array containing all the content of the message template"
+      t: [
+        "`$ONE`"
+        [
+          "`$ARRAY`"
+          "`$NULL`"
+        ]
+      ]
     }
     createdDate: {
       fo: "date-time"
@@ -66,53 +47,15 @@ main: kit: entity: template: {
     language: {
       h: "Language"
       n: "language"
-      op: {
-        create: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
       r: false
       t: "`$STRING`"
     }
-    library_template_body_inputs: {
-      h: "Library Template Body Inputs"
-      n: "library_template_body_inputs"
-      r: false
-      t: "`$OBJECT`"
-    }
-    library_template_button_inputs: {
-      h: "Library Template Button Inputs"
-      n: "library_template_button_inputs"
-      r: false
-      sh: "Optional data during creation of a template from a library template."
-      t: [
-        "`$ONE`"
-        [
-          "`$ARRAY`"
-          "`$NULL`"
-        ]
-      ]
-    }
-    library_template_name: {
-      h: "Library Template Name"
-      n: "library_template_name"
-      r: false
-      sh: "Library template name"
-      t: [
-        "`$ONE`"
-        [
-          "`$STRING`"
-          "`$NULL`"
-        ]
-      ]
-    }
     message_send_ttl_seconds: {
-      fo: "int64"
+      fo: "int32"
       h: "Message Send Ttl Seconds"
       n: "message_send_ttl_seconds"
       r: false
-      sh: "Time to live for message template sent."
+      sh: "Template message delivery retry time-to-live (TTL) override value."
       t: "`$INTEGER`"
     }
     modifiedDate: {
@@ -131,12 +74,6 @@ main: kit: entity: template: {
     name: {
       h: "Name"
       n: "name"
-      op: {
-        create: {
-          req: true
-          type: "`$STRING`"
-        }
-      }
       r: false
       sh: "The message template name"
       t: [
@@ -159,12 +96,6 @@ main: kit: entity: template: {
       r: false
       t: "`$STRING`"
     }
-    sub_category: {
-      h: "Sub Category"
-      n: "sub_category"
-      r: false
-      t: "`$STRING`"
-    }
   }
 
   id: {
@@ -174,47 +105,6 @@ main: kit: entity: template: {
 
   name: "template"
   op: {
-    create: {
-      name: "create"
-      points: [
-        {
-          co: {
-            id: "POST /whatsapp/v2/templates"
-            source: "openapi3"
-            version: 2
-          }
-          m: "POST"
-          o: "/whatsapp/v2/templates"
-          s: [
-            {
-              lit: "whatsapp"
-            }
-            {
-              lit: "v2"
-            }
-            {
-              lit: "templates"
-            }
-          ]
-          t: {
-            req: {
-              allow_category_change: "`reqdata.allow_category_change`"
-              category: "`reqdata.category`"
-              components: "`reqdata.component`"
-              language: "`reqdata.language`"
-              library_template_body_inputs: "`reqdata.library_template_body_input`"
-              library_template_button_inputs: "`reqdata.library_template_button_input`"
-              library_template_name: "`reqdata.library_template_name`"
-              message_send_ttl_seconds: "`reqdata.message_send_ttl_second`"
-              name: "`reqdata.name`"
-              parameter_format: "`reqdata.parameter_format`"
-              sub_category: "`reqdata.sub_category`"
-            }
-            res: "`body`"
-          }
-        }
-      ]
-    }
     update: {
       name: "update"
       points: [

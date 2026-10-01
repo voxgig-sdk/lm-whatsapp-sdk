@@ -109,18 +109,6 @@ Create a new `WhatsAppTemplateGetV2` entity instance.
 
 **Returns:** `WhatsAppTemplateGetV2Entity` instance.
 
-#### `WhatsAppTemplateGetV2Pagination(data?: object)`
-
-Create a new `WhatsAppTemplateGetV2Pagination` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `WhatsAppTemplateGetV2PaginationEntity` instance.
-
 #### `options()`
 
 Return a deep copy of the current SDK options.
@@ -177,9 +165,71 @@ const manage_template = client.ManageTemplate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `allow_category_change` | `boolean` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` | `string` | No |  |
+| `components` | `any[]` | Yes | Array of components that make up the template. |
+| `createdDate` | `string` | No |  |
+| `currentPage` | `number` | No |  |
+| `id` | `string | null` | No | ID |
+| `items` | `any[] | null` | No |  |
+| `language` | `string` | No |  |
+| `library_template_body_inputs` | `Record<string, any>` | No |  |
+| `library_template_button_inputs` | `any[] | null` | No | Optional data during creation of a template from a library template. |
+| `library_template_name` | `string | null` | No | Library template name |
+| `message_send_ttl_seconds` | `number` | No | Time to live for message template sent. |
+| `modifiedDate` | `string | null` | No |  |
+| `name` | `string | null` | No | The message template name |
+| `pages` | `number` | No |  |
+| `parameter_format` | `string` | No |  |
+| `results` | `number` | No |  |
+| `resultsPerPage` | `number` | No |  |
+| `status` | `string` | No |  |
+| `sub_category` | `string` | No |  |
+
+### Field Usage by Operation
+
+| Field | load | create | remove |
+| --- | --- | --- | --- |
+| `allow_category_change` | - | - | - |
+| `category` | - | Yes | - |
+| `components` | - | - | - |
+| `createdDate` | - | - | - |
+| `currentPage` | - | - | - |
+| `id` | - | - | - |
+| `items` | - | - | - |
+| `language` | - | Yes | - |
+| `library_template_body_inputs` | - | - | - |
+| `library_template_button_inputs` | - | - | - |
+| `library_template_name` | - | - | - |
+| `message_send_ttl_seconds` | - | - | - |
+| `modifiedDate` | - | - | - |
+| `name` | - | Yes | - |
+| `pages` | - | - | - |
+| `parameter_format` | - | - | - |
+| `results` | - | - | - |
+| `resultsPerPage` | - | - | - |
+| `status` | - | - | - |
+| `sub_category` | - | - | - |
 
 ### Operations
+
+#### `create(data: object, ctrl?: object)`
+
+Create a new entity with the given data.
+
+```ts
+const result = await client.ManageTemplate().create({
+  components: [],
+})
+```
+
+#### `load(match: object, ctrl?: object)`
+
+Load a single entity matching the given criteria.
+
+```ts
+const result = await client.ManageTemplate().load()
+```
 
 #### `remove(match: object, ctrl?: object)`
 
@@ -269,6 +319,13 @@ Return a copy of the entity options.
 const send_message = client.SendMessage()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `messages` | `any[]` | Yes |  |
+| `requestId` | `string` | Yes | Unique Id of the request made towards LINK Mobility. |
+
 ### Operations
 
 #### `create(data: object, ctrl?: object)`
@@ -277,6 +334,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.SendMessage().create({
+  messages: [],
+  requestId: 'example_requestId',
 })
 ```
 
@@ -318,53 +377,18 @@ const template = client.Template()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `allow_category_change` | `boolean` | No | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` | No |  |
-| `components` | `any[]` | Yes | Array of components that make up the template. |
+| `components` | `any[] | null` | No | The array containing all the content of the message template |
 | `createdDate` | `string` | No |  |
 | `id` | `string | null` | No | ID |
 | `language` | `string` | No |  |
-| `library_template_body_inputs` | `Record<string, any>` | No |  |
-| `library_template_button_inputs` | `any[] | null` | No | Optional data during creation of a template from a library template. |
-| `library_template_name` | `string | null` | No | Library template name |
-| `message_send_ttl_seconds` | `number` | No | Time to live for message template sent. |
+| `message_send_ttl_seconds` | `number` | No | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` | `string | null` | No |  |
 | `name` | `string | null` | No | The message template name |
 | `parameter_format` | `string` | No |  |
 | `status` | `string` | No |  |
-| `sub_category` | `string` | No |  |
-
-### Field Usage by Operation
-
-| Field | create | update |
-| --- | --- | --- |
-| `allow_category_change` | - | - |
-| `category` | Yes | - |
-| `components` | - | Yes |
-| `createdDate` | - | - |
-| `id` | - | - |
-| `language` | Yes | - |
-| `library_template_body_inputs` | - | - |
-| `library_template_button_inputs` | - | - |
-| `library_template_name` | - | - |
-| `message_send_ttl_seconds` | - | - |
-| `modifiedDate` | - | - |
-| `name` | Yes | - |
-| `parameter_format` | - | - |
-| `status` | - | - |
-| `sub_category` | - | - |
 
 ### Operations
-
-#### `create(data: object, ctrl?: object)`
-
-Create a new entity with the given data.
-
-```ts
-const result = await client.Template().create({
-  components: [],
-})
-```
 
 #### `update(data: object, ctrl?: object)`
 
@@ -442,60 +466,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `WhatsAppTemplateGetV2Entity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `LmWhatsappSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## WhatsAppTemplateGetV2PaginationEntity
-
-```ts
-const whats_app_template_get_v2_pagination = client.WhatsAppTemplateGetV2Pagination()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `currentPage` | `number` | No |  |
-| `items` | `any[] | null` | No |  |
-| `pages` | `number` | No |  |
-| `results` | `number` | No |  |
-| `resultsPerPage` | `number` | No |  |
-
-### Operations
-
-#### `load(match: object, ctrl?: object)`
-
-Load a single entity matching the given criteria.
-
-```ts
-const result = await client.WhatsAppTemplateGetV2Pagination().load()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `WhatsAppTemplateGetV2PaginationEntity` instance with the same client and
 options.
 
 #### `client()`

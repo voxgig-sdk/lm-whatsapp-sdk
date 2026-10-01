@@ -9,7 +9,7 @@ const live_runner_1 = require("../../live-runner");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 (0, utility_1.loadEnvLocal)(__dirname + '/../../../.env.local');
-(0, node_test_1.describe)('WhatsAppTemplateGetV2PaginationDirect', async () => {
+(0, node_test_1.describe)('ManageTemplateDirect', async () => {
     // Per-test live pacing. Delay is read from sdk-test-control.json's
     // `test.live.delayMs`; only sleeps when LM_WHATSAPP_TEST_LIVE=TRUE.
     (0, node_test_1.afterEach)((0, utility_1.liveDelay)('LM_WHATSAPP_TEST_LIVE'));
@@ -21,13 +21,13 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)('function' === typeof sdk.direct);
         (0, node_assert_1.default)('function' === typeof sdk.prepare);
     });
-    (0, node_test_1.test)('direct-load-whats_app_template_get_v2_pagination', async (t) => {
+    (0, node_test_1.test)('direct-load-manage_template', async (t) => {
         if (liveScenariosActive()) {
             t.skip('Covered by live operation scenarios');
             return;
         }
         const setup = directSetup({ id: 'direct01' });
-        if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-load-whats_app_template_get_v2_pagination', setup.live))
+        if ((0, utility_1.maybeSkipControl)(t, 'direct', 'direct-load-manage_template', setup.live))
             return;
         const { client, calls } = setup;
         const params = {};
@@ -65,7 +65,7 @@ function liveScenariosActive() { return false && process.env.LM_WHATSAPP_TEST_LI
 function directSetup(mockres) {
     const calls = [];
     const env = (0, utility_1.envOverride)({
-        'LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID': {},
+        'LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID': {},
         'LM_WHATSAPP_TEST_LIVE': 'FALSE',
         'LM_WHATSAPP_APIKEY': '',
     });
@@ -77,7 +77,7 @@ function directSetup(mockres) {
         const client = new __1.LmWhatsappSDK(Object.assign({}, (0, utility_1.liveClientOptions)(), { system: { fetch: transport.fetch },
             apikey: env.LM_WHATSAPP_APIKEY,
         }));
-        let idmap = env['LM_WHATSAPP_TEST_WHATS_APP_TEMPLATE_GET_V2_PAGINATION_ENTID'];
+        let idmap = env['LM_WHATSAPP_TEST_MANAGE_TEMPLATE_ENTID'];
         if ('string' === typeof idmap && idmap.startsWith('{')) {
             idmap = JSON.parse(idmap);
         }
@@ -114,4 +114,4 @@ function unwrapListData(data) {
     }
     return null;
 }
-//# sourceMappingURL=WhatsAppTemplateGetV2PaginationDirect.test.js.map
+//# sourceMappingURL=ManageTemplateDirect.test.js.map

@@ -20,7 +20,7 @@ main: kit: entity: media: {
               {
                 k: "header"
                 n: "x_link_upload_filename"
-                or: "x_link_upload_filename"
+                or: "X-Link-Upload-Filename"
                 r: true
                 t: "`$STRING`"
               }
@@ -30,7 +30,7 @@ main: kit: entity: media: {
                 ex: "+15551234567 or %2b15551234567 or %2B15551234567"
                 k: "param"
                 n: "phone_number"
-                or: "phone_number"
+                or: "phoneNumber"
                 r: true
                 t: "`$STRING`"
               }

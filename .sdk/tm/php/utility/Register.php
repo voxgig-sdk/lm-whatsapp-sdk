@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 LmWhatsappUtility::setRegistrar(function (LmWhatsappUtility $u): void {
     $u->clean = [LmWhatsappClean::class, 'call'];
+    $u->clean_add = [LmWhatsappClean::class, 'add'];
+    $u->clean_explain = [LmWhatsappDone::class, 'clean_explain'];
     $u->done = [LmWhatsappDone::class, 'call'];
     $u->make_error = [LmWhatsappMakeError::class, 'call'];
     $u->feature_add = [LmWhatsappFeatureAdd::class, 'call'];

@@ -31,7 +31,7 @@ Each feature is generated into every SDK target — as a directory
 `<lang>/src/feature/<name>/` (ts/js) or a flat file in the `<lang>/feature/`
 package (other languages). Each target's guide documents its features.
 
-**Entities** (6): `ManageTemplate`, `Media`, `SendMessage`, `Template`, `WhatsAppTemplateGetV2`, `WhatsAppTemplateGetV2Pagination`.
+**Entities** (5): `ManageTemplate`, `Media`, `SendMessage`, `Template`, `WhatsAppTemplateGetV2`.
 
 ## Generating and updating the SDK
 

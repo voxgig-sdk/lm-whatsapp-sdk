@@ -70,7 +70,7 @@ const __1 = require("..");
 const SDK_NAME = 'LmWhatsappSDK';
 // A fixture for every entity, so list()/load() resolve offline with no
 // network. Snippet client construction is rewritten to seed this.
-const TEST_SEED = { "entity": { "manage_template": { "test01": { "id": "test01" } }, "media": { "test01": { "id": "test01" } }, "send_message": { "test01": { "id": "test01" } }, "template": { "test01": { "id": "test01" } }, "whats_app_template_get_v2": { "test01": { "id": "test01" } }, "whats_app_template_get_v2_pagination": { "test01": { "id": "test01" } } } };
+const TEST_SEED = { "entity": { "manage_template": { "test01": { "id": "test01" } }, "media": { "test01": { "id": "test01" } }, "send_message": { "test01": { "id": "test01" } }, "template": { "test01": { "id": "test01" } }, "whats_app_template_get_v2": { "test01": { "id": "test01" } } } };
 const SEED_ARG = JSON.stringify(TEST_SEED);
 const SEEDED_CTOR = SDK_NAME + '.test(' + SEED_ARG + ')';
 // The three docs this gate covers, resolved relative to dist-test/.

@@ -27,7 +27,7 @@ class TestTemplateEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["create", "update"]:
+        for _op in ["update"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "template." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -39,16 +39,15 @@ class TestTemplateEntity:
                         "set LM_WHATSAPP_TEST_TEMPLATE_ENTID JSON to run live")
         client = setup["client"]
 
-        # CREATE
-        template_ref01_ent = client.Template(None)
-        template_ref01_data = helpers.to_map(vs.getprop(
-            vs.getpath(setup["data"], "new.template"), "template_ref01"))
-
-        template_ref01_data = helpers.to_map(runner.entity_data(template_ref01_ent.create(template_ref01_data, None)))
-        assert template_ref01_data is not None
-        assert template_ref01_data["id"] is not None
+        # Bootstrap entity data from existing test data.
+        template_ref01_data_raw = vs.items(helpers.to_map(
+            vs.getpath(setup["data"], "existing.template")))
+        template_ref01_data = None
+        if len(template_ref01_data_raw) > 0:
+            template_ref01_data = helpers.to_map(template_ref01_data_raw[0][1])
 
         # UPDATE
+        template_ref01_ent = client.Template(None)
         template_ref01_data_up0_up = {
             "id": template_ref01_data["id"],
         }

@@ -130,22 +130,175 @@ declare class Config {
             send_message: {};
             template: {};
             whats_app_template_get_v2: {};
-            whats_app_template_get_v2_pagination: {};
         };
     };
     entity: {
         manage_template: {
-            fields: {
+            fields: ({
                 name: string;
                 title: string;
                 type: string;
-            }[];
+                short: string;
+                op?: undefined;
+                req?: undefined;
+                format?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                op: {
+                    create: {
+                        req: boolean;
+                        type: string;
+                    };
+                };
+                short?: undefined;
+                req?: undefined;
+                format?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                req: boolean;
+                short: string;
+                op?: undefined;
+                format?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                format: string;
+                short?: undefined;
+                op?: undefined;
+                req?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: (string | string[])[];
+                short: string;
+                op?: undefined;
+                req?: undefined;
+                format?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: (string | string[])[];
+                short?: undefined;
+                op?: undefined;
+                req?: undefined;
+                format?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                short?: undefined;
+                op?: undefined;
+                req?: undefined;
+                format?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                short: string;
+                format: string;
+                op?: undefined;
+                req?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: (string | string[])[];
+                format: string;
+                short?: undefined;
+                op?: undefined;
+                req?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: (string | string[])[];
+                op: {
+                    create: {
+                        req: boolean;
+                        type: string;
+                    };
+                };
+                short: string;
+                req?: undefined;
+                format?: undefined;
+            })[];
             id: {
                 field: string;
                 name: string;
             };
             name: string;
             op: {
+                create: {
+                    input: string;
+                    name: string;
+                    points: {
+                        kind: string;
+                        method: string;
+                        orig: string;
+                        segments: {
+                            lit: string;
+                        }[];
+                        parts: string[];
+                        rename: {};
+                        transform: {
+                            req: {
+                                allow_category_change: string;
+                                category: string;
+                                components: string;
+                                language: string;
+                                library_template_body_inputs: string;
+                                library_template_button_inputs: string;
+                                library_template_name: string;
+                                message_send_ttl_seconds: string;
+                                name: string;
+                                parameter_format: string;
+                                sub_category: string;
+                            };
+                            res: string;
+                        };
+                        args: {};
+                        select: {};
+                    }[];
+                };
+                load: {
+                    input: string;
+                    name: string;
+                    points: {
+                        kind: string;
+                        method: string;
+                        orig: string;
+                        segments: {
+                            lit: string;
+                        }[];
+                        parts: string[];
+                        rename: {};
+                        transform: {
+                            req: string;
+                            res: string;
+                        };
+                        args: {
+                            query: ({
+                                name: string;
+                                orig: string;
+                                type: string;
+                                kind: string;
+                                example: number;
+                            } | {
+                                name: string;
+                                orig: string;
+                                type: string;
+                                kind: string;
+                                example?: undefined;
+                            })[];
+                        };
+                        select: {
+                            exist: string[];
+                        };
+                    }[];
+                };
                 remove: {
                     input: string;
                     name: string;
@@ -241,7 +394,21 @@ declare class Config {
             };
         };
         send_message: {
-            fields: never[];
+            fields: ({
+                name: string;
+                title: string;
+                type: string;
+                req: boolean;
+                short?: undefined;
+                format?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                req: boolean;
+                short: string;
+                format: string;
+            })[];
             name: string;
             op: {
                 create: {
@@ -274,35 +441,12 @@ declare class Config {
                 name: string;
                 title: string;
                 type: string;
-                short: string;
-                op?: undefined;
-                req?: undefined;
-                format?: undefined;
-            } | {
-                name: string;
-                title: string;
-                type: string;
-                op: {
-                    create: {
-                        req: boolean;
-                        type: string;
-                    };
-                    update?: undefined;
-                };
                 short?: undefined;
-                req?: undefined;
                 format?: undefined;
             } | {
                 name: string;
                 title: string;
-                type: string;
-                req: boolean;
-                op: {
-                    update: {
-                        type: (string | string[])[];
-                    };
-                    create?: undefined;
-                };
+                type: (string | string[])[];
                 short: string;
                 format?: undefined;
             } | {
@@ -311,54 +455,18 @@ declare class Config {
                 type: string;
                 format: string;
                 short?: undefined;
-                op?: undefined;
-                req?: undefined;
-            } | {
-                name: string;
-                title: string;
-                type: (string | string[])[];
-                short: string;
-                op?: undefined;
-                req?: undefined;
-                format?: undefined;
-            } | {
-                name: string;
-                title: string;
-                type: string;
-                short?: undefined;
-                op?: undefined;
-                req?: undefined;
-                format?: undefined;
             } | {
                 name: string;
                 title: string;
                 type: string;
                 short: string;
                 format: string;
-                op?: undefined;
-                req?: undefined;
             } | {
                 name: string;
                 title: string;
                 type: (string | string[])[];
                 format: string;
                 short?: undefined;
-                op?: undefined;
-                req?: undefined;
-            } | {
-                name: string;
-                title: string;
-                type: (string | string[])[];
-                op: {
-                    create: {
-                        req: boolean;
-                        type: string;
-                    };
-                    update?: undefined;
-                };
-                short: string;
-                req?: undefined;
-                format?: undefined;
             })[];
             id: {
                 field: string;
@@ -366,38 +474,6 @@ declare class Config {
             };
             name: string;
             op: {
-                create: {
-                    input: string;
-                    name: string;
-                    points: {
-                        kind: string;
-                        method: string;
-                        orig: string;
-                        segments: {
-                            lit: string;
-                        }[];
-                        parts: string[];
-                        rename: {};
-                        transform: {
-                            req: {
-                                allow_category_change: string;
-                                category: string;
-                                components: string;
-                                language: string;
-                                library_template_body_inputs: string;
-                                library_template_button_inputs: string;
-                                library_template_name: string;
-                                message_send_ttl_seconds: string;
-                                name: string;
-                                parameter_format: string;
-                                sub_category: string;
-                            };
-                            res: string;
-                        };
-                        args: {};
-                        select: {};
-                    }[];
-                };
                 update: {
                     input: string;
                     name: string;
@@ -482,61 +558,6 @@ declare class Config {
                                 kind: string;
                                 reqd: boolean;
                             }[];
-                        };
-                        select: {
-                            exist: string[];
-                        };
-                    }[];
-                };
-            };
-            relations: {
-                ancestors: never[];
-            };
-        };
-        whats_app_template_get_v2_pagination: {
-            fields: ({
-                name: string;
-                title: string;
-                type: string;
-                format: string;
-            } | {
-                name: string;
-                title: string;
-                type: (string | string[])[];
-                format?: undefined;
-            })[];
-            name: string;
-            op: {
-                load: {
-                    input: string;
-                    name: string;
-                    points: {
-                        kind: string;
-                        method: string;
-                        orig: string;
-                        segments: {
-                            lit: string;
-                        }[];
-                        parts: string[];
-                        rename: {};
-                        transform: {
-                            req: string;
-                            res: string;
-                        };
-                        args: {
-                            query: ({
-                                name: string;
-                                orig: string;
-                                type: string;
-                                kind: string;
-                                example: number;
-                            } | {
-                                name: string;
-                                orig: string;
-                                type: string;
-                                kind: string;
-                                example?: undefined;
-                            })[];
                         };
                         select: {
                             exist: string[];

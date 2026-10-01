@@ -1,6 +1,6 @@
 # LmWhatsapp Golang SDK
 
-
+LINK Mobility MyLINK WhatsApp API clients in TypeScript, Python, PHP, Go, Ruby and Lua, plus a CLI and an MCP server for AI agents. All generated from LINK Mobility's public OpenAPI definition, so every surface stays in sync with the API.
 
 The Golang SDK for the LmWhatsapp API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
@@ -53,6 +53,20 @@ func main() {
         "apikey": os.Getenv("LM_WHATSAPP_APIKEY"),
     })
 
+    // Load a single manageTemplate — the value is the loaded record.
+    manageTemplate, err := client.ManageTemplate(nil).Load(nil, nil)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(manageTemplate)
+
+    // Create a manageTemplate.
+    created, err := client.ManageTemplate(nil).Create(map[string]any{"components": []any{}}, nil)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(created)
+
     // Remove a manageTemplate.
     removed, err := client.ManageTemplate(nil).Remove(map[string]any{"id": "example_id"}, nil)
     if err != nil {
@@ -69,12 +83,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-whatsapptemplategetv2, err := client.WhatsAppTemplateGetV2(nil).Load(map[string]any{"id": "example_id"}, nil)
+managetemplate, err := client.ManageTemplate(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = whatsapptemplategetv2
+_ = managetemplate
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -138,13 +152,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-whatsAppTemplateGetV2, err := client.WhatsAppTemplateGetV2(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+manageTemplate, err := client.ManageTemplate(nil).Load(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(whatsAppTemplateGetV2) // the returned mock data
+fmt.Println(manageTemplate) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -228,7 +242,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `SendMessage` | `(data map[string]any) LmWhatsappEntity` | Create a SendMessage entity instance. |
 | `Template` | `(data map[string]any) LmWhatsappEntity` | Create a Template entity instance. |
 | `WhatsAppTemplateGetV2` | `(data map[string]any) LmWhatsappEntity` | Create a WhatsAppTemplateGetV2 entity instance. |
-| `WhatsAppTemplateGetV2Pagination` | `(data map[string]any) LmWhatsappEntity` | Create a WhatsAppTemplateGetV2Pagination entity instance. |
 
 ### Entity interface (LmWhatsappEntity)
 
@@ -258,7 +271,7 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    manageTemplate, err := client.ManageTemplate(nil).Remove(nil, nil)
+    manageTemplate, err := client.ManageTemplate(nil).Load(nil, nil)
     if err != nil { /* handle */ }
     // manageTemplate is the returned record
 
@@ -271,11 +284,30 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"id"` |  |
+| `"allow_category_change"` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `"category"` |  |
+| `"components"` | Array of components that make up the template. |
+| `"createdDate"` |  |
+| `"currentPage"` |  |
+| `"id"` | ID |
+| `"items"` |  |
+| `"language"` |  |
+| `"library_template_body_inputs"` |  |
+| `"library_template_button_inputs"` | Optional data during creation of a template from a library template. |
+| `"library_template_name"` | Library template name |
+| `"message_send_ttl_seconds"` | Time to live for message template sent. |
+| `"modifiedDate"` |  |
+| `"name"` | The message template name |
+| `"pages"` |  |
+| `"parameter_format"` |  |
+| `"results"` |  |
+| `"resultsPerPage"` |  |
+| `"status"` |  |
+| `"sub_category"` |  |
 
-Operations: Remove.
+Operations: Create, Load, Remove.
 
-API path: `/whatsapp/v2/templates/{id}`
+API path: `/whatsapp/v2/templates`
 
 #### Media
 
@@ -290,6 +322,8 @@ API path: `/whatsapp/v2/{phoneNumber}/media`
 
 | Field | Description |
 | --- | --- |
+| `"messages"` |  |
+| `"requestId"` | Unique Id of the request made towards LINK Mobility. |
 
 Operations: Create.
 
@@ -299,25 +333,20 @@ API path: `/whatsapp/v2/messages`
 
 | Field | Description |
 | --- | --- |
-| `"allow_category_change"` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `"category"` |  |
-| `"components"` | Array of components that make up the template. |
+| `"components"` | The array containing all the content of the message template |
 | `"createdDate"` |  |
 | `"id"` | ID |
 | `"language"` |  |
-| `"library_template_body_inputs"` |  |
-| `"library_template_button_inputs"` | Optional data during creation of a template from a library template. |
-| `"library_template_name"` | Library template name |
-| `"message_send_ttl_seconds"` | Time to live for message template sent. |
+| `"message_send_ttl_seconds"` | Template message delivery retry time-to-live (TTL) override value. |
 | `"modifiedDate"` |  |
 | `"name"` | The message template name |
 | `"parameter_format"` |  |
 | `"status"` |  |
-| `"sub_category"` |  |
 
-Operations: Create, Update.
+Operations: Update.
 
-API path: `/whatsapp/v2/templates`
+API path: `/whatsapp/v2/templates/{id}`
 
 #### WhatsAppTemplateGetV2
 
@@ -328,20 +357,6 @@ API path: `/whatsapp/v2/templates`
 Operations: Load.
 
 API path: `/whatsapp/v2/templates/{id}`
-
-#### WhatsAppTemplateGetV2Pagination
-
-| Field | Description |
-| --- | --- |
-| `"currentPage"` |  |
-| `"items"` |  |
-| `"pages"` |  |
-| `"results"` |  |
-| `"resultsPerPage"` |  |
-
-Operations: Load.
-
-API path: `/whatsapp/v2/templates`
 
 
 
@@ -356,13 +371,56 @@ Create an instance: `manageTemplate := client.ManageTemplate(nil)`
 
 | Method | Description |
 | --- | --- |
+| `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Remove(match, ctrl)` | Remove the matching entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `allow_category_change` | `bool` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
+| `category` | `string` |  |
+| `components` | `[]any` | Array of components that make up the template. |
+| `createdDate` | `string` |  |
+| `currentPage` | `int` |  |
+| `id` | `any` | ID |
+| `items` | `any` |  |
+| `language` | `string` |  |
+| `library_template_body_inputs` | `map[string]any` |  |
+| `library_template_button_inputs` | `any` | Optional data during creation of a template from a library template. |
+| `library_template_name` | `any` | Library template name |
+| `message_send_ttl_seconds` | `int` | Time to live for message template sent. |
+| `modifiedDate` | `any` |  |
+| `name` | `any` | The message template name |
+| `pages` | `int` |  |
+| `parameter_format` | `string` |  |
+| `results` | `int` |  |
+| `resultsPerPage` | `int` |  |
+| `status` | `string` |  |
+| `sub_category` | `string` |  |
+
+#### Example: Load
+
+```go
+manageTemplate, err := client.ManageTemplate(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(manageTemplate) // the loaded record
+```
+
+#### Example: Create
+
+```go
+result, err := client.ManageTemplate(nil).Create(map[string]any{
+    "components": []any{},
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
 
 
 ### Media
@@ -398,10 +456,19 @@ Create an instance: `sendMessage := client.SendMessage(nil)`
 | --- | --- |
 | `Create(data, ctrl)` | Create a new entity with the given data. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `messages` | `[]any` |  |
+| `requestId` | `string` | Unique Id of the request made towards LINK Mobility. |
+
 #### Example: Create
 
 ```go
 result, err := client.SendMessage(nil).Create(map[string]any{
+    "messages": []any{},
+    "requestId": "example_requestId",
 }, nil)
 if err != nil {
     panic(err)
@@ -418,40 +485,22 @@ Create an instance: `template := client.Template(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Update(data, ctrl)` | Update an existing entity. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `allow_category_change` | `bool` | Set to true to allow to assign a category based on template guidelines and the template's contents. |
 | `category` | `string` |  |
-| `components` | `[]any` | Array of components that make up the template. |
+| `components` | `any` | The array containing all the content of the message template |
 | `createdDate` | `string` |  |
 | `id` | `any` | ID |
 | `language` | `string` |  |
-| `library_template_body_inputs` | `map[string]any` |  |
-| `library_template_button_inputs` | `any` | Optional data during creation of a template from a library template. |
-| `library_template_name` | `any` | Library template name |
-| `message_send_ttl_seconds` | `int` | Time to live for message template sent. |
+| `message_send_ttl_seconds` | `int` | Template message delivery retry time-to-live (TTL) override value. |
 | `modifiedDate` | `any` |  |
 | `name` | `any` | The message template name |
 | `parameter_format` | `string` |  |
 | `status` | `string` |  |
-| `sub_category` | `string` |  |
-
-#### Example: Create
-
-```go
-result, err := client.Template(nil).Create(map[string]any{
-    "components": []any{},
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result)
-```
 
 
 ### WhatsAppTemplateGetV2
@@ -478,37 +527,6 @@ if err != nil {
     panic(err)
 }
 fmt.Println(whatsAppTemplateGetV2) // the loaded record
-```
-
-
-### WhatsAppTemplateGetV2Pagination
-
-Create an instance: `whatsAppTemplateGetV2Pagination := client.WhatsAppTemplateGetV2Pagination(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `Load(match, ctrl)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `currentPage` | `int` |  |
-| `items` | `any` |  |
-| `pages` | `int` |  |
-| `results` | `int` |  |
-| `resultsPerPage` | `int` |  |
-
-#### Example: Load
-
-```go
-whatsAppTemplateGetV2Pagination, err := client.WhatsAppTemplateGetV2Pagination(nil).Load(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(whatsAppTemplateGetV2Pagination) // the loaded record
 ```
 
 ## Features
@@ -728,11 +746,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-whatsapptemplategetv2 := client.WhatsAppTemplateGetV2(nil)
-whatsapptemplategetv2.Load(map[string]any{"id": "example_id"}, nil)
+managetemplate := client.ManageTemplate(nil)
+managetemplate.Load(nil, nil)
 
-// whatsapptemplategetv2.Data() now returns the whatsapptemplategetv2 data from the last load
-// whatsapptemplategetv2.Match() returns the last match criteria
+// managetemplate.Data() now returns the managetemplate data from the last load
+// managetemplate.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

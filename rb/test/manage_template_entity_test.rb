@@ -16,7 +16,7 @@ class ManageTemplateEntityTest < Minitest::Test
     setup = manage_template_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    [].each do |_op|
+    ["create", "load", "remove"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "manage_template." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -31,13 +31,30 @@ class ManageTemplateEntityTest < Minitest::Test
     end
     client = setup[:client]
 
-    # Bootstrap entity data from existing test data.
-    manage_template_ref01_data_raw = Vs.items(Helpers.to_map(
-      Vs.getpath(setup[:data], "existing.manage_template")))
-    manage_template_ref01_data = nil
-    if manage_template_ref01_data_raw.length > 0
-      manage_template_ref01_data = Helpers.to_map(manage_template_ref01_data_raw[0][1])
-    end
+    # CREATE
+    manage_template_ref01_ent = client.ManageTemplate(nil)
+    manage_template_ref01_data = Helpers.to_map(Vs.getprop(
+      Vs.getpath(setup[:data], "new.manage_template"), "manage_template_ref01"))
+
+    manage_template_ref01_data_result = manage_template_ref01_ent.create(manage_template_ref01_data, nil)
+    manage_template_ref01_data = Helpers.to_map(manage_template_ref01_data_result.respond_to?(:data_get) ? manage_template_ref01_data_result.data_get : manage_template_ref01_data_result)
+    assert !manage_template_ref01_data.nil?
+    assert !manage_template_ref01_data["id"].nil?
+
+    # LOAD
+    manage_template_ref01_match_dt0 = {
+      "id" => manage_template_ref01_data["id"],
+    }
+    manage_template_ref01_data_dt0_loaded = manage_template_ref01_ent.load(manage_template_ref01_match_dt0, nil)
+    manage_template_ref01_data_dt0_load_result = Helpers.to_map(manage_template_ref01_data_dt0_loaded.respond_to?(:data_get) ? manage_template_ref01_data_dt0_loaded.data_get : manage_template_ref01_data_dt0_loaded)
+    assert !manage_template_ref01_data_dt0_load_result.nil?
+    assert_equal manage_template_ref01_data_dt0_load_result["id"], manage_template_ref01_data["id"]
+
+    # REMOVE
+    manage_template_ref01_match_rm0 = {
+      "id" => manage_template_ref01_data["id"],
+    }
+    manage_template_ref01_ent.remove(manage_template_ref01_match_rm0, nil)
 
   end
 end

@@ -19,13 +19,15 @@ make build
 export LM_WHATSAPP_APIKEY=sk_live_xxx
 
 # 4. Each command line is ONE boru expression, run against the API:
+./lm-whatsapp-cli load 1 manage_template            # {id:1} shorthand
+./lm-whatsapp-cli load '{id:1}' manage_template       # explicit match map
 
 # 5. Override the API base URL for a single call
-LM_WHATSAPP_BASE=https://api.example.com ./lm-whatsapp-cli --help
+LM_WHATSAPP_BASE=https://api.example.com ./lm-whatsapp-cli load 1 manage_template
 
 # 6. No arguments -> interactive REPL
 ./lm-whatsapp-cli
-lm-whatsapp> /help
+lm-whatsapp> load 1 manage_template
 lm-whatsapp> /quit
 ```
 
@@ -51,7 +53,7 @@ lm-whatsapp> /quit
    arguments to open the REPL):
 
    ```sh
-   ./dist/*/lm-whatsapp-cli --help
+   ./dist/*/lm-whatsapp-cli load 1 manage_template
    ```
 
 4. **Go interactive.** Run the binary with no arguments to open the REPL, then
@@ -61,6 +63,16 @@ That is the whole loop: *build → set key → evaluate boru expressions*.
 
 ## How-to guides
 
+### Load a single record
+
+```sh
+./lm-whatsapp-cli load 1 manage_template          # scalar shorthand for {id:1}
+./lm-whatsapp-cli load '{id:1}' manage_template     # explicit match map
+```
+
+The query is either a **scalar** (`1`, treated as `{id:1}`) or a **match map**
+(`{id:1}`, `{slug:"acme"}`). Quote the map so your shell passes it through intact.
+
 ### Authenticate and choose an environment
 
 Configuration is read from the environment — nothing is written to disk:
@@ -68,7 +80,7 @@ Configuration is read from the environment — nothing is written to disk:
 ```sh
 export LM_WHATSAPP_APIKEY=sk_live_xxx            # API key
 export LM_WHATSAPP_BASE=https://api.example.com  # optional: override the API base URL
-./lm-whatsapp-cli --help
+./lm-whatsapp-cli load 1 manage_template
 ```
 
 Both are injectable by a secrets vault, so the key never has to be typed inline.
@@ -80,6 +92,7 @@ evaluated as its own boru expression:
 
 ```text
 $ ./lm-whatsapp-cli
+lm-whatsapp> load 1 manage_template
 lm-whatsapp> /help
 lm-whatsapp> /quit
 ```
@@ -94,7 +107,7 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 ### Discover the available entities
 
 `/help` in the REPL prints the full entity list, or see [Entities](#entities)
-below — this SDK exposes 6 entities.
+below — this SDK exposes 5 entities.
 
 ## Reference
 
@@ -148,9 +161,9 @@ Meta-commands use the `/` prefix (everything else on a line is evaluated as boru
 
 ### Entities
 
-The 6 entities this SDK exposes (any is valid as `<entity>`):
+The 5 entities this SDK exposes (any is valid as `<entity>`):
 
-manage_template media send_message template whats_app_template_get_v2 whats_app_template_get_v2_pagination
+manage_template media send_message template whats_app_template_get_v2
 
 ## Explanation
 

@@ -14,7 +14,6 @@ main: {
       }
       servers: [
         {
-          description: "LINK Mobility MyLINK (base shared with the sibling SMS/Email APIs)"
           url: "https://api.linkmobility.com"
         }
       ]

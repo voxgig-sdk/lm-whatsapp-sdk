@@ -16,6 +16,37 @@ import (
 type ManageTemplate struct {
 }
 
+// ManageTemplateLoadMatch is the typed request payload for ManageTemplate.LoadTyped.
+type ManageTemplateLoadMatch struct {
+	Page *int `json:"page,omitempty"`
+	Size *int `json:"size,omitempty"`
+	Sort *[]any `json:"sort,omitempty"`
+}
+
+// ManageTemplateCreateData is the typed request payload for ManageTemplate.CreateTyped.
+type ManageTemplateCreateData struct {
+	AllowCategoryChange *bool `json:"allow_category_change,omitempty"`
+	Category *string `json:"category,omitempty"`
+	Components []any `json:"components"`
+	CreatedDate *string `json:"createdDate,omitempty"`
+	CurrentPage *int `json:"currentPage,omitempty"`
+	Id *any `json:"id,omitempty"`
+	Items *any `json:"items,omitempty"`
+	Language *string `json:"language,omitempty"`
+	LibraryTemplateBodyInputs *map[string]any `json:"library_template_body_inputs,omitempty"`
+	LibraryTemplateButtonInputs *any `json:"library_template_button_inputs,omitempty"`
+	LibraryTemplateName *any `json:"library_template_name,omitempty"`
+	MessageSendTtlSeconds *int `json:"message_send_ttl_seconds,omitempty"`
+	ModifiedDate *any `json:"modifiedDate,omitempty"`
+	Name *any `json:"name,omitempty"`
+	Pages *int `json:"pages,omitempty"`
+	ParameterFormat *string `json:"parameter_format,omitempty"`
+	Results *int `json:"results,omitempty"`
+	ResultsPerPage *int `json:"resultsPerPage,omitempty"`
+	Status *string `json:"status,omitempty"`
+	SubCategory *string `json:"sub_category,omitempty"`
+}
+
 // ManageTemplateRemoveMatch is the typed request payload for ManageTemplate.RemoveTyped.
 type ManageTemplateRemoveMatch struct {
 	Id string `json:"id"`
@@ -36,48 +67,26 @@ type SendMessage struct {
 
 // SendMessageCreateData is the typed request payload for SendMessage.CreateTyped.
 type SendMessageCreateData struct {
+	Messages []any `json:"messages"`
+	RequestId string `json:"requestId"`
 }
 
 // Template is the typed data model for the template entity.
 type Template struct {
 }
 
-// TemplateCreateData is the typed request payload for Template.CreateTyped.
-type TemplateCreateData struct {
-	AllowCategoryChange *bool `json:"allow_category_change,omitempty"`
-	Category *string `json:"category,omitempty"`
-	Components []any `json:"components"`
-	CreatedDate *string `json:"createdDate,omitempty"`
-	Id *any `json:"id,omitempty"`
-	Language *string `json:"language,omitempty"`
-	LibraryTemplateBodyInputs *map[string]any `json:"library_template_body_inputs,omitempty"`
-	LibraryTemplateButtonInputs *any `json:"library_template_button_inputs,omitempty"`
-	LibraryTemplateName *any `json:"library_template_name,omitempty"`
-	MessageSendTtlSeconds *int `json:"message_send_ttl_seconds,omitempty"`
-	ModifiedDate *any `json:"modifiedDate,omitempty"`
-	Name *any `json:"name,omitempty"`
-	ParameterFormat *string `json:"parameter_format,omitempty"`
-	Status *string `json:"status,omitempty"`
-	SubCategory *string `json:"sub_category,omitempty"`
-}
-
 // TemplateUpdateData is the typed request payload for Template.UpdateTyped.
 type TemplateUpdateData struct {
 	Id string `json:"id"`
-	AllowCategoryChange *bool `json:"allow_category_change,omitempty"`
 	Category *string `json:"category,omitempty"`
-	Components *[]any `json:"components,omitempty"`
+	Components *any `json:"components,omitempty"`
 	CreatedDate *string `json:"createdDate,omitempty"`
 	Language *string `json:"language,omitempty"`
-	LibraryTemplateBodyInputs *map[string]any `json:"library_template_body_inputs,omitempty"`
-	LibraryTemplateButtonInputs *any `json:"library_template_button_inputs,omitempty"`
-	LibraryTemplateName *any `json:"library_template_name,omitempty"`
 	MessageSendTtlSeconds *int `json:"message_send_ttl_seconds,omitempty"`
 	ModifiedDate *any `json:"modifiedDate,omitempty"`
 	Name *any `json:"name,omitempty"`
 	ParameterFormat *string `json:"parameter_format,omitempty"`
 	Status *string `json:"status,omitempty"`
-	SubCategory *string `json:"sub_category,omitempty"`
 }
 
 // WhatsAppTemplateGetV2 is the typed data model for the whats_app_template_get_v2 entity.
@@ -87,17 +96,6 @@ type WhatsAppTemplateGetV2 struct {
 // WhatsAppTemplateGetV2LoadMatch is the typed request payload for WhatsAppTemplateGetV2.LoadTyped.
 type WhatsAppTemplateGetV2LoadMatch struct {
 	Id string `json:"id"`
-}
-
-// WhatsAppTemplateGetV2Pagination is the typed data model for the whats_app_template_get_v2_pagination entity.
-type WhatsAppTemplateGetV2Pagination struct {
-}
-
-// WhatsAppTemplateGetV2PaginationLoadMatch is the typed request payload for WhatsAppTemplateGetV2Pagination.LoadTyped.
-type WhatsAppTemplateGetV2PaginationLoadMatch struct {
-	Page *int `json:"page,omitempty"`
-	Size *int `json:"size,omitempty"`
-	Sort *[]any `json:"sort,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

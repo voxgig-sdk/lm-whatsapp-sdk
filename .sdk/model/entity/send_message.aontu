@@ -4,6 +4,23 @@ main: kit: entity: send_message: {
 
   alias: field: {}
 
+  fields: {
+    messages: {
+      h: "Messages"
+      n: "messages"
+      r: true
+      t: "`$ARRAY`"
+    }
+    requestId: {
+      fo: "uuid"
+      h: "Request Id"
+      n: "requestId"
+      r: true
+      sh: "Unique Id of the request made towards LINK Mobility."
+      t: "`$STRING`"
+    }
+  }
+
   name: "send_message"
   op: {
     create: {
@@ -29,15 +46,12 @@ main: kit: entity: send_message: {
             }
           ]
           t: {
-            req: "`reqdata`"
+            req: "`reqdata.messages`"
             res: "`body`"
           }
         }
       ]
     }
-  }
-
-  fields: {
   }
 
 

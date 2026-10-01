@@ -6,12 +6,13 @@
 <div class="site-notice" role="note"></div>
 <div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">MyLINK WhatsApp API</a></details>
 <details open><summary>API</summary><a href="../api/index.html">API overview</a>
-<a aria-current="page" href="../api/manage_template.html">ManageTemplate</a><div class="nav-sections"><a class="nav-section" href="#delete-whatsappv2templatesid">DELETE /whatsapp/v2/templates/{id}</a></div>
+<a aria-current="page" href="../api/manage_template.html">ManageTemplate</a><div class="nav-sections"><a class="nav-section" href="#post-whatsappv2templates">POST /whatsapp/v2/templates</a>
+<a class="nav-section" href="#get-whatsappv2templates">GET /whatsapp/v2/templates</a>
+<a class="nav-section" href="#delete-whatsappv2templatesid">DELETE /whatsapp/v2/templates/{id}</a></div>
 <a href="../api/media.html">Media</a>
 <a href="../api/send_message.html">SendMessage</a>
 <a href="../api/template.html">Template</a>
-<a href="../api/whats_app_template_get_v2.html">WhatsAppTemplateGetV2</a>
-<a href="../api/whats_app_template_get_v2_pagination.html">WhatsAppTemplateGetV2Pagination</a></details>
+<a href="../api/whats_app_template_get_v2.html">WhatsAppTemplateGetV2</a></details>
 <details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
 <a href="../guides/first-call.html">Make your first API call</a>
 <a href="../guides/errors.html">Handle errors</a>
@@ -45,6 +46,18 @@
 </thead>
 <tbody>
 <tr>
+<td><code>POST</code></td>
+<td><a href="#post-whatsappv2templates"><code>/whatsapp/v2/templates</code></a></td>
+<td><code>create</code></td>
+<td>Success</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-whatsappv2templates"><code>/whatsapp/v2/templates</code></a></td>
+<td><code>load</code></td>
+<td>Success</td>
+</tr>
+<tr>
 <td><code>DELETE</code></td>
 <td><a href="#delete-whatsappv2templatesid"><code>/whatsapp/v2/templates/{id}</code></a></td>
 <td><code>remove</code></td>
@@ -56,7 +69,17 @@
 <p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
 <h3 id="golang">Golang</h3>
 <p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
-<pre><code class="language-go">removed, err := client.ManageTemplate(nil).Remove(map[string]any{&quot;id&quot;: &quot;example&quot;}, nil)
+<pre><code class="language-go">manage_template, err := client.ManageTemplate(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(manage_template)
+created, err := client.ManageTemplate(nil).Create(map[string]any{&quot;components&quot;: []any{}}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+removed, err := client.ManageTemplate(nil).Remove(map[string]any{&quot;id&quot;: &quot;example&quot;}, nil)
 if err != nil {
     panic(err)
 }
@@ -64,23 +87,33 @@ fmt.Println(removed)
 </code></pre>
 <h3 id="lua">Lua</h3>
 <p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
-<pre><code class="language-lua">local removed, err = client:ManageTemplate():remove({ id = &quot;example&quot; })
+<pre><code class="language-lua">local manage_template, err = client:ManageTemplate():load()
+local created, err = client:ManageTemplate():create({ components = {} })
+local removed, err = client:ManageTemplate():remove({ id = &quot;example&quot; })
 </code></pre>
 <h3 id="php">PHP</h3>
 <p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
-<pre><code class="language-php">$client-&gt;ManageTemplate()-&gt;remove([&quot;id&quot; =&gt; &quot;example&quot;]);
+<pre><code class="language-php">$manage_template = $client-&gt;ManageTemplate()-&gt;load();
+$created = $client-&gt;ManageTemplate()-&gt;create([&quot;components&quot; =&gt; []]);
+$client-&gt;ManageTemplate()-&gt;remove([&quot;id&quot; =&gt; &quot;example&quot;]);
 </code></pre>
 <h3 id="python">Python</h3>
 <p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
-<pre><code class="language-py">client.ManageTemplate().remove({&quot;id&quot;: &quot;example&quot;})
+<pre><code class="language-py">manage_template = client.ManageTemplate().load()
+created = client.ManageTemplate().create({ &quot;components&quot;: [] })
+client.ManageTemplate().remove({&quot;id&quot;: &quot;example&quot;})
 </code></pre>
 <h3 id="ruby">Ruby</h3>
 <p>Construct <code>client</code> as shown in the <a href="../sdks/rb.html#set-up-the-client">Ruby setup</a>, then call the operations:</p>
-<pre><code class="language-rb">client.ManageTemplate.remove({ &quot;id&quot; =&gt; &quot;example&quot; })
+<pre><code class="language-rb">manage_template = client.ManageTemplate.load()
+created = client.ManageTemplate.create({ &quot;components&quot; =&gt; [] })
+client.ManageTemplate.remove({ &quot;id&quot; =&gt; &quot;example&quot; })
 </code></pre>
 <h3 id="typescript">TypeScript</h3>
 <p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
-<pre><code class="language-ts">await client.ManageTemplate().remove({ id: &quot;example&quot; })
+<pre><code class="language-ts">const manage_template = await client.ManageTemplate().load()
+const created = await client.ManageTemplate().create({ components: [] })
+await client.ManageTemplate().remove({ id: &quot;example&quot; })
 </code></pre>
 <h2 id="fields">Fields</h2>
 <table>
@@ -94,22 +127,345 @@ fmt.Println(removed)
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
+<td><code>allow_category_change</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Set to true to allow to assign a category based on template guidelines and the template's contents.</td>
+</tr>
+<tr>
+<td><code>category</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td>Id</td>
+<td>Category</td>
+</tr>
+<tr>
+<td><code>components</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>Array of components that make up the template.</td>
+</tr>
+<tr>
+<td><code>createdDate</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Created Date</td>
+</tr>
+<tr>
+<td><code>currentPage</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>Current Page</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>one,string,null</code></td>
+<td>No</td>
+<td>ID</td>
+</tr>
+<tr>
+<td><code>items</code></td>
+<td><code>one,array,null</code></td>
+<td>No</td>
+<td>Items</td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Language</td>
+</tr>
+<tr>
+<td><code>library_template_body_inputs</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Library Template Body Inputs</td>
+</tr>
+<tr>
+<td><code>library_template_button_inputs</code></td>
+<td><code>one,array,null</code></td>
+<td>No</td>
+<td>Optional data during creation of a template from a library template.</td>
+</tr>
+<tr>
+<td><code>library_template_name</code></td>
+<td><code>one,string,null</code></td>
+<td>No</td>
+<td>Library template name</td>
+</tr>
+<tr>
+<td><code>message_send_ttl_seconds</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>Time to live for message template sent.</td>
+</tr>
+<tr>
+<td><code>modifiedDate</code></td>
+<td><code>one,string,null</code></td>
+<td>No</td>
+<td>Modified Date</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>one,string,null</code></td>
+<td>No</td>
+<td>The message template name</td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>Pages</td>
+</tr>
+<tr>
+<td><code>parameter_format</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Parameter Format</td>
+</tr>
+<tr>
+<td><code>results</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>Results</td>
+</tr>
+<tr>
+<td><code>resultsPerPage</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>Results Per Page</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Status</td>
+</tr>
+<tr>
+<td><code>sub_category</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Sub Category</td>
 </tr>
 </tbody>
 </table>
-<h2 id="remove">remove</h2>
-<h3 id="delete-whatsappv2templatesid" class="operation" data-method="delete"><code>DELETE</code> /whatsapp/v2/templates/{id}</h3>
+<h2 id="create">create</h2>
+<h3 id="post-whatsappv2templates" class="operation" data-method="post"><code>POST</code> /whatsapp/v2/templates</h3>
 <p>Authentication: oauth2 (<code>Bearer</code>).</p>
-<h4 id="parameters">Parameters</h4>
-<p>| Parameter | In | Type | Required | Description |
-| --- | --- | --- | --- |
-| <code>id</code> | <code>path</code> | <code>string (uuid)</code> | Yes |  |</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>allow_category_change</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Set to true to allow to assign a category based on template guidelines and the template's contents. This can prevent the template status from immediately being set to REJECTED upon creation due to miscategorization. If omitted, template will not be auto-assigned a category and its status may be set to REJECTED if determined to be miscategorized.</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td><code>enum: AUTHENTICATION, MARKETING, UTILITY</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>Array of components that make up the template.</td>
+</tr>
+<tr>
+<td><code>components[].buttons</code></td>
+<td><code>array,null</code></td>
+<td>No</td>
+<td>Button components to be used in the template.</td>
+</tr>
+<tr>
+<td><code>components[].examples</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components[].examples.body_text</code></td>
+<td><code>array,null</code></td>
+<td>No</td>
+<td>Body text</td>
+</tr>
+<tr>
+<td><code>components[].examples.header_handle</code></td>
+<td><code>array,null</code></td>
+<td>No</td>
+<td>Header handle</td>
+</tr>
+<tr>
+<td><code>components[].examples.header_text</code></td>
+<td><code>array,null</code></td>
+<td>No</td>
+<td>Header text</td>
+</tr>
+<tr>
+<td><code>components[].format</code></td>
+<td><code>enum: TEXT, IMAGE, DOCUMENT, VIDEO, LOCATION</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>components[].text</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Component text. Required for components with type HEADER, BODY or FOOTER.</td>
+</tr>
+<tr>
+<td><code>components[].type</code></td>
+<td><code>enum: GREETING, HEADER, BODY, FOOTER, BUTTONS, CAROUSEL, ...</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td><code>enum: af, sq, ar, az, bn, bg, ...</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>library_template_body_inputs</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>library_template_body_inputs.add_contact_number</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Add contact number</td>
+</tr>
+<tr>
+<td><code>library_template_body_inputs.add_learn_more_link</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Add learn more link</td>
+</tr>
+<tr>
+<td><code>library_template_body_inputs.add_security_recommendation</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Add security recommendation</td>
+</tr>
+<tr>
+<td><code>library_template_body_inputs.add_track_package_link</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Add track package link</td>
+</tr>
+<tr>
+<td><code>library_template_body_inputs.code_expiration_minutes</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>Code expiration minutes</td>
+</tr>
+<tr>
+<td><code>library_template_button_inputs</code></td>
+<td><code>array,null</code></td>
+<td>No</td>
+<td>Optional data during creation of a template from a library template. These are optional fields for the button component.</td>
+</tr>
+<tr>
+<td><code>library_template_name</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Library template name</td>
+</tr>
+<tr>
+<td><code>message_send_ttl_seconds</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>Time to live for message template sent. If users are offline for more than TTL duration after message template is sent, we will retry the delivery for a period of time known as a time-to-live, TTL, or the message validity period. TTL can be configured for certain message types.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Template name</td>
+</tr>
+<tr>
+<td><code>parameter_format</code></td>
+<td><code>enum: NAMED, POSITIONAL</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>sub_category</code></td>
+<td><code>enum: ORDER_DETAILS, ORDER_STATUS</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h4 id="responses">Responses</h4>
 <h5 id="200-success" class="status" data-status="2xx">200: Success</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td><code>enum: AUTHENTICATION, MARKETING, UTILITY</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>createdDate</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>ID</td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td><code>enum: af, sq, ar, az, bn, bg, ...</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>modifiedDate</code></td>
+<td><code>string,null (date-time)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>The message template name</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>enum: APPROVED, IN_APPEAL, PENDING, REJECTED, PENDING_DELETION, DELETED, ...</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h5 id="400-bad-request" class="status" data-status="4xx">400: Bad Request</h5>
 <p><code>application/json</code></p>
 <table>
@@ -241,6 +597,381 @@ fmt.Println(removed)
 </tbody>
 </table>
 <h5 id="502-server-error" class="status" data-status="5xx">502: Server Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="load">load</h2>
+<h3 id="get-whatsappv2templates" class="operation" data-method="get"><code>GET</code> /whatsapp/v2/templates</h3>
+<p>Authentication: oauth2 (<code>Bearer</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>sort</code> | <code>query</code> | <code>array of string</code> | No | List of fields used to sort results |
+| <code>page</code> | <code>query</code> | <code>integer (int32)</code> | No | Requested page |
+| <code>size</code> | <code>query</code> | <code>integer (int32)</code> | No | Number of items per page |</p>
+<h4 id="responses-1">Responses</h4>
+<h5 id="200-success-1" class="status" data-status="2xx">200: Success</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>currentPage</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>items</code></td>
+<td><code>array,null</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>results</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>resultsPerPage</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request-1" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized-1" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-1" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="429-too-many-requests-1" class="status" data-status="4xx">429: Too Many Requests</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-server-error-1" class="status" data-status="5xx">500: Server Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="502-server-error-1" class="status" data-status="5xx">502: Server Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="remove">remove</h2>
+<h3 id="delete-whatsappv2templatesid" class="operation" data-method="delete"><code>DELETE</code> /whatsapp/v2/templates/{id}</h3>
+<p>Authentication: oauth2 (<code>Bearer</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>id</code> | <code>path</code> | <code>string (uuid)</code> | Yes |  |</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-success-2" class="status" data-status="2xx">200: Success</h5>
+<h5 id="400-bad-request-2" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized-2" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-2" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="429-too-many-requests-2" class="status" data-status="4xx">429: Too Many Requests</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="500-server-error-2" class="status" data-status="5xx">500: Server Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Unique Link Message ID generated as part of the processing the request.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string,null</code></td>
+<td>No</td>
+<td>Recipient of the message as submitted in the corresponding Message.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="502-server-error-2" class="status" data-status="5xx">502: Server Error</h5>
 <p><code>application/json</code></p>
 <table>
 <thead>

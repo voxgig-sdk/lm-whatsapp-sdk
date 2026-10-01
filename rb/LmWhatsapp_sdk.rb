@@ -95,6 +95,17 @@ class LmWhatsappSDK
     @_rootctx
   end
 
+  # The options and the root context both hold the credential, so the
+  # client's printed form is its name alone; `options_map` is the
+  # documented way to read them back.
+  def to_s
+    "LmWhatsapp " + VoxgigStruct.jsonify({ "name" => "LmWhatsapp" })
+  end
+
+  def inspect
+    to_s
+  end
+
   def prepare(fetchargs = {})
     utility = @_utility
     fetchargs ||= {}
@@ -202,7 +213,7 @@ class LmWhatsappSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err } if fetch_err
+    return { "ok" => false, "err" => utility.clean.call(ctx, fetch_err) } if fetch_err
 
     if fetched.nil?
       return {
@@ -321,13 +332,6 @@ class LmWhatsappSDK
   def WhatsAppTemplateGetV2(data = nil)
     require_relative 'entity/whats_app_template_get_v2_entity'
     WhatsAppTemplateGetV2Entity.new(self, data)
-  end
-
-
-  # Canonical facade: client.WhatsAppTemplateGetV2Pagination.list / client.WhatsAppTemplateGetV2Pagination.load({ "id" => ... })
-  def WhatsAppTemplateGetV2Pagination(data = nil)
-    require_relative 'entity/whats_app_template_get_v2_pagination_entity'
-    WhatsAppTemplateGetV2PaginationEntity.new(self, data)
   end
 
 

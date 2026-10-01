@@ -16,7 +16,7 @@ class TemplateEntityTest < Minitest::Test
     setup = template_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["create", "update"].each do |_op|
+    ["update"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "template." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -31,17 +31,16 @@ class TemplateEntityTest < Minitest::Test
     end
     client = setup[:client]
 
-    # CREATE
-    template_ref01_ent = client.Template(nil)
-    template_ref01_data = Helpers.to_map(Vs.getprop(
-      Vs.getpath(setup[:data], "new.template"), "template_ref01"))
-
-    template_ref01_data_result = template_ref01_ent.create(template_ref01_data, nil)
-    template_ref01_data = Helpers.to_map(template_ref01_data_result.respond_to?(:data_get) ? template_ref01_data_result.data_get : template_ref01_data_result)
-    assert !template_ref01_data.nil?
-    assert !template_ref01_data["id"].nil?
+    # Bootstrap entity data from existing test data.
+    template_ref01_data_raw = Vs.items(Helpers.to_map(
+      Vs.getpath(setup[:data], "existing.template")))
+    template_ref01_data = nil
+    if template_ref01_data_raw.length > 0
+      template_ref01_data = Helpers.to_map(template_ref01_data_raw[0][1])
+    end
 
     # UPDATE
+    template_ref01_ent = client.Template(nil)
     template_ref01_data_up0_up = {
       "id" => template_ref01_data["id"],
     }

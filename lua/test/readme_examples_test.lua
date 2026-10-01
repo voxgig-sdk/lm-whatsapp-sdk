@@ -20,7 +20,7 @@ local SDK_MODULE = "lm-whatsapp_sdk"
 -- A test-mode client seeded with a fixture for every entity. The constructor
 -- of each runnable snippet is rewritten to this form so the offline mock has
 -- data to return.
-local TEST_SEED = '{ entity = { ["manage_template"] = { ["test01"] = { id = "test01" } }, ["media"] = { ["test01"] = { id = "test01" } }, ["send_message"] = { ["test01"] = { id = "test01" } }, ["template"] = { ["test01"] = { id = "test01" } }, ["whats_app_template_get_v2"] = { ["test01"] = { id = "test01" } }, ["whats_app_template_get_v2_pagination"] = { ["test01"] = { id = "test01" } } } }'
+local TEST_SEED = '{ entity = { ["manage_template"] = { ["test01"] = { id = "test01" } }, ["media"] = { ["test01"] = { id = "test01" } }, ["send_message"] = { ["test01"] = { id = "test01" } }, ["template"] = { ["test01"] = { id = "test01" } }, ["whats_app_template_get_v2"] = { ["test01"] = { id = "test01" } } } }'
 local TEST_CTOR = "sdk.test(" .. TEST_SEED .. ")"
 
 local function script_dir()

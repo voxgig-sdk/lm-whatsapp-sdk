@@ -19,7 +19,7 @@ describe("ManageTemplateEntity", function()
     local setup = manage_template_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({}) do
+    for _, _op in ipairs({"create", "load", "remove"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "manage_template." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -34,13 +34,33 @@ describe("ManageTemplateEntity", function()
     end
     local client = setup.client
 
-    -- Bootstrap entity data from existing test data.
-    local manage_template_ref01_data_raw = vs.items(helpers.to_map(
-      vs.getpath(setup.data, "existing.manage_template")))
-    local manage_template_ref01_data = nil
-    if #manage_template_ref01_data_raw > 0 then
-      manage_template_ref01_data = helpers.to_map(manage_template_ref01_data_raw[1][2])
-    end
+    -- CREATE
+    local manage_template_ref01_ent = client:ManageTemplate(nil)
+    local manage_template_ref01_data = helpers.to_map(vs.getprop(
+      vs.getpath(setup.data, "new.manage_template"), "manage_template_ref01"))
+
+    local manage_template_ref01_data_result, err = manage_template_ref01_ent:create(manage_template_ref01_data, nil)
+    assert.is_nil(err)
+    manage_template_ref01_data = helpers.to_map(type(manage_template_ref01_data_result) == 'table' and manage_template_ref01_data_result.data_get and manage_template_ref01_data_result:data_get() or manage_template_ref01_data_result)
+    assert.is_not_nil(manage_template_ref01_data)
+    assert.is_not_nil(manage_template_ref01_data["id"])
+
+    -- LOAD
+    local manage_template_ref01_match_dt0 = {
+      id = manage_template_ref01_data["id"],
+    }
+    local manage_template_ref01_data_dt0_loaded, err = manage_template_ref01_ent:load(manage_template_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    local manage_template_ref01_data_dt0_load_result = helpers.to_map(type(manage_template_ref01_data_dt0_loaded) == 'table' and manage_template_ref01_data_dt0_loaded.data_get and manage_template_ref01_data_dt0_loaded:data_get() or manage_template_ref01_data_dt0_loaded)
+    assert.is_not_nil(manage_template_ref01_data_dt0_load_result)
+    assert.are.equal(manage_template_ref01_data_dt0_load_result["id"], manage_template_ref01_data["id"])
+
+    -- REMOVE
+    local manage_template_ref01_match_rm0 = {
+      id = manage_template_ref01_data["id"],
+    }
+    local _, err = manage_template_ref01_ent:remove(manage_template_ref01_match_rm0, nil)
+    assert.is_nil(err)
 
   end)
 end)

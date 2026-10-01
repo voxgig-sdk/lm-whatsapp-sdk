@@ -1,6 +1,9 @@
 package entity
 
 import (
+	"encoding/json"
+	"fmt"
+
 	"github.com/voxgig-sdk/lm-whatsapp-sdk/go/core"
 
 	vs "github.com/voxgig-sdk/lm-whatsapp-sdk/go/utility/struct"
@@ -49,6 +52,26 @@ func NewTemplateEntity(client *core.LmWhatsappSDK, entopts map[string]any) *Temp
 }
 
 func (e *TemplateEntity) GetName() string { return e.name }
+
+// An entity prints and serialises as its data, as ts's toString and toJSON
+// do: the match state can carry a query credential, and the client holds
+// the options.
+func (e *TemplateEntity) String() string {
+	return "Template " + vs.Jsonify(e.data, map[string]any{"indent": 0})
+}
+
+func (e *TemplateEntity) GoString() string {
+	return e.String()
+}
+
+func (e *TemplateEntity) MarshalJSON() ([]byte, error) {
+	out := map[string]any{}
+	for k, v := range e.data {
+		out[k] = v
+	}
+	out["voxgig$entity"] = "Template"
+	return json.Marshal(out)
+}
 
 func (e *TemplateEntity) MarkDeleted() {
 	e.deleted = true
@@ -173,6 +196,15 @@ func (e *TemplateEntity) Stream(action string, args map[string]any, callopts map
 	go func() {
 		defer close(out)
 
+		// With no error channel, a panicking hook or stream function ends the
+		// stream as runOp's error would. A goroutine the stream function
+		// starts is out of reach of this recover.
+		defer func() {
+			if r := recover(); r != nil {
+				e.recovered(ctx, r)
+			}
+		}()
+
 		utility.FeatureHook(ctx, "PrePoint")
 		point, err := utility.MakePoint(ctx)
 		ctx.Out["point"] = point
@@ -213,6 +245,8 @@ func (e *TemplateEntity) Stream(action string, args map[string]any, callopts map
 		// Inbound: prefer the streaming feature's incremental iterator; else
 		// fall back to the materialised items so Stream always yields.
 		if ctx.Result != nil && ctx.Result.Stream != nil {
+			// Done does not run on this path, so its record is cleaned here.
+			utility.CleanExplain(ctx)
 			for item := range ctx.Result.Stream() {
 				if !send(item) {
 					return
@@ -252,40 +286,9 @@ func (e *TemplateEntity) List(_ map[string]any, _ map[string]any) (any, error) {
 }
 
 
-
-func (e *TemplateEntity) Create(reqdata map[string]any, ctrl map[string]any) (any, error) {
-	utility := e.utility
-	ctx := utility.MakeContext(map[string]any{
-		"opname":  "create",
-		"ctrl":    ctrl,
-		"match":   e.match,
-		"data":    e.data,
-		"reqdata": reqdata,
-	}, e.entctx)
-
-	return e.runOp(ctx, func() {
-		if ctx.Result != nil {
-			if ctx.Result.Resdata != nil {
-				e.data = core.ToMapAny(vs.Clone(ctx.Result.Resdata))
-				if e.data == nil {
-					e.data = map[string]any{}
-				}
-			}
-		}
-	})
+func (e *TemplateEntity) Create(_ map[string]any, _ map[string]any) (any, error) {
+	return core.UnsupportedOp("create", e.name)
 }
-
-// CreateTyped is the statically-typed variant of Create: it takes an
-// TemplateCreateData and returns an Template. It delegates to the untyped
-// Create (identical runtime) and converts at the typed boundary.
-func (e *TemplateEntity) CreateTyped(reqdata TemplateCreateData, ctrl map[string]any) (Template, error) {
-	res, err := e.Create(asMap(reqdata), ctrl)
-	if err != nil {
-		return Template{}, err
-	}
-	return typedFrom[Template](res), nil
-}
-
 
 
 
@@ -332,8 +335,14 @@ func (e *TemplateEntity) Remove(_ map[string]any, _ map[string]any) (any, error)
 }
 
 
-func (e *TemplateEntity) runOp(ctx *core.Context, postDone func()) (any, error) {
+func (e *TemplateEntity) runOp(ctx *core.Context, postDone func()) (out any, err error) {
 	utility := e.utility
+
+	defer func() {
+		if r := recover(); r != nil {
+			out, err = e.recovered(ctx, r)
+		}
+	}()
 
 	utility.FeatureHook(ctx, "PrePoint")
 	point, err := utility.MakePoint(ctx)
@@ -373,9 +382,9 @@ func (e *TemplateEntity) runOp(ctx *core.Context, postDone func()) (any, error) 
 	utility.FeatureHook(ctx, "PreDone")
 	postDone()
 
-	out, doneErr := utility.Done(ctx)
-	if doneErr != nil {
-		return out, doneErr
+	out, err = utility.Done(ctx)
+	if err != nil {
+		return out, err
 	}
 
 	opname := ""
@@ -391,4 +400,14 @@ func (e *TemplateEntity) runOp(ctx *core.Context, postDone func()) (any, error) 
 	}
 
 	return out, nil
+}
+
+// A hook, fetcher or parser that panics never reached MakeError, and its
+// message can quote the request.
+func (e *TemplateEntity) recovered(ctx *core.Context, r any) (any, error) {
+	perr, ok := r.(error)
+	if !ok {
+		perr = fmt.Errorf("%v", r)
+	}
+	return e.utility.MakeError(ctx, perr)
 }

@@ -6,7 +6,7 @@
 
 This guide introduces the API, the client libraries, and the companion tools in this repository. Start with the API capabilities, choose a client for your application, and use the linked reference when you need exact request and response details.
 
-The selected API surface contains 6 entities and 7 HTTP routes. There are 6 SDK targets and 2 companion tools.
+The selected API surface contains 5 entities and 7 HTTP routes. There are 6 SDK targets and 2 companion tools.
 
 An entity groups related API operations. An operation can have several routes with different inputs or authentication requirements. The SDK exposes the entity and its operations using the conventions of the selected language.
 
@@ -16,7 +16,15 @@ An entity groups related API operations. An operation can have several routes wi
 
 Results: Success.
 
-SDK operations: `remove`.
+SDK operations: `create`, `load`, `remove`.
+
+Key fields to recognise:
+
+- `allow_category_change`: Set to true to allow to assign a category based on template guidelines and the template&#39;s contents.
+- `components`: Array of components that make up the template.
+- `id`: ID
+- `library_template_button_inputs`: Optional data during creation of a template from a library template.
+- `library_template_name`: Library template name
 
 ### [Media](docs/api/media.html)
 
@@ -30,19 +38,22 @@ Results: Accepted.
 
 SDK operations: `create`.
 
+Key fields to recognise:
+
+- `requestId`: Unique Id of the request made towards LINK Mobility.
+
 ### [Template](docs/api/template.html)
 
 Results: Success.
 
-SDK operations: `create`, `update`.
+SDK operations: `update`.
 
 Key fields to recognise:
 
-- `allow_category_change`: Set to true to allow to assign a category based on template guidelines and the template&#39;s contents.
-- `components`: Array of components that make up the template.
+- `components`: The array containing all the content of the message template
 - `id`: ID
-- `library_template_button_inputs`: Optional data during creation of a template from a library template.
-- `library_template_name`: Library template name
+- `message_send_ttl_seconds`: Template message delivery retry time-to-live (TTL) override value.
+- `name`: The message template name
 
 ### [WhatsAppTemplateGetV2](docs/api/whats_app_template_get_v2.html)
 
@@ -54,29 +65,23 @@ Key fields to recognise:
 
 - `id`: ID
 
-### [WhatsAppTemplateGetV2Pagination](docs/api/whats_app_template_get_v2_pagination.html)
-
-Results: Success.
-
-SDK operations: `load`.
-
 ### Route map
 
 Use this map to locate a capability. Consult the entity reference before supplying request data; routes for the same operation can require different fields.
 
 | Entity | SDK operation | HTTP route | Authentication |
 | --- | --- | --- | --- |
+| [ManageTemplate](docs/api/manage_template.html) | `create` | `POST /whatsapp/v2/templates` | Required |
+| [ManageTemplate](docs/api/manage_template.html) | `load` | `GET /whatsapp/v2/templates` | Required |
 | [ManageTemplate](docs/api/manage_template.html) | `remove` | `DELETE /whatsapp/v2/templates/{id}` | Required |
 | [Media](docs/api/media.html) | `create` | `POST /whatsapp/v2/{phoneNumber}/media` | Required |
 | [SendMessage](docs/api/send_message.html) | `create` | `POST /whatsapp/v2/messages` | Required |
-| [Template](docs/api/template.html) | `create` | `POST /whatsapp/v2/templates` | Required |
 | [Template](docs/api/template.html) | `update` | `PUT /whatsapp/v2/templates/{id}` | Required |
 | [WhatsAppTemplateGetV2](docs/api/whats_app_template_get_v2.html) | `load` | `GET /whatsapp/v2/templates/{id}` | Required |
-| [WhatsAppTemplateGetV2Pagination](docs/api/whats_app_template_get_v2_pagination.html) | `load` | `GET /whatsapp/v2/templates` | Required |
 
 ## Connect to the API
 
-- LINK Mobility MyLINK (base shared with the sibling SMS/Email APIs): `https://api.linkmobility.com`
+- API server: `https://api.linkmobility.com`
 
 The default credential is sent in the `Authorization` header with the `Bearer` prefix.
 
@@ -125,7 +130,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
 - `lm-whatsapp_list`: List records for an entity. No active entity supports this operation.
-- `lm-whatsapp_load`: Load one record for an entity. Supported entities: `whats_app_template_get_v2`, `whats_app_template_get_v2_pagination`.
+- `lm-whatsapp_load`: Load one record for an entity. Supported entities: `manage_template`, `whats_app_template_get_v2`.
 
 ## Operational features
 

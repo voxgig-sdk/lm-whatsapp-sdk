@@ -10,10 +10,188 @@
 
 # ManageTemplate entity data model.
 #
+# @!attribute [rw] allow_category_change
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] category
+#   @return [String, nil]
+#
+# @!attribute [rw] components
+#   @return [Array]
+#
+# @!attribute [rw] createdDate
+#   @return [String, nil]
+#
+# @!attribute [rw] currentPage
+#   @return [Integer, nil]
+#
 # @!attribute [rw] id
+#   @return [Object, nil]
+#
+# @!attribute [rw] items
+#   @return [Object, nil]
+#
+# @!attribute [rw] language
+#   @return [String, nil]
+#
+# @!attribute [rw] library_template_body_inputs
+#   @return [Hash, nil]
+#
+# @!attribute [rw] library_template_button_inputs
+#   @return [Object, nil]
+#
+# @!attribute [rw] library_template_name
+#   @return [Object, nil]
+#
+# @!attribute [rw] message_send_ttl_seconds
+#   @return [Integer, nil]
+#
+# @!attribute [rw] modifiedDate
+#   @return [Object, nil]
+#
+# @!attribute [rw] name
+#   @return [Object, nil]
+#
+# @!attribute [rw] pages
+#   @return [Integer, nil]
+#
+# @!attribute [rw] parameter_format
+#   @return [String, nil]
+#
+# @!attribute [rw] results
+#   @return [Integer, nil]
+#
+# @!attribute [rw] resultsPerPage
+#   @return [Integer, nil]
+#
+# @!attribute [rw] status
+#   @return [String, nil]
+#
+# @!attribute [rw] sub_category
 #   @return [String, nil]
 ManageTemplate = Struct.new(
+  :allow_category_change,
+  :category,
+  :components,
+  :createdDate,
+  :currentPage,
   :id,
+  :items,
+  :language,
+  :library_template_body_inputs,
+  :library_template_button_inputs,
+  :library_template_name,
+  :message_send_ttl_seconds,
+  :modifiedDate,
+  :name,
+  :pages,
+  :parameter_format,
+  :results,
+  :resultsPerPage,
+  :status,
+  :sub_category,
+  keyword_init: true
+)
+
+# Request payload for ManageTemplate#load.
+#
+# @!attribute [rw] page
+#   @return [Integer, nil]
+#
+# @!attribute [rw] size
+#   @return [Integer, nil]
+#
+# @!attribute [rw] sort
+#   @return [Array, nil]
+ManageTemplateLoadMatch = Struct.new(
+  :page,
+  :size,
+  :sort,
+  keyword_init: true
+)
+
+# Request payload for ManageTemplate#create.
+#
+# @!attribute [rw] allow_category_change
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] category
+#   @return [String, nil]
+#
+# @!attribute [rw] components
+#   @return [Array]
+#
+# @!attribute [rw] createdDate
+#   @return [String, nil]
+#
+# @!attribute [rw] currentPage
+#   @return [Integer, nil]
+#
+# @!attribute [rw] id
+#   @return [Object, nil]
+#
+# @!attribute [rw] items
+#   @return [Object, nil]
+#
+# @!attribute [rw] language
+#   @return [String, nil]
+#
+# @!attribute [rw] library_template_body_inputs
+#   @return [Hash, nil]
+#
+# @!attribute [rw] library_template_button_inputs
+#   @return [Object, nil]
+#
+# @!attribute [rw] library_template_name
+#   @return [Object, nil]
+#
+# @!attribute [rw] message_send_ttl_seconds
+#   @return [Integer, nil]
+#
+# @!attribute [rw] modifiedDate
+#   @return [Object, nil]
+#
+# @!attribute [rw] name
+#   @return [Object, nil]
+#
+# @!attribute [rw] pages
+#   @return [Integer, nil]
+#
+# @!attribute [rw] parameter_format
+#   @return [String, nil]
+#
+# @!attribute [rw] results
+#   @return [Integer, nil]
+#
+# @!attribute [rw] resultsPerPage
+#   @return [Integer, nil]
+#
+# @!attribute [rw] status
+#   @return [String, nil]
+#
+# @!attribute [rw] sub_category
+#   @return [String, nil]
+ManageTemplateCreateData = Struct.new(
+  :allow_category_change,
+  :category,
+  :components,
+  :createdDate,
+  :currentPage,
+  :id,
+  :items,
+  :language,
+  :library_template_body_inputs,
+  :library_template_button_inputs,
+  :library_template_name,
+  :message_send_ttl_seconds,
+  :modifiedDate,
+  :name,
+  :pages,
+  :parameter_format,
+  :results,
+  :resultsPerPage,
+  :status,
+  :sub_category,
   keyword_init: true
 )
 
@@ -40,88 +218,38 @@ MediaCreateData = Struct.new(
 )
 
 # SendMessage entity data model.
-class SendMessage
-end
-
-# Request payload for SendMessage#create.
-class SendMessageCreateData
-end
-
-# Template entity data model.
 #
-# @!attribute [rw] allow_category_change
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] category
-#   @return [String, nil]
-#
-# @!attribute [rw] components
+# @!attribute [rw] messages
 #   @return [Array]
 #
-# @!attribute [rw] createdDate
-#   @return [String, nil]
-#
-# @!attribute [rw] id
-#   @return [Object, nil]
-#
-# @!attribute [rw] language
-#   @return [String, nil]
-#
-# @!attribute [rw] library_template_body_inputs
-#   @return [Hash, nil]
-#
-# @!attribute [rw] library_template_button_inputs
-#   @return [Object, nil]
-#
-# @!attribute [rw] library_template_name
-#   @return [Object, nil]
-#
-# @!attribute [rw] message_send_ttl_seconds
-#   @return [Integer, nil]
-#
-# @!attribute [rw] modifiedDate
-#   @return [Object, nil]
-#
-# @!attribute [rw] name
-#   @return [Object, nil]
-#
-# @!attribute [rw] parameter_format
-#   @return [String, nil]
-#
-# @!attribute [rw] status
-#   @return [String, nil]
-#
-# @!attribute [rw] sub_category
-#   @return [String, nil]
-Template = Struct.new(
-  :allow_category_change,
-  :category,
-  :components,
-  :createdDate,
-  :id,
-  :language,
-  :library_template_body_inputs,
-  :library_template_button_inputs,
-  :library_template_name,
-  :message_send_ttl_seconds,
-  :modifiedDate,
-  :name,
-  :parameter_format,
-  :status,
-  :sub_category,
+# @!attribute [rw] requestId
+#   @return [String]
+SendMessage = Struct.new(
+  :messages,
+  :requestId,
   keyword_init: true
 )
 
-# Request payload for Template#create.
+# Request payload for SendMessage#create.
 #
-# @!attribute [rw] allow_category_change
-#   @return [Boolean, nil]
+# @!attribute [rw] messages
+#   @return [Array]
+#
+# @!attribute [rw] requestId
+#   @return [String]
+SendMessageCreateData = Struct.new(
+  :messages,
+  :requestId,
+  keyword_init: true
+)
+
+# Template entity data model.
 #
 # @!attribute [rw] category
 #   @return [String, nil]
 #
 # @!attribute [rw] components
-#   @return [Array]
+#   @return [Object, nil]
 #
 # @!attribute [rw] createdDate
 #   @return [String, nil]
@@ -131,15 +259,6 @@ Template = Struct.new(
 #
 # @!attribute [rw] language
 #   @return [String, nil]
-#
-# @!attribute [rw] library_template_body_inputs
-#   @return [Hash, nil]
-#
-# @!attribute [rw] library_template_button_inputs
-#   @return [Object, nil]
-#
-# @!attribute [rw] library_template_name
-#   @return [Object, nil]
 #
 # @!attribute [rw] message_send_ttl_seconds
 #   @return [Integer, nil]
@@ -155,25 +274,17 @@ Template = Struct.new(
 #
 # @!attribute [rw] status
 #   @return [String, nil]
-#
-# @!attribute [rw] sub_category
-#   @return [String, nil]
-TemplateCreateData = Struct.new(
-  :allow_category_change,
+Template = Struct.new(
   :category,
   :components,
   :createdDate,
   :id,
   :language,
-  :library_template_body_inputs,
-  :library_template_button_inputs,
-  :library_template_name,
   :message_send_ttl_seconds,
   :modifiedDate,
   :name,
   :parameter_format,
   :status,
-  :sub_category,
   keyword_init: true
 )
 
@@ -182,29 +293,17 @@ TemplateCreateData = Struct.new(
 # @!attribute [rw] id
 #   @return [String]
 #
-# @!attribute [rw] allow_category_change
-#   @return [Boolean, nil]
-#
 # @!attribute [rw] category
 #   @return [String, nil]
 #
 # @!attribute [rw] components
-#   @return [Array, nil]
+#   @return [Object, nil]
 #
 # @!attribute [rw] createdDate
 #   @return [String, nil]
 #
 # @!attribute [rw] language
 #   @return [String, nil]
-#
-# @!attribute [rw] library_template_body_inputs
-#   @return [Hash, nil]
-#
-# @!attribute [rw] library_template_button_inputs
-#   @return [Object, nil]
-#
-# @!attribute [rw] library_template_name
-#   @return [Object, nil]
 #
 # @!attribute [rw] message_send_ttl_seconds
 #   @return [Integer, nil]
@@ -220,25 +319,17 @@ TemplateCreateData = Struct.new(
 #
 # @!attribute [rw] status
 #   @return [String, nil]
-#
-# @!attribute [rw] sub_category
-#   @return [String, nil]
 TemplateUpdateData = Struct.new(
   :id,
-  :allow_category_change,
   :category,
   :components,
   :createdDate,
   :language,
-  :library_template_body_inputs,
-  :library_template_button_inputs,
-  :library_template_name,
   :message_send_ttl_seconds,
   :modifiedDate,
   :name,
   :parameter_format,
   :status,
-  :sub_category,
   keyword_init: true
 )
 
@@ -257,48 +348,6 @@ WhatsAppTemplateGetV2 = Struct.new(
 #   @return [String]
 WhatsAppTemplateGetV2LoadMatch = Struct.new(
   :id,
-  keyword_init: true
-)
-
-# WhatsAppTemplateGetV2Pagination entity data model.
-#
-# @!attribute [rw] currentPage
-#   @return [Integer, nil]
-#
-# @!attribute [rw] items
-#   @return [Object, nil]
-#
-# @!attribute [rw] pages
-#   @return [Integer, nil]
-#
-# @!attribute [rw] results
-#   @return [Integer, nil]
-#
-# @!attribute [rw] resultsPerPage
-#   @return [Integer, nil]
-WhatsAppTemplateGetV2Pagination = Struct.new(
-  :currentPage,
-  :items,
-  :pages,
-  :results,
-  :resultsPerPage,
-  keyword_init: true
-)
-
-# Request payload for WhatsAppTemplateGetV2Pagination#load.
-#
-# @!attribute [rw] page
-#   @return [Integer, nil]
-#
-# @!attribute [rw] size
-#   @return [Integer, nil]
-#
-# @!attribute [rw] sort
-#   @return [Array, nil]
-WhatsAppTemplateGetV2PaginationLoadMatch = Struct.new(
-  :page,
-  :size,
-  :sort,
   keyword_init: true
 )
 

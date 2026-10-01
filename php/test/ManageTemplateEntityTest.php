@@ -23,7 +23,7 @@ class ManageTemplateEntityTest extends TestCase
         $setup = manage_template_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["create", "load", "remove"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "manage_template." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -38,13 +38,30 @@ class ManageTemplateEntityTest extends TestCase
         }
         $client = $setup["client"];
 
-        // Bootstrap entity data from existing test data.
-        $manage_template_ref01_data_raw = Vs::items(Helpers::to_map(
-            Vs::getpath($setup["data"], "existing.manage_template")));
-        $manage_template_ref01_data = null;
-        if (count($manage_template_ref01_data_raw) > 0) {
-            $manage_template_ref01_data = Helpers::to_map($manage_template_ref01_data_raw[0][1]);
-        }
+        // CREATE
+        $manage_template_ref01_ent = $client->ManageTemplate(null);
+        $manage_template_ref01_data = Helpers::to_map(Vs::getprop(
+            Vs::getpath($setup["data"], "new.manage_template"), "manage_template_ref01"));
+
+        $manage_template_ref01_data_result = $manage_template_ref01_ent->create($manage_template_ref01_data, null);
+        $manage_template_ref01_data = Helpers::to_map(is_object($manage_template_ref01_data_result) && method_exists($manage_template_ref01_data_result, 'data_get') ? $manage_template_ref01_data_result->data_get() : $manage_template_ref01_data_result);
+        $this->assertNotNull($manage_template_ref01_data);
+        $this->assertNotNull($manage_template_ref01_data["id"]);
+
+        // LOAD
+        $manage_template_ref01_match_dt0 = [
+            "id" => $manage_template_ref01_data["id"],
+        ];
+        $manage_template_ref01_data_dt0_loaded = $manage_template_ref01_ent->load($manage_template_ref01_match_dt0, null);
+        $manage_template_ref01_data_dt0_load_result = Helpers::to_map(is_object($manage_template_ref01_data_dt0_loaded) && method_exists($manage_template_ref01_data_dt0_loaded, 'data_get') ? $manage_template_ref01_data_dt0_loaded->data_get() : $manage_template_ref01_data_dt0_loaded);
+        $this->assertNotNull($manage_template_ref01_data_dt0_load_result);
+        $this->assertEquals($manage_template_ref01_data_dt0_load_result["id"], $manage_template_ref01_data["id"]);
+
+        // REMOVE
+        $manage_template_ref01_match_rm0 = [
+            "id" => $manage_template_ref01_data["id"],
+        ];
+        $manage_template_ref01_ent->remove($manage_template_ref01_match_rm0, null);
 
     }
 }
