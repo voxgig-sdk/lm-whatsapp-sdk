@@ -182,8 +182,8 @@ local result, err = client:ManageTemplate():load()
 | Golang | `github.com/voxgig-sdk/lm-whatsapp-sdk/go` | `go get github.com/voxgig-sdk/lm-whatsapp-sdk/go@latest` |
 | Ruby | `voxgig-sdk-lm-whatsapp-sdk` | publish pending — [install from source](rb/README.md#install) |
 | Lua | `voxgig-sdk-lm-whatsapp-sdk` | publish pending — [install from source](lua/README.md#install) |
-| Go CLI | `github.com/voxgig-sdk/lm-whatsapp-sdk/go-cli` | `go install github.com/voxgig-sdk/lm-whatsapp-sdk/go-cli/cmd/lm-whatsapp@latest` |
-| Go MCP server | `github.com/voxgig-sdk/lm-whatsapp-sdk/go-mcp` | `go get github.com/voxgig-sdk/lm-whatsapp-sdk/go-mcp@latest` |
+| Go CLI | `github.com/voxgig-sdk/lm-whatsapp-sdk/go-cli` | build from source — [go-cli/README.md](go-cli/README.md) |
+| Go MCP server | `github.com/voxgig-sdk/lm-whatsapp-sdk/go-mcp` | build from source — [go-mcp/README.md](go-mcp/README.md) |
 
 ## Quickstart
 
