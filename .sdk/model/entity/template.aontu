@@ -109,6 +109,12 @@ main: kit: entity: template: {
       name: "update"
       points: [
         {
+          bf: [
+            "category"
+            "components"
+            "message_send_ttl_seconds"
+            "parameter_format"
+          ]
           co: {
             id: "PUT /whatsapp/v2/templates/{id}"
             source: "openapi3"
@@ -131,6 +137,10 @@ main: kit: entity: template: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

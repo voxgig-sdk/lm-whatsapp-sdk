@@ -149,11 +149,12 @@ class WhatsAppTemplateGetV2Entity extends LmWhatsappEntityBase<WhatsAppTemplateG
       }
       else {
         // Off-happy-path (throw disabled): typed as any so the method's
-        // Promise<WhatsAppTemplateGetV2> return stays clean under strict null checks.
+        // Promise<WhatsAppTemplateGetV2Entity> return stays clean under strict null checks.
         return undefined as any
       }
     }
   }
+
 
 
 

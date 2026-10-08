@@ -165,19 +165,19 @@ fmt.Println(manageTemplate.GetName()) // "manage_template"
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
 
 ```go
 result, err := client.ManageTemplate(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
 
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity; `err` is non-nil on failure.
 
 ```go
 result, err := client.ManageTemplate(nil).Create(map[string]any{
@@ -186,19 +186,19 @@ result, err := client.ManageTemplate(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
 
 #### `Remove(reqmatch, ctrl map[string]any) (any, error)`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted; `err` is non-nil on failure.
 
 ```go
 result, err := client.ManageTemplate(nil).Remove(map[string]any{"id": "id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
 
 ### Common Methods
@@ -218,6 +218,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 Create a new `ManageTemplateEntity` instance with the same client and
 options.
 
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
+
 #### `GetName() string`
 
 Return the entity name.
@@ -236,7 +244,7 @@ fmt.Println(media.GetName()) // "media"
 
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity; `err` is non-nil on failure.
 
 ```go
 result, err := client.Media(nil).Create(map[string]any{
@@ -245,8 +253,10 @@ result, err := client.Media(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
+
+Sends its body unencoded, as `application/msword`: pass it as `$body`, a `[]byte`, a `string` or an `io.Reader`. An `io.Reader` is read in full before the request is sent, so that a retry sends the same bytes. The operation also accepts `application/pdf`, `application/vnd.ms-excel`, `application/vnd.ms-powerpoint`, `application/vnd.openxmlformats-officedocument.presentationml.presentation`, `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`, `audio/aac`, `audio/amr`, `audio/mp4`, `audio/mpeg`, `audio/ogg`, `audio/opus`, `image/jpeg`, `image/png`, `image/webp`, `text/plain`, `video/3gp`, `video/mp4`: a `content-type` header option that is not JSON replaces the declared one.
 
 ### Common Methods
 
@@ -264,6 +274,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `MediaEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -286,11 +304,18 @@ fmt.Println(sendMessage.GetName()) // "send_message"
 | `messages` | `[]any` | Yes |  |
 | `requestId` | `string` | Yes | Unique Id of the request made towards LINK Mobility. |
 
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `messages` | Yes |
+| `requestId` | - |
+
 ### Operations
 
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity; `err` is non-nil on failure.
 
 ```go
 result, err := client.SendMessage(nil).Create(map[string]any{
@@ -300,7 +325,7 @@ result, err := client.SendMessage(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
 
 ### Common Methods
@@ -319,6 +344,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `SendMessageEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -353,7 +386,7 @@ fmt.Println(template.GetName()) // "template"
 
 #### `Update(reqdata, ctrl map[string]any) (any, error)`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity; `err` is non-nil on failure.
 
 ```go
 result, err := client.Template(nil).Update(map[string]any{
@@ -363,7 +396,7 @@ result, err := client.Template(nil).Update(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
 
 ### Common Methods
@@ -383,6 +416,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 Create a new `TemplateEntity` instance with the same client and
 options.
 
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
+
 #### `GetName() string`
 
 Return the entity name.
@@ -401,20 +442,36 @@ fmt.Println(whatsAppTemplateGetV2.GetName()) // "whats_app_template_get_v2"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `category` | `string` | No |  |
+| `components` | `any` | No | An array of JSON objects describing the message template components. |
+| `correct_category` | `string` | No |  |
+| `createdDate` | `string` | No |  |
+| `cta_url_link_tracking_opted_out` | `bool` | No | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `string` | No | ID |
+| `language` | `string` | No |  |
+| `library_template_name` | `any` | No | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `int` | No | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `any` | No |  |
+| `name` | `any` | No | The message template name |
+| `parameter_format` | `string` | No |  |
+| `previous_category` | `string` | No |  |
+| `quality_score` | `map[string]any` | No |  |
+| `rejected_reason` | `string` | No |  |
+| `status` | `string` | No |  |
+| `sub_category` | `string` | No |  |
 
 ### Operations
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
 
 ```go
 result, err := client.WhatsAppTemplateGetV2(nil).Load(map[string]any{"id": "whats_app_template_get_v2_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
 
 ### Common Methods
@@ -433,6 +490,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `WhatsAppTemplateGetV2Entity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -731,6 +796,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

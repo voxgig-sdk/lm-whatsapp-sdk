@@ -12,7 +12,7 @@ func MakeConfig() map[string]any {
 		"main": map[string]any{
 			"name": "LmWhatsapp",
 			"slug": "lm-whatsapp",
-			"version": "0.1.1",
+			"version": "0.1.2",
 			"target": "go",
 		},
 		"feature": map[string]any{
@@ -141,6 +141,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -385,6 +386,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -441,12 +446,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"page",
-										"size",
-										"sort",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -576,6 +579,107 @@ func MakeConfig() map[string]any {
 										"x_link_upload_filename",
 									},
 								},
+								"body": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "application/pdf",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "application/vnd.ms-excel",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "application/vnd.ms-powerpoint",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "audio/aac",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "audio/amr",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "audio/mp4",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "audio/mpeg",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "audio/ogg",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "audio/opus",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "image/jpeg",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "image/png",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "image/webp",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "text/plain",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "video/3gp",
+										},
+										map[string]any{
+											"binary": true,
+											"kind": "raw",
+											"media": "video/mp4",
+										},
+									},
+									"binary": true,
+									"kind": "raw",
+									"media": "application/msword",
+								},
+								"response": map[string]any{
+									"kind": "raw",
+									"media": "text/plain",
+								},
 							},
 						},
 					},
@@ -591,6 +695,11 @@ func MakeConfig() map[string]any {
 						"title": "Messages",
 						"type": "`$ARRAY`",
 						"req": true,
+						"op": map[string]any{
+							"create": map[string]any{
+								"type": "`$ARRAY`",
+							},
+						},
 					},
 					map[string]any{
 						"name": "requestId",
@@ -634,6 +743,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -786,6 +899,10 @@ func MakeConfig() map[string]any {
 										"id",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -797,8 +914,121 @@ func MakeConfig() map[string]any {
 			"whats_app_template_get_v2": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"name": "category",
+						"title": "Category",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "components",
+						"title": "Components",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$ARRAY`",
+								"`$NULL`",
+							},
+						},
+						"short": "An array of JSON objects describing the message template components.",
+					},
+					map[string]any{
+						"name": "correct_category",
+						"title": "Correct Category",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "createdDate",
+						"title": "Created Date",
+						"type": "`$STRING`",
+						"format": "date-time",
+					},
+					map[string]any{
+						"name": "cta_url_link_tracking_opted_out",
+						"title": "Cta Url Link Tracking Opted Out",
+						"type": "`$BOOLEAN`",
+						"short": "Optional boolean field for opting out/in of link tracking at template level",
+					},
+					map[string]any{
 						"name": "id",
 						"title": "Id",
+						"type": "`$STRING`",
+						"short": "ID",
+					},
+					map[string]any{
+						"name": "language",
+						"title": "Language",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "library_template_name",
+						"title": "Library Template Name",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$STRING`",
+								"`$NULL`",
+							},
+						},
+						"short": "Template Library name that this HSM is clone from",
+					},
+					map[string]any{
+						"name": "message_send_ttl_seconds",
+						"title": "Message Send Ttl Seconds",
+						"type": "`$INTEGER`",
+						"short": "Template message delivery retry time-to-live (TTL) override value.",
+						"format": "int32",
+					},
+					map[string]any{
+						"name": "modifiedDate",
+						"title": "Modified Date",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$STRING`",
+								"`$NULL`",
+							},
+						},
+						"format": "date-time",
+					},
+					map[string]any{
+						"name": "name",
+						"title": "Name",
+						"type": []any{
+							"`$ONE`",
+							[]any{
+								"`$STRING`",
+								"`$NULL`",
+							},
+						},
+						"short": "The message template name",
+					},
+					map[string]any{
+						"name": "parameter_format",
+						"title": "Parameter Format",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "previous_category",
+						"title": "Previous Category",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "quality_score",
+						"title": "Quality Score",
+						"type": "`$OBJECT`",
+					},
+					map[string]any{
+						"name": "rejected_reason",
+						"title": "Rejected Reason",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "status",
+						"title": "Status",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "sub_category",
+						"title": "Sub Category",
 						"type": "`$STRING`",
 					},
 				},
@@ -856,6 +1086,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

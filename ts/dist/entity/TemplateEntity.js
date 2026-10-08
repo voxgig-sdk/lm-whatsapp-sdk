@@ -98,7 +98,7 @@ class TemplateEntity extends LmWhatsappEntityBase_1.LmWhatsappEntityBase {
             }
             else {
                 // Off-happy-path (throw disabled): typed as any so the method's
-                // Promise<Template> return stays clean under strict null checks.
+                // Promise<TemplateEntity> return stays clean under strict null checks.
                 return undefined;
             }
         }

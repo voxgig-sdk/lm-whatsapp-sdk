@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/lm-whatsapp-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -47,7 +47,7 @@ client = LmWhatsappSDK.new({
 begin
   # load returns the ENTITY — call data_get for the ManageTemplate record (raises on error).
   managetemplate = client.ManageTemplate.load()
-  puts managetemplate
+  puts managetemplate.data_get
 rescue => err
   warn "load failed: #{err}"
 end
@@ -139,9 +139,9 @@ Create a mock client for unit testing — no server required:
 client = LmWhatsappSDK.test
 
 # Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
+# data_get reads its mock record.
 managetemplate = client.ManageTemplate.load()
-puts managetemplate
+puts managetemplate.data_get
 ```
 
 ### Use a custom fetch function
@@ -231,10 +231,10 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity, and return it. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity, and return it. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity, and return it marked as deleted. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -244,9 +244,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `LmWhatsappError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`LmWhatsappError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -333,7 +334,23 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `category` |  |
+| `components` | An array of JSON objects describing the message template components. |
+| `correct_category` |  |
+| `createdDate` |  |
+| `cta_url_link_tracking_opted_out` | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | ID |
+| `language` |  |
+| `library_template_name` | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` |  |
+| `name` | The message template name |
+| `parameter_format` |  |
+| `previous_category` |  |
+| `quality_score` |  |
+| `rejected_reason` |  |
+| `status` |  |
+| `sub_category` |  |
 
 Operations: Load.
 
@@ -483,7 +500,23 @@ Create an instance: `whats_app_template_get_v2 = client.WhatsAppTemplateGetV2`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `String` |  |
+| `category` | `String` |  |
+| `components` | `Object` | An array of JSON objects describing the message template components. |
+| `correct_category` | `String` |  |
+| `createdDate` | `String` |  |
+| `cta_url_link_tracking_opted_out` | `Boolean` | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `String` | ID |
+| `language` | `String` |  |
+| `library_template_name` | `Object` | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `Integer` | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `Object` |  |
+| `name` | `Object` | The message template name |
+| `parameter_format` | `String` |  |
+| `previous_category` | `String` |  |
+| `quality_score` | `Hash` |  |
+| `rejected_reason` | `String` |  |
+| `status` | `String` |  |
+| `sub_category` | `String` |  |
 
 #### Example: Load
 

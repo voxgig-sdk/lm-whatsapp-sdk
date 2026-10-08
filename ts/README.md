@@ -15,7 +15,7 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases)), or from a
+release tag (`ts/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/lm-whatsapp-sdk/tags)), or from a
 clone, which carries the compiled `dist/`:
 
 ```bash
@@ -41,12 +41,12 @@ const client = new LmWhatsappSDK({
 
 ### 3. Load a managetemplate
 
-`load()` returns the entity directly and throws on failure:
+`load()` returns the entity and throws on failure; `.data()` reads its record:
 
 ```ts
 try {
   const managetemplate = await client.ManageTemplate().load()
-  console.log(managetemplate)
+  console.log(managetemplate.data())
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -74,14 +74,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const managetemplate = await client.ManageTemplate().load()
-  console.log(managetemplate)
+  console.log(managetemplate.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -90,8 +91,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -109,9 +110,6 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
-if (result instanceof Error) {
-  throw result
-}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -141,9 +139,8 @@ Create a mock client for unit testing — no server required:
 const client = LmWhatsappSDK.test()
 
 const managetemplate = await client.ManageTemplate().load()
-// managetemplate is the entity, populated with mock response data
-// — call managetemplate.data() for the record itself
-console.log(managetemplate)
+// managetemplate is the ManageTemplate entity; .data() reads its mock record
+console.log(managetemplate.data())
 ```
 
 You can also use the instance method:
@@ -266,10 +263,10 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria, and return it. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity, and return it. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity, and return it. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<Entity>` | Remove an entity, and return it marked as deleted. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -278,11 +275,11 @@ All entities share the same interface.
 
 #### Return values
 
-Entity operations resolve to the entity data directly — there is no
-result envelope:
+Entity operations resolve to the entity itself — there is no result
+envelope, and an entity's `data()` reads its record:
 
 - `load`, `create` and `update` resolve to a single entity object.
-- `remove` resolves to `void`.
+- `remove` resolves to the entity, marked as deleted.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -390,7 +387,23 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `category` |  |
+| `components` | An array of JSON objects describing the message template components. |
+| `correct_category` |  |
+| `createdDate` |  |
+| `cta_url_link_tracking_opted_out` | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | ID |
+| `language` |  |
+| `library_template_name` | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` |  |
+| `name` | The message template name |
+| `parameter_format` |  |
+| `previous_category` |  |
+| `quality_score` |  |
+| `rejected_reason` |  |
+| `status` |  |
+| `sub_category` |  |
 
 Operations: load.
 
@@ -539,7 +552,23 @@ Create an instance: `const whats_app_template_get_v2 = client.WhatsAppTemplateGe
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `category` | `string` |  |
+| `components` | `any[] | null` | An array of JSON objects describing the message template components. |
+| `correct_category` | `string` |  |
+| `createdDate` | `string` |  |
+| `cta_url_link_tracking_opted_out` | `boolean` | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `string` | ID |
+| `language` | `string` |  |
+| `library_template_name` | `string | null` | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `number` | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `string | null` |  |
+| `name` | `string | null` | The message template name |
+| `parameter_format` | `string` |  |
+| `previous_category` | `string` |  |
+| `quality_score` | `Record<string, any>` |  |
+| `rejected_reason` | `string` |  |
+| `status` | `string` |  |
+| `sub_category` | `string` |  |
 
 #### Example: Load
 

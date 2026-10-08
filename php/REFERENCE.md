@@ -159,7 +159,7 @@ $manage_template = $client->ManageTemplate();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->ManageTemplate()->create([
@@ -169,7 +169,7 @@ $result = $client->ManageTemplate()->create([
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->ManageTemplate()->load();
@@ -177,7 +177,7 @@ $result = $client->ManageTemplate()->load();
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
-Remove the entity matching the given criteria. Throws on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and throws on error.
 
 ```php
 $result = $client->ManageTemplate()->remove(["id" => "id"]);
@@ -223,13 +223,15 @@ $media = $client->Media();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->Media()->create([
   "phone_number" => null, // string
 ]);
 ```
+
+Sends its body unencoded, as `application/msword`: pass it as `$body`, a string or a stream resource. A stream resource is read in full before the request is sent, so that a retry sends the same bytes. The operation also accepts `application/pdf`, `application/vnd.ms-excel`, `application/vnd.ms-powerpoint`, `application/vnd.openxmlformats-officedocument.presentationml.presentation`, `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`, `audio/aac`, `audio/amr`, `audio/mp4`, `audio/mpeg`, `audio/ogg`, `audio/opus`, `image/jpeg`, `image/png`, `image/webp`, `text/plain`, `video/3gp`, `video/mp4`: a `content-type` header option that is not JSON replaces the declared one.
 
 ### Common Methods
 
@@ -274,11 +276,18 @@ $send_message = $client->SendMessage();
 | `messages` | `array` | Yes |  |
 | `requestId` | `string` | Yes | Unique Id of the request made towards LINK Mobility. |
 
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `messages` | Yes |
+| `requestId` | - |
+
 ### Operations
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->SendMessage()->create([
@@ -342,7 +351,7 @@ $template = $client->Template();
 
 #### `update(array $reqdata, ?array $ctrl = null): mixed`
 
-Update an existing entity. The data must include the entity `id`. Throws on error.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and throws on error.
 
 ```php
 $result = $client->Template()->update([
@@ -391,13 +400,29 @@ $whats_app_template_get_v2 = $client->WhatsAppTemplateGetV2();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `category` | `string` | No |  |
+| `components` | `mixed` | No | An array of JSON objects describing the message template components. |
+| `correct_category` | `string` | No |  |
+| `createdDate` | `string` | No |  |
+| `cta_url_link_tracking_opted_out` | `bool` | No | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `string` | No | ID |
+| `language` | `string` | No |  |
+| `library_template_name` | `mixed` | No | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `int` | No | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `mixed` | No |  |
+| `name` | `mixed` | No | The message template name |
+| `parameter_format` | `string` | No |  |
+| `previous_category` | `string` | No |  |
+| `quality_score` | `array` | No |  |
+| `rejected_reason` | `string` | No |  |
+| `status` | `string` | No |  |
+| `sub_category` | `string` | No |  |
 
 ### Operations
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->WhatsAppTemplateGetV2()->load(["id" => "whats_app_template_get_v2_id"]);
@@ -723,6 +748,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

@@ -96,7 +96,23 @@
 ---@field status? string
 
 ---@class WhatsAppTemplateGetV2
+---@field category? string
+---@field components? table|nil
+---@field correct_category? string
+---@field createdDate? string
+---@field cta_url_link_tracking_opted_out? boolean
 ---@field id? string
+---@field language? string
+---@field library_template_name? string|nil
+---@field message_send_ttl_seconds? number
+---@field modifiedDate? string|nil
+---@field name? string|nil
+---@field parameter_format? string
+---@field previous_category? string
+---@field quality_score? table
+---@field rejected_reason? string
+---@field status? string
+---@field sub_category? string
 
 ---@class WhatsAppTemplateGetV2LoadMatch
 ---@field id string

@@ -160,7 +160,7 @@ manage_template = client.ManageTemplate
 
 #### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data. Raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```ruby
 result = client.ManageTemplate.create({
@@ -170,7 +170,7 @@ result = client.ManageTemplate.create({
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.ManageTemplate.load()
@@ -178,7 +178,7 @@ result = client.ManageTemplate.load()
 
 #### `remove(reqmatch, ctrl = nil) -> result`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```ruby
 result = client.ManageTemplate.remove({ "id" => "id" })
@@ -224,13 +224,15 @@ media = client.Media
 
 #### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data. Raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```ruby
 result = client.Media.create({
   "phone_number" => "example_phone_number", # String
 })
 ```
+
+Sends its body unencoded, as `application/msword`: pass it as `$body`, a `String`, or an IO that responds to `read`. An IO is read in full before the request is sent, so that a retry sends the same bytes. The operation also accepts `application/pdf`, `application/vnd.ms-excel`, `application/vnd.ms-powerpoint`, `application/vnd.openxmlformats-officedocument.presentationml.presentation`, `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`, `audio/aac`, `audio/amr`, `audio/mp4`, `audio/mpeg`, `audio/ogg`, `audio/opus`, `image/jpeg`, `image/png`, `image/webp`, `text/plain`, `video/3gp`, `video/mp4`: a `content-type` header option that is not JSON replaces the declared one.
 
 ### Common Methods
 
@@ -275,11 +277,18 @@ send_message = client.SendMessage
 | `messages` | `Array` | Yes |  |
 | `requestId` | `String` | Yes | Unique Id of the request made towards LINK Mobility. |
 
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `messages` | Yes |
+| `requestId` | - |
+
 ### Operations
 
 #### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data. Raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```ruby
 result = client.SendMessage.create({
@@ -343,7 +352,7 @@ template = client.Template
 
 #### `update(reqdata, ctrl = nil) -> result`
 
-Update an existing entity. The data must include the entity `id`. Raises on error.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
 
 ```ruby
 result = client.Template.update({
@@ -392,13 +401,29 @@ whats_app_template_get_v2 = client.WhatsAppTemplateGetV2
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `String` | No |  |
+| `category` | `String` | No |  |
+| `components` | `Object` | No | An array of JSON objects describing the message template components. |
+| `correct_category` | `String` | No |  |
+| `createdDate` | `String` | No |  |
+| `cta_url_link_tracking_opted_out` | `Boolean` | No | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `String` | No | ID |
+| `language` | `String` | No |  |
+| `library_template_name` | `Object` | No | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `Integer` | No | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `Object` | No |  |
+| `name` | `Object` | No | The message template name |
+| `parameter_format` | `String` | No |  |
+| `previous_category` | `String` | No |  |
+| `quality_score` | `Hash` | No |  |
+| `rejected_reason` | `String` | No |  |
+| `status` | `String` | No |  |
+| `sub_category` | `String` | No |  |
 
 ### Operations
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.WhatsAppTemplateGetV2.load({ "id" => "whats_app_template_get_v2_id" })
@@ -724,6 +749,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

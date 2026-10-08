@@ -98,7 +98,7 @@ class ManageTemplateEntity extends LmWhatsappEntityBase_1.LmWhatsappEntityBase {
             }
             else {
                 // Off-happy-path (throw disabled): typed as any so the method's
-                // Promise<ManageTemplate> return stays clean under strict null checks.
+                // Promise<ManageTemplateEntity> return stays clean under strict null checks.
                 return undefined;
             }
         }
@@ -186,7 +186,7 @@ class ManageTemplateEntity extends LmWhatsappEntityBase_1.LmWhatsappEntityBase {
             }
             else {
                 // Off-happy-path (throw disabled): typed as any so the method's
-                // Promise<ManageTemplate> return stays clean under strict null checks.
+                // Promise<ManageTemplateEntity> return stays clean under strict null checks.
                 return undefined;
             }
         }

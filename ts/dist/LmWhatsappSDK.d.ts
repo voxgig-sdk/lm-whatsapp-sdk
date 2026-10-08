@@ -11,6 +11,19 @@ import { LmWhatsappEntityBase } from './LmWhatsappEntityBase';
 import { Utility } from './utility/Utility';
 import { BaseFeature } from './feature/base/BaseFeature';
 declare const stdutil: Utility;
+type DirectResult = {
+    ok: false;
+    err: any;
+    status?: undefined;
+    headers?: undefined;
+    data?: undefined;
+} | {
+    ok: boolean;
+    status: number;
+    headers: any;
+    data: any;
+    err?: any;
+};
 declare class LmWhatsappSDK {
     _mode: string;
     _options: any;
@@ -21,32 +34,8 @@ declare class LmWhatsappSDK {
     options(): any;
     utility(): any;
     prepare(fetchargs?: any): Promise<any>;
-    direct(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
-    _rawRequest(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
+    direct(fetchargs?: any): Promise<DirectResult>;
+    _rawRequest(fetchargs?: any): Promise<DirectResult>;
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     ManageTemplate(entopts?: Record<string, any>): ManageTemplateEntity;
     Media(entopts?: Record<string, any>): MediaEntity;
@@ -63,3 +52,4 @@ declare class LmWhatsappSDK {
 }
 declare const SDK: typeof LmWhatsappSDK;
 export { stdutil, config, BaseFeature, LmWhatsappEntityBase, LmWhatsappSDK, SDK, };
+export type { DirectResult };

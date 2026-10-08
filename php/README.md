@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases)), or
+GitHub release tag (`php/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/lm-whatsapp-sdk/tags)), or
 from a clone as a Composer path repository:
 
 ```bash
@@ -140,7 +140,7 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = LmWhatsappSDK::test([
-    "entity" => ["whatsapptemplategetv2" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["whats_app_template_get_v2" => ["test01" => ["id" => "test01"]]],
 ]);
 
 // Entity ops return the ENTITY (throws on error);
@@ -239,10 +239,10 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
+| `load` | `($reqmatch, $ctrl): mixed` | Load a single entity by match criteria, and return it. |
+| `create` | `($reqdata, $ctrl): mixed` | Create a new entity, and return it. |
+| `update` | `($reqdata, $ctrl): mixed` | Update an existing entity, and return it. |
+| `remove` | `($reqmatch, $ctrl): mixed` | Remove an entity, and return it marked as deleted. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -252,9 +252,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
-ops, a `list` for `list`) and throw on error. Wrap calls in
-`try`/`catch` to handle failures.
+Entity operations return the entity, and `list` an `array` of entities, one
+per record; an entity's `data_get()` reads its record (an `array`). They
+throw on error, so wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `array`
 you branch on via `$result["ok"]`:
@@ -342,7 +342,23 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `category` |  |
+| `components` | An array of JSON objects describing the message template components. |
+| `correct_category` |  |
+| `createdDate` |  |
+| `cta_url_link_tracking_opted_out` | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | ID |
+| `language` |  |
+| `library_template_name` | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` |  |
+| `name` | The message template name |
+| `parameter_format` |  |
+| `previous_category` |  |
+| `quality_score` |  |
+| `rejected_reason` |  |
+| `status` |  |
+| `sub_category` |  |
 
 Operations: Load.
 
@@ -492,7 +508,23 @@ Create an instance: `$whats_app_template_get_v2 = $client->WhatsAppTemplateGetV2
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `category` | `string` |  |
+| `components` | `mixed` | An array of JSON objects describing the message template components. |
+| `correct_category` | `string` |  |
+| `createdDate` | `string` |  |
+| `cta_url_link_tracking_opted_out` | `bool` | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `string` | ID |
+| `language` | `string` |  |
+| `library_template_name` | `mixed` | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `int` | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `mixed` |  |
+| `name` | `mixed` | The message template name |
+| `parameter_format` | `string` |  |
+| `previous_category` | `string` |  |
+| `quality_score` | `array` |  |
+| `rejected_reason` | `string` |  |
+| `status` | `string` |  |
+| `sub_category` | `string` |  |
 
 #### Example: Load
 

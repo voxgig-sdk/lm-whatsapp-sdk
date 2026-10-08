@@ -134,7 +134,23 @@ class TemplateUpdateData
 /** WhatsAppTemplateGetV2 entity data model. */
 class WhatsAppTemplateGetV2
 {
+    public ?string $category = null;
+    public mixed $components = null;
+    public ?string $correct_category = null;
+    public ?string $createdDate = null;
+    public ?bool $cta_url_link_tracking_opted_out = null;
     public ?string $id = null;
+    public ?string $language = null;
+    public mixed $library_template_name = null;
+    public ?int $message_send_ttl_seconds = null;
+    public mixed $modifiedDate = null;
+    public mixed $name = null;
+    public ?string $parameter_format = null;
+    public ?string $previous_category = null;
+    public ?array $quality_score = null;
+    public ?string $rejected_reason = null;
+    public ?string $status = null;
+    public ?string $sub_category = null;
 }
 
 /** Request payload for WhatsAppTemplateGetV2#load. */

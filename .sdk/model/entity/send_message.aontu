@@ -8,6 +8,12 @@ main: kit: entity: send_message: {
     messages: {
       h: "Messages"
       n: "messages"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
       r: true
       t: "`$ARRAY`"
     }
@@ -27,6 +33,9 @@ main: kit: entity: send_message: {
       name: "create"
       points: [
         {
+          bf: [
+            "messages"
+          ]
           co: {
             id: "POST /whatsapp/v2/messages"
             source: "openapi3"
@@ -34,6 +43,10 @@ main: kit: entity: send_message: {
           }
           m: "POST"
           o: "/whatsapp/v2/messages"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "whatsapp"

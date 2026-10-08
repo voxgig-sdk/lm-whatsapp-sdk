@@ -123,9 +123,8 @@ const client = LmWhatsappSDK.test({
   },
 })
 const managetemplate = await client.ManageTemplate().load()
-// managetemplate is the ManageTemplate entity, populated with mock data
-// — call managetemplate.data() for the record itself
-console.log(managetemplate)
+// managetemplate is the ManageTemplate entity; .data() reads its mock record
+console.log(managetemplate.data())
 ```
 
 ### Python
@@ -133,7 +132,7 @@ console.log(managetemplate)
 ```python
 client = LmWhatsappSDK.test()
 managetemplate = client.ManageTemplate().load()
-print(managetemplate)
+print(managetemplate.data_get())
 ```
 
 ### PHP
@@ -141,7 +140,7 @@ print(managetemplate)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = LmWhatsappSDK::test([
-    "entity" => ["managetemplate" => ["test01" => []]],
+    "entity" => ["manage_template" => ["test01" => []]],
 ]);
 $managetemplate = $client->ManageTemplate()->load();
 ```
@@ -160,7 +159,7 @@ result, err := client.ManageTemplate(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = LmWhatsappSDK.test({
-  "entity" => { "managetemplate" => { "test01" => {} } },
+  "entity" => { "manage_template" => { "test01" => {} } },
 })
 managetemplate = client.ManageTemplate.load()
 ```
@@ -196,9 +195,9 @@ const client = new LmWhatsappSDK({
   apikey: process.env.LM_WHATSAPP_APIKEY,
 })
 
-// Load managetemplate data (returns a ManageTemplate)
+// Load a specific managetemplate (returns the entity, a ManageTemplateEntity)
 const managetemplate = await client.ManageTemplate().load()
-console.log(managetemplate)
+console.log(managetemplate.data())
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -213,9 +212,10 @@ See the [TypeScript README](ts/README.md) for the full guide.
 
 ## Use it from an AI agent (MCP)
 
-The generated MCP server exposes every operation in this SDK as an
-[MCP](https://modelcontextprotocol.io) tool that Claude, Cursor or Cline
-can call directly. Build and register it:
+The generated MCP server exposes this SDK's load operations as
+[MCP](https://modelcontextprotocol.io) tools that Claude, Cursor or Cline
+can call directly. It only reads: create, update, patch and remove become tools when the SDK's model sets
+`main: kit: target: 'go-mcp': tool: write: true`. Build and register it:
 
 ```bash
 cd go-mcp && go build -o lm-whatsapp-mcp .
@@ -261,9 +261,9 @@ client = LmWhatsappSDK({
 })
 
 
-# Load a specific managetemplate (returns the record, raises on error)
+# Load a specific managetemplate (returns the entity, raises on error)
 managetemplate = client.ManageTemplate().load()
-print(managetemplate)
+print(managetemplate.data_get())
 ```
 
 ### PHP
@@ -277,7 +277,7 @@ $client = new LmWhatsappSDK([
 ]);
 
 
-// Load a specific managetemplate (returns the ENTITY; call data_get() for the record; throws on error)
+// Load a specific managetemplate (returns the entity; data_get() reads its record; throws on error)
 $managetemplate = $client->ManageTemplate()->load();
 print_r($managetemplate->data_get());
 ```
@@ -291,12 +291,12 @@ client := sdk.NewLmWhatsappSDK(map[string]any{
     "apikey": os.Getenv("LM_WHATSAPP_APIKEY"),
 })
 
-// Load managetemplate data
+// Load a specific managetemplate (returns the entity; err is non-nil on failure)
 manageTemplate, err := client.ManageTemplate(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(manageTemplate)
+fmt.Println(manageTemplate.(sdk.Entity).Data())
 ```
 
 ### Ruby
@@ -309,24 +309,26 @@ client = LmWhatsappSDK.new({
 })
 
 
-# Load a specific managetemplate (returns the ENTITY; call data_get for the record)
+# Load a specific managetemplate (returns the entity; data_get reads its record; raises on error)
 managetemplate = client.ManageTemplate.load()
-puts managetemplate
+puts managetemplate.data_get
 ```
 
 ### Lua
 
 ```lua
 local sdk = require("lm-whatsapp_sdk")
+local json = require("dkjson")
 
 local client = sdk.new({
   apikey = os.getenv("LM_WHATSAPP_APIKEY"),
 })
 
 
--- Load a specific managetemplate
+-- Load a specific managetemplate (returns the entity; err on failure)
 local managetemplate, err = client:ManageTemplate():load()
-print(managetemplate)
+if err then error(err) end
+print(json.encode(managetemplate:data_get()))
 ```
 
 ## Direct and prepare
@@ -352,10 +354,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
-if (result instanceof Error) {
-  throw result
+if (result.ok) {
+  console.log(result.data)
 }
-console.log(result.data)
 ```
 
 **Python:**
@@ -453,10 +454,12 @@ customizable without forking any upstream tool:
 - **Templates** (`.sdk/tm/`) and **components** (`.sdk/src/cmp/`) are
   the two layers of generation, copied into this repo: templates are the
   literal per-language source, components generate the API-shaped parts.
-- **Regeneration merges.** By default, newly generated content is
-  three-way merged into existing files, so generator updates and local
-  edits usually converge without manual conflict handling. A project can
-  opt for plain overwrite instead.
+- **Regeneration overwrites.** Each run rewrites every generated file from
+  the model, the templates and the components, so an edit made to
+  generated output is lost. Say what this project needs in its own model
+  (`.sdk/model/sdk.aontu`), or extend a target with a component of its
+  own in `.sdk/src/cmp/<target>/`, registered with `registerComponent`,
+  which `voxgig-sdkgen doctor` reports as an addition rather than drift.
 - **Custom features and entire custom targets** arrive through sdkgen
   packages (`voxgig-sdkgen package add`), on the same rails as the
   bundled languages, and `voxgig-sdkgen doctor` reports any drift from

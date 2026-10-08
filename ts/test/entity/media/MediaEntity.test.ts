@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { LmWhatsappSDK, BaseFeature, stdutil } from '../../..'
+import { LmWhatsappSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('MediaEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = LmWhatsappSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Media().create({"phone_number":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.LM_WHATSAPP_TEST_LIVE
@@ -51,7 +63,7 @@ describe('MediaEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"media","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /whatsapp/v2/{phoneNumber}/media","source":"openapi3","version":2},"g":{"header":[{"a":true,"k":"header","n":"x_link_upload_filename","or":"X-Link-Upload-Filename","r":true,"t":"`$STRING`","index$":0}],"params":[{"a":true,"ex":"+15551234567 or %2b15551234567 or %2B15551234567","k":"param","n":"phone_number","or":"phoneNumber","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/whatsapp/v2/{phoneNumber}/media","q":{"exist":["phone_number","x_link_upload_filename"]},"r":{"param":{"phoneNumber":"phone_number"}},"s":[{"lit":"whatsapp"},{"lit":"v2"},{"var":"phone_number"},{"lit":"media"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"media","name__orig":"media","Name":"Media","name_":"media","name-":"media","NAME":"MEDIA","index$":1}, {"active":true,"entity":"media","key$":"BasicMediaFlow","kind":"basic","name":"BasicMediaFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"media_ref01"},"m":{"phone_number":"phone_number01"},"o":"create","s":[],"v":[],"index$":0}]}, 'Media', {"POST /whatsapp/v2/{phoneNumber}/media":{"protocol":"http","requestBody":{"content":{"text/plain":{"schema":{"type":"string","format":"binary"}},"application/pdf":{"schema":{"type":"string","format":"binary"}},"application/vnd.ms-powerpoint":{"schema":{"type":"string","format":"binary"}},"application/msword":{"schema":{"type":"string","format":"binary"}},"application/vnd.ms-excel":{"schema":{"type":"string","format":"binary"}},"application/vnd.openxmlformats-officedocument.wordprocessingml.document":{"schema":{"type":"string","format":"binary"}},"application/vnd.openxmlformats-officedocument.presentationml.presentation":{"schema":{"type":"string","format":"binary"}},"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":{"schema":{"type":"string","format":"binary"}},"image/png":{"schema":{"type":"string","format":"binary"}},"image/jpeg":{"schema":{"type":"string","format":"binary"}},"image/webp":{"schema":{"type":"string","format":"binary"}},"audio/aac":{"schema":{"type":"string","format":"binary"}},"audio/mp4":{"schema":{"type":"string","format":"binary"}},"audio/mpeg":{"schema":{"type":"string","format":"binary"}},"audio/amr":{"schema":{"type":"string","format":"binary"}},"audio/ogg":{"schema":{"type":"string","format":"binary"}},"audio/opus":{"schema":{"type":"string","format":"binary"}},"video/mp4":{"schema":{"type":"string","format":"binary"}},"video/3gp":{"schema":{"type":"string","format":"binary"}}}},"parameters":[{"name":"X-Link-Upload-Filename","in":"header","description":"The uploaded file's name.","required":true,"schema":{"type":"string"},"index$":0},{"name":"phoneNumber","in":"path","description":"The sender's phone number. Should start with + sign or its URL-encoded equivalent - %2B | %2b","required":true,"schema":{"type":"string","pattern":"^(?:\\+|%2[bB])\\d+$"},"example":"+15551234567 or %2b15551234567 or %2B15551234567","index$":1}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"media","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /whatsapp/v2/{phoneNumber}/media","source":"openapi3","version":2},"g":{"header":[{"a":true,"k":"header","n":"x_link_upload_filename","or":"X-Link-Upload-Filename","r":true,"t":"`$STRING`","index$":0}],"params":[{"a":true,"ex":"+15551234567 or %2b15551234567 or %2B15551234567","k":"param","n":"phone_number","or":"phoneNumber","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"POST","o":"/whatsapp/v2/{phoneNumber}/media","q":{"exist":["phone_number","x_link_upload_filename"]},"r":{"param":{"phoneNumber":"phone_number"}},"rb":{"alternatives":[{"binary":true,"kind":"raw","media":"application/pdf"},{"binary":true,"kind":"raw","media":"application/vnd.ms-excel"},{"binary":true,"kind":"raw","media":"application/vnd.ms-powerpoint"},{"binary":true,"kind":"raw","media":"application/vnd.openxmlformats-officedocument.presentationml.presentation"},{"binary":true,"kind":"raw","media":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},{"binary":true,"kind":"raw","media":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"},{"binary":true,"kind":"raw","media":"audio/aac"},{"binary":true,"kind":"raw","media":"audio/amr"},{"binary":true,"kind":"raw","media":"audio/mp4"},{"binary":true,"kind":"raw","media":"audio/mpeg"},{"binary":true,"kind":"raw","media":"audio/ogg"},{"binary":true,"kind":"raw","media":"audio/opus"},{"binary":true,"kind":"raw","media":"image/jpeg"},{"binary":true,"kind":"raw","media":"image/png"},{"binary":true,"kind":"raw","media":"image/webp"},{"binary":true,"kind":"raw","media":"text/plain"},{"binary":true,"kind":"raw","media":"video/3gp"},{"binary":true,"kind":"raw","media":"video/mp4"}],"binary":true,"kind":"raw","media":"application/msword"},"rs":{"kind":"raw","media":"text/plain"},"s":[{"lit":"whatsapp"},{"lit":"v2"},{"var":"phone_number"},{"lit":"media"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"}},"relations":{"ancestors":[]},"key$":"media","name__orig":"media","Name":"Media","name_":"media","name-":"media","NAME":"MEDIA","index$":1}, {"active":true,"entity":"media","key$":"BasicMediaFlow","kind":"basic","name":"BasicMediaFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"media_ref01"},"m":{"phone_number":"phone_number01"},"o":"create","s":[],"v":[],"index$":0}]}, 'Media', {"POST /whatsapp/v2/{phoneNumber}/media":{"protocol":"http","requestBody":{"content":{"text/plain":{"schema":{"type":"string","format":"binary"}},"application/pdf":{"schema":{"type":"string","format":"binary"}},"application/vnd.ms-powerpoint":{"schema":{"type":"string","format":"binary"}},"application/msword":{"schema":{"type":"string","format":"binary"}},"application/vnd.ms-excel":{"schema":{"type":"string","format":"binary"}},"application/vnd.openxmlformats-officedocument.wordprocessingml.document":{"schema":{"type":"string","format":"binary"}},"application/vnd.openxmlformats-officedocument.presentationml.presentation":{"schema":{"type":"string","format":"binary"}},"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":{"schema":{"type":"string","format":"binary"}},"image/png":{"schema":{"type":"string","format":"binary"}},"image/jpeg":{"schema":{"type":"string","format":"binary"}},"image/webp":{"schema":{"type":"string","format":"binary"}},"audio/aac":{"schema":{"type":"string","format":"binary"}},"audio/mp4":{"schema":{"type":"string","format":"binary"}},"audio/mpeg":{"schema":{"type":"string","format":"binary"}},"audio/amr":{"schema":{"type":"string","format":"binary"}},"audio/ogg":{"schema":{"type":"string","format":"binary"}},"audio/opus":{"schema":{"type":"string","format":"binary"}},"video/mp4":{"schema":{"type":"string","format":"binary"}},"video/3gp":{"schema":{"type":"string","format":"binary"}}}},"parameters":[{"name":"X-Link-Upload-Filename","in":"header","description":"The uploaded file's name.","required":true,"schema":{"type":"string"},"index$":0},{"name":"phoneNumber","in":"path","description":"The sender's phone number. Should start with + sign or its URL-encoded equivalent - %2B | %2b","required":true,"schema":{"type":"string","pattern":"^(?:\\+|%2[bB])\\d+$"},"example":"+15551234567 or %2b15551234567 or %2B15551234567","index$":1}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -73,6 +85,12 @@ describe('MediaEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

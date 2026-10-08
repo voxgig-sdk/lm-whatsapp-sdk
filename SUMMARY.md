@@ -79,7 +79,11 @@ SDK operations: `load`.
 
 Key fields to recognise:
 
+- `components`: An array of JSON objects describing the message template components.
+- `cta_url_link_tracking_opted_out`: Optional boolean field for opting out/in of link tracking at template level
 - `id`: ID
+- `library_template_name`: Template Library name that this HSM is clone from
+- `message_send_ttl_seconds`: Template message delivery retry time-to-live (TTL) override value. If we are unable to deliver a message to a WhatsApp user, we will retry the delivery for a period of time known as a time-to-live, TTL, or the message validity period. TTL can be configured for certain message types.
 
 ### Route map
 

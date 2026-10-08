@@ -17,7 +17,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -39,15 +44,33 @@ const PLAN = [
         "path": "/whatsapp/v2/templates",
         "args": [],
         "select": {
-            "page": "v1",
-            "size": "v1",
+            "page": 1,
+            "size": 25,
             "sort": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "sort",
             "page",
             "size"
+        ],
+        "queryArgs": [
+            {
+                "name": "page",
+                "wire": "page"
+            },
+            {
+                "name": "size",
+                "wire": "size"
+            },
+            {
+                "name": "sort",
+                "wire": "sort"
+            }
         ],
         "auth": [
             [
@@ -85,7 +108,9 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -120,7 +145,36 @@ const PLAN = [
                 "value": "h1"
             }
         ],
+        "cookies": [],
+        "responseMedia": [
+            "text/plain"
+        ],
+        "rawBody": {
+            "media": [
+                "text/plain",
+                "application/pdf",
+                "application/vnd.ms-powerpoint",
+                "application/msword",
+                "application/vnd.ms-excel",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "image/png",
+                "image/jpeg",
+                "image/webp",
+                "audio/aac",
+                "audio/mp4",
+                "audio/mpeg",
+                "audio/amr",
+                "audio/ogg",
+                "audio/opus",
+                "video/mp4",
+                "video/3gp"
+            ],
+            "text": false
+        },
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -143,7 +197,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -181,7 +240,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -210,7 +274,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {

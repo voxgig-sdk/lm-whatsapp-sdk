@@ -206,6 +206,19 @@ main: kit: entity: manage_template: {
       name: "create"
       points: [
         {
+          bf: [
+            "allow_category_change"
+            "category"
+            "components"
+            "language"
+            "library_template_body_inputs"
+            "library_template_button_inputs"
+            "library_template_name"
+            "message_send_ttl_seconds"
+            "name"
+            "parameter_format"
+            "sub_category"
+          ]
           co: {
             id: "POST /whatsapp/v2/templates"
             source: "openapi3"
@@ -213,6 +226,10 @@ main: kit: entity: manage_template: {
           }
           m: "POST"
           o: "/whatsapp/v2/templates"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "whatsapp"
@@ -281,12 +298,9 @@ main: kit: entity: manage_template: {
           }
           m: "GET"
           o: "/whatsapp/v2/templates"
-          q: {
-            exist: [
-              "page"
-              "size"
-              "sort"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

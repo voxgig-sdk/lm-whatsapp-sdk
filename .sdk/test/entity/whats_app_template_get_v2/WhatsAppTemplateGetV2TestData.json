@@ -2,19 +2,84 @@
   "existing": {
     "whats_app_template_get_v2": {
       "WHATS_APP_TEMPLATE_GET_V200": {
-        "id": "WHATS_APP_TEMPLATE_GET_V200"
+        "category": "saa",
+        "components": "sab",
+        "correct_category": "sac",
+        "createdDate": "sad",
+        "cta_url_link_tracking_opted_out": true,
+        "id": "WHATS_APP_TEMPLATE_GET_V200",
+        "language": "sb0",
+        "library_template_name": "sb1",
+        "message_send_ttl_seconds": 178,
+        "modifiedDate": "sb3",
+        "name": "sb4",
+        "parameter_format": "sb5",
+        "previous_category": "sb6",
+        "quality_score": {},
+        "rejected_reason": "sb8",
+        "status": "sb9",
+        "sub_category": "sba"
       },
       "WHATS_APP_TEMPLATE_GET_V201": {
-        "id": "WHATS_APP_TEMPLATE_GET_V201"
+        "category": "s154",
+        "components": "s155",
+        "correct_category": "s156",
+        "createdDate": "s157",
+        "cta_url_link_tracking_opted_out": true,
+        "id": "WHATS_APP_TEMPLATE_GET_V201",
+        "language": "s15a",
+        "library_template_name": "s15b",
+        "message_send_ttl_seconds": 348,
+        "modifiedDate": "s15d",
+        "name": "s15e",
+        "parameter_format": "s15f",
+        "previous_category": "s160",
+        "quality_score": {},
+        "rejected_reason": "s162",
+        "status": "s163",
+        "sub_category": "s164"
       },
       "WHATS_APP_TEMPLATE_GET_V202": {
-        "id": "WHATS_APP_TEMPLATE_GET_V202"
+        "category": "s1fe",
+        "components": "s1ff",
+        "correct_category": "s200",
+        "createdDate": "s201",
+        "cta_url_link_tracking_opted_out": true,
+        "id": "WHATS_APP_TEMPLATE_GET_V202",
+        "language": "s204",
+        "library_template_name": "s205",
+        "message_send_ttl_seconds": 518,
+        "modifiedDate": "s207",
+        "name": "s208",
+        "parameter_format": "s209",
+        "previous_category": "s20a",
+        "quality_score": {},
+        "rejected_reason": "s20c",
+        "status": "s20d",
+        "sub_category": "s20e"
       }
     }
   },
   "new": {
     "whats_app_template_get_v2": {
-      "whats_app_template_get_v2_ref01": {}
+      "whats_app_template_get_v2_ref01": {
+        "category": "s2a8",
+        "components": "s2a9",
+        "correct_category": "s2aa",
+        "createdDate": "s2ab",
+        "cta_url_link_tracking_opted_out": true,
+        "language": "s2ae",
+        "library_template_name": "s2af",
+        "message_send_ttl_seconds": 688,
+        "modifiedDate": "s2b1",
+        "name": "s2b2",
+        "parameter_format": "s2b3",
+        "previous_category": "s2b4",
+        "quality_score": {},
+        "rejected_reason": "s2b6",
+        "status": "s2b7",
+        "sub_category": "s2b8"
+      }
     }
   },
   "requests": {

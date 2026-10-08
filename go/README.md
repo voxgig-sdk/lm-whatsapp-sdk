@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/lm-whatsapp-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/lm-whatsapp-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/lm-whatsapp-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -35,9 +35,10 @@ loading a specific record.
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -53,26 +54,26 @@ func main() {
         "apikey": os.Getenv("LM_WHATSAPP_APIKEY"),
     })
 
-    // Load a single manageTemplate — the value is the loaded record.
+    // Load a single manageTemplate — the value is the entity; Data() reads its record.
     manageTemplate, err := client.ManageTemplate(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(manageTemplate)
+    fmt.Println(manageTemplate.(sdk.Entity).Data())
 
     // Create a manageTemplate.
     created, err := client.ManageTemplate(nil).Create(map[string]any{"components": []any{}}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(created)
+    fmt.Println(created.(sdk.Entity).Data())
 
     // Remove a manageTemplate.
     removed, err := client.ManageTemplate(nil).Remove(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(removed)
+    fmt.Println(removed.(sdk.Entity).Data())
 }
 ```
 
@@ -158,7 +159,7 @@ manageTemplate, err := client.ManageTemplate(nil).Load(
 if err != nil {
     panic(err)
 }
-fmt.Println(manageTemplate) // the returned mock data
+fmt.Println(manageTemplate.(sdk.Entity).Data()) // the entity's mock record
 ```
 
 ### Use a custom fetch function
@@ -249,10 +250,10 @@ All entities implement the `LmWhatsappEntity` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity, and return it. |
+| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity, and return it. |
+| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity, and return it marked as deleted. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -260,12 +261,12 @@ All entities implement the `LmWhatsappEntity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `Load` / `Create` / `Update` / `Remove` | the entity, whose `Data()` reads its record (`map[string]any`) |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
@@ -273,7 +274,7 @@ slice):
 
     manageTemplate, err := client.ManageTemplate(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // manageTemplate is the returned record
+    // manageTemplate is the entity; manageTemplate.(sdk.Entity).Data() reads its record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -352,7 +353,23 @@ API path: `/whatsapp/v2/templates/{id}`
 
 | Field | Description |
 | --- | --- |
-| `"id"` |  |
+| `"category"` |  |
+| `"components"` | An array of JSON objects describing the message template components. |
+| `"correct_category"` |  |
+| `"createdDate"` |  |
+| `"cta_url_link_tracking_opted_out"` | Optional boolean field for opting out/in of link tracking at template level |
+| `"id"` | ID |
+| `"language"` |  |
+| `"library_template_name"` | Template Library name that this HSM is clone from |
+| `"message_send_ttl_seconds"` | Template message delivery retry time-to-live (TTL) override value. |
+| `"modifiedDate"` |  |
+| `"name"` | The message template name |
+| `"parameter_format"` |  |
+| `"previous_category"` |  |
+| `"quality_score"` |  |
+| `"rejected_reason"` |  |
+| `"status"` |  |
+| `"sub_category"` |  |
 
 Operations: Load.
 
@@ -407,7 +424,7 @@ manageTemplate, err := client.ManageTemplate(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(manageTemplate) // the loaded record
+fmt.Println(manageTemplate.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: Create
@@ -419,7 +436,7 @@ result, err := client.ManageTemplate(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -442,7 +459,7 @@ result, err := client.Media(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -473,7 +490,7 @@ result, err := client.SendMessage(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -517,7 +534,23 @@ Create an instance: `whatsAppTemplateGetV2 := client.WhatsAppTemplateGetV2(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `category` | `string` |  |
+| `components` | `any` | An array of JSON objects describing the message template components. |
+| `correct_category` | `string` |  |
+| `createdDate` | `string` |  |
+| `cta_url_link_tracking_opted_out` | `bool` | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `string` | ID |
+| `language` | `string` |  |
+| `library_template_name` | `any` | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `int` | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `any` |  |
+| `name` | `any` | The message template name |
+| `parameter_format` | `string` |  |
+| `previous_category` | `string` |  |
+| `quality_score` | `map[string]any` |  |
+| `rejected_reason` | `string` |  |
+| `status` | `string` |  |
+| `sub_category` | `string` |  |
 
 #### Example: Load
 
@@ -526,7 +559,7 @@ whatsAppTemplateGetV2, err := client.WhatsAppTemplateGetV2(nil).Load(map[string]
 if err != nil {
     panic(err)
 }
-fmt.Println(whatsAppTemplateGetV2) // the loaded record
+fmt.Println(whatsAppTemplateGetV2.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 ## Features
@@ -722,7 +755,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 

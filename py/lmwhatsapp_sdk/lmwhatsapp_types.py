@@ -126,7 +126,23 @@ class TemplateUpdateData(TemplateUpdateDataRequired, total=False):
 
 
 class WhatsAppTemplateGetV2(TypedDict, total=False):
+    category: str
+    components: list | None
+    correct_category: str
+    createdDate: str
+    cta_url_link_tracking_opted_out: bool
     id: str
+    language: str
+    library_template_name: str | None
+    message_send_ttl_seconds: int
+    modifiedDate: str | None
+    name: str | None
+    parameter_format: str
+    previous_category: str
+    quality_score: dict
+    rejected_reason: str
+    status: str
+    sub_category: str
 
 
 class WhatsAppTemplateGetV2LoadMatch(TypedDict):

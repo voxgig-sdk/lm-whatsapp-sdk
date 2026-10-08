@@ -66,6 +66,7 @@ export interface Media {
 
 export interface MediaCreateData {
   phone_number: string
+  $body?: Uint8Array | ArrayBuffer | Blob | ReadableStream | AsyncIterable<Uint8Array> | string
 }
 
 export interface SendMessage {
@@ -105,7 +106,23 @@ export interface TemplateUpdateData {
 }
 
 export interface WhatsAppTemplateGetV2 {
+  category?: string
+  components?: any[] | null
+  correct_category?: string
+  createdDate?: string
+  cta_url_link_tracking_opted_out?: boolean
   id?: string
+  language?: string
+  library_template_name?: string | null
+  message_send_ttl_seconds?: number
+  modifiedDate?: string | null
+  name?: string | null
+  parameter_format?: string
+  previous_category?: string
+  quality_score?: Record<string, any>
+  rejected_reason?: string
+  status?: string
+  sub_category?: string
 }
 
 export interface WhatsAppTemplateGetV2LoadMatch {

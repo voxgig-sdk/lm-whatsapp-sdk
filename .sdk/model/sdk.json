@@ -350,6 +350,19 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "allow_category_change",
+                    "category",
+                    "components",
+                    "language",
+                    "library_template_body_inputs",
+                    "library_template_button_inputs",
+                    "library_template_name",
+                    "message_send_ttl_seconds",
+                    "name",
+                    "parameter_format",
+                    "sub_category"
+                  ],
                   "co": {
                     "id": "POST /whatsapp/v2/templates",
                     "source": "openapi3",
@@ -361,6 +374,10 @@
                   "o": "/whatsapp/v2/templates",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "whatsapp"
@@ -435,14 +452,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/whatsapp/v2/templates",
-                  "q": {
-                    "exist": [
-                      "page",
-                      "size",
-                      "sort"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "whatsapp"
@@ -575,6 +590,107 @@
                       "phoneNumber": "phone_number"
                     }
                   },
+                  "rb": {
+                    "alternatives": [
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "application/pdf"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "application/vnd.ms-excel"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "application/vnd.ms-powerpoint"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "audio/aac"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "audio/amr"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "audio/mp4"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "audio/mpeg"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "audio/ogg"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "audio/opus"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "image/jpeg"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "image/png"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "image/webp"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "text/plain"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "video/3gp"
+                      },
+                      {
+                        "binary": true,
+                        "kind": "raw",
+                        "media": "video/mp4"
+                      }
+                    ],
+                    "binary": true,
+                    "kind": "raw",
+                    "media": "application/msword"
+                  },
+                  "rs": {
+                    "kind": "raw",
+                    "media": "text/plain"
+                  },
                   "s": [
                     {
                       "lit": "whatsapp"
@@ -611,6 +727,12 @@
               "a": true,
               "h": "Messages",
               "n": "messages",
+              "op": {
+                "create": {
+                  "req": false,
+                  "type": "`$ARRAY`"
+                }
+              },
               "r": true,
               "t": "`$ARRAY`"
             },
@@ -632,6 +754,9 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "messages"
+                  ],
                   "co": {
                     "id": "POST /whatsapp/v2/messages",
                     "source": "openapi3",
@@ -643,6 +768,10 @@
                   "o": "/whatsapp/v2/messages",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "whatsapp"
@@ -786,6 +915,12 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "category",
+                    "components",
+                    "message_send_ttl_seconds",
+                    "parameter_format"
+                  ],
                   "co": {
                     "id": "PUT /whatsapp/v2/templates/{id}",
                     "source": "openapi3",
@@ -812,6 +947,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "whatsapp"
@@ -849,10 +988,155 @@
             "field": {}
           },
           "fields": {
+            "category": {
+              "a": true,
+              "h": "Category",
+              "n": "category",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "components": {
+              "a": true,
+              "h": "Components",
+              "n": "components",
+              "r": false,
+              "sh": "An array of JSON objects describing the message template components.",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$ARRAY`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "correct_category": {
+              "a": true,
+              "h": "Correct Category",
+              "n": "correct_category",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "createdDate": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Created Date",
+              "n": "createdDate",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "cta_url_link_tracking_opted_out": {
+              "a": true,
+              "h": "Cta Url Link Tracking Opted Out",
+              "n": "cta_url_link_tracking_opted_out",
+              "r": false,
+              "sh": "Optional boolean field for opting out/in of link tracking at template level",
+              "t": "`$BOOLEAN`"
+            },
             "id": {
               "a": true,
               "h": "Id",
               "n": "id",
+              "r": false,
+              "sh": "ID",
+              "t": "`$STRING`"
+            },
+            "language": {
+              "a": true,
+              "h": "Language",
+              "n": "language",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "library_template_name": {
+              "a": true,
+              "h": "Library Template Name",
+              "n": "library_template_name",
+              "r": false,
+              "sh": "Template Library name that this HSM is clone from",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "message_send_ttl_seconds": {
+              "a": true,
+              "fo": "int32",
+              "h": "Message Send Ttl Seconds",
+              "n": "message_send_ttl_seconds",
+              "r": false,
+              "sh": "Template message delivery retry time-to-live (TTL) override value.",
+              "t": "`$INTEGER`"
+            },
+            "modifiedDate": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Modified Date",
+              "n": "modifiedDate",
+              "r": false,
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "The message template name",
+              "t": [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`"
+                ]
+              ]
+            },
+            "parameter_format": {
+              "a": true,
+              "h": "Parameter Format",
+              "n": "parameter_format",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "previous_category": {
+              "a": true,
+              "h": "Previous Category",
+              "n": "previous_category",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "quality_score": {
+              "a": true,
+              "h": "Quality Score",
+              "n": "quality_score",
+              "r": false,
+              "t": "`$OBJECT`"
+            },
+            "rejected_reason": {
+              "a": true,
+              "h": "Rejected Reason",
+              "n": "rejected_reason",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "status": {
+              "a": true,
+              "h": "Status",
+              "n": "status",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "sub_category": {
+              "a": true,
+              "h": "Sub Category",
+              "n": "sub_category",
               "r": false,
               "t": "`$STRING`"
             }
@@ -895,6 +1179,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "whatsapp"
@@ -1674,6 +1962,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -1952,7 +2241,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -2005,6 +2294,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -2072,7 +2366,7 @@
               },
               "via": "port"
             },
-            "version": "0.1.1"
+            "version": "0.1.2"
           },
           "srcfeature": false,
           "superseded": [
@@ -2154,7 +2448,7 @@
               },
               "via": "root"
             },
-            "version": "0.1.1"
+            "version": "0.1.2"
           },
           "superseded": [],
           "title": "Go CLI"
@@ -2232,10 +2526,13 @@
               },
               "via": "root"
             },
-            "version": "0.1.1"
+            "version": "0.1.2"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -2302,7 +2599,7 @@
               },
               "via": "port"
             },
-            "version": "0.1.1"
+            "version": "0.1.2"
           },
           "srcfeature": false,
           "superseded": [
@@ -2369,7 +2666,7 @@
               },
               "via": "port"
             },
-            "version": "0.1.1"
+            "version": "0.1.2"
           },
           "srcfeature": false,
           "superseded": [
@@ -2442,7 +2739,7 @@
               },
               "via": "port"
             },
-            "version": "0.1.1"
+            "version": "0.1.2"
           },
           "srcfeature": false,
           "superseded": [
@@ -2515,7 +2812,7 @@
               },
               "via": "port"
             },
-            "version": "0.1.1"
+            "version": "0.1.2"
           },
           "srcfeature": false,
           "superseded": [
@@ -2593,7 +2890,7 @@
               },
               "via": "port"
             },
-            "version": "0.1.1"
+            "version": "0.1.2"
           },
           "superseded": [
             "test/runner.ts",
@@ -2612,6 +2909,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

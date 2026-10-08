@@ -5,9 +5,138 @@ main: kit: entity: whats_app_template_get_v2: {
   alias: field: {}
 
   fields: {
+    category: {
+      h: "Category"
+      n: "category"
+      r: false
+      t: "`$STRING`"
+    }
+    components: {
+      h: "Components"
+      n: "components"
+      r: false
+      sh: "An array of JSON objects describing the message template components."
+      t: [
+        "`$ONE`"
+        [
+          "`$ARRAY`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    correct_category: {
+      h: "Correct Category"
+      n: "correct_category"
+      r: false
+      t: "`$STRING`"
+    }
+    createdDate: {
+      fo: "date-time"
+      h: "Created Date"
+      n: "createdDate"
+      r: false
+      t: "`$STRING`"
+    }
+    cta_url_link_tracking_opted_out: {
+      h: "Cta Url Link Tracking Opted Out"
+      n: "cta_url_link_tracking_opted_out"
+      r: false
+      sh: "Optional boolean field for opting out/in of link tracking at template level"
+      t: "`$BOOLEAN`"
+    }
     id: {
       h: "Id"
       n: "id"
+      r: false
+      sh: "ID"
+      t: "`$STRING`"
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      r: false
+      t: "`$STRING`"
+    }
+    library_template_name: {
+      h: "Library Template Name"
+      n: "library_template_name"
+      r: false
+      sh: "Template Library name that this HSM is clone from"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    message_send_ttl_seconds: {
+      fo: "int32"
+      h: "Message Send Ttl Seconds"
+      n: "message_send_ttl_seconds"
+      r: false
+      sh: "Template message delivery retry time-to-live (TTL) override value."
+      t: "`$INTEGER`"
+    }
+    modifiedDate: {
+      fo: "date-time"
+      h: "Modified Date"
+      n: "modifiedDate"
+      r: false
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "The message template name"
+      t: [
+        "`$ONE`"
+        [
+          "`$STRING`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    parameter_format: {
+      h: "Parameter Format"
+      n: "parameter_format"
+      r: false
+      t: "`$STRING`"
+    }
+    previous_category: {
+      h: "Previous Category"
+      n: "previous_category"
+      r: false
+      t: "`$STRING`"
+    }
+    quality_score: {
+      h: "Quality Score"
+      n: "quality_score"
+      r: false
+      t: "`$OBJECT`"
+    }
+    rejected_reason: {
+      h: "Rejected Reason"
+      n: "rejected_reason"
+      r: false
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$STRING`"
+    }
+    sub_category: {
+      h: "Sub Category"
+      n: "sub_category"
       r: false
       t: "`$STRING`"
     }
@@ -46,6 +175,10 @@ main: kit: entity: whats_app_template_get_v2: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

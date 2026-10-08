@@ -152,9 +152,9 @@ manage_template = client.ManageTemplate()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> dict`
+#### `create(reqdata, ctrl=None) -> ManageTemplateEntity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```python
 result = client.ManageTemplate().create({
@@ -162,17 +162,17 @@ result = client.ManageTemplate().create({
 })
 ```
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> ManageTemplateEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.ManageTemplate().load()
 ```
 
-#### `remove(reqmatch, ctrl=None) -> dict`
+#### `remove(reqmatch, ctrl=None) -> ManageTemplateEntity`
 
-Remove the entity matching the given criteria. Raises on error.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, and raises on error.
 
 ```python
 result = client.ManageTemplate().remove({"id": "id"})
@@ -215,15 +215,17 @@ media = client.Media()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> dict`
+#### `create(reqdata, ctrl=None) -> MediaEntity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```python
 result = client.Media().create({
     "phone_number": "example_phone_number",  # str
 })
 ```
+
+Sends its body unencoded, as `application/msword`: pass it as `$body`, `bytes`, `bytearray`, `memoryview`, a `str` or a file object. A file object is read in full before the request is sent, so that a retry sends the same bytes. The operation also accepts `application/pdf`, `application/vnd.ms-excel`, `application/vnd.ms-powerpoint`, `application/vnd.openxmlformats-officedocument.presentationml.presentation`, `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`, `audio/aac`, `audio/amr`, `audio/mp4`, `audio/mpeg`, `audio/ogg`, `audio/opus`, `image/jpeg`, `image/png`, `image/webp`, `text/plain`, `video/3gp`, `video/mp4`: a `content-type` header option that is not JSON replaces the declared one.
 
 ### Common Methods
 
@@ -267,11 +269,18 @@ send_message = client.SendMessage()
 | `messages` | `list` | Yes |  |
 | `requestId` | `str` | Yes | Unique Id of the request made towards LINK Mobility. |
 
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `messages` | Yes |
+| `requestId` | - |
+
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> dict`
+#### `create(reqdata, ctrl=None) -> SendMessageEntity`
 
-Create a new entity with the given data. Returns the created entity data and raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```python
 result = client.SendMessage().create({
@@ -332,9 +341,9 @@ template = client.Template()
 
 ### Operations
 
-#### `update(reqdata, ctrl=None) -> dict`
+#### `update(reqdata, ctrl=None) -> TemplateEntity`
 
-Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity and raises on error.
 
 ```python
 result = client.Template().update({
@@ -382,13 +391,29 @@ whats_app_template_get_v2 = client.WhatsAppTemplateGetV2()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `str` | No |  |
+| `category` | `str` | No |  |
+| `components` | `list | None` | No | An array of JSON objects describing the message template components. |
+| `correct_category` | `str` | No |  |
+| `createdDate` | `str` | No |  |
+| `cta_url_link_tracking_opted_out` | `bool` | No | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `str` | No | ID |
+| `language` | `str` | No |  |
+| `library_template_name` | `str | None` | No | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `int` | No | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `str | None` | No |  |
+| `name` | `str | None` | No | The message template name |
+| `parameter_format` | `str` | No |  |
+| `previous_category` | `str` | No |  |
+| `quality_score` | `dict` | No |  |
+| `rejected_reason` | `str` | No |  |
+| `status` | `str` | No |  |
+| `sub_category` | `str` | No |  |
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> WhatsAppTemplateGetV2Entity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.WhatsAppTemplateGetV2().load({"id": "whats_app_template_get_v2_id"})
@@ -713,6 +738,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

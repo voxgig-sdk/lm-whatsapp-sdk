@@ -49,6 +49,107 @@ main: kit: entity: media: {
               phoneNumber: "phone_number"
             }
           }
+          rb: {
+            alternatives: [
+              {
+                binary: true
+                kind: "raw"
+                media: "application/pdf"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "application/vnd.ms-excel"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "application/vnd.ms-powerpoint"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "audio/aac"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "audio/amr"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "audio/mp4"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "audio/mpeg"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "audio/ogg"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "audio/opus"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "image/jpeg"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "image/png"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "image/webp"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "text/plain"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "video/3gp"
+              }
+              {
+                binary: true
+                kind: "raw"
+                media: "video/mp4"
+              }
+            ]
+            binary: true
+            kind: "raw"
+            media: "application/msword"
+          }
+          rs: {
+            kind: "raw"
+            media: "text/plain"
+          }
           s: [
             {
               lit: "whatsapp"

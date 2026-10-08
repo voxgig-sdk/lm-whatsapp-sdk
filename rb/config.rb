@@ -20,7 +20,7 @@ module LmWhatsappConfig
       "main" => {
         "name" => "LmWhatsapp",
         "slug" => "lm-whatsapp",
-        "version" => "0.1.1",
+        "version" => "0.1.2",
         "target" => "rb",
       },
       "feature" => {
@@ -149,6 +149,7 @@ module LmWhatsappConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -393,6 +394,10 @@ module LmWhatsappConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -449,12 +454,10 @@ module LmWhatsappConfig
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "page",
-                      "size",
-                      "sort",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -584,6 +587,107 @@ module LmWhatsappConfig
                       "x_link_upload_filename",
                     ],
                   },
+                  "body" => {
+                    "alternatives" => [
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "application/pdf",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "application/vnd.ms-excel",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "application/vnd.ms-powerpoint",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "audio/aac",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "audio/amr",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "audio/mp4",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "audio/mpeg",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "audio/ogg",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "audio/opus",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "image/jpeg",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "image/png",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "image/webp",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "text/plain",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "video/3gp",
+                      },
+                      {
+                        "binary" => true,
+                        "kind" => "raw",
+                        "media" => "video/mp4",
+                      },
+                    ],
+                    "binary" => true,
+                    "kind" => "raw",
+                    "media" => "application/msword",
+                  },
+                  "response" => {
+                    "kind" => "raw",
+                    "media" => "text/plain",
+                  },
                 },
               ],
             },
@@ -599,6 +703,11 @@ module LmWhatsappConfig
               "title" => "Messages",
               "type" => "`$ARRAY`",
               "req" => true,
+              "op" => {
+                "create" => {
+                  "type" => "`$ARRAY`",
+                },
+              },
             },
             {
               "name" => "requestId",
@@ -642,6 +751,10 @@ module LmWhatsappConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -794,6 +907,10 @@ module LmWhatsappConfig
                       "id",
                     ],
                   },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -805,8 +922,121 @@ module LmWhatsappConfig
         "whats_app_template_get_v2" => {
           "fields" => [
             {
+              "name" => "category",
+              "title" => "Category",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "components",
+              "title" => "Components",
+              "type" => [
+                "`$ONE`",
+                [
+                  "`$ARRAY`",
+                  "`$NULL`",
+                ],
+              ],
+              "short" => "An array of JSON objects describing the message template components.",
+            },
+            {
+              "name" => "correct_category",
+              "title" => "Correct Category",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "createdDate",
+              "title" => "Created Date",
+              "type" => "`$STRING`",
+              "format" => "date-time",
+            },
+            {
+              "name" => "cta_url_link_tracking_opted_out",
+              "title" => "Cta Url Link Tracking Opted Out",
+              "type" => "`$BOOLEAN`",
+              "short" => "Optional boolean field for opting out/in of link tracking at template level",
+            },
+            {
               "name" => "id",
               "title" => "Id",
+              "type" => "`$STRING`",
+              "short" => "ID",
+            },
+            {
+              "name" => "language",
+              "title" => "Language",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "library_template_name",
+              "title" => "Library Template Name",
+              "type" => [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`",
+                ],
+              ],
+              "short" => "Template Library name that this HSM is clone from",
+            },
+            {
+              "name" => "message_send_ttl_seconds",
+              "title" => "Message Send Ttl Seconds",
+              "type" => "`$INTEGER`",
+              "short" => "Template message delivery retry time-to-live (TTL) override value.",
+              "format" => "int32",
+            },
+            {
+              "name" => "modifiedDate",
+              "title" => "Modified Date",
+              "type" => [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`",
+                ],
+              ],
+              "format" => "date-time",
+            },
+            {
+              "name" => "name",
+              "title" => "Name",
+              "type" => [
+                "`$ONE`",
+                [
+                  "`$STRING`",
+                  "`$NULL`",
+                ],
+              ],
+              "short" => "The message template name",
+            },
+            {
+              "name" => "parameter_format",
+              "title" => "Parameter Format",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "previous_category",
+              "title" => "Previous Category",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "quality_score",
+              "title" => "Quality Score",
+              "type" => "`$OBJECT`",
+            },
+            {
+              "name" => "rejected_reason",
+              "title" => "Rejected Reason",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "status",
+              "title" => "Status",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "sub_category",
+              "title" => "Sub Category",
               "type" => "`$STRING`",
             },
           ],
@@ -864,6 +1094,10 @@ module LmWhatsappConfig
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

@@ -136,8 +136,10 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs.headers` | `object` | Request headers (merged with defaults). |
 | `fetchargs.body` | `any` | Request body (objects are JSON-serialized). |
 | `fetchargs.ctrl` | `object` | Control options (e.g. `{ explain: true }`). |
+| `fetchargs.ctrl.signal` | `AbortSignal` | Aborts the request in flight: `ok` is then `false` and `err.code` is `request_aborted`. |
 
-**Returns:** `Promise<{ ok, status, headers, data } | Error>`
+**Returns:** `Promise<{ ok, status, headers, data }>`. On a failure
+`ok` is `false` and `err` holds the error.
 
 #### `prepare(fetchargs?: object)`
 
@@ -151,6 +153,15 @@ same parameters as `direct()`.
 Alias for `LmWhatsappSDK.test()`.
 
 **Returns:** `LmWhatsappSDK` instance in test mode.
+
+#### Cancelling a call
+
+Every entity operation takes an optional `ctrl` object after its match or
+data, and an `AbortSignal` in `ctrl.signal` cancels the request in flight.
+The operation then rejects with an error whose `code` is
+`request_aborted` and whose `cause` is the signal's reason. A request
+whose signal has already aborted is not sent. `stream()` takes the signal
+as `callopts.signal`, and ends when it aborts.
 
 
 ---
@@ -215,7 +226,7 @@ const manage_template = client.ManageTemplate()
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.ManageTemplate().create({
@@ -225,7 +236,7 @@ const result = await client.ManageTemplate().create({
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.ManageTemplate().load()
@@ -233,7 +244,7 @@ const result = await client.ManageTemplate().load()
 
 #### `remove(match: object, ctrl?: object)`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Resolves to the entity, marked as deleted.
 
 ```ts
 const result = await client.ManageTemplate().remove({ id: 'id' })
@@ -277,13 +288,15 @@ const media = client.Media()
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Media().create({
   phone_number: 'example_phone_number',
 })
 ```
+
+Sends its body unencoded, as `application/msword`: pass it as `$body`, a `Buffer`, `Uint8Array`, `ArrayBuffer`, `Blob`, stream or string. A stream is read in full before the request is sent, so that a retry sends the same bytes. The operation also accepts `application/pdf`, `application/vnd.ms-excel`, `application/vnd.ms-powerpoint`, `application/vnd.openxmlformats-officedocument.presentationml.presentation`, `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`, `audio/aac`, `audio/amr`, `audio/mp4`, `audio/mpeg`, `audio/ogg`, `audio/opus`, `image/jpeg`, `image/png`, `image/webp`, `text/plain`, `video/3gp`, `video/mp4`: a `content-type` header option that is not JSON replaces the declared one.
 
 ### Common Methods
 
@@ -326,11 +339,18 @@ const send_message = client.SendMessage()
 | `messages` | `any[]` | Yes |  |
 | `requestId` | `string` | Yes | Unique Id of the request made towards LINK Mobility. |
 
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `messages` | Yes |
+| `requestId` | - |
+
 ### Operations
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.SendMessage().create({
@@ -392,7 +412,7 @@ const template = client.Template()
 
 #### `update(data: object, ctrl?: object)`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Resolves to the updated entity.
 
 ```ts
 const result = await client.Template().update({
@@ -439,13 +459,29 @@ const whats_app_template_get_v2 = client.WhatsAppTemplateGetV2()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `category` | `string` | No |  |
+| `components` | `any[] | null` | No | An array of JSON objects describing the message template components. |
+| `correct_category` | `string` | No |  |
+| `createdDate` | `string` | No |  |
+| `cta_url_link_tracking_opted_out` | `boolean` | No | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `string` | No | ID |
+| `language` | `string` | No |  |
+| `library_template_name` | `string | null` | No | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `number` | No | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `string | null` | No |  |
+| `name` | `string | null` | No | The message template name |
+| `parameter_format` | `string` | No |  |
+| `previous_category` | `string` | No |  |
+| `quality_score` | `Record<string, any>` | No |  |
+| `rejected_reason` | `string` | No |  |
+| `status` | `string` | No |  |
+| `sub_category` | `string` | No |  |
 
 ### Operations
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.WhatsAppTemplateGetV2().load({ id: 'whats_app_template_get_v2_id' })
@@ -769,6 +805,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

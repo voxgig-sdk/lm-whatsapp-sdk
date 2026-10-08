@@ -157,7 +157,7 @@ local manage_template = client:ManageTemplate(nil)
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:ManageTemplate():create({
@@ -167,7 +167,7 @@ local result, err = client:ManageTemplate():create({
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:ManageTemplate():load()
@@ -175,7 +175,7 @@ local result, err = client:ManageTemplate():load()
 
 #### `remove(reqmatch, ctrl) -> any, err`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Returns the entity, marked as deleted, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:ManageTemplate():remove({ id = "id" })
@@ -221,13 +221,15 @@ local media = client:Media(nil)
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Media():create({
   phone_number = --[[ string ]],
 })
 ```
+
+Sends its body unencoded, as `application/msword`: pass it as `$body`, a string. The operation also accepts `application/pdf`, `application/vnd.ms-excel`, `application/vnd.ms-powerpoint`, `application/vnd.openxmlformats-officedocument.presentationml.presentation`, `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`, `audio/aac`, `audio/amr`, `audio/mp4`, `audio/mpeg`, `audio/ogg`, `audio/opus`, `image/jpeg`, `image/png`, `image/webp`, `text/plain`, `video/3gp`, `video/mp4`: a `content-type` header option that is not JSON replaces the declared one.
 
 ### Common Methods
 
@@ -272,11 +274,18 @@ local send_message = client:SendMessage(nil)
 | `messages` | `table` | Yes |  |
 | `requestId` | `string` | Yes | Unique Id of the request made towards LINK Mobility. |
 
+### Field Usage by Operation
+
+| Field | create |
+| --- | --- |
+| `messages` | Yes |
+| `requestId` | - |
+
 ### Operations
 
 #### `create(reqdata, ctrl) -> any, err`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:SendMessage():create({
@@ -340,7 +349,7 @@ local template = client:Template(nil)
 
 #### `update(reqdata, ctrl) -> any, err`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Template():update({
@@ -389,13 +398,29 @@ local whats_app_template_get_v2 = client:WhatsAppTemplateGetV2(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `category` | `string` | No |  |
+| `components` | `table|nil` | No | An array of JSON objects describing the message template components. |
+| `correct_category` | `string` | No |  |
+| `createdDate` | `string` | No |  |
+| `cta_url_link_tracking_opted_out` | `boolean` | No | Optional boolean field for opting out/in of link tracking at template level |
+| `id` | `string` | No | ID |
+| `language` | `string` | No |  |
+| `library_template_name` | `string|nil` | No | Template Library name that this HSM is clone from |
+| `message_send_ttl_seconds` | `number` | No | Template message delivery retry time-to-live (TTL) override value. |
+| `modifiedDate` | `string|nil` | No |  |
+| `name` | `string|nil` | No | The message template name |
+| `parameter_format` | `string` | No |  |
+| `previous_category` | `string` | No |  |
+| `quality_score` | `table` | No |  |
+| `rejected_reason` | `string` | No |  |
+| `status` | `string` | No |  |
+| `sub_category` | `string` | No |  |
 
 ### Operations
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:WhatsAppTemplateGetV2():load({ id = "whats_app_template_get_v2_id" })
@@ -721,6 +746,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

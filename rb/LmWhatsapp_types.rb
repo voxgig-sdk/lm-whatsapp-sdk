@@ -335,10 +335,74 @@ TemplateUpdateData = Struct.new(
 
 # WhatsAppTemplateGetV2 entity data model.
 #
+# @!attribute [rw] category
+#   @return [String, nil]
+#
+# @!attribute [rw] components
+#   @return [Object, nil]
+#
+# @!attribute [rw] correct_category
+#   @return [String, nil]
+#
+# @!attribute [rw] createdDate
+#   @return [String, nil]
+#
+# @!attribute [rw] cta_url_link_tracking_opted_out
+#   @return [Boolean, nil]
+#
 # @!attribute [rw] id
 #   @return [String, nil]
+#
+# @!attribute [rw] language
+#   @return [String, nil]
+#
+# @!attribute [rw] library_template_name
+#   @return [Object, nil]
+#
+# @!attribute [rw] message_send_ttl_seconds
+#   @return [Integer, nil]
+#
+# @!attribute [rw] modifiedDate
+#   @return [Object, nil]
+#
+# @!attribute [rw] name
+#   @return [Object, nil]
+#
+# @!attribute [rw] parameter_format
+#   @return [String, nil]
+#
+# @!attribute [rw] previous_category
+#   @return [String, nil]
+#
+# @!attribute [rw] quality_score
+#   @return [Hash, nil]
+#
+# @!attribute [rw] rejected_reason
+#   @return [String, nil]
+#
+# @!attribute [rw] status
+#   @return [String, nil]
+#
+# @!attribute [rw] sub_category
+#   @return [String, nil]
 WhatsAppTemplateGetV2 = Struct.new(
+  :category,
+  :components,
+  :correct_category,
+  :createdDate,
+  :cta_url_link_tracking_opted_out,
   :id,
+  :language,
+  :library_template_name,
+  :message_send_ttl_seconds,
+  :modifiedDate,
+  :name,
+  :parameter_format,
+  :previous_category,
+  :quality_score,
+  :rejected_reason,
+  :status,
+  :sub_category,
   keyword_init: true
 )
 
